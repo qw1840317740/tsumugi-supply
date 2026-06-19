@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Wholesale Japanese Daily Goods Catalog | Tsumugi</title>
+  <meta name="description" content="Browse authentic Japanese daily goods at wholesale JPY prices — skincare, makeup, bath, hair, oral, home and more. Filter by category and brand, then request a proforma invoice.">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css?v=8">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/favicon.svg">
+  <meta name="theme-color" content="#21463D">
+  <meta name="color-scheme" content="light">
+  <link rel="canonical" href="https://www.tsumugi-supply.com/products.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tsumugi Supply Co.">
+  <meta property="og:title" content="Wholesale Japanese Daily Goods Catalog | Tsumugi">
+  <meta property="og:description" content="Authentic Japanese daily goods at wholesale JPY prices — skincare, makeup, bath, hair, home and more. Filter and request a proforma invoice.">
+  <meta property="og:url" content="https://www.tsumugi-supply.com/products.html">
+  <meta property="og:image" content="https://www.tsumugi-supply.com/assets/og.svg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+  <meta property="og:locale:alternate" content="ja_JP">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Wholesale Japanese Daily Goods Catalog | Tsumugi">
+  <meta name="twitter:description" content="Authentic Japanese daily goods at wholesale JPY prices — filter by category and brand.">
+  <meta name="twitter:image" content="https://www.tsumugi-supply.com/assets/og.svg">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Tsumugi Supply Co.","url":"https://www.tsumugi-supply.com/","logo":"https://www.tsumugi-supply.com/assets/favicon.svg","email":"hello@tsumugi-supply.com"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.tsumugi-supply.com/"},{"@type":"ListItem","position":2,"name":"Catalog","item":"https://www.tsumugi-supply.com/products.html"}]}</script>
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <section class="page-hero">
+    <div class="container">
+      <div class="breadcrumb"><a href="index.html" data-i18n="nav.home"></a><span class="sep">/</span><a href="products.html" data-i18n="nav.products"></a><span class="sep">/</span><span class="cur" id="activeCatTitle" data-i18n="shop.all"></span></div>
+      <span class="eyebrow" data-i18n="shop.eyebrow"></span>
+      <h1 class="tight" style="margin-top:12px" id="activeCatTitleH" data-i18n="shop.all"></h1>
+      <p data-i18n="shop.lead"></p>
+    </div>
+  </section>
+
+  <section class="section-sm">
+    <div class="container">
+      <div class="shop">
+        <aside class="filters">
+          <div class="filter-group">
+            <h4 data-i18n="shop.cat"></h4>
+            <ul id="filterCats"></ul>
+          </div>
+          <div class="filter-group">
+            <h4 data-i18n="shop.brand"></h4>
+            <ul id="filterBrands"></ul>
+          </div>
+          <div class="filter-group">
+            <h4 data-i18n="shop.maxPrice"></h4>
+            <div class="price-range">
+              <input type="range" id="priceRange" min="500" max="7000" step="100" value="7000">
+              <div class="vals"><span>¥500</span><span id="priceVal">¥7,000</span></div>
+            </div>
+          </div>
+          <div class="filter-group">
+            <label class="check-row"><input type="checkbox" id="inStock"> <span data-i18n="shop.inStock"></span></label>
+          </div>
+          <a class="btn btn-ghost btn-block" href="how-to-order.html#request" data-i18n="shop.cantFind"></a>
+        </aside>
+
+        <div>
+          <div class="shop-bar">
+            <div class="res"><b id="resCount">0</b> <span data-i18n="shop.results"></span> · <span class="muted" id="resCat"></span></div>
+            <div class="tools">
+              <div class="search-box">
+                <span id="searchIc"></span>
+                <input type="search" id="shopSearch" data-i18n-ph="shop.search">
+              </div>
+              <select class="select" id="shopSort">
+                <option value="featured" data-i18n="shop.sortFeatured"></option>
+                <option value="low" data-i18n="shop.sortLow"></option>
+                <option value="high" data-i18n="shop.sortHigh"></option>
+                <option value="brand" data-i18n="shop.sortBrand"></option>
+              </select>
+            </div>
+          </div>
+          <div class="product-grid" id="productGrid"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="site-footer"></div>
+  <script src="assets/js/data.js?v=6"></script>
+  <script src="assets/js/i18n.js?v=6"></script>
+  <script src="assets/js/app.js?v=7"></script>
+  <script>
+    document.getElementById('searchIc').innerHTML = ICON.search;
+  </script>
+</body>
+</html>

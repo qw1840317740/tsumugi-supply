@@ -1,0 +1,7 @@
+# local preview screenshot (not part of the site)
+homepage-full.png
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.log
