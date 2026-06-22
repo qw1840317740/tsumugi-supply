@@ -69,16 +69,16 @@ function buildAuthModal(){
         <button class="auth-tab active" data-tab="login" type="button" onclick="authTab('login')">${ai18n('signin')}</button>
         <button class="auth-tab" data-tab="register" type="button" onclick="authTab('register')">${ai18n('register')}</button>
       </div>
-      <form class="auth-form" id="loginForm" onsubmit="return handleSignIn(event)">
-        <div class="auth-field"><input type="email" id="loginEmail" required placeholder="${ai18n('emailPh')}" autocomplete="email"></div>
-        <div class="auth-field"><input type="password" id="loginPassword" required placeholder="${ai18n('passwordPh')}" autocomplete="current-password"></div>
+      <form class="auth-form" id="loginForm" novalidate onsubmit="return handleSignIn(event)">
+        <div class="auth-field"><input type="email" id="loginEmail" placeholder="${ai18n('emailPh')}" autocomplete="email"></div>
+        <div class="auth-field"><input type="password" id="loginPassword" placeholder="${ai18n('passwordPh')}" autocomplete="current-password"></div>
         <p class="auth-error" id="loginError"></p>
         <button class="btn btn-primary btn-block btn-lg" type="submit" id="loginBtn">${ai18n('signinBtn')}</button>
       </form>
-      <form class="auth-form auth-hidden" id="registerForm" onsubmit="return handleRegister(event)">
-        <div class="auth-field"><input type="email" id="regEmail" required placeholder="${ai18n('emailPh')}" autocomplete="email"></div>
-        <div class="auth-field"><input id="regCompany" required placeholder="${ai18n('companyPh')}"></div>
-        <div class="auth-field"><input type="password" id="regPassword" required minlength="6" placeholder="${ai18n('passwordHint')}" autocomplete="new-password"></div>
+      <form class="auth-form auth-hidden" id="registerForm" novalidate onsubmit="return handleRegister(event)">
+        <div class="auth-field"><input type="email" id="regEmail" placeholder="${ai18n('emailPh')}" autocomplete="email"></div>
+        <div class="auth-field"><input id="regCompany" placeholder="${ai18n('companyPh')}"></div>
+        <div class="auth-field"><input type="password" id="regPassword" placeholder="${ai18n('passwordHint')}" autocomplete="new-password"></div>
         <p class="auth-error" id="regError"></p>
         <button class="btn btn-primary btn-block btn-lg" type="submit" id="regBtn">${ai18n('registerBtn')}</button>
       </form>
@@ -104,7 +104,8 @@ async function handleSignIn(e){
   e.preventDefault();
   const email=getValue('loginEmail'), password=getValue('loginPassword');
   const errEl=document.getElementById('loginError'), btn=document.getElementById('loginBtn');
-  errEl.textContent=''; btn.textContent=ai18n('signingIn'); btn.disabled=true;
+  errEl.textContent='';
+  if(!email || !password){ errEl.textContent=authErrMsg('MISSING_FIELDS'); return false; }
   try{
     const resp=await fetch('/api/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,password})});
     const data=await resp.json();
@@ -119,7 +120,9 @@ async function handleRegister(e){
   e.preventDefault();
   const email=getValue('regEmail'), password=getValue('regPassword'), company=getValue('regCompany');
   const errEl=document.getElementById('regError'), btn=document.getElementById('regBtn');
-  errEl.textContent=''; btn.textContent=ai18n('creating'); btn.disabled=true;
+  errEl.textContent='';
+  if(!email || !password || !company){ errEl.textContent=authErrMsg('MISSING_FIELDS'); return false; }
+  if(password.length < 6){ errEl.textContent=authErrMsg('SHORT_PASSWORD'); return false; }
   try{
     const resp=await fetch('/api/register',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,password,company})});
     const data=await resp.json();
