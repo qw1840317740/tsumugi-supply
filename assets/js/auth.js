@@ -40,7 +40,7 @@ const AUTH_I18N = {
       SERVER_ERROR:'エラーが発生しました。もう一度お試しください。', NETWORK_ERROR:'サーバーに接続できません。しばらくしてからお試しください。' }
   },
 };
-function _authLang(){ return (typeof getLang === 'function') ? getLang() : 'en'; }
+function curLang(){ return (typeof getLang === 'function') ? getLang() : 'en'; }
 function ai18n(key){
   const dict = AUTH_I18N[curLang()] || AUTH_I18N.en;
   return dict[key] !== undefined ? dict[key] : (AUTH_I18N.en[key] || key);
