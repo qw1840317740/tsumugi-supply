@@ -1,32 +1,34 @@
 /* =========================================================
-   KAISEI SANGYOU — Authentication module (Supabase)
-   Handles login / register / logout / session state.
-   Requires: Supabase CDN, supabase-config.js, app.js (for ICON/toast)
+   KAISEI SANGYOU — Authentication (Vercel API + Neon PG)
+   Calls /api/register, /api/login, /api/me via fetch().
+   Token stored in localStorage. No third-party SDK needed.
    ========================================================= */
 
-let _sb = null;
-let _session = null;
+const TOKEN_KEY = 'kaisei_token';
+const USER_KEY  = 'kaisei_user';
 const _closeSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><path d="M6 6l12 12M18 6 6 18"/></svg>';
 
 function initAuth(){
-  if(!AUTH_CONFIGURED || typeof supabase === 'undefined') return;
-  _sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-  _sb.auth.getSession().then(({ data }) => { _session = data.session; updateAuthUI(); });
-  _sb.auth.onAuthStateChange((_evt, s) => { _session = s; updateAuthUI(); });
+  const token = localStorage.getItem(TOKEN_KEY);
+  if(!token){ updateAuthUI(); return; }
+  // verify token with server
+  fetch('/api/me', { headers: { Authorization: 'Bearer ' + token } })
+    .then(r => r.ok ? r.json() : Promise.reject())
+    .then(data => {
+      localStorage.setItem(USER_KEY, JSON.stringify(data.user));
+      updateAuthUI();
+    })
+    .catch(() => {
+      // token expired or invalid — clean up
+      localStorage.removeItem(TOKEN_KEY);
+      localStorage.removeItem(USER_KEY);
+      updateAuthUI();
+    });
 }
 
 /* ---------- Modal ---------- */
 function buildAuthModal(){
-  const notReady = `
-    <div class="auth-card">
-      <button class="auth-close" onclick="closeAuthModal()">${_closeSvg}</button>
-      <div style="text-align:center;padding:20px 0">
-        <h2 style="margin-bottom:12px">Setup Required</h2>
-        <p class="muted" style="max-width:280px;margin:0 auto 20px">To enable user accounts, create a free Supabase project and add your keys to <code>assets/js/supabase-config.js</code>.</p>
-        <a class="btn btn-primary" href="https://supabase.com/dashboard" target="_blank" rel="noopener">Create Supabase Project →</a>
-      </div>
-    </div>`;
-  const ready = `
+  return `<div class="auth-overlay" id="authOverlay">
     <div class="auth-card">
       <button class="auth-close" onclick="closeAuthModal()">${_closeSvg}</button>
       <div class="auth-tabs">
@@ -46,19 +48,19 @@ function buildAuthModal(){
         <p class="auth-error" id="regError"></p>
         <button class="btn btn-primary btn-block btn-lg" type="submit" id="regBtn">Create Account</button>
       </form>
-    </div>`;
-  return `<div class="auth-overlay" id="authOverlay">${AUTH_CONFIGURED ? ready : notReady}</div>`;
+    </div>
+  </div>`;
 }
 
 function openAuthModal(tab){
   if(tab === undefined) tab = 'login';
   if(!document.getElementById('authOverlay')) document.body.insertAdjacentHTML('beforeend', buildAuthModal());
-  const overlay = document.getElementById('authOverlay');
-  overlay.classList.add('open');
+  const ov = document.getElementById('authOverlay');
+  ov.classList.add('open');
   document.body.style.overflow = 'hidden';
-  if(AUTH_CONFIGURED) authTab(tab);
-  // close on backdrop click / Esc
-  overlay.addEventListener('click', e => { if(e.target === overlay) closeAuthModal(); });
+  authTab(tab);
+  ov.addEventListener('click', e => { if(e.target === ov) closeAuthModal(); });
+  document.addEventListener('keydown', function escClose(e){ if(e.key==='Escape'){ closeAuthModal(); document.removeEventListener('keydown', escClose); } });
 }
 function closeAuthModal(){
   const el = document.getElementById('authOverlay');
@@ -76,15 +78,28 @@ async function handleSignIn(e){
   e.preventDefault();
   const email = document.getElementById('loginEmail').value.trim();
   const password = document.getElementById('loginPassword').value;
-  const err = document.getElementById('loginError');
+  const errEl = document.getElementById('loginError');
   const btn = document.getElementById('loginBtn');
-  err.textContent = ''; err.style.color = '';
+  errEl.textContent = ''; errEl.style.color = '';
   btn.textContent = 'Signing in…'; btn.disabled = true;
-  const { error } = await _sb.auth.signInWithPassword({ email, password });
-  btn.textContent = 'Sign In'; btn.disabled = false;
-  if(error){ err.textContent = error.message; return false; }
-  closeAuthModal();
-  if(typeof toast === 'function') toast('Welcome back!');
+  try {
+    const resp = await fetch('/api/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password }),
+    });
+    const data = await resp.json();
+    btn.textContent = 'Sign In'; btn.disabled = false;
+    if(!resp.ok){ errEl.textContent = data.error || 'Login failed.'; return false; }
+    localStorage.setItem(TOKEN_KEY, data.token);
+    localStorage.setItem(USER_KEY, JSON.stringify(data.user));
+    closeAuthModal();
+    if(typeof toast === 'function') toast('Welcome back!');
+    updateAuthUI();
+  } catch {
+    btn.textContent = 'Sign In'; btn.disabled = false;
+    errEl.textContent = 'Cannot reach server. Please try again later.';
+  }
   return false;
 }
 
@@ -93,26 +108,34 @@ async function handleRegister(e){
   const email = document.getElementById('regEmail').value.trim();
   const password = document.getElementById('regPassword').value;
   const company = document.getElementById('regCompany').value.trim();
-  const err = document.getElementById('regError');
+  const errEl = document.getElementById('regError');
   const btn = document.getElementById('regBtn');
-  err.textContent = ''; err.style.color = '';
+  errEl.textContent = ''; errEl.style.color = '';
   btn.textContent = 'Creating…'; btn.disabled = true;
-  const { data, error } = await _sb.auth.signUp({ email, password, options: { data: { company } } });
-  btn.textContent = 'Create Account'; btn.disabled = false;
-  if(error){ err.textContent = error.message; return false; }
-  if(data.user && !data.session){
-    err.style.color = 'var(--ok)';
-    err.textContent = '✓ Account created. Check your email to confirm, then sign in.';
-    return false;
+  try {
+    const resp = await fetch('/api/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password, company }),
+    });
+    const data = await resp.json();
+    btn.textContent = 'Create Account'; btn.disabled = false;
+    if(!resp.ok){ errEl.textContent = data.error || 'Registration failed.'; return false; }
+    localStorage.setItem(TOKEN_KEY, data.token);
+    localStorage.setItem(USER_KEY, JSON.stringify(data.user));
+    closeAuthModal();
+    if(typeof toast === 'function') toast('Account created — welcome!');
+    updateAuthUI();
+  } catch {
+    btn.textContent = 'Create Account'; btn.disabled = false;
+    errEl.textContent = 'Cannot reach server. Please try again later.';
   }
-  closeAuthModal();
-  if(typeof toast === 'function') toast('Account created — welcome!');
   return false;
 }
 
-async function handleSignOut(){
-  if(_sb) await _sb.auth.signOut();
-  _session = null;
+function handleSignOut(){
+  localStorage.removeItem(TOKEN_KEY);
+  localStorage.removeItem(USER_KEY);
   updateAuthUI();
   if(typeof toast === 'function') toast('Signed out');
 }
@@ -121,22 +144,25 @@ async function handleSignOut(){
 function updateAuthUI(){
   const btn = document.getElementById('accountBtn');
   if(!btn) return;
-  if(_session){
-    const email = _session.user.email || '';
-    const initial = email.charAt(0).toUpperCase() || 'U';
-    btn.innerHTML = `<span class="user-avatar">${initial}</span>`;
-    btn.classList.add('logged-in');
-    btn.title = email;
-    btn.setAttribute('aria-label', 'Account: ' + email);
-    btn.onclick = () => {
-      if(confirm('Signed in as:\n' + email + '\n\nClick OK to sign out.')) handleSignOut();
-    };
-  } else {
-    const ICON = (typeof window !== 'undefined' && window.ICON) || {};
-    btn.innerHTML = ICON.user || '👤';
-    btn.classList.remove('logged-in');
-    btn.title = 'Account';
-    btn.setAttribute('aria-label', 'Account');
-    btn.onclick = () => openAuthModal('login');
+  const userStr = localStorage.getItem(USER_KEY);
+  if(userStr){
+    try {
+      const user = JSON.parse(userStr);
+      const initial = (user.email || 'U').charAt(0).toUpperCase();
+      btn.innerHTML = `<span class="user-avatar">${initial}</span>`;
+      btn.classList.add('logged-in');
+      btn.title = user.email;
+      btn.setAttribute('aria-label', 'Account: ' + user.email);
+      btn.onclick = () => {
+        if(confirm('Signed in as:\n' + user.email + '\n\nClick OK to sign out.')) handleSignOut();
+      };
+      return;
+    } catch {}
   }
+  const ICON = (typeof window !== 'undefined' && window.ICON) || {};
+  btn.innerHTML = ICON.user || '👤';
+  btn.classList.remove('logged-in');
+  btn.title = 'Account';
+  btn.setAttribute('aria-label', 'Account');
+  btn.onclick = () => openAuthModal('login');
 }

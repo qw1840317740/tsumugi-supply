@@ -1,6 +1,10 @@
 # local preview screenshot (not part of the site)
 homepage-full.png
 
+# secrets / env
+.env
+node_modules/
+
 # OS / editor
 .DS_Store
 Thumbs.db
