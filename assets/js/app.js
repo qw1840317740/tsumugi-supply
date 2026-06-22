@@ -541,11 +541,14 @@ function initShop(){
   $('#inStock')?.addEventListener('change', e=>{ state.inStock=e.target.checked; apply(); });
   $('#priceRange')?.addEventListener('input', e=>{ state.maxPrice=+e.target.value; $('#priceVal').textContent=jpy(state.maxPrice); apply(); });
 
-  $('#activeCatTitle').textContent = state.cat ? catName(state.cat) : t('shop.all');
   function setTitle(){
     const v = state.cat ? catName(state.cat) : t('shop.all');
-    const b=$('#activeCatTitle'); if(b) b.textContent=v;
     const h=$('#activeCatTitleH'); if(h) h.textContent=v;
+    const bc=$('#shopBreadcrumb'); if(bc){
+      bc.innerHTML = state.cat
+        ? `<a href="index.html">${t('nav.home')}</a><span class="sep">/</span><a href="products.html">${t('nav.products')}</a><span class="sep">/</span><span class="cur">${v}</span>`
+        : `<a href="index.html">${t('nav.home')}</a><span class="sep">/</span><span class="cur">${t('nav.products')}</span>`;
+    }
   }
   setTitle();
   addRenderer(setTitle);
