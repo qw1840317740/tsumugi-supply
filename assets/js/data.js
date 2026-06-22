@@ -1,5 +1,5 @@
 /* =========================================================
-   TSUMUGI SUPPLY CO. — Sample catalog data
+   KAISEI SANGYOU LLC. — Sample catalog data
    Catalog data. Replace these sample brands, products and prices
    with your real catalog before going live.
    ========================================================= */

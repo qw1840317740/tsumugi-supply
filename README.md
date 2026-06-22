@@ -1,4 +1,4 @@
-# Tsumugi Supply Co. — Japan Daily-Goods Wholesale (Demo)
+# KAISEI SANGYOU LLC — Japan Daily-Goods Wholesale (Demo)
 
 An **original** demo website for a Japanese daily-goods (日用品) wholesale business.
 Inspired by the *functionality* and *information architecture* of modern
@@ -77,7 +77,7 @@ On-page, technical and structured-data SEO are implemented **in static HTML** (n
 - **Mobile-first / responsive**, semantic landmarks (`header/main/footer`), single `H1` per page.
 - **Core Web Vitals** — system fonts as fallback with Google Fonts `display=swap` + `preconnect` (no invisible text), reserved image/box sizes to minimise CLS, no heavy JS.
 
-> ⚠️ **Before going live, replace the placeholder domain `https://www.tsumugi-supply.com`** everywhere it appears (canonical URLs, OG/Twitter tags, JSON-LD, `sitemap.xml`, `robots.txt`) with your real domain. A project-wide find-and-replace handles it.
+> ⚠️ **Before going live, replace the placeholder domain `https://www.kaiseisg.com`** everywhere it appears (canonical URLs, OG/Twitter tags, JSON-LD, `sitemap.xml`, `robots.txt`) with your real domain. A project-wide find-and-replace handles it.
 
 > 🌐 **Multilingual note:** the EN/中/日 switch is client-side on a single URL, so search engines index the English (default) version. For full multilingual SEO (separate ranking per language), serve each language on its own URL path (e.g. `/en/`, `/zh/`, `/ja/`) and add `hreflang` alternate tags — a larger architectural change worth doing before launch if non-English organic traffic matters.
 
@@ -123,7 +123,7 @@ All tokens are CSS custom properties at the top of
 ## 🛠️ Make it yours
 
 1. **Brand & contact** — `SITE` object at the top of [`assets/js/app.js`](assets/js/app.js).
-2. **Logo** — replace the `紬` kanji in the header/footer builders + hero, or
+2. **Logo** — replace the `開` kanji in the header/footer builders + hero, or
    drop a logo image into `.brand .mark`.
 3. **Catalog** — edit `CATEGORIES`, `BRANDS`, `PRODUCTS` in
    [`assets/js/data.js`](assets/js/data.js). To use real photos, swap the SVG in

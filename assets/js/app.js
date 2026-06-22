@@ -1,18 +1,20 @@
 /* =========================================================
-   TSUMUGI SUPPLY CO. — Shared UI + commerce logic
+   KAISEI SANGYOU LLC. — Shared UI + commerce logic
    (vanilla JS, no dependencies). i18n-aware.
    ========================================================= */
 
 const SITE = {
-  name: 'Tsumugi',
-  full: 'Tsumugi Supply Co.',
-  tagline: 'JAPAN DAILY GOODS · WHOLESALE',
+  name: 'Kaisei',
+  full: 'KAISEI SANGYOU LLC',
+  jaName: '開成産業合同会社',
+  tagline: 'JAPAN WHOLESALE & TRADING',
   minOrder: 25000,
   currency: 'JPY',
-  whatsapp: '+81 00 000 0000',
-  email: 'hello@tsumugi-supply.com',
-  phone: '+81 00 000 0000',
-  year: 2026,
+  phone: '+81 4-9257-4332',
+  fax: '+81 4-9265-8258',
+  email: 'info@kaiseisg.com',
+  address: '〒354-0021 3465 Tsuruba, Fujimi, Saitama, Japan',
+  year: 2024,
 };
 const STORE_KEY = 'tsumugi_cart_v1';
 
@@ -207,7 +209,7 @@ function buildHeader(){
     <div class="container">
       <nav class="nav">
         <a class="brand" href="index.html" aria-label="${SITE.full}">
-          <span class="mark">紬</span>
+          <span class="mark">開</span>
           <span class="wordmark"><b>${SITE.name}</b><span>${SITE.tagline}</span></span>
         </a>
         <ul class="nav-primary">
@@ -254,7 +256,7 @@ function buildMobileMenu(){
   return `
   <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Site menu" tabindex="-1">
     <div class="mm-head">
-      <span class="brand"><span class="mark">紬</span><span class="wordmark"><b>${SITE.name}</b></span></span>
+      <span class="brand"><span class="mark">開</span><span class="wordmark"><b>${SITE.name}</b></span></span>
       <button class="icon-btn" id="mmClose" aria-label="Close">${ICON.close}</button>
     </div>
     <div class="mm-list">
@@ -279,7 +281,7 @@ function buildFooter(){
     <div class="container">
       <div class="footer-top">
         <div class="footer-brand">
-          <a class="brand" href="index.html"><span class="mark">紬</span><span class="wordmark"><b>${SITE.name}</b><span>${SITE.tagline}</span></span></a>
+          <a class="brand" href="index.html"><span class="mark">開</span><span class="wordmark"><b>${SITE.name}</b><span>${SITE.tagline}</span></span></a>
           <p data-i18n="foot.about"></p>
           <div class="social">
             <a href="#" aria-label="Instagram">${ICON.spark}</a>
@@ -324,7 +326,7 @@ function buildFooter(){
       </div>
     </div>
   </footer>
-  <a class="fab" href="https://wa.me/" target="_blank" rel="noopener">${ICON.chat} <span data-i18n="cta.chat"></span></a>`;
+  <a class="fab" href="tel:+81492574332" rel="noopener">${ICON.phone} <span data-i18n="cta.chat"></span></a>`;
 }
 
 /* =========================================================
