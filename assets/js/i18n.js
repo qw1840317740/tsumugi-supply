@@ -483,7 +483,7 @@ function applyI18n(){
   });
 
   // lang pill
-  document.querySelectorAll('[data-lang-label]').forEach(el=>{ el.textContent = LANG_META[_lang].label; });
+  const _lsel = document.querySelector('#langSelect'); if(_lsel) _lsel.value = _lang;
 
   runRenderers();
 }

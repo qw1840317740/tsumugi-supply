@@ -203,6 +203,18 @@ h2.h{ font-size:clamp(1.7rem,3.2vw,2.4rem); }
 .currency-pill:hover{ border-color:var(--sumi); }
 .currency-pill svg{ width:15px; height:15px; flex:none; }
 
+/* ---------- Nav dropdowns (language + currency) ---------- */
+.nav-select{
+  appearance:none; -webkit-appearance:none; -moz-appearance:none;
+  padding:7px 26px 7px 12px; border:1px solid var(--line); border-radius:999px;
+  font-size:.8rem; font-weight:600; color:var(--ink); font-family:var(--f-sans);
+  background:var(--paper-2) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%23666553' stroke-width='2.5' stroke-linecap='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 9px center;
+  background-size:10px; cursor:pointer; transition:border-color .18s, color .18s; outline:none;
+}
+.nav-select:hover{ border-color:var(--sumi); color:var(--sumi); }
+.nav-select:focus{ border-color:var(--sumi); box-shadow:0 0 0 3px rgba(33,70,61,.12); }
+@media(max-width:680px){ .nav-select{ padding:6px 22px 6px 10px; font-size:.76rem; } }
+
 .nav-toggle{ display:none; }
 
 /* mega menu — panel spans the full header width (containing block = sticky .site-header) */

@@ -238,8 +238,12 @@ function buildHeader(){
           <li><a class="nav-link ${active('faq.html')}" href="faq.html" data-i18n="nav.faq"></a></li>
         </ul>
         <div class="nav-actions">
-          <button class="lang-pill" id="langBtn" title="Language">${ICON.globe}<span data-lang-label>EN</span>${ICON.chev}</button>
-          <button class="currency-pill" id="currencyBtn" title="Currency">${ICON.yen}<span class="lbl">JPY (¥)</span></button>
+          <select class="nav-select" id="langSelect" aria-label="Language" title="Language">
+            <option value="en">EN</option><option value="zh">中文</option><option value="ja">日本語</option>
+          </select>
+          <select class="nav-select" id="curSelect" aria-label="Currency" title="Currency">
+            <option value="JPY">¥ JPY</option><option value="USD">$ USD</option><option value="EUR">€ EUR</option><option value="CNY">¥ CNY</option>
+          </select>
           <button class="icon-btn" id="searchBtn" aria-label="Search" data-i18n-title="cur.search">${ICON.search}</button>
           <button class="icon-btn" aria-label="Account" data-i18n-title="cur.account" onclick="toast(t('t.login'))">${ICON.user}</button>
           <button class="icon-btn" id="cartBtn" aria-label="Cart" data-i18n-title="cur.cart">${ICON.cart}<span class="cart-count" id="cartCount"></span></button>
@@ -689,9 +693,15 @@ function mount(){
   $('#navToggle')?.addEventListener('click', ()=>{ $('#mobileMenu').classList.add('open'); $('#scrim').classList.add('open'); document.body.style.overflow='hidden'; openTrap($('#mobileMenu')); });
   $('#mmClose')?.addEventListener('click', closeMobile);
   $('#scrim')?.addEventListener('click', ()=>{ closeCart(); closeMobile(); });
-  $('#currencyBtn')?.addEventListener('click', cycleCurrency);
-  const _cb = $('#currencyBtn'); if(_cb) _cb.querySelector('.lbl').textContent = `${cur} (${SYMS[cur]})`;
-  $('#langBtn')?.addEventListener('click', cycleLang);
+  $('#langSelect')?.addEventListener('change', e => setLang(e.target.value));
+  const _ls = $('#langSelect'); if(_ls) _ls.value = getLang();
+  $('#curSelect')?.addEventListener('change', e => {
+    cur = e.target.value;
+    try { localStorage.setItem('tsumugi_cur', cur); } catch(e) {}
+    runRenderers(); renderCartItems();
+    toast(t('t.currency').replace('CUR', cur));
+  });
+  const _cs = $('#curSelect'); if(_cs) _cs.value = cur;
   $('#searchBtn')?.addEventListener('click', ()=>{ location.href='products.html'; });
   $$('.mm-toggle').forEach(t=>t.addEventListener('click', ()=>{ $('#'+t.dataset.toggle)?.classList.toggle('open'); t.classList.toggle('open'); }));
   initMegaMenu();
