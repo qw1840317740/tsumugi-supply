@@ -723,3 +723,37 @@ table.t td b{ color:var(--clay); font-family:var(--f-serif); font-size:1.1rem; }
 @media (max-width:420px){
   .product-grid, .cat-grid, .brand-grid{ grid-template-columns:1fr; }
 }
+
+/* ---------- Auth modal ---------- */
+.auth-overlay{
+  position:fixed; inset:0; background:rgba(20,30,26,.5); backdrop-filter:blur(4px); -webkit-backdrop-filter:blur(4px);
+  z-index:140; display:grid; place-items:center; padding:20px;
+  opacity:0; visibility:hidden; transition:opacity .25s var(--ease), visibility .25s;
+}
+.auth-overlay.open{ opacity:1; visibility:visible; }
+.auth-card{
+  background:var(--paper-2); border-radius:var(--radius-lg); padding:36px 32px 32px;
+  box-shadow:var(--shadow-lg); width:100%; max-width:380px; position:relative;
+  transform:translateY(16px) scale(.97); transition:transform .3s var(--ease);
+}
+.auth-overlay.open .auth-card{ transform:translateY(0) scale(1); }
+.auth-close{ position:absolute; top:14px; right:14px; width:34px; height:34px; border-radius:9px; display:grid; place-items:center; color:var(--ink-3); transition:.15s; }
+.auth-close:hover{ background:var(--paper-3); color:var(--ink); }
+.auth-tabs{ display:flex; margin-bottom:22px; border-bottom:1px solid var(--line); }
+.auth-tab{ flex:1; padding:10px; font-size:.92rem; font-weight:600; color:var(--ink-3); border-bottom:2px solid transparent; transition:.18s; cursor:pointer; }
+.auth-tab:hover{ color:var(--ink-2); }
+.auth-tab.active{ color:var(--sumi); border-bottom-color:var(--clay); }
+.auth-form{ display:flex; flex-direction:column; gap:12px; }
+.auth-hidden{ display:none; }
+.auth-field input{
+  width:100%; padding:12px 14px; border:1px solid var(--line); border-radius:10px;
+  background:var(--paper); font-size:.92rem; color:var(--ink); transition:.18s;
+}
+.auth-field input::placeholder{ color:var(--ink-3); }
+.auth-field input:focus{ outline:none; border-color:var(--sumi); box-shadow:0 0 0 3px rgba(33,70,61,.1); }
+.auth-error{ font-size:.84rem; color:var(--clay); min-height:1.2em; line-height:1.4; }
+.user-avatar{
+  width:28px; height:28px; border-radius:50%; background:var(--sumi); color:var(--paper-2);
+  display:grid; place-items:center; font-size:.82rem; font-weight:700; font-family:var(--f-serif);
+}
+.icon-btn.logged-in{ padding:5px; }

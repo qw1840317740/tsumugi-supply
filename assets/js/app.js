@@ -256,7 +256,7 @@ function buildHeader(){
             </div>
           </div>
           <button class="icon-btn" id="searchBtn" aria-label="Search" data-i18n-title="cur.search">${ICON.search}</button>
-          <button class="icon-btn" aria-label="Account" data-i18n-title="cur.account" onclick="toast(t('t.login'))">${ICON.user}</button>
+          <button class="icon-btn" id="accountBtn" aria-label="Account" data-i18n-title="cur.account" onclick="openAuthModal('login')">${ICON.user}</button>
           <button class="icon-btn" id="cartBtn" aria-label="Cart" data-i18n-title="cur.cart">${ICON.cart}<span class="cart-count" id="cartCount"></span></button>
           <button class="icon-btn nav-toggle" id="navToggle" aria-label="Menu" data-i18n-title="cur.menu">${ICON.menu}</button>
         </div>
@@ -749,6 +749,7 @@ function mount(){
   injectSEO();      // after initPDP so document.title/meta reflect the product
   applyI18n();      // set language on all static + dynamic nodes
   revealObs();
+  if(typeof initAuth==="function") initAuth();
 }
 function closeMobile(){ $('#mobileMenu')?.classList.remove('open'); closeScrim(); closeTrap(); }
 
