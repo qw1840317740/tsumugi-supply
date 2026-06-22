@@ -238,12 +238,23 @@ function buildHeader(){
           <li><a class="nav-link ${active('faq.html')}" href="faq.html" data-i18n="nav.faq"></a></li>
         </ul>
         <div class="nav-actions">
-          <select class="nav-select" id="langSelect" aria-label="Language" title="Language">
-            <option value="en">EN</option><option value="zh">中文</option><option value="ja">日本語</option>
-          </select>
-          <select class="nav-select" id="curSelect" aria-label="Currency" title="Currency">
-            <option value="JPY">¥ JPY</option><option value="USD">$ USD</option><option value="EUR">€ EUR</option><option value="CNY">¥ CNY</option>
-          </select>
+          <div class="dd" id="langDD">
+            <button class="dd-trigger" type="button" aria-haspopup="listbox" aria-expanded="false">${ICON.globe}<span class="dd-label">EN</span><span class="dd-chev">${ICON.chev}</span></button>
+            <div class="dd-menu" role="listbox">
+              <button class="dd-item" data-val="en" type="button">EN <span class="dd-check">${ICON.check}</span></button>
+              <button class="dd-item" data-val="zh" type="button">中文 <span class="dd-check">${ICON.check}</span></button>
+              <button class="dd-item" data-val="ja" type="button">日本語 <span class="dd-check">${ICON.check}</span></button>
+            </div>
+          </div>
+          <div class="dd" id="curDD">
+            <button class="dd-trigger" type="button" aria-haspopup="listbox" aria-expanded="false"><span class="dd-label">¥ JPY</span><span class="dd-chev">${ICON.chev}</span></button>
+            <div class="dd-menu" role="listbox">
+              <button class="dd-item" data-val="JPY" type="button">¥ JPY <span class="dd-check">${ICON.check}</span></button>
+              <button class="dd-item" data-val="USD" type="button">$ USD <span class="dd-check">${ICON.check}</span></button>
+              <button class="dd-item" data-val="EUR" type="button">€ EUR <span class="dd-check">${ICON.check}</span></button>
+              <button class="dd-item" data-val="CNY" type="button">¥ CNY <span class="dd-check">${ICON.check}</span></button>
+            </div>
+          </div>
           <button class="icon-btn" id="searchBtn" aria-label="Search" data-i18n-title="cur.search">${ICON.search}</button>
           <button class="icon-btn" aria-label="Account" data-i18n-title="cur.account" onclick="toast(t('t.login'))">${ICON.user}</button>
           <button class="icon-btn" id="cartBtn" aria-label="Cart" data-i18n-title="cur.cart">${ICON.cart}<span class="cart-count" id="cartCount"></span></button>
@@ -416,6 +427,25 @@ function openTrap(container){
   setTimeout(()=>{ const f=_focusable(container); if(f[0]) f[0].focus(); else container.focus(); }, 40);
 }
 function closeTrap(){ if(!_trap) return; _trap.container.removeEventListener('keydown', _trap.handler); try{ _trap.restore && _trap.restore.focus(); }catch(e){} _trap=null; }
+
+/* custom animated dropdown (language / currency) */
+function initDropdown(ddId, onSelect){
+  const dd = document.getElementById(ddId);
+  if(!dd) return;
+  const trigger = dd.querySelector('.dd-trigger');
+  const items = dd.querySelectorAll('.dd-item');
+  const close = () => { dd.classList.remove('open'); trigger.classList.remove('open'); trigger.setAttribute('aria-expanded','false'); };
+  const open  = () => { document.querySelectorAll('.dd.open').forEach(d=>{ d.classList.remove('open'); d.querySelector('.dd-trigger')?.classList.remove('open'); d.querySelector('.dd-trigger')?.setAttribute('aria-expanded','false'); }); dd.classList.add('open'); trigger.classList.add('open'); trigger.setAttribute('aria-expanded','true'); };
+  trigger.addEventListener('click', e => { e.stopPropagation(); dd.classList.contains('open') ? close() : open(); });
+  items.forEach(item => item.addEventListener('click', () => { onSelect(item.dataset.val); items.forEach(i=>i.classList.toggle('active', i===item)); close(); }));
+  document.addEventListener('click', e => { if(!dd.contains(e.target)) close(); });
+  dd.addEventListener('keydown', e => { if(e.key==='Escape') close(); });
+}
+function syncDD(ddId, val, label){
+  const dd = document.getElementById(ddId); if(!dd) return;
+  dd.querySelectorAll('.dd-item').forEach(i => i.classList.toggle('active', i.dataset.val === val));
+  const lbl = dd.querySelector('.dd-label'); if(lbl && label) lbl.textContent = label;
+}
 
 function buildCartDrawer(){
   return `
@@ -693,15 +723,19 @@ function mount(){
   $('#navToggle')?.addEventListener('click', ()=>{ $('#mobileMenu').classList.add('open'); $('#scrim').classList.add('open'); document.body.style.overflow='hidden'; openTrap($('#mobileMenu')); });
   $('#mmClose')?.addEventListener('click', closeMobile);
   $('#scrim')?.addEventListener('click', ()=>{ closeCart(); closeMobile(); });
-  $('#langSelect')?.addEventListener('change', e => setLang(e.target.value));
-  const _ls = $('#langSelect'); if(_ls) _ls.value = getLang();
-  $('#curSelect')?.addEventListener('change', e => {
-    cur = e.target.value;
+  // custom dropdowns
+  initDropdown('langDD', val => setLang(val));
+  initDropdown('curDD', val => {
+    cur = val;
     try { localStorage.setItem('tsumugi_cur', cur); } catch(e) {}
+    const lbl = document.querySelector('#curDD .dd-label');
+    if(lbl) lbl.textContent = `${SYMS[cur]} ${cur}`;
     runRenderers(); renderCartItems();
     toast(t('t.currency').replace('CUR', cur));
   });
-  const _cs = $('#curSelect'); if(_cs) _cs.value = cur;
+  // sync initial active items + labels
+  syncDD('langDD', getLang(), LANG_META[getLang()]?.label);
+  syncDD('curDD', cur, `${SYMS[cur]} ${cur}`);
   $('#searchBtn')?.addEventListener('click', ()=>{ location.href='products.html'; });
   $$('.mm-toggle').forEach(t=>t.addEventListener('click', ()=>{ $('#'+t.dataset.toggle)?.classList.toggle('open'); t.classList.toggle('open'); }));
   initMegaMenu();
