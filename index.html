@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Japan Daily Goods Wholesale Export | KAISEI SANGYOU LLC</title>
-  <meta name="description" content="Kaisei exports authentic Japanese daily goods wholesale — skincare, cosmetics, hair, bath, home and wellness — to retailers in 40+ countries. JPY wholesale pricing, global shipping.">
+  <meta name="description" content="Kaisei exports authentic Japanese daily goods wholesale — skincare, cosmetics, hair, bath, home and wellness — to retailers across Japan and overseas. JPY wholesale pricing, global shipping.">
   <meta name="robots" content="index,follow,max-image-preview:large">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,7 +18,7 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="KAISEI SANGYOU LLC">
   <meta property="og:title" content="Japan Daily Goods Wholesale Export | KAISEI SANGYOU LLC">
-  <meta property="og:description" content="Authentic Japanese daily goods — skincare, cosmetics, hair, bath, home and wellness — exported wholesale to retailers in 40+ countries.">
+  <meta property="og:description" content="Authentic Japanese daily goods — skincare, cosmetics, hair, bath, home and wellness — exported wholesale to retailers across Japan and overseas.">
   <meta property="og:url" content="https://www.kaiseisg.com/">
   <meta property="og:image" content="https://www.kaiseisg.com/assets/og.svg">
   <meta property="og:image:width" content="1200">
@@ -162,10 +162,10 @@
     <div class="container">
       <div class="stats-band">
         <div class="stats-grid">
-          <div class="stat"><b>1,200+</b><span data-i18n="stats.skuL"></span></div>
-          <div class="stat"><b>120+</b><span data-i18n="stats.brandsL"></span></div>
-          <div class="stat"><b>40+</b><span data-i18n="stats.countriesL"></span></div>
-          <div class="stat"><b>98%</b><span data-i18n="stats.shippedL"></span></div>
+          <div class="stat"><b>3</b><span data-i18n="stats.skuL"></span></div>
+          <div class="stat"><b>8</b><span data-i18n="stats.brandsL"></span></div>
+          <div class="stat"><b>2</b><span data-i18n="stats.countriesL"></span></div>
+          <div class="stat"><b>15+</b><span data-i18n="stats.shippedL"></span></div>
         </div>
       </div>
     </div>
@@ -183,28 +183,28 @@
     </div>
   </section>
 
-  <!-- TESTIMONIALS -->
+  <!-- COMPANY PROFILE / CREDENTIALS -->
   <section class="section" style="background:var(--paper-3);border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)">
     <div class="container">
       <div class="section-head center">
-        <span class="eyebrow center" data-i18n="testi.eyebrow"></span>
-        <h2 class="h" style="margin-top:14px" data-i18n="testi.title"></h2>
+        <span class="eyebrow center" data-i18n="cred.eyebrow"></span>
+        <h2 class="h" style="margin-top:14px" data-i18n="cred.title"></h2>
       </div>
-      <div class="quote-grid">
-        <div class="quote reveal">
-          <div class="stars">★★★★★</div>
-          <p>"Kaisei consolidated six brands I used to source separately into one shipment. My landed cost dropped and the stock is always the latest packaging."</p>
-          <div class="who"><span class="av" style="background:var(--clay)">M</span><div><b>Marcus L.</b><span>Beauty retailer · Singapore</span></div></div>
+      <div class="feature-row">
+        <div class="feature">
+          <div class="ic"><span id="crPhil"></span></div>
+          <h4 data-i18n="cred.pT"></h4>
+          <p data-i18n="cred.pD"></p>
         </div>
-        <div class="quote reveal">
-          <div class="stars">★★★★★</div>
-          <p>"The 1-day proforma invoice changed how I plan. I place an inquiry Monday and have landed pricing Tuesday. The customs paperwork was spotless — clearance was a breeze."</p>
-          <div class="who"><span class="av" style="background:var(--sumi)">A</span><div><b>Ana R.</b><span>Marketplace seller · Spain</span></div></div>
+        <div class="feature">
+          <div class="ic"><span id="crLic"></span></div>
+          <h4 data-i18n="cred.lT"></h4>
+          <p data-i18n="cred.lD"></p>
         </div>
-        <div class="quote reveal">
-          <div class="stars">★★★★★</div>
-          <p>"Requested a hard-to-find bath salt line — they sourced it within a week and quoted a great bulk rate. Feels like a partner, not a vendor."</p>
-          <div class="who"><span class="av" style="background:var(--gold);color:#241d09">K</span><div><b>Kenji T.</b><span>Concept store · USA</span></div></div>
+        <div class="feature">
+          <div class="ic"><span id="crArea"></span></div>
+          <h4 data-i18n="cred.aT"></h4>
+          <p data-i18n="cred.aD"></p>
         </div>
       </div>
     </div>
@@ -230,7 +230,7 @@
   <div id="site-footer"></div>
 
   <script src="assets/js/data.js?v=9"></script>
-  <script src="assets/js/i18n.js?v=9"></script>
+  <script src="assets/js/i18n.js?v=10"></script>
   <script src="assets/js/app.js?v=9"></script>
   <script>
     const I = window.ICON || {};
@@ -241,6 +241,7 @@
       set('icClock', I.clock); set('icLayers', I.layers);
       set('seeAllArr', I.arrow); set('brandsArr', I.arrow); set('howArr', I.arrow);
       set('icLeaf', I.leaf); set('icTag2', I.layers); set('icShip2', I.ship); set('icShield2', I.shield);
+      set('crPhil', I.spark); set('crLic', I.shield); set('crArea', I.globe);
       set('ctaChatIc', I.phone);
     }
     const catIcons = { skincare:I.leaf, makeup:I.spark, haircare:I.leaf, bodycare:I.leaf, bath:I.box,
