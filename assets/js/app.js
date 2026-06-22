@@ -764,20 +764,13 @@ function closeAllMegas(){
   });
 }
 function initMegaMenu(){
+  // Nav links (Products / Brands) navigate normally on click.
+  // The mega-menu dropdown opens on hover (desktop CSS) for preview.
+  // No preventDefault — clicking goes to the actual page.
   $$('.nav-link.has-mega').forEach(link=>{
-    link.setAttribute('role','button');
-    link.setAttribute('aria-expanded','false');
-    link.addEventListener('click', e=>{
-      e.preventDefault();
-      const item = link.closest('.nav-item');
-      const willOpen = !item.classList.contains('open');
-      closeAllMegas();
-      if(willOpen){ item.classList.add('open'); link.setAttribute('aria-expanded','true'); }
-    });
-    link.addEventListener('keydown', e=>{
-      if(e.key===' ' || e.key==='Spacebar'){ e.preventDefault(); link.click(); }
-    });
+    link.setAttribute('aria-haspopup','true');
   });
+  // Close any pinned mega on outside click (for touch tap-and-hold edge cases)
   document.addEventListener('click', e=>{
     if(!e.target.closest('.nav-item')) closeAllMegas();
   });
