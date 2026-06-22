@@ -667,11 +667,16 @@ table.t td b{ color:var(--clay); font-family:var(--f-serif); font-size:1.1rem; }
 /* ---------- Page hero (inner) ---------- */
 .page-hero{ background:var(--paper-3); border-bottom:1px solid var(--line-soft); }
 .page-hero .container{ padding-top:54px; padding-bottom:54px; }
-.breadcrumb{ font-family:var(--f-mono); font-size:.8rem; letter-spacing:.03em; color:var(--ink-3); margin-bottom:22px; display:flex; flex-wrap:wrap; align-items:baseline; line-height:1.5; }
-.breadcrumb a{ color:var(--ink-3); transition:color .15s; }
+.breadcrumb{ font-family:var(--f-sans); font-size:.82rem; color:var(--ink-3); margin-bottom:22px; display:flex; flex-wrap:wrap; align-items:center; line-height:1.5; overflow:hidden; }
+.breadcrumb a{ color:var(--ink-3); transition:color .15s; white-space:nowrap; }
 .breadcrumb a:hover{ color:var(--sumi); }
-.breadcrumb .sep{ margin:0 10px; color:var(--line); user-select:none; }
-.breadcrumb .cur{ color:var(--ink); font-weight:600; }
+.breadcrumb .sep{ margin:0 6px; color:var(--line); user-select:none; flex:none; }
+.breadcrumb .cur{ color:var(--ink); font-weight:600; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:220px; }
+@media(max-width:680px){
+  .breadcrumb{ font-size:.76rem; }
+  .breadcrumb .cur{ max-width:140px; }
+  .breadcrumb .sep{ margin:0 4px; }
+}
 .page-hero h1{ font-size:clamp(2.2rem,4.6vw,3.4rem); }
 .page-hero p{ margin-top:16px; max-width:60ch; color:var(--ink-2); font-size:1.06rem; }
 
