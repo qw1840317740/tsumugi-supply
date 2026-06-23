@@ -14,6 +14,7 @@ const AUTH_I18N = {
     emailPh:'Email', passwordPh:'Password', companyPh:'Company / Shop name', passwordHint:'Password (min 6 characters)',
     signinBtn:'Sign In', registerBtn:'Create Account', signingIn:'Signing in…', creating:'Creating…',
     welcomeBack:'Welcome back!', welcomeNew:'Account created — welcome!', signedOut:'Signed out',
+    signOutBtn:'Sign Out', closeBtn:'Close',
     signOutConfirm:'Signed in as:\n{EMAIL}\n\nClick OK to sign out.',
     err:{ EMAIL_TAKEN:'This email is already registered.', INVALID_CREDENTIALS:'Invalid email or password.',
       MISSING_FIELDS:'Email and password are required.', SHORT_PASSWORD:'Password must be at least 6 characters.',
@@ -24,6 +25,7 @@ const AUTH_I18N = {
     emailPh:'邮箱', passwordPh:'密码', companyPh:'公司 / 店铺名', passwordHint:'密码（至少 6 个字符）',
     signinBtn:'登录', registerBtn:'创建账户', signingIn:'登录中…', creating:'创建中…',
     welcomeBack:'欢迎回来！', welcomeNew:'账户已创建 — 欢迎！', signedOut:'已退出登录',
+    signOutBtn:'退出登录', closeBtn:'关闭',
     signOutConfirm:'已登录：\n{EMAIL}\n\n点击「确定」退出登录。',
     err:{ EMAIL_TAKEN:'该邮箱已被注册。', INVALID_CREDENTIALS:'邮箱或密码错误。',
       MISSING_FIELDS:'请填写邮箱和密码。', SHORT_PASSWORD:'密码至少需要 6 个字符。',
@@ -34,6 +36,7 @@ const AUTH_I18N = {
     emailPh:'メール', passwordPh:'パスワード', companyPh:'会社名・店舗名', passwordHint:'パスワード（6文字以上）',
     signinBtn:'サインイン', registerBtn:'アカウント作成', signingIn:'サインイン中…', creating:'作成中…',
     welcomeBack:'おかえりなさい！', welcomeNew:'アカウント作成完了 — ようこそ！', signedOut:'サインアウトしました',
+    signOutBtn:'サインアウト', closeBtn:'閉じる',
     signOutConfirm:'サインイン中：\n{EMAIL}\n\nOKでサインアウトします。',
     err:{ EMAIL_TAKEN:'このメールアドレスは既に登録されています。', INVALID_CREDENTIALS:'メールアドレスまたはパスワードが正しくありません。',
       MISSING_FIELDS:'メールアドレスとパスワードを入力してください。', SHORT_PASSWORD:'パスワードは6文字以上で入力してください。',
@@ -135,7 +138,36 @@ async function handleRegister(e){
 }
 function handleSignOut(){
   localStorage.removeItem(TOKEN_KEY); localStorage.removeItem(USER_KEY);
-  updateAuthUI(); toast(ai18n('signedOut'));
+  closeAccountPanel(); updateAuthUI(); toast(ai18n('signedOut'));
+}
+
+/* ---------- Account panel (logged-in dropdown) ---------- */
+function openAccountPanel(){
+  let user = {};
+  try{ user = JSON.parse(localStorage.getItem(USER_KEY)) || {}; }catch{}
+  const initial = (user.email||'U').charAt(0).toUpperCase();
+  if(!document.getElementById('accountPanel')){
+    document.body.insertAdjacentHTML('beforeend', `
+      <div class="auth-overlay" id="accountPanel" onclick="if(event.target===this) closeAccountPanel()">
+        <div class="auth-card" style="max-width:340px;text-align:center;padding:36px 28px 28px">
+          <button class="auth-close" onclick="closeAccountPanel()">${_closeSvg}</button>
+          <div class="user-avatar" style="width:56px;height:56px;font-size:1.5rem;margin:4px auto 16px">${initial}</div>
+          <div style="font-family:var(--f-serif);font-size:1.1rem;font-weight:600;margin-bottom:4px;word-break:break-all">${user.email||''}</div>
+          ${user.company ? `<div class="muted" style="font-size:.9rem;margin-bottom:4px">${user.company}</div>` : ''}
+          <div class="muted" style="font-size:.78rem;margin-bottom:24px;font-family:var(--f-mono);letter-spacing:.1em;text-transform:uppercase">ID: ${user.id||'—'}</div>
+          <div style="border-top:1px solid var(--line-soft);padding-top:18px;display:flex;flex-direction:column;gap:8px">
+            <button class="btn btn-ghost btn-block" onclick="closeAccountPanel()">${ai18n('closeBtn')}</button>
+            <button class="btn btn-clay btn-block" onclick="handleSignOut()">${ai18n('signOutBtn')}</button>
+          </div>
+        </div>
+      </div>`);
+  }
+  document.getElementById('accountPanel').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeAccountPanel(){
+  document.getElementById('accountPanel')?.classList.remove('open');
+  document.body.style.overflow = '';
 }
 
 /* ---------- Header ---------- */
@@ -148,7 +180,7 @@ function updateAuthUI(){
       btn.innerHTML=`<span class="user-avatar">${initial}</span>`;
       btn.classList.add('logged-in'); btn.title=user.email;
       btn.setAttribute('aria-label','Account: '+user.email);
-      btn.onclick=()=>{ if(confirm(ai18n('signOutConfirm').replace('{EMAIL}',user.email))) handleSignOut(); };
+      btn.onclick=()=>openAccountPanel();
       return;
     }
   }catch{}
