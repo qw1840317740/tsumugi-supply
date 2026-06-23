@@ -14,11 +14,13 @@ pool.query(`
     email VARCHAR(255) UNIQUE NOT NULL,
     password_hash TEXT NOT NULL,
     company VARCHAR(255),
+    customer_code VARCHAR(20) UNIQUE,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
   );
   CREATE TABLE IF NOT EXISTS orders (
     id SERIAL PRIMARY KEY,
     user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    order_code VARCHAR(20) UNIQUE,
     items JSONB NOT NULL DEFAULT '[]',
     total_jpy INTEGER NOT NULL DEFAULT 0,
     currency VARCHAR(3) DEFAULT 'JPY',
@@ -50,5 +52,16 @@ pool.query(`
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
   );
 `).catch(() => {});
+
+// Backfill customer_code for existing users
+pool.query("UPDATE users SET customer_code = 'KS-' || upper(substr(encode(gen_random_bytes(4), 'hex'), 1, 6)) WHERE customer_code IS NULL").catch(() => {});
+
+function genCode(prefix) {
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  let code = prefix + '-';
+  for (let i = 0; i < 6; i++) code += chars[Math.floor(Math.random() * chars.length)];
+  return code;
+}
+module.exports = { pool, genCode };
 
 module.exports = { pool };

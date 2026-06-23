@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const { pool } = require('./_db');
+const { pool, genCode } = require('./_db');
 
 function getUserId(req) {
   const auth = req.headers.authorization;
@@ -14,7 +14,7 @@ module.exports = async (req, res) => {
 
   if (req.method === 'GET') {
     try {
-      const r = await pool.query('SELECT id, items, total_jpy, currency, status, created_at FROM orders WHERE user_id = $1 ORDER BY created_at DESC LIMIT 50', [uid]);
+      const r = await pool.query('SELECT id, order_code, items, total_jpy, currency, status, created_at FROM orders WHERE user_id = $1 ORDER BY created_at DESC LIMIT 50', [uid]);
       return res.status(200).json({ orders: r.rows });
     } catch { return res.status(500).json({ error: 'SERVER_ERROR' }); }
   }
@@ -23,9 +23,10 @@ module.exports = async (req, res) => {
     const { items, total_jpy, currency } = req.body || {};
     if (!items || !Array.isArray(items) || !items.length) return res.status(400).json({ error: 'EMPTY_CART' });
     try {
+      const orderCode = genCode('ORD');
       const r = await pool.query(
-        'INSERT INTO orders (user_id, items, total_jpy, currency) VALUES ($1, $2, $3, $4) RETURNING id, created_at',
-        [uid, JSON.stringify(items), total_jpy || 0, currency || 'JPY']
+        'INSERT INTO orders (user_id, order_code, items, total_jpy, currency) VALUES ($1, $2, $3, $4, $5) RETURNING id, order_code, created_at',
+        [uid, orderCode, JSON.stringify(items), total_jpy || 0, currency || 'JPY']
       );
       return res.status(201).json({ order: r.rows[0] });
     } catch { return res.status(500).json({ error: 'SERVER_ERROR' }); }

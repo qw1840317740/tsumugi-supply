@@ -9,14 +9,14 @@ module.exports = async (req, res) => {
   if (!email || !password) return res.status(400).json({ error: 'MISSING_FIELDS' });
 
   try {
-    const result = await pool.query('SELECT id, email, password_hash, company FROM users WHERE email = $1', [email.toLowerCase()]);
+    const result = await pool.query('SELECT id, email, password_hash, company, customer_code FROM users WHERE email = $1', [email.toLowerCase()]);
     if (!result.rows.length) return res.status(401).json({ error: 'INVALID_CREDENTIALS' });
     const user = result.rows[0];
     const valid = await bcrypt.compare(password, user.password_hash);
     if (!valid) return res.status(401).json({ error: 'INVALID_CREDENTIALS' });
 
-    const token = jwt.sign({ id: user.id, email: user.email }, process.env.JWT_SECRET || 'dev-secret-7d', { expiresIn: '7d' });
-    return res.status(200).json({ token, user: { id: user.id, email: user.email, company: user.company } });
+    const token = jwt.sign({ id: user.id, email: user.email, cc: user.customer_code }, process.env.JWT_SECRET || 'dev-secret-7d', { expiresIn: '7d' });
+    return res.status(200).json({ token, user: { id: user.id, email: user.email, company: user.company, customer_code: user.customer_code } });
   } catch (err) {
     console.error('Login error:', err);
     return res.status(500).json({ error: 'SERVER_ERROR' });

@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const { pool } = require('./_db');
+const { pool, genCode } = require('./_db');
 
 module.exports = async (req, res) => {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
@@ -14,12 +14,13 @@ module.exports = async (req, res) => {
     if (existing.rows.length) return res.status(409).json({ error: 'EMAIL_TAKEN' });
 
     const hash = await bcrypt.hash(password, 10);
+    const customerCode = genCode('KS');
     const result = await pool.query(
-      'INSERT INTO users (email, password_hash, company) VALUES ($1, $2, $3) RETURNING id, email, company',
-      [email.toLowerCase(), hash, company || null]
+      'INSERT INTO users (email, password_hash, company, customer_code) VALUES ($1, $2, $3, $4) RETURNING id, email, company, customer_code',
+      [email.toLowerCase(), hash, company || null, customerCode]
     );
     const user = result.rows[0];
-    const token = jwt.sign({ id: user.id, email: user.email }, process.env.JWT_SECRET || 'dev-secret-7d', { expiresIn: '7d' });
+    const token = jwt.sign({ id: user.id, email: user.email, cc: user.customer_code }, process.env.JWT_SECRET || 'dev-secret-7d', { expiresIn: '7d' });
     return res.status(201).json({ token, user });
   } catch (err) {
     console.error('Register error:', err);

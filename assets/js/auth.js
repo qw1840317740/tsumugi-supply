@@ -221,7 +221,7 @@ function renderOverview(el){
   let user={}; try{user=JSON.parse(localStorage.getItem(USER_KEY))||{};}catch{}
   el.innerHTML=`
     <div style="display:flex;flex-direction:column;gap:12px;padding:4px 0">
-      <div class="acct-stat"><span>ID</span><b style="font-family:var(--f-mono);font-size:.92rem">KS-${String(user.id||0).padStart(5,'0')}</b></div>
+      <div class="acct-stat"><span>ID</span><b style="font-family:var(--f-mono);font-size:.92rem">${user.customer_code || 'KS-' + String(user.id||0).padStart(5,'0')}</b></div>
       <div class="acct-stat"><span>Email</span><b style="font-size:.88rem">${user.email||''}</b></div>
       <div class="acct-stat"><span>Company</span><b>${user.company||'—'}</b></div>
     </div>`;
@@ -239,7 +239,7 @@ async function renderOrders(el){
     el.innerHTML=orders.map(o=>`
       <div class="acct-order">
         <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px">
-          <b style="font-family:var(--f-mono);font-size:.92rem">ORD-${String(o.id).padStart(5,'0')}</b>
+          <b style="font-family:var(--f-mono);font-size:.92rem">${o.order_code || 'ORD-' + String(o.id).padStart(5,'0')}</b>
           <span class="acct-status">${ai18n('status'+o.status.charAt(0).toUpperCase()+o.status.slice(1).replace(/_/g,''))}</span>
         </div>
         <div class="muted" style="font-size:.8rem">${new Date(o.created_at).toLocaleDateString()} · ${(o.items||[]).length} ${ai18n('orderItems')}</div>
