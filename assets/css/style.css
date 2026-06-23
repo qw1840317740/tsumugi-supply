@@ -762,3 +762,20 @@ table.t td b{ color:var(--clay); font-family:var(--f-serif); font-size:1.1rem; }
   display:grid; place-items:center; font-size:.82rem; font-weight:700; font-family:var(--f-serif);
 }
 .icon-btn.logged-in{ padding:5px; }
+
+/* ---------- Account dashboard ---------- */
+.acct-dashboard{ padding:32px 24px 24px; }
+.acct-header{ display:flex; align-items:center; gap:12px; margin-bottom:20px; }
+.acct-tabs{ display:flex; gap:0; border-bottom:1px solid var(--line); margin-bottom:18px; overflow-x:auto; }
+.acct-tab{ padding:8px 14px; font-size:.84rem; font-weight:600; color:var(--ink-3); border-bottom:2px solid transparent; white-space:nowrap; transition:.15s; cursor:pointer; }
+.acct-tab:hover{ color:var(--ink-2); }
+.acct-tab.active{ color:var(--sumi); border-bottom-color:var(--clay); }
+.acct-body{ min-height:120px; max-height:300px; overflow-y:auto; }
+.acct-stat{ display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid var(--line-soft); font-size:.88rem; }
+.acct-stat span{ color:var(--ink-3); font-family:var(--f-mono); font-size:.74rem; text-transform:uppercase; letter-spacing:.08em; }
+.acct-stat b{ font-family:var(--f-serif); }
+.acct-order{ padding:14px; border:1px solid var(--line-soft); border-radius:10px; margin-bottom:8px; }
+.acct-order:last-child{ margin-bottom:0; }
+.acct-status{ font-size:.72rem; font-weight:600; padding:3px 8px; border-radius:6px; background:var(--paper-3); color:var(--sumi); }
+.acct-wish{ display:flex; align-items:center; gap:8px; padding:10px 0; border-bottom:1px solid var(--line-soft); }
+.acct-wish:last-child{ border-bottom:none; }
