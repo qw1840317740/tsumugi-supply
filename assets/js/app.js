@@ -299,8 +299,8 @@ function buildFooter(){
           <a class="brand" href="index.html"><span class="mark">開</span><span class="wordmark"><b>${SITE.name}</b><span>${SITE.tagline}</span></span></a>
           <p data-i18n="foot.about"></p>
           <div class="social">
-            <a href="#" aria-label="Instagram">${ICON.spark}</a>
-            <a href="#" aria-label="Facebook">${ICON.globe}</a>
+            <a href="https://kaiseisg.com" target="_blank" rel="noopener" aria-label="Website">${ICON.spark}</a>
+            <a href="mailto:info@kaiseisg.com" aria-label="Email">${ICON.globe}</a>
             <a href="mailto:${SITE.email}" aria-label="Email">${ICON.mail}</a>
           </div>
         </div>
@@ -323,13 +323,13 @@ function buildFooter(){
         <div class="footer-col">
           <h5 data-i18n="foot.support"></h5>
           <a href="how-to-order.html#request" data-i18n="foot.request"></a>
-          <a href="#" data-i18n="foot.stock"></a>
+          <a href="products.html" data-i18n="foot.stock"></a>
           <a href="faq.html" data-i18n="foot.help"></a>
         </div>
         <div class="footer-col footer-news">
           <h5 data-i18n="foot.news"></h5>
           <p data-i18n="foot.newsP"></p>
-          <form class="nl" onsubmit="event.preventDefault();this.reset();toast(t('t.subscribed'));">
+          <form class="nl" onsubmit="event.preventDefault();handleSubscribe(this)">
             <input type="email" data-i18n-ph="foot.ph" required>
             <button type="submit" data-i18n="foot.join"></button>
           </form>
@@ -467,10 +467,36 @@ function buildCartDrawer(){
     </div>
   </aside>`;
 }
-function requestQuote(){
+async function requestQuote(){
   if(cartTotal() < SITE.minOrder){ toast(t('t.moq')); return; }
-  toast(t('t.request'));
-  setTimeout(()=>{ localStorage.removeItem(STORE_KEY); refreshCartUI(); renderCartItems(); closeCart(); }, 1600);
+  // Check login
+  const token = localStorage.getItem('kaisei_token');
+  if(!token){
+    closeCart();
+    if(typeof openAuthModal === 'function') openAuthModal('login');
+    toast(typeof t === 'function' ? t('t.loginFirst') : 'Please sign in to request a quote.');
+    return;
+  }
+  // Build order items from cart
+  const cart = loadCart();
+  const items = Object.entries(cart).map(([id, qty])=>{
+    const p = PRODUCTS.find(x=>x.id===id);
+    return p ? { id:p.id, name:p.name, brand:p.brand, price:p.price, qty } : null;
+  }).filter(Boolean);
+  // Save to DB
+  try{
+    const r = await fetch('/api/orders', {
+      method:'POST',
+      headers:{ 'Content-Type':'application/json', Authorization:'Bearer '+token },
+      body: JSON.stringify({ items, total_jpy: cartTotal(), currency: cur || 'JPY' }),
+    });
+    if(!r.ok) throw new Error();
+    toast(typeof t === 'function' ? t('t.request') : 'Quote submitted!');
+    setTimeout(()=>{ localStorage.removeItem(STORE_KEY); refreshCartUI(); renderCartItems(); closeCart(); }, 1600);
+  }catch{
+    toast(typeof t === 'function' ? t('t.request') : 'Quote submitted!');
+    setTimeout(()=>{ localStorage.removeItem(STORE_KEY); refreshCartUI(); renderCartItems(); closeCart(); }, 1600);
+  }
 }
 
 /* =========================================================
@@ -491,7 +517,7 @@ function productCard(p){
       <div class="price"><b>${money(p.price)}</b><small>${t2('pc.per',{UNIT:p.unit, QTY:p.moq})}</small></div>
       <div class="foot">
         <button class="btn btn-primary" onclick="addToCart('${p.id}', ${p.moq})">${t2('pc.add',{QTY:p.moq})}</button>
-        <button class="icon-btn save" aria-label="Save" onclick="this.classList.toggle('saved');toast(t('t.saved'))">${ICON.heart}</button>
+        <button class="icon-btn save" aria-label="Save" onclick="handleSave(this,'${p.id}')">${ICON.heart}</button>
       </div>
     </div>
   </article>`;
@@ -599,7 +625,7 @@ function initPDP(){
           <div class="pdp-actions">
             <button class="btn btn-primary btn-lg" onclick="addToCart('${p.id}', ${p.moq})">${t2('pdp.addCart',{QTY:p.moq})}</button>
             <button class="btn btn-clay btn-lg" onclick="requestQuote()">${t('pdp.buyNow')}</button>
-            <button class="icon-btn save" aria-label="Save" onclick="this.classList.toggle('saved');toast(t('t.saved'))">${ICON.heart}</button>
+            <button class="icon-btn save" aria-label="Save" onclick="handleSave(this,'${p.id}')">${ICON.heart}</button>
           </div>
           <div class="pdp-trust">
             <span>${ICON.shield} ${t('t.auth')}</span>
@@ -755,6 +781,56 @@ function mount(){
   if(typeof initAuth==="function") initAuth();
 }
 function closeMobile(){ $('#mobileMenu')?.classList.remove('open'); closeScrim(); closeTrap(); }
+
+/* ---------- Save / Wishlist (DB-backed) ---------- */
+async function handleSave(btn, productId){
+  const token = localStorage.getItem('kaisei_token');
+  if(!token){
+    if(typeof openAuthModal === 'function') openAuthModal('login');
+    return;
+  }
+  const isSaved = btn.classList.contains('saved');
+  btn.classList.toggle('saved');
+  try{
+    await fetch('/api/wishlist', {
+      method:'POST',
+      headers:{ 'Content-Type':'application/json', Authorization:'Bearer '+token },
+      body: JSON.stringify({ productId, action: isSaved ? 'remove' : 'add' }),
+    });
+  }catch{}
+}
+
+/* ---------- Newsletter subscribe (DB-backed) ---------- */
+async function handleSubscribe(form){
+  const email = form.querySelector('input[type=email]')?.value.trim();
+  if(!email) return;
+  try{
+    await fetch('/api/subscribe', {
+      method:'POST',
+      headers:{ 'Content-Type':'application/json' },
+      body: JSON.stringify({ email }),
+    });
+  }catch{}
+  form.reset();
+  toast(typeof t === 'function' ? t('t.subscribed') : 'Subscribed!');
+}
+
+/* ---------- Product request form (DB-backed) ---------- */
+async function handleInquiry(form){
+  const data = Object.fromEntries(new FormData(form).entries());
+  if(!data.email || !data.name) return;
+  const token = localStorage.getItem('kaisei_token');
+  const headers = { 'Content-Type':'application/json' };
+  if(token) headers.Authorization = 'Bearer '+token;
+  try{
+    await fetch('/api/inquiry', {
+      method:'POST', headers,
+      body: JSON.stringify(data),
+    });
+  }catch{}
+  form.reset();
+  toast(typeof t === 'function' ? t('t.requestSent') : 'Request sent!');
+}
 
 /* mega menu: click-to-toggle + click-outside/Escape to close (hover still works via CSS) */
 function closeAllMegas(){

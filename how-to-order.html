@@ -148,7 +148,7 @@
             <div class="row"><div class="ic"><span id="ciPhone"></span></div><div><span data-i18n="req.cc"></span><b>〒354-0021 3465 Tsuruba, Fujimi, Saitama, Japan</b></div></div>
           </div>
         </div>
-        <form class="form-card" onsubmit="event.preventDefault();this.reset();toast(t('t.requestSent'));">
+        <form class="form-card" onsubmit="event.preventDefault();handleInquiry(this)">
           <div class="form-row">
             <div class="field"><label><span data-i18n="req.name"></span> <span class="req">*</span></label><input required data-i18n-ph="req.phName"></div>
             <div class="field"><label><span data-i18n="req.company"></span> <span class="req">*</span></label><input required data-i18n-ph="req.phCo"></div>
