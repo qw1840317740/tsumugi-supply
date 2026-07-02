@@ -182,6 +182,10 @@ const CAT_IMG = {
   home: ['photo-1740657254989-42fe9c3b8cce','photo-1563453392212-326f5e854473','photo-1627905646269-7f034dcc5738','photo-1585421514284-efb74c2b69ba'],
 };
 function productPhoto(p){
+  // Real LION catalog photos, filed by JAN under assets/products/.
+  // If a SKU has no photo (or it 404s), <img onerror> hides it and the SVG
+  // art underneath shows as a graceful fallback.
+  if (p.jan) return `assets/products/${p.jan}.jpg`;
   const pool = CAT_IMG[p.category] || BEAUTY_IMG;
   const id = pool[Math.abs(PRODUCTS.indexOf(p)) % pool.length];
   return `https://images.unsplash.com/${id}?w=600&h=600&q=80&auto=format&fit=crop`;
@@ -244,15 +248,6 @@ function buildHeader(){
               <button class="dd-item" data-val="en" type="button">EN <span class="dd-check">${ICON.check}</span></button>
               <button class="dd-item" data-val="zh" type="button">中文 <span class="dd-check">${ICON.check}</span></button>
               <button class="dd-item" data-val="ja" type="button">日本語 <span class="dd-check">${ICON.check}</span></button>
-            </div>
-          </div>
-          <div class="dd" id="curDD">
-            <button class="dd-trigger" type="button" aria-haspopup="listbox" aria-expanded="false"><span class="dd-label">¥ JPY</span><span class="dd-chev">${ICON.chev}</span></button>
-            <div class="dd-menu" role="listbox">
-              <button class="dd-item" data-val="JPY" type="button">¥ JPY <span class="dd-check">${ICON.check}</span></button>
-              <button class="dd-item" data-val="USD" type="button">$ USD <span class="dd-check">${ICON.check}</span></button>
-              <button class="dd-item" data-val="EUR" type="button">€ EUR <span class="dd-check">${ICON.check}</span></button>
-              <button class="dd-item" data-val="CNY" type="button">¥ CNY <span class="dd-check">${ICON.check}</span></button>
             </div>
           </div>
           <button class="icon-btn" id="searchBtn" aria-label="Search" data-i18n-title="cur.search">${ICON.search}</button>
@@ -370,33 +365,31 @@ function renderCartItems(){
   } else {
     body.innerHTML = ids.map(id=>{
       const p = PRODUCTS.find(x=>x.id===id); if(!p) return '';
-      const q = c[id]; const line = p.price*q;
+      const q = c[id];
       return `<div class="cart-item">
         <div class="thumb" style="background:${p.hue};color:#fff">${brandKana(p.brand)}</div>
         <div>
           <div class="nm">${p.name}</div>
           <div class="br">${p.brand} · ${p.unit}</div>
-          <div class="px">${money(p.price)} · MOQ ${p.moq}</div>
+          <div class="px">${t('cart.qty')}: ${q}</div>
           <div class="qty"><button onclick="setQty('${id}',${q-1})">${ICON.minus}</button><span>${q}</span><button onclick="setQty('${id}',${q+1})">${ICON.plus}</button></div>
         </div>
         <div class="right">
-          <b>${money(line)}</b>
           <button class="rm" onclick="removeItem('${id}')">${ICON.trash} ${t('cart.remove')}</button>
         </div>
       </div>`;
     }).join('');
   }
   const total = cartTotal();
-  const remain = Math.max(0, SITE.minOrder - total);
   const moq = $('#cartMoq');
   if(moq){
     if(total>=SITE.minOrder){
       moq.className = 'cart-moq ok'; moq.innerHTML = `${ICON.check} ${t('t.moqOk')}`;
     } else {
-      moq.className = 'cart-moq'; moq.innerHTML = `${ICON.info} ${t2('t.moqAdd',{AMT:money(remain)})}`;
+      moq.className = 'cart-moq'; moq.innerHTML = `${ICON.info} ${t('t.moqAdd')}`;
     }
   }
-  const tot = $('#cartTotal'); if(tot) tot.textContent = money(total);
+  const tot = $('#cartTotal'); if(tot) tot.textContent = t('cart.priceOnQuote');
   const ct = $('#cartItemsHead'); if(ct) ct.textContent = ` · ${cartQty()}`;
   refreshCartUI();
 }
@@ -514,9 +507,8 @@ function productCard(p){
       <span class="cat">${catName(p.category)}</span>
       <h4><a href="product.html?id=${p.id}">${p.name}</a></h4>
       <span class="brand">${p.brand} <span class="d"></span> ${p.unit}</span>
-      <div class="price"><b>${money(p.price)}</b><small>${t2('pc.per',{UNIT:p.unit, QTY:p.moq})}</small></div>
       <div class="foot">
-        <button class="btn btn-primary" onclick="addToCart('${p.id}', ${p.moq})">${t2('pc.add',{QTY:p.moq})}</button>
+        <a class="btn btn-primary" href="product.html?id=${p.id}">${t('pc.view')}</a>
         <button class="icon-btn save" aria-label="Save" onclick="handleSave(this,'${p.id}')">${ICON.heart}</button>
       </div>
     </div>
@@ -529,16 +521,15 @@ function productCard(p){
 function initShop(){
   const grid = $('#productGrid'); if(!grid) return;
   const params = new URLSearchParams(location.search);
-  let state = { cat: params.get('cat')||'', brand:'', q:'', sort:'featured', inStock:false, maxPrice:7000 };
+  let state = { cat: params.get('cat')||'', brand:'', q:'', sort:'featured', inStock:false };
 
   function apply(){
     let list = PRODUCTS.slice();
     if(state.cat)   list = list.filter(p=>p.category===state.cat);
     if(state.brand) list = list.filter(p=>p.brand===state.brand);
     if(state.inStock) list = list.filter(p=>p.tag!=='low');
-    list = list.filter(p=>p.price<=state.maxPrice);
     if(state.q){ const q=state.q.toLowerCase(); list = list.filter(p=>(p.name+p.brand+catName(p.category)).toLowerCase().includes(q)); }
-    switch(state.sort){ case 'low':list.sort((a,b)=>a.price-b.price);break; case 'high':list.sort((a,b)=>b.price-a.price);break; case 'brand':list.sort((a,b)=>a.brand.localeCompare(b.brand));break; }
+    if(state.sort==='brand') list.sort((a,b)=>a.brand.localeCompare(b.brand));
     render(list);
   }
   function render(list){
@@ -565,7 +556,6 @@ function initShop(){
   $('#shopSearch')?.addEventListener('input', e=>{ state.q=e.target.value.trim(); apply(); });
   $('#shopSort')?.addEventListener('change', e=>{ state.sort=e.target.value; apply(); });
   $('#inStock')?.addEventListener('change', e=>{ state.inStock=e.target.checked; apply(); });
-  $('#priceRange')?.addEventListener('input', e=>{ state.maxPrice=+e.target.value; $('#priceVal').textContent=jpy(state.maxPrice); apply(); });
 
   function setTitle(){
     const v = state.cat ? catName(state.cat) : t('shop.all');
@@ -612,7 +602,6 @@ function initPDP(){
           <span class="cat">${catName(p.category)}</span>
           <h1>${p.name}</h1>
           <a class="brandlink" href="brands.html#${p.brand}">${p.brand} ${ICON.arrow}</a>
-          <div class="pdp-price"><b>${money(p.price)}</b><small>${t2('pc.per',{UNIT:p.unit,QTY:p.moq})}</small></div>
           <p class="pdp-blurb">${brand.blurb||t('pdp.desc')}</p>
           <div class="pdp-specs">
             <div><span>${t('pdp.brand')}</span><b>${p.brand}</b></div>
@@ -623,14 +612,14 @@ function initPDP(){
             <div><span>${t('pdp.origin')}</span><b>Japan</b></div>
           </div>
           <div class="pdp-actions">
-            <button class="btn btn-primary btn-lg" onclick="addToCart('${p.id}', ${p.moq})">${t2('pdp.addCart',{QTY:p.moq})}</button>
-            <button class="btn btn-clay btn-lg" onclick="requestQuote()">${t('pdp.buyNow')}</button>
+            <a class="btn btn-primary btn-lg" href="how-to-order.html#request">${t('pdp.inquire')}</a>
+            <a class="btn btn-clay btn-lg" href="mailto:${SITE.email}?subject=${encodeURIComponent('Quote request: '+p.name+' ('+p.id+')')}">${t('pdp.contact')}</a>
             <button class="icon-btn save" aria-label="Save" onclick="handleSave(this,'${p.id}')">${ICON.heart}</button>
           </div>
           <div class="pdp-trust">
             <span>${ICON.shield} ${t('t.auth')}</span>
             <span>${ICON.truck} ${t('t.logistics')}</span>
-            <span>${ICON.yen} ${t('t.price')}</span>
+            <span>${ICON.clock} ${t('t.day')}</span>
           </div>
         </div>
       </div>
@@ -717,7 +706,7 @@ function injectSEO(){
   _ld('product', { '@context':'https://schema.org','@type':'Product',
     name:p.name, brand:{'@type':'Brand', name:p.brand}, category:catName(p.category),
     sku:p.id, mpn:p.id, description:descP,
-    offers:{ '@type':'Offer', priceCurrency:'JPY', price:p.price, availability:'https://schema.org/InStock', url:location.href } });
+    offers:{ '@type':'Offer', availability:'https://schema.org/InStock', url:location.href } });
   _ld('breadcrumb', { '@context':'https://schema.org','@type':'BreadcrumbList',
     itemListElement:[
       {'@type':'ListItem', position:1, name:'Home', item:location.origin+'/'},
@@ -754,17 +743,8 @@ function mount(){
   $('#scrim')?.addEventListener('click', ()=>{ closeCart(); closeMobile(); });
   // custom dropdowns
   initDropdown('langDD', val => setLang(val));
-  initDropdown('curDD', val => {
-    cur = val;
-    try { localStorage.setItem('tsumugi_cur', cur); } catch(e) {}
-    const lbl = document.querySelector('#curDD .dd-label');
-    if(lbl) lbl.textContent = `${SYMS[cur]} ${cur}`;
-    runRenderers(); renderCartItems();
-    toast(t('t.currency').replace('CUR', cur));
-  });
   // sync initial active items + labels
   syncDD('langDD', getLang(), LANG_META[getLang()]?.label);
-  syncDD('curDD', cur, `${SYMS[cur]} ${cur}`);
   $('#searchBtn')?.addEventListener('click', ()=>{ location.href='products.html'; });
   $$('.mm-toggle').forEach(t=>t.addEventListener('click', ()=>{ $('#'+t.dataset.toggle)?.classList.toggle('open'); t.classList.toggle('open'); }));
   initMegaMenu();

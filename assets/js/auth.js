@@ -243,7 +243,7 @@ async function renderOrders(el){
           <span class="acct-status">${ai18n('status'+o.status.charAt(0).toUpperCase()+o.status.slice(1).replace(/_/g,''))}</span>
         </div>
         <div class="muted" style="font-size:.8rem">${new Date(o.created_at).toLocaleDateString()} · ${(o.items||[]).length} ${ai18n('orderItems')}</div>
-        <div style="margin-top:4px"><b>${(o.currency||'JPY')==='JPY'?'¥':'$'}${(o.total_jpy||0).toLocaleString()}</b></div>
+        <div style="margin-top:4px" class="muted">${ai18n('orderTotal')||'Quote'}</div>
       </div>`).join('');
   }catch{ el.innerHTML=`<div style="text-align:center;padding:20px;color:var(--ink-3)">${ai18n('noOrders')}</div>`; }
 }
@@ -262,7 +262,7 @@ async function renderWishlist(el){
       <div class="acct-wish">
         <a href="product.html?id=${p.id}" style="display:flex;gap:10px;align-items:center;flex:1;min-width:0" onclick="closeAccountPanel()">
           <div class="thumb" style="background:${p.hue};color:#fff;width:36px;height:36px;border-radius:8px;display:grid;place-items:center;font-family:var(--f-serif);font-size:.9rem;flex:none">${(typeof brandKana==='function'?brandKana(p.brand):p.brand.charAt(0))}</div>
-          <div style="min-width:0"><div style="font-size:.86rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${p.name}</div><div class="muted" style="font-size:.76rem">¥${p.price.toLocaleString()}</div></div>
+          <div style="min-width:0"><div style="font-size:.86rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${p.name}</div><div class="muted" style="font-size:.76rem">${p.brand} · ${p.unit}</div></div>
         </a>
         <button class="btn btn-ghost" style="padding:6px 10px;font-size:.78rem;flex:none" onclick="removeWish('${p.id}')">${ai18n('removeBtn')}</button>
       </div>`).join('');
