@@ -142,6 +142,48 @@ function pickShape(p){
   }
   return 'dropper';
 }
+
+/* Brand logo: monogram inside a hue-tinted rounded square.
+   Per-brand overrides live in the `mark` field on each BRANDS entry so
+   Western brands (Clinica, NANOX...) get a Latin glyph and Japanese
+   houses get their kana head. */
+const BRAND_MARKS = {
+  'White&White':'W','Clinica':'C','Denter':'D','Systema':'S','Dent Health':'D',
+  'NONIO':'N','Lightee':'L','Zact':'Z','Between':'B','LION Kids':'LK',
+  'LION e-Toothbrush':'LE','OCH-TUNE':'O','Migacot':'M','Dental Rinse':'DR',
+  'Soft in One':'SI','Oct':'O','Kirei Kirei':'K','Hadakara':'H','Ban':'B',
+  'Top':'T','NANOX':'N','Acron':'A','Bright':'B','Soflan':'S',
+  'Soflan Premium':'SP','Soflan Aroma':'SA','Style Guard':'SG','Elegard':'E',
+  'Rain Guard':'RG','Mama Lemon':'ML','Magica':'M','LION':'L','Look':'L',
+  'Bathtub Cleanser':'BC','Toilet Cleanser':'TC','Mamepika':'M'
+};
+function brandLogo(b, size=44){
+  const hue = b.hue || '#21463D';
+  const mark = (b.mark && b.mark.length<=3 ? b.mark : (BRAND_MARKS[b.name] || (b.kana||'?').slice(0,2)));
+  // Three logo shapes — distribute across brands by hash so the brand
+  // strip has visual variety while each card stays stable.
+  const shapeBucket = [...b.name].reduce((a,c)=>a + c.charCodeAt(0), 0) % 3;
+  const isWide = mark.length > 1;
+  const fs = isWide ? (size * (mark.length===2 ? 0.42 : 0.34)) : (size * 0.5);
+  const ring = `<circle cx="${size/2}" cy="${size/2}" r="${size/2-3}" fill="none" stroke="rgba(255,255,255,.22)" stroke-width="1"/>`;
+  let inner = '';
+  if(shapeBucket===0){
+    // rounded square + concentric ring
+    inner = ring;
+  } else if(shapeBucket===1){
+    // diagonal slash accent
+    inner = `<path d="M${size*0.18} ${size*0.82} L${size*0.82} ${size*0.18}" stroke="rgba(255,255,255,.22)" stroke-width="1.2" stroke-linecap="round"/>` + ring;
+  } else {
+    // bottom bar accent
+    inner = `<rect x="${size*0.2}" y="${size*0.74}" width="${size*0.6}" height="2" rx="1" fill="rgba(255,255,255,.28)"/>` + ring;
+  }
+  return `<svg class="brand-logo" viewBox="0 0 ${size} ${size}" width="${size}" height="${size}" aria-label="${b.name} logo" role="img">
+    <rect x="0" y="0" width="${size}" height="${size}" rx="${size*0.22}" fill="${hue}"/>
+    ${inner}
+    <text x="${size/2}" y="${size/2}" text-anchor="middle" dominant-baseline="central" fill="#fff" font-family="'Inter','Helvetica Neue',Arial,sans-serif" font-weight="700" font-size="${fs}" letter-spacing="${isWide?-0.5:0}">${mark}</text>
+  </svg>`;
+}
+
 function productArt(p){
   const h = p.hue || '#21463D';
   const kana = brandKana(p.brand);
@@ -707,7 +749,7 @@ function initPDP(){
         <div class="pdp-info">
           <span class="cat">${subOf(p)}</span>
           <h1>${p.name}</h1>
-          <a class="brandlink" href="brands.html#${p.brand}">${p.brand} ${ICON.arrow}</a>
+          <a class="brandlink" href="brands.html#${p.brand}">${brandLogo(brand,28)} <span>${p.brand}</span> ${ICON.arrow}</a>
           <p class="pdp-blurb">${brand.blurb||t('pdp.desc')}</p>
           <div class="pdp-specs">
             <div><span>${t('pdp.brand')}</span><b>${p.brand}</b></div>
