@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css?v=28">
+  <link rel="stylesheet" href="assets/css/style.css?v=29">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="assets/favicon.svg">
   <meta name="theme-color" content="#21463D">
@@ -177,9 +177,9 @@
   </section>
 
   <div id="site-footer"></div>
-  <script src="assets/js/data.js?v=28"></script>
-  <script src="assets/js/i18n.js?v=28"></script>
-  <script src="assets/js/app.js?v=28"></script>
+  <script src="assets/js/data.js?v=29"></script>
+  <script src="assets/js/i18n.js?v=29"></script>
+  <script src="assets/js/app.js?v=29"></script>
   <script src="assets/js/auth.js"></script>
   <script>
     const set=(id,h)=>{const e=document.getElementById(id);if(e)e.innerHTML=h;};
@@ -202,6 +202,11 @@
       const brandEl = document.getElementById('reqBrand');
       if(prodEl && !prodEl.value) prodEl.value = name ? `${name} (${product})` : product;
       if(brandEl && !brandEl.value && brand) brandEl.value = brand;
+      // Strip the #request hash so the browser doesn't fire its own
+      // scroll-into-view before we get a chance to compute the offset.
+      if(location.hash){
+        history.replaceState(null, '', location.pathname + location.search);
+      }
       // Highlight the request section so the user sees the prefill, and
       // scroll past the sticky header so the section heading is actually
       // visible (scrollIntoView ignores fixed/sticky nav chrome).
