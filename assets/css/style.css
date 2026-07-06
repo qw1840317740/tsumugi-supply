@@ -353,7 +353,7 @@ h2.h{ font-size:clamp(1.7rem,3.2vw,2.4rem); }
   overflow:hidden; display:flex; flex-direction:column; transition:.22s; position:relative;
 }
 .product:hover{ transform:translateY(-4px); box-shadow:var(--shadow-lg); border-color:var(--line); }
-.product .media{ aspect-ratio:4/5; position:relative; display:grid; place-items:center; overflow:hidden; }
+.product .media{ aspect-ratio:1/1; position:relative; display:grid; place-items:center; overflow:hidden; }
 .product .media .glyph{ font-family:var(--f-serif); font-size:4.4rem; line-height:1; opacity:.92; transition:.3s; }
 .product .media .wm{ position:absolute; left:14px; bottom:10px; font-family:var(--f-mono); font-size:.6rem; letter-spacing:.18em; text-transform:uppercase; opacity:.5; }
 .product:hover .media .glyph{ transform:scale(1.08) rotate(-3deg); }
@@ -619,10 +619,10 @@ table.t td b{ color:var(--clay); font-family:var(--f-serif); font-size:1.1rem; }
 /* ---------- Product art ---------- */
 .prod-art-wrap{ position:relative; display:block; width:100%; height:100%; overflow:hidden; background:#fff; }
 .prod-art{ position:absolute; inset:0; width:100%; height:100%; display:block; }
-.prod-photo{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; background:#fff; display:block; opacity:0; transition:opacity .45s var(--ease); }
+.prod-photo{ position:absolute; inset:0; width:100%; height:100%; object-fit:contain; background:#fff; display:block; opacity:0; transition:opacity .45s var(--ease); }
 .prod-photo.loaded{ opacity:1; }       /* fade the photo in once it arrives */
 .prod-photo.failed{ display:none; }    /* photo failed → show the SVG illustration behind */
-.product .media{ aspect-ratio:4/5; position:relative; display:block; overflow:hidden; }
+.product .media{ aspect-ratio:1/1; position:relative; display:block; overflow:hidden; }
 .product .media .prod-art-wrap{ transition:transform .4s var(--ease-soft); }
 .product:hover .media .prod-art-wrap{ transform:scale(1.04); }
 
@@ -635,7 +635,7 @@ table.t td b{ color:var(--clay); font-family:var(--f-serif); font-size:1.1rem; }
 .pdp-grid{ display:grid; grid-template-columns:1fr 1fr; gap:54px; align-items:start; margin-top:20px; }
 .pdp-media{
   position:sticky; top:calc(var(--nav-h) + 18px); border-radius:var(--radius-lg); overflow:hidden;
-  border:1px solid var(--line-soft); box-shadow:var(--shadow); aspect-ratio:4/5; background:#fff;
+  border:1px solid var(--line-soft); box-shadow:var(--shadow); aspect-ratio:1/1; background:#fff;
 }
 .pdp-info .cat{ font-family:var(--f-mono); font-size:.7rem; letter-spacing:.16em; text-transform:uppercase; color:var(--clay); }
 .pdp-info h1{ font-size:clamp(1.9rem,3.4vw,2.7rem); margin:10px 0 8px; line-height:1.08; }
