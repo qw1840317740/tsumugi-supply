@@ -54,6 +54,7 @@ const ICON = {
   trash: svg('<path d="M4 7h16M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2M6 7l1 13h10l1-13"/>'),
   arrow: svg('<path d="M5 12h14M13 6l6 6-6 6"/>'),
   star:  svg('<path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 17l-5.2 2.6 1-5.8L3.5 9.7l5.9-.9z" fill="currentColor" stroke="none"/>'),
+  x:     svg('<path d="m6 6 12 12M6 18 18 6"/>'),
   chat:  svg('<path d="M21 11.5a8 8 0 0 1-11.5 7.1L3 20l1.4-6.2A8 8 0 1 1 21 11.5z"/>'),
   mail:  svg('<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>'),
   phone: svg('<path d="M5 4h3l2 5-2 1a12 12 0 0 0 5 5l1-2 5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 4 6a2 2 0 0 1 1-2z"/>'),
@@ -554,10 +555,41 @@ function initShop(){
     const list = currentList;
     $('#resCount').textContent = list.length;
     $('#resCat').textContent = state.sub ? subName(state.sub) : (state.cat ? catName(state.cat) : t('shop.allCat'));
-    if(!list.length){ grid.innerHTML = `<div class="empty" style="grid-column:1/-1">${ICON.search}<h3>${t('shop.emptyT')}</h3><p>${t('shop.emptyP')}</p></div>`; updateMore(0); return; }
+    renderActiveFilters();
+    if(!list.length){
+      const hint = (state.cat||state.sub||state.brand||state.q)
+        ? `<p style="margin-top:6px">${t('shop.emptyHint')}</p>`
+        : `<p>${t('shop.emptyP')}</p>`;
+      grid.innerHTML = `<div class="empty" style="grid-column:1/-1">${ICON.search}<h3>${t('shop.emptyT')}</h3>${hint}</div>`;
+      updateMore(0); return;
+    }
     grid.innerHTML = list.slice(0, shown).map(productCard).join('');
     updateMore(list.length);
   }
+  function renderActiveFilters(){
+    const wrap = $('#activeFilters'); if(!wrap) return;
+    const chips = [];
+    if(state.cat)   chips.push({k:'cat',   label:catName(state.cat)});
+    if(state.sub)   chips.push({k:'sub',   label:subName(state.sub)});
+    if(state.brand) chips.push({k:'brand', label:state.brand});
+    if(state.q)     chips.push({k:'q',     label:`“${state.q}”`});
+    if(state.inStock) chips.push({k:'inStock', label:t('shop.inStock')});
+    if(!chips.length){ wrap.style.display='none'; wrap.innerHTML=''; return; }
+    wrap.style.display='';
+    const x = ICON.x;
+    wrap.innerHTML = `<span class="lbl">${t('shop.activeL')}</span>` + chips.map(c=>`<span class="chip">${c.label}<span class="x" data-clear="${c.k}">${x}</span></span>`).join('') + `<button class="clear" data-clear="all">${t('shop.clearAll')}</button>`;
+  }
+  $('#activeFilters')?.addEventListener('click', e=>{
+    const k = e.target.closest('[data-clear]')?.dataset?.clear; if(!k) return;
+    if(k==='all'){ state.cat=''; state.sub=''; state.brand=''; state.q=''; state.inStock=false; const s=$('#shopSearch'); if(s) s.value=''; const ic=$('#inStock'); if(ic) ic.checked=false; }
+    else if(k==='cat')   { state.cat=''; state.sub=''; }
+    else if(k==='sub')   { state.sub=''; }
+    else if(k==='brand') { state.brand=''; }
+    else if(k==='q')     { state.q=''; const s=$('#shopSearch'); if(s) s.value=''; }
+    else if(k==='inStock'){ state.inStock=false; const ic=$('#inStock'); if(ic) ic.checked=false; }
+    buildCats(); buildBrands();
+    setTitle(); apply();
+  });
   function updateMore(total){
     const wrap = $('#loadMoreWrap'); if(!wrap) return;
     if(shown >= total){ wrap.style.display='none'; return; }
@@ -606,9 +638,21 @@ function initShop(){
     addRenderer(buildCats);
   }
   const brandList = $('#filterBrands');
+  let buildBrands = ()=>{};
   if(brandList){
-    brandList.innerHTML = BRANDS.map(b=>{ const n=PRODUCTS.filter(p=>p.brand===b.name).length; return `<li><a data-brand="${b.name}">${b.name} <span class="n">${n}</span></a></li>`; }).join('');
-    brandList.addEventListener('click', e=>{ e.preventDefault(); const a=e.target.closest('a'); if(!a)return; state.brand=(state.brand===a.dataset.brand)?'':a.dataset.brand; brandList.querySelectorAll('a').forEach(x=>x.classList.toggle('on',x.dataset.brand===state.brand)); apply(); });
+    buildBrands = ()=>{
+      brandList.innerHTML = BRANDS.map(b=>{ const n=PRODUCTS.filter(p=>p.brand===b.name).length; if(n===0) return ''; return `<li><a data-brand="${b.name}" class="${state.brand===b.name?'on':''}">${b.name} <span class="n">${n}</span></a></li>`; }).join('');
+    };
+    buildBrands();
+    brandList.addEventListener('click', e=>{
+      e.preventDefault();
+      const a=e.target.closest('a'); if(!a)return;
+      state.brand = (state.brand===a.dataset.brand) ? '' : a.dataset.brand;
+      buildBrands();
+      buildCats(); // re-render category sidebar so its "on" stays consistent across cross-list interactions
+      apply();
+    });
+    addRenderer(buildBrands);
   }
   $('#shopSearch')?.addEventListener('input', e=>{ state.q=e.target.value.trim(); apply(); });
   $('#shopSort')?.addEventListener('change', e=>{ state.sort=e.target.value; apply(); });
