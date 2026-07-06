@@ -207,6 +207,29 @@ window.__brandMonogramFallback = function(img){
   node.innerHTML = brandMonogram(b, size);
   return node.firstChild.outerHTML;
 };
+// Fix in-page anchor jumps so the target isn't hidden under the sticky
+// site-header. The browser's native jump ignores the offset, and the
+// CSS scroll-margin-top trick doesn't always apply for ids on <a>/etc.
+function fixAnchorJump(){
+  const hash = location.hash;
+  if(!hash || hash.length < 2) return;
+  const target = document.querySelector(hash);
+  if(!target) return;
+  // Wait until the header has been mounted and sticky styles settle
+  const tryScroll = () => {
+    const nav = document.querySelector('.site-header');
+    const navH = nav ? nav.getBoundingClientRect().height : 0;
+    const top = target.getBoundingClientRect().top + window.scrollY - navH - 18;
+    window.scrollTo({top: Math.max(0, top), behavior:'instant' in window ? 'auto' : 'auto'});
+  };
+  const wait = () => {
+    if(document.querySelector('.site-header')) requestAnimationFrame(()=>requestAnimationFrame(tryScroll));
+    else requestAnimationFrame(wait);
+  };
+  wait();
+}
+window.addEventListener('hashchange', fixAnchorJump);
+window.addEventListener('load', fixAnchorJump);
 
 function productArt(p){
   const h = p.hue || '#21463D';
