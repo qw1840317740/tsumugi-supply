@@ -523,7 +523,9 @@ function productCard(p){
 function initShop(){
   const grid = $('#productGrid'); if(!grid) return;
   const params = new URLSearchParams(location.search);
-  let state = { cat: params.get('cat')||'', sub: params.get('sub')||'', brand:'', q:'', sort:'featured', inStock:false };
+  let state = { cat: params.get('cat')||'', sub: params.get('sub')||'', brand:params.get('brand')||'', q:params.get('q')||'', sort:'featured', inStock:false };
+  // Pre-fill the visible search input if we arrived with ?q=...
+  const searchEl = $('#shopSearch'); if(searchEl && state.q) searchEl.value = state.q;
   const PAGE = 24;
   let shown = PAGE;
   let currentList = [];
@@ -538,7 +540,15 @@ function initShop(){
     if(state.sort==='brand') list.sort((a,b)=>a.brand.localeCompare(b.brand));
     shown = PAGE;
     currentList = list;
+    // mirror state into the URL so refresh / share preserves the filter view
+    syncUrl();
     render();
+  }
+  function syncUrl(){
+    const u = new URL(location.href);
+    const set = (k,v)=>{ if(v) u.searchParams.set(k,v); else u.searchParams.delete(k); };
+    set('cat', state.cat); set('sub', state.sub); set('brand', state.brand); set('q', state.q);
+    history.replaceState(null, '', u.pathname + (u.search ? u.search : '') + u.hash);
   }
   function render(){
     const list = currentList;
@@ -579,16 +589,18 @@ function initShop(){
     };
     buildCats();
     catList.addEventListener('click', e=>{
+      e.preventDefault();
       const a=e.target.closest('a'); if(!a)return;
       if(a.dataset.sub){
-        state.sub = (state.sub===a.dataset.sub)?'':a.dataset.sub;
-        catList.querySelectorAll('a').forEach(x=>x.classList.toggle('on', x===a));
-      } else if(a.dataset.cat){
-        // toggle: clicking the already-active top collapses its subs; clicking a fresh top opens it
+        // toggle sub: clicking the same sub clears it; clicking a new sub keeps the parent cat
+        state.sub = (state.sub===a.dataset.sub) ? '' : a.dataset.sub;
+      } else if(a.dataset.cat !== undefined){
+        // top-level or "All products" (data-cat=""). Re-clicking the active top collapses
+        // back to "All products" so the caret / sub-list state stays coherent.
         if(state.cat===a.dataset.cat){ state.cat=''; state.sub=''; }
         else { state.cat=a.dataset.cat; state.sub=''; }
-        catList.querySelectorAll('a').forEach(x=>x.classList.toggle('on', x===a));
-      }
+      } else { return; }
+      buildCats(); // re-render so caret rotates, sub list opens/closes, highlight stays coherent
       setTitle(); apply();
     });
     addRenderer(buildCats);
@@ -596,7 +608,7 @@ function initShop(){
   const brandList = $('#filterBrands');
   if(brandList){
     brandList.innerHTML = BRANDS.map(b=>{ const n=PRODUCTS.filter(p=>p.brand===b.name).length; return `<li><a data-brand="${b.name}">${b.name} <span class="n">${n}</span></a></li>`; }).join('');
-    brandList.addEventListener('click', e=>{ const a=e.target.closest('a'); if(!a)return; state.brand=(state.brand===a.dataset.brand)?'':a.dataset.brand; brandList.querySelectorAll('a').forEach(x=>x.classList.toggle('on',x.dataset.brand===state.brand)); apply(); });
+    brandList.addEventListener('click', e=>{ e.preventDefault(); const a=e.target.closest('a'); if(!a)return; state.brand=(state.brand===a.dataset.brand)?'':a.dataset.brand; brandList.querySelectorAll('a').forEach(x=>x.classList.toggle('on',x.dataset.brand===state.brand)); apply(); });
   }
   $('#shopSearch')?.addEventListener('input', e=>{ state.q=e.target.value.trim(); apply(); });
   $('#shopSort')?.addEventListener('change', e=>{ state.sort=e.target.value; apply(); });
