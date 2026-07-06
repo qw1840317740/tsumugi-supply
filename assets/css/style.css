@@ -527,6 +527,8 @@ table.t td b{ color:var(--clay); font-family:var(--f-serif); font-size:1.1rem; }
 
 /* contact / request form */
 .form-card{ background:var(--paper-2); border:1px solid var(--line-soft); border-radius:var(--radius); padding:34px; }
+@keyframes reqPulse{ 0%{box-shadow:0 0 0 0 rgba(190,90,56,.35)} 70%{box-shadow:0 0 0 18px rgba(190,90,56,0)} 100%{box-shadow:0 0 0 0 rgba(190,90,56,0)} }
+.req-highlight .form-card{ animation:reqPulse 1.4s ease-out 2; border-color:var(--clay); }
 .form-row{ display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:14px; }
 .field{ display:flex; flex-direction:column; gap:6px; margin-bottom:14px; }
 .field.full{ grid-column:1/-1; }
