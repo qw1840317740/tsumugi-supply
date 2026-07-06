@@ -262,7 +262,7 @@ function buildHeader(){
 }
 
 function buildMobileMenu(){
-  const cats = CATEGORIES.map(c=>`<a href="products.html?cat=${c.id}" data-i18nc>${t('c.'+c.id)}</a>`).join('');
+  const cats = CATEGORIES.map(c=>`<a href="products.html?cat=${c.id}" data-i18n="c.${c.id}"></a>`).join('');
   const brands = BRANDS.map(b=>`<a href="brands.html#${b.name}">${b.name}</a>`).join('');
   return `
   <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Site menu" tabindex="-1">
@@ -331,11 +331,11 @@ function buildFooter(){
       </div>
       <div class="footer-bottom">
         <div>© ${SITE.year} ${SITE.full} — <span data-i18n="foot.copy"></span></div>
-        <div class="pay"><span>VISA</span><span>MASTERCARD</span><span>PAYPAL</span><span>WISE / T-T</span></div>
+        <div class="pay" data-i18n="foot.pay"></div>
       </div>
     </div>
   </footer>
-  <a class="fab" href="tel:+81492574332" rel="noopener">${ICON.phone} <span data-i18n="cta.chat"></span></a>`;
+  <a class="fab" href="tel:${SITE.phone.replace(/\s/g,'')}" rel="noopener">${ICON.phone} <span data-i18n="cta.chat"></span></a>`;
 }
 
 /* =========================================================
@@ -560,14 +560,16 @@ function initShop(){
   if(catList){
     const buildCats = ()=>{
       const topsHtml = CATEGORIES.map(c=>{
-        const n = c.count||0;
+        const n = PRODUCTS.filter(p=>p.category===c.id).length;
         if(n===0) return '';
-        const liveSubs = c.subs.filter(s=>s.count>0);
+        const liveSubs = c.subs
+          .map(s=>({id:s.id, n:PRODUCTS.filter(p=>p.category===c.id && p.sub===s.id).length}))
+          .filter(s=>s.n>0);
         const expanded = (state.cat===c.id);
         const subsHtml = (expanded && liveSubs.length)
           ? `<ul class="filter-subs">${
               liveSubs.map(s=>{
-                return `<li><a data-sub="${s.id}" class="${state.sub===s.id?'on':''}">${subName(s.id)} <span class="n">${s.count}</span></a></li>`;
+                return `<li><a data-sub="${s.id}" class="${state.sub===s.id?'on':''}">${subName(s.id)} <span class="n">${s.n}</span></a></li>`;
               }).join('')
             }</ul>` : '';
         const caret = liveSubs.length ? `<span class="caret ${expanded?'open':''}">${ICON.chev}</span>` : '';
