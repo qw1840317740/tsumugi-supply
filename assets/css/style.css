@@ -393,6 +393,9 @@ h2.h{ font-size:clamp(1.7rem,3.2vw,2.4rem); }
 .filter-group li a.on{ background:var(--sumi); color:var(--paper-2); font-weight:600; }
 .filter-group li a.on .n{ color:rgba(255,255,255,.7); }
 .filter-group li a .n{ font-family:var(--f-mono); font-size:.74rem; color:var(--ink-3); }
+.filter-group li a .caret{ display:inline-flex; margin-left:6px; transition:transform .2s; opacity:.55; }
+.filter-group li a .caret svg{ width:10px; height:10px; }
+.filter-group li a .caret.open{ transform:rotate(90deg); opacity:1; }
 .filter-subs{ margin:2px 0 4px 12px; padding-left:10px; border-left:1px solid var(--line-soft); display:flex; flex-direction:column; gap:1px; }
 .filter-subs li a{ padding:5px 10px; font-size:.84rem; color:var(--ink-3); }
 .filter-subs li a:hover{ background:var(--paper-3); color:var(--sumi); }
@@ -616,7 +619,7 @@ table.t td b{ color:var(--clay); font-family:var(--f-serif); font-size:1.1rem; }
 /* ---------- Product art ---------- */
 .prod-art-wrap{ position:relative; display:block; width:100%; height:100%; overflow:hidden; background:#fff; }
 .prod-art{ position:absolute; inset:0; width:100%; height:100%; display:block; }
-.prod-photo{ position:absolute; inset:0; width:100%; height:100%; object-fit:contain; background:#fff; display:block; opacity:0; transition:opacity .45s var(--ease); }
+.prod-photo{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; background:#fff; display:block; opacity:0; transition:opacity .45s var(--ease); }
 .prod-photo.loaded{ opacity:1; }       /* fade the photo in once it arrives */
 .prod-photo.failed{ display:none; }    /* photo failed → show the SVG illustration behind */
 .product .media{ aspect-ratio:4/5; position:relative; display:block; overflow:hidden; }

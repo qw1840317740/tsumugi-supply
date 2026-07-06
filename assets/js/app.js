@@ -555,7 +555,7 @@ function initShop(){
     const lbl = $('#loadMoreLbl');
     if(lbl) lbl.textContent = t('shop.showing').replace('{n}', shown).replace('{t}', total);
   }
-  $('#loadMoreBtn')?.addEventListener('click', ()=>{ shown += PAGE; render(); window.scrollTo({top:grid.getBoundingClientRect().top+window.scrollY-120, behavior:'smooth'}); });
+  $('#loadMoreBtn')?.addEventListener('click', ()=>{ shown += PAGE; render(); });
   const catList = $('#filterCats');
   if(catList){
     const buildCats = ()=>{
@@ -563,22 +563,30 @@ function initShop(){
         const n = c.count||0;
         if(n===0) return '';
         const liveSubs = c.subs.filter(s=>s.count>0);
-        const subsHtml = (state.cat===c.id && liveSubs.length)
+        const expanded = (state.cat===c.id);
+        const subsHtml = (expanded && liveSubs.length)
           ? `<ul class="filter-subs">${
               liveSubs.map(s=>{
                 return `<li><a data-sub="${s.id}" class="${state.sub===s.id?'on':''}">${subName(s.id)} <span class="n">${s.count}</span></a></li>`;
               }).join('')
             }</ul>` : '';
-        return `<li><a data-cat="${c.id}" class="${state.cat===c.id&&!state.sub?'on':''}">${catName(c.id)} <span class="n">${n}</span></a>${subsHtml}</li>`;
+        const caret = liveSubs.length ? `<span class="caret ${expanded?'open':''}">${ICON.chev}</span>` : '';
+        return `<li><a data-cat="${c.id}" class="${state.cat===c.id&&!state.sub?'on':''}">${catName(c.id)} <span class="n">${n}</span>${caret}</a>${subsHtml}</li>`;
       }).join('');
       catList.innerHTML = `<li><a data-cat="" data-sub="" class="${!state.cat?'on':''}">${t('shop.allP')} <span class="n">${PRODUCTS.length}</span></a></li>` + topsHtml;
     };
     buildCats();
     catList.addEventListener('click', e=>{
       const a=e.target.closest('a'); if(!a)return;
-      if(a.dataset.sub){ state.sub = (state.sub===a.dataset.sub)?'':a.dataset.sub; }
-      else { state.cat = a.dataset.cat; state.sub=''; }
-      catList.querySelectorAll('a').forEach(x=>x.classList.toggle('on',x===a));
+      if(a.dataset.sub){
+        state.sub = (state.sub===a.dataset.sub)?'':a.dataset.sub;
+        catList.querySelectorAll('a').forEach(x=>x.classList.toggle('on', x===a));
+      } else if(a.dataset.cat){
+        // toggle: clicking the already-active top collapses its subs; clicking a fresh top opens it
+        if(state.cat===a.dataset.cat){ state.cat=''; state.sub=''; }
+        else { state.cat=a.dataset.cat; state.sub=''; }
+        catList.querySelectorAll('a').forEach(x=>x.classList.toggle('on', x===a));
+      }
       setTitle(); apply();
     });
     addRenderer(buildCats);
