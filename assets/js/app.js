@@ -560,13 +560,13 @@ function initShop(){
   if(catList){
     const buildCats = ()=>{
       const topsHtml = CATEGORIES.map(c=>{
-        const n = PRODUCTS.filter(p=>p.category===c.id).length;
+        const n = c.count||0;
         if(n===0) return '';
-        const subsHtml = (state.cat===c.id && c.subs.length)
+        const liveSubs = c.subs.filter(s=>s.count>0);
+        const subsHtml = (state.cat===c.id && liveSubs.length)
           ? `<ul class="filter-subs">${
-              c.subs.filter(s=>s.count>0).map(s=>{
-                const sn = PRODUCTS.filter(p=>p.category===c.id && p.sub===s.id).length;
-                return `<li><a data-sub="${s.id}" class="${state.sub===s.id?'on':''}">${subName(s.id)} <span class="n">${sn}</span></a></li>`;
+              liveSubs.map(s=>{
+                return `<li><a data-sub="${s.id}" class="${state.sub===s.id?'on':''}">${subName(s.id)} <span class="n">${s.count}</span></a></li>`;
               }).join('')
             }</ul>` : '';
         return `<li><a data-cat="${c.id}" class="${state.cat===c.id&&!state.sub?'on':''}">${catName(c.id)} <span class="n">${n}</span></a>${subsHtml}</li>`;
