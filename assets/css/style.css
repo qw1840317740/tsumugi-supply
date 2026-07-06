@@ -100,6 +100,9 @@ html{ scrollbar-color:var(--line) var(--paper); scrollbar-width:thin; }
 .section{ padding:84px 0; }
 .section-sm{ padding:56px 0; }
 .section-tight{ padding:40px 0; }
+/* Every in-page anchor (footer #request, PDP #brand, etc.) lands
+   underneath the sticky .site-header unless we offset it. */
+[id]{ scroll-margin-top:90px; }
 .stack > * + *{ margin-top:14px; }
 
 .eyebrow{
