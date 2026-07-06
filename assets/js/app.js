@@ -784,8 +784,8 @@ function initPDP(){
             <div><span>${t('pdp.origin')}</span><b>Japan</b></div>
           </div>
           <div class="pdp-actions">
-            <a class="btn btn-primary btn-lg" href="how-to-order.html#request">${t('pdp.inquire')}</a>
-            <a class="btn btn-clay btn-lg" href="mailto:${SITE.email}?subject=${encodeURIComponent('Quote request: '+p.name+' ('+p.id+')')}">${t('pdp.contact')}</a>
+            <a class="btn btn-primary btn-lg" href="how-to-order.html?product=${encodeURIComponent(p.id)}&name=${encodeURIComponent(p.name)}&brand=${encodeURIComponent(p.brand)}#request">${t('pdp.inquire')}</a>
+            <a class="btn btn-clay btn-lg" href="mailto:${SITE.email}?subject=${encodeURIComponent('Quote request: '+p.name+' ('+p.id+')')}&body=${encodeURIComponent(t('pdp.emailBody').replace('{NAME}',p.name).replace('{BRAND}',p.brand).replace('{ID}',p.id).replace('{URL}',location.href))}">${t('pdp.contact')}</a>
             <button class="icon-btn save" aria-label="Save" onclick="handleSave(this,'${p.id}')">${ICON.heart}</button>
           </div>
           <div class="pdp-trust">
