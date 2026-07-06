@@ -173,13 +173,14 @@ const BEAUTY_IMG = [
   'photo-1581182815808-b6eb627a8798',
 ];
 const CAT_IMG = {
-  skincare: BEAUTY_IMG, makeup: BEAUTY_IMG, haircare: BEAUTY_IMG, bodycare: BEAUTY_IMG,
-  bath: BEAUTY_IMG, suncare: BEAUTY_IMG, kits: BEAUTY_IMG,
-  oral: ['photo-1654373535457-383a0a4d00f9','photo-1609840113564-ab4aba4956c4','photo-1520013573795-38516d2661e4','photo-1693692273603-3b9e13789298'],
-  supplement: ['photo-1664956618021-73c47736845e','photo-1662695086526-112d7959fab4','photo-1732900293895-233f769299b3','photo-1559087316-6b27308e53f6'],
-  stationery: ['photo-1654931800100-2ecf6eee7c64','photo-1470790376778-a9fbc86d70e2','photo-1631173716529-fd1696a807b0','photo-1456735190827-d1262f71b8a3'],
-  food: ['photo-1704079698754-5e621edb610b','photo-1717603545758-88cc454db69b','photo-1631308491952-040f80133535','photo-1515823064-d6e0c04616a7'],
-  home: ['photo-1740657254989-42fe9c3b8cce','photo-1563453392212-326f5e854473','photo-1627905646269-7f034dcc5738','photo-1585421514284-efb74c2b69ba'],
+  beauty:     BEAUTY_IMG,
+  babykids:   BEAUTY_IMG,
+  seasonaltop:BEAUTY_IMG,
+  sweets:     ['photo-1704079698754-5e621edb610b','photo-1717603545758-88cc454db69b','photo-1631308491952-040f80133535','photo-1515823064-d6e0c04616a7'],
+  food:       ['photo-1704079698754-5e621edb610b','photo-1717603545758-88cc454db69b','photo-1631308491952-040f80133535','photo-1515823064-d6e0c04616a7'],
+  hobby:      ['photo-1654931800100-2ecf6eee7c64','photo-1470790376778-a9fbc86d70e2','photo-1631173716529-fd1696a807b0','photo-1456735190827-d1262f71b8a3'],
+  health:     ['photo-1654373535457-383a0a4d00f9','photo-1609840113564-ab4aba4956c4','photo-1520013573795-38516d2661e4','photo-1693692273603-3b9e13789298'],
+  daily:      ['photo-1740657254989-42fe9c3b8cce','photo-1563453392212-326f5e854473','photo-1627905646269-7f034dcc5738','photo-1585421514284-efb74c2b69ba'],
 };
 function productPhoto(p){
   // Real LION catalog photos, filed by JAN under assets/products/.
@@ -301,11 +302,9 @@ function buildFooter(){
         </div>
         <div class="footer-col">
           <h5 data-i18n="foot.shop"></h5>
-          <a href="products.html" data-i18n="foot.all"></a>
-          <a href="products.html?cat=skincare" data-i18n="c.skincare"></a>
-          <a href="products.html?cat=makeup" data-i18n="c.makeup"></a>
-          <a href="products.html?cat=haircare" data-i18n="c.haircare"></a>
-          <a href="products.html?cat=bath" data-i18n="c.bath"></a>
+          <a href="products.html" data-i18n="foot.all"></a>${
+            CATEGORIES.map(c=>`<a href="products.html?cat=${c.id}" data-i18n="c.${c.id}"></a>`).join('')
+          }
         </div>
         <div class="footer-col">
           <h5 data-i18n="foot.company"></h5>
@@ -496,6 +495,9 @@ async function requestQuote(){
    PRODUCT CARD + CATEGORY NAME (i18n)
    ========================================================= */
 function catName(id){ const v = t('c.'+id); return (v===('c.'+id))? id : v; }
+function subName(id){ const v = t('cs.'+id); return (v===('cs.'+id))? id : v; }
+function catOf(p){ return catName(p.category); }
+function subOf(p){ return p.sub ? subName(p.sub) : catName(p.category); }
 function productCard(p){
   const tag = p.tag==='best' ? `<span class="tag tag-best">${t('pc.best')}</span>`
             : p.tag==='new'  ? `<span class="tag tag-new">${t('pc.new')}</span>`
@@ -504,7 +506,7 @@ function productCard(p){
   <article class="product">
     <a class="media" href="product.html?id=${p.id}">${productArt(p)}${tag}</a>
     <div class="body">
-      <span class="cat">${catName(p.category)}</span>
+      <span class="cat">${subOf(p)}</span>
       <h4><a href="product.html?id=${p.id}">${p.name}</a></h4>
       <span class="brand">${p.brand} <span class="d"></span> ${p.unit}</span>
       <div class="foot">
@@ -521,31 +523,49 @@ function productCard(p){
 function initShop(){
   const grid = $('#productGrid'); if(!grid) return;
   const params = new URLSearchParams(location.search);
-  let state = { cat: params.get('cat')||'', brand:'', q:'', sort:'featured', inStock:false };
+  let state = { cat: params.get('cat')||'', sub: params.get('sub')||'', brand:'', q:'', sort:'featured', inStock:false };
 
   function apply(){
     let list = PRODUCTS.slice();
     if(state.cat)   list = list.filter(p=>p.category===state.cat);
+    if(state.sub)   list = list.filter(p=>p.sub===state.sub);
     if(state.brand) list = list.filter(p=>p.brand===state.brand);
     if(state.inStock) list = list.filter(p=>p.tag!=='low');
-    if(state.q){ const q=state.q.toLowerCase(); list = list.filter(p=>(p.name+p.brand+catName(p.category)).toLowerCase().includes(q)); }
+    if(state.q){ const q=state.q.toLowerCase(); list = list.filter(p=>(p.name+p.brand+catName(p.category)+(p.sub?subName(p.sub):'')).toLowerCase().includes(q)); }
     if(state.sort==='brand') list.sort((a,b)=>a.brand.localeCompare(b.brand));
     render(list);
   }
   function render(list){
     $('#resCount').textContent = list.length;
-    $('#resCat').textContent = state.cat ? catName(state.cat) : t('shop.allCat');
+    $('#resCat').textContent = state.sub ? subName(state.sub) : (state.cat ? catName(state.cat) : t('shop.allCat'));
     if(!list.length){ grid.innerHTML = `<div class="empty" style="grid-column:1/-1">${ICON.search}<h3>${t('shop.emptyT')}</h3><p>${t('shop.emptyP')}</p></div>`; return; }
     grid.innerHTML = list.map(productCard).join('');
   }
   const catList = $('#filterCats');
   if(catList){
     const buildCats = ()=>{
-      catList.innerHTML = `<li><a data-cat="" class="${!state.cat?'on':''}">${t('shop.allP')} <span class="n">${PRODUCTS.length}</span></a></li>` +
-        CATEGORIES.map(c=>{ const n=PRODUCTS.filter(p=>p.category===c.id).length; return `<li><a data-cat="${c.id}" class="${state.cat===c.id?'on':''}">${t('c.'+c.id)} <span class="n">${n}</span></a></li>`; }).join('');
+      const topsHtml = CATEGORIES.map(c=>{
+        const n = PRODUCTS.filter(p=>p.category===c.id).length;
+        if(n===0) return '';
+        const subsHtml = (state.cat===c.id && c.subs.length)
+          ? `<ul class="filter-subs">${
+              c.subs.filter(s=>s.count>0).map(s=>{
+                const sn = PRODUCTS.filter(p=>p.category===c.id && p.sub===s.id).length;
+                return `<li><a data-sub="${s.id}" class="${state.sub===s.id?'on':''}">${subName(s.id)} <span class="n">${sn}</span></a></li>`;
+              }).join('')
+            }</ul>` : '';
+        return `<li><a data-cat="${c.id}" class="${state.cat===c.id&&!state.sub?'on':''}">${catName(c.id)} <span class="n">${n}</span></a>${subsHtml}</li>`;
+      }).join('');
+      catList.innerHTML = `<li><a data-cat="" data-sub="" class="${!state.cat?'on':''}">${t('shop.allP')} <span class="n">${PRODUCTS.length}</span></a></li>` + topsHtml;
     };
     buildCats();
-    catList.addEventListener('click', e=>{ const a=e.target.closest('a'); if(!a)return; state.cat=a.dataset.cat; catList.querySelectorAll('a').forEach(x=>x.classList.toggle('on',x===a)); setTitle(); apply(); });
+    catList.addEventListener('click', e=>{
+      const a=e.target.closest('a'); if(!a)return;
+      if(a.dataset.sub){ state.sub = (state.sub===a.dataset.sub)?'':a.dataset.sub; }
+      else { state.cat = a.dataset.cat; state.sub=''; }
+      catList.querySelectorAll('a').forEach(x=>x.classList.toggle('on',x===a));
+      setTitle(); apply();
+    });
     addRenderer(buildCats);
   }
   const brandList = $('#filterBrands');
@@ -558,12 +578,14 @@ function initShop(){
   $('#inStock')?.addEventListener('change', e=>{ state.inStock=e.target.checked; apply(); });
 
   function setTitle(){
-    const v = state.cat ? catName(state.cat) : t('shop.all');
+    const v = state.sub ? subName(state.sub) : (state.cat ? catName(state.cat) : t('shop.all'));
     const h=$('#activeCatTitleH'); if(h) h.textContent=v;
     const bc=$('#shopBreadcrumb'); if(bc){
-      bc.innerHTML = state.cat
-        ? `<a href="index.html">${t('nav.home')}</a><span class="sep">/</span><a href="products.html">${t('nav.products')}</a><span class="sep">/</span><span class="cur">${v}</span>`
-        : `<a href="index.html">${t('nav.home')}</a><span class="sep">/</span><span class="cur">${t('nav.products')}</span>`;
+      bc.innerHTML = state.sub
+        ? `<a href="index.html">${t('nav.home')}</a><span class="sep">/</span><a href="products.html">${t('nav.products')}</a><span class="sep">/</span><a href="products.html?cat=${state.cat}">${catName(state.cat)}</a><span class="sep">/</span><span class="cur">${v}</span>`
+        : state.cat
+          ? `<a href="index.html">${t('nav.home')}</a><span class="sep">/</span><a href="products.html">${t('nav.products')}</a><span class="sep">/</span><span class="cur">${v}</span>`
+          : `<a href="index.html">${t('nav.home')}</a><span class="sep">/</span><span class="cur">${t('nav.products')}</span>`;
     }
   }
   setTitle();
@@ -589,23 +611,25 @@ function initPDP(){
   }
   document.title = `${p.name} · ${SITE.name}`;
   const brand = BRANDS.find(b=>b.name===p.brand) || {blurb:''};
-  const related = PRODUCTS.filter(x=>x.category===p.category && x.id!==p.id).slice(0,4);
+  const related = (PRODUCTS.filter(x=>x.sub===p.sub && x.id!==p.id).length>=4
+    ? PRODUCTS.filter(x=>x.sub===p.sub && x.id!==p.id)
+    : PRODUCTS.filter(x=>x.category===p.category && x.id!==p.id)).slice(0,4);
   const tag = p.tag==='best'?t('pdp.tag.best'):p.tag==='new'?t('pdp.tag.new'):p.tag==='low'?t('pdp.tag.low'):'';
 
   function build(){
     host.innerHTML = `
     <div class="container pdp-wrap">
-      <div class="breadcrumb"><a href="index.html">${t('nav.home')}</a><span class="sep">/</span><a href="products.html">${t('nav.products')}</a><span class="sep">/</span><a href="products.html?cat=${p.category}">${catName(p.category)}</a><span class="sep">/</span><span class="cur">${p.name}</span></div>
+      <div class="breadcrumb"><a href="index.html">${t('nav.home')}</a><span class="sep">/</span><a href="products.html">${t('nav.products')}</a><span class="sep">/</span><a href="products.html?cat=${p.category}">${catName(p.category)}</a>${p.sub?`<span class="sep">/</span><a href="products.html?cat=${p.category}&sub=${p.sub}">${subName(p.sub)}</a>`:''}<span class="sep">/</span><span class="cur">${p.name}</span></div>
       <div class="pdp-grid">
         <div class="pdp-media">${productArt(p)}${tag?`<span class="tag ${p.tag==='best'?'tag-best':p.tag==='new'?'tag-new':'tag-low'}" style="top:16px;left:16px">${tag}</span>`:''}</div>
         <div class="pdp-info">
-          <span class="cat">${catName(p.category)}</span>
+          <span class="cat">${subOf(p)}</span>
           <h1>${p.name}</h1>
           <a class="brandlink" href="brands.html#${p.brand}">${p.brand} ${ICON.arrow}</a>
           <p class="pdp-blurb">${brand.blurb||t('pdp.desc')}</p>
           <div class="pdp-specs">
             <div><span>${t('pdp.brand')}</span><b>${p.brand}</b></div>
-            <div><span>${t('pdp.cat')}</span><b>${catName(p.category)}</b></div>
+            <div><span>${t('pdp.cat')}</span><b>${catName(p.category)}${p.sub?' / '+subName(p.sub):''}</b></div>
             <div><span>${t('pdp.unit')}</span><b>${p.unit}</b></div>
             <div><span>${t('pdp.moq')}</span><b>${p.moq} pcs</b></div>
             <div><span>${t('pdp.sku')}</span><b>${p.id}</b></div>
@@ -704,7 +728,7 @@ function injectSEO(){
   _setMeta('property','og:title', document.title);
   _setMeta('property','og:description', fullDesc);
   _ld('product', { '@context':'https://schema.org','@type':'Product',
-    name:p.name, brand:{'@type':'Brand', name:p.brand}, category:catName(p.category),
+    name:p.name, brand:{'@type':'Brand', name:p.brand}, category:(p.sub?subName(p.sub):catName(p.category)),
     sku:p.id, mpn:p.id, description:descP,
     offers:{ '@type':'Offer', availability:'https://schema.org/InStock', url:location.href } });
   _ld('breadcrumb', { '@context':'https://schema.org','@type':'BreadcrumbList',
@@ -712,7 +736,7 @@ function injectSEO(){
       {'@type':'ListItem', position:1, name:'Home', item:location.origin+'/'},
       {'@type':'ListItem', position:2, name:'Products', item:new URL('products.html', location.origin).href},
       {'@type':'ListItem', position:3, name:catName(p.category), item:new URL('products.html?cat='+p.category, location.origin).href},
-      {'@type':'ListItem', position:4, name:p.name, item:location.href} ] });
+      ...(p.sub?[{'@type':'ListItem', position:4, name:subName(p.sub), item:new URL('products.html?cat='+p.category+'&sub='+p.sub, location.origin).href},{'@type':'ListItem', position:5, name:p.name, item:location.href}]:[{'@type':'ListItem', position:4, name:p.name, item:location.href}]) ] });
 }
 
 /* =========================================================
