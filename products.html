@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css?v=15">
+  <link rel="stylesheet" href="assets/css/style.css?v=16">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="assets/favicon.svg">
   <meta name="theme-color" content="#21463D">
@@ -78,15 +78,19 @@
             </div>
           </div>
           <div class="product-grid" id="productGrid"></div>
+          <div id="loadMoreWrap" class="load-more-wrap" style="display:none">
+            <p class="muted load-more-lbl" id="loadMoreLbl"></p>
+            <button class="btn btn-primary" id="loadMoreBtn" data-i18n="shop.loadMore"></button>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
   <div id="site-footer"></div>
-  <script src="assets/js/data.js?v=15"></script>
-  <script src="assets/js/i18n.js?v=15"></script>
-  <script src="assets/js/app.js?v=15"></script>
+  <script src="assets/js/data.js?v=16"></script>
+  <script src="assets/js/i18n.js?v=16"></script>
+  <script src="assets/js/app.js?v=16"></script>
   <script src="assets/js/auth.js"></script>
   <script>
     document.getElementById('searchIc').innerHTML = ICON.search;

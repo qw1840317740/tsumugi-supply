@@ -346,6 +346,8 @@ h2.h{ font-size:clamp(1.7rem,3.2vw,2.4rem); }
 .product-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:18px; }
 .product-grid.cols-3{ grid-template-columns:repeat(3,1fr); }
 .product-grid.cols-5{ grid-template-columns:repeat(5,1fr); }
+.load-more-wrap{ display:flex; flex-direction:column; align-items:center; gap:10px; margin:28px 0 8px; }
+.load-more-lbl{ font-size:13px; }
 .product{
   border:1px solid var(--line-soft); border-radius:var(--radius); background:var(--paper-2);
   overflow:hidden; display:flex; flex-direction:column; transition:.22s; position:relative;

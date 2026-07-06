@@ -99,6 +99,7 @@ const L = {
     'shop.sortFeatured':'Sort: Featured','shop.sortLow':'Price: low to high','shop.sortHigh':'Price: high to low','shop.sortBrand':'Brand A–Z',
     'shop.search':'Search name or brand…','shop.allP':'All products',
     'shop.emptyT':'No products match','shop.emptyP':'Try clearing a filter or searching another term.',
+    'shop.loadMore':'Load more','shop.showing':'Showing {n} of {t}',
     // brands page
     'bp.crumb':'Brands','bp.eyebrow':'Curated houses','bp.title':'Japanese brands, A to Z',
     'bp.lead':'A growing directory of makers we source wholesale — botanical independents, cult cosmetics houses and beloved everyday names.',
@@ -249,6 +250,7 @@ const L = {
     'shop.sortFeatured':'排序：推荐','shop.sortLow':'价格：从低到高','shop.sortHigh':'价格：从高到低','shop.sortBrand':'品牌 A–Z',
     'shop.search':'搜索名称或品牌…','shop.allP':'全部商品',
     'shop.emptyT':'没有符合条件的商品','shop.emptyP':'试试清除筛选或换个关键词。',
+    'shop.loadMore':'加载更多','shop.showing':'已显示 {n} / {t}',
     'bp.crumb':'品牌','bp.eyebrow':'精选品牌','bp.title':'日本品牌 A 到 Z',
     'bp.lead':'我们批发采购的品牌库 —— 植物系独立品牌、人气彩妆与国民日用品牌。',
     'bp.brands':'个品牌','bp.brandsPl':'个品牌','bp.products':'款商品 · 查看库存',
@@ -387,6 +389,7 @@ const L = {
     'shop.sortFeatured':'並び順：おすすめ','shop.sortLow':'価格：安い順','shop.sortHigh':'価格：高い順','shop.sortBrand':'ブランド A–Z',
     'shop.search':'商品名やブランドを検索…','shop.allP':'すべての商品',
     'shop.emptyT':'該当する商品がありません','shop.emptyP':'絞り込みを解除するか、別のキーワードでお試しください。',
+    'shop.loadMore':'もっと見る','shop.showing':'{n} / {t} 件表示',
     'bp.crumb':'ブランド','bp.eyebrow':'厳選ブランド','bp.title':'日本ブランド A to Z',
     'bp.lead':'卸売で扱うブランド集 —— 植物系インディーズ、話題のコスメ、愛される定番まで。',
     'bp.brands':'ブランド','bp.brandsPl':'ブランド','bp.products':'商品 · 在庫を見る',

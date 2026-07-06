@@ -524,6 +524,9 @@ function initShop(){
   const grid = $('#productGrid'); if(!grid) return;
   const params = new URLSearchParams(location.search);
   let state = { cat: params.get('cat')||'', sub: params.get('sub')||'', brand:'', q:'', sort:'featured', inStock:false };
+  const PAGE = 24;
+  let shown = PAGE;
+  let currentList = [];
 
   function apply(){
     let list = PRODUCTS.slice();
@@ -533,14 +536,26 @@ function initShop(){
     if(state.inStock) list = list.filter(p=>p.tag!=='low');
     if(state.q){ const q=state.q.toLowerCase(); list = list.filter(p=>(p.name+p.brand+catName(p.category)+(p.sub?subName(p.sub):'')).toLowerCase().includes(q)); }
     if(state.sort==='brand') list.sort((a,b)=>a.brand.localeCompare(b.brand));
-    render(list);
+    shown = PAGE;
+    currentList = list;
+    render();
   }
-  function render(list){
+  function render(){
+    const list = currentList;
     $('#resCount').textContent = list.length;
     $('#resCat').textContent = state.sub ? subName(state.sub) : (state.cat ? catName(state.cat) : t('shop.allCat'));
-    if(!list.length){ grid.innerHTML = `<div class="empty" style="grid-column:1/-1">${ICON.search}<h3>${t('shop.emptyT')}</h3><p>${t('shop.emptyP')}</p></div>`; return; }
-    grid.innerHTML = list.map(productCard).join('');
+    if(!list.length){ grid.innerHTML = `<div class="empty" style="grid-column:1/-1">${ICON.search}<h3>${t('shop.emptyT')}</h3><p>${t('shop.emptyP')}</p></div>`; updateMore(0); return; }
+    grid.innerHTML = list.slice(0, shown).map(productCard).join('');
+    updateMore(list.length);
   }
+  function updateMore(total){
+    const wrap = $('#loadMoreWrap'); if(!wrap) return;
+    if(shown >= total){ wrap.style.display='none'; return; }
+    wrap.style.display='';
+    const lbl = $('#loadMoreLbl');
+    if(lbl) lbl.textContent = t('shop.showing').replace('{n}', shown).replace('{t}', total);
+  }
+  $('#loadMoreBtn')?.addEventListener('click', ()=>{ shown += PAGE; render(); window.scrollTo({top:grid.getBoundingClientRect().top+window.scrollY-120, behavior:'smooth'}); });
   const catList = $('#filterCats');
   if(catList){
     const buildCats = ()=>{
