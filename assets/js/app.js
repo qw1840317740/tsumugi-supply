@@ -157,32 +157,56 @@ const BRAND_MARKS = {
   'Rain Guard':'RG','Mama Lemon':'ML','Magica':'M','LION':'L','Look':'L',
   'Bathtub Cleanser':'BC','Toilet Cleanser':'TC','Mamepika':'M'
 };
+// Map brand name -> downloaded Amazon product image filename (assets/brands/*.jpg).
+// Falls back to a hue-tinted SVG monogram if no image is available.
+const BRAND_IMAGES = {
+  'White&White':'white_white.jpg','Clinica':'clinica.jpg','Denter':'denter.jpg',
+  'Systema':'systema.jpg','Dent Health':'dent_health.jpg','NONIO':'nonio.jpg',
+  'Lightee':'lightee.jpg','Zact':'zact.jpg','Between':'between.jpg',
+  'LION Kids':'lion_kids.jpg','LION e-Toothbrush':'lion_e_toothbrush.jpg',
+  'OCH-TUNE':'och_tune.jpg','Migacot':'migacot.jpg','Dental Rinse':'dental_rinse.jpg',
+  'Soft in One':'soft_in_one.jpg','Oct':'oct.jpg','Kirei Kirei':'kirei_kirei.jpg',
+  'Hadakara':'hadakara.jpg','Ban':'ban.jpg','Top':'top.jpg','NANOX':'nanox.jpg',
+  'Acron':'acron.jpg','Bright':'bright.jpg','Soflan':'soflan.jpg',
+  'Soflan Premium':'soflan_premium.jpg','Soflan Aroma':'soflan_aroma.jpg',
+  'Style Guard':'style_guard.jpg','Elegard':'elegard.jpg','Rain Guard':'rain_guard.jpg',
+  'Mama Lemon':'mama_lemon.jpg','Magica':'magica.jpg','LION':'lion.jpg',
+  'Look':'look.jpg','Bathtub Cleanser':'bathtub_cleanser.jpg',
+  'Toilet Cleanser':'toilet_cleanser.jpg','Mamepika':'mamepika.jpg'
+};
 function brandLogo(b, size=44){
+  const imgName = BRAND_IMAGES[b.name];
+  // Prefer the real Amazon product image when available
+  if(imgName){
+    return `<img class="brand-logo" src="assets/brands/${imgName}" alt="${b.name}" width="${size}" height="${size}" loading="lazy" decoding="async" onerror="window.__brandMonogramFallback(this)" data-brand="${b.name}" data-fb-size="${size}">`;
+  }
+  return brandMonogram(b, size);
+}
+function brandMonogram(b, size=44){
   const hue = b.hue || '#21463D';
   const mark = (b.mark && b.mark.length<=3 ? b.mark : (BRAND_MARKS[b.name] || (b.kana||'?').slice(0,2)));
-  // Three logo shapes — distribute across brands by hash so the brand
-  // strip has visual variety while each card stays stable.
   const shapeBucket = [...b.name].reduce((a,c)=>a + c.charCodeAt(0), 0) % 3;
   const isWide = mark.length > 1;
   const fs = isWide ? (size * (mark.length===2 ? 0.42 : 0.34)) : (size * 0.5);
   const ring = `<circle cx="${size/2}" cy="${size/2}" r="${size/2-3}" fill="none" stroke="rgba(255,255,255,.22)" stroke-width="1"/>`;
   let inner = '';
-  if(shapeBucket===0){
-    // rounded square + concentric ring
-    inner = ring;
-  } else if(shapeBucket===1){
-    // diagonal slash accent
-    inner = `<path d="M${size*0.18} ${size*0.82} L${size*0.82} ${size*0.18}" stroke="rgba(255,255,255,.22)" stroke-width="1.2" stroke-linecap="round"/>` + ring;
-  } else {
-    // bottom bar accent
-    inner = `<rect x="${size*0.2}" y="${size*0.74}" width="${size*0.6}" height="2" rx="1" fill="rgba(255,255,255,.28)"/>` + ring;
-  }
+  if(shapeBucket===0) inner = ring;
+  else if(shapeBucket===1) inner = `<path d="M${size*0.18} ${size*0.82} L${size*0.82} ${size*0.18}" stroke="rgba(255,255,255,.22)" stroke-width="1.2" stroke-linecap="round"/>` + ring;
+  else inner = `<rect x="${size*0.2}" y="${size*0.74}" width="${size*0.6}" height="2" rx="1" fill="rgba(255,255,255,.28)"/>` + ring;
   return `<svg class="brand-logo" viewBox="0 0 ${size} ${size}" width="${size}" height="${size}" aria-label="${b.name} logo" role="img">
     <rect x="0" y="0" width="${size}" height="${size}" rx="${size*0.22}" fill="${hue}"/>
     ${inner}
     <text x="${size/2}" y="${size/2}" text-anchor="middle" dominant-baseline="central" fill="#fff" font-family="'Inter','Helvetica Neue',Arial,sans-serif" font-weight="700" font-size="${fs}" letter-spacing="${isWide?-0.5:0}">${mark}</text>
   </svg>`;
 }
+// Fallback handler used when an Amazon image fails to load
+window.__brandMonogramFallback = function(img){
+  const b = BRANDS.find(x => x.name === img.dataset.brand) || {name:img.dataset.brand, hue:'#21463D'};
+  const size = parseInt(img.dataset.fbSize,10) || 44;
+  const node = document.createElement('span');
+  node.innerHTML = brandMonogram(b, size);
+  return node.firstChild.outerHTML;
+};
 
 function productArt(p){
   const h = p.hue || '#21463D';
