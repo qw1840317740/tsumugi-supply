@@ -599,8 +599,9 @@ function initShop(){
   }
   $('#loadMoreBtn')?.addEventListener('click', ()=>{ shown += PAGE; render(); });
   const catList = $('#filterCats');
+  let buildCats = ()=>{};
   if(catList){
-    const buildCats = ()=>{
+    buildCats = ()=>{
       const topsHtml = CATEGORIES.map(c=>{
         const n = PRODUCTS.filter(p=>p.category===c.id).length;
         if(n===0) return '';
