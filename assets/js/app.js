@@ -808,11 +808,12 @@ function initPDP(){
           <a class="brandlink" href="brands.html#${encodeURIComponent(p.brand)}">${brandLogo(brand,28)} <span>${brandName(brand)}</span> ${ICON.arrow}</a>
           <p class="pdp-blurb">${brand.blurb||t('pdp.desc')}</p>
           <div class="pdp-specs">
-            <div><span>${t('pdp.brand')}</span><b>${p.brand}</b></div>
+            <div><span>${t('pdp.brand')}</span><b>${brandName(brand)}</b></div>
             <div><span>${t('pdp.cat')}</span><b>${catName(p.category)}${p.sub?' / '+subName(p.sub):''}</b></div>
-            <div><span>${t('pdp.unit')}</span><b>${p.unit}</b></div>
+            <div><span>${t('pdp.unit')}</span><b>${p.unit||'—'}</b></div>
             <div><span>${t('pdp.moq')}</span><b>${p.moq} pcs</b></div>
-            <div><span>${t('pdp.sku')}</span><b>${p.id}</b></div>
+            <div><span>${t('pdp.jan')}</span><b>${p.jan||p.id}</b></div>
+            <div><span>${t('pdp.sku')}</span><b>${p.sku||p.id}</b></div>
             <div><span>${t('pdp.origin')}</span><b>Japan</b></div>
           </div>
           <div class="pdp-actions">
@@ -908,8 +909,8 @@ function injectSEO(){
   _setMeta('property','og:title', document.title);
   _setMeta('property','og:description', fullDesc);
   _ld('product', { '@context':'https://schema.org','@type':'Product',
-    name:p.name, brand:{'@type':'Brand', name:p.brand}, category:(p.sub?subName(p.sub):catName(p.category)),
-    sku:p.id, mpn:p.id, description:descP,
+    name:p.name, brand:{'@type':'Brand', name:brandName(brand)}, category:(p.sub?subName(p.sub):catName(p.category)),
+    sku:p.sku||p.id, mpn:p.sku||p.id, gtin13:(p.jan||p.id).replace(/^0+/, ''), description:descP,
     offers:{ '@type':'Offer', availability:'https://schema.org/InStock', url:location.href } });
   _ld('breadcrumb', { '@context':'https://schema.org','@type':'BreadcrumbList',
     itemListElement:[
