@@ -811,9 +811,8 @@ function initPDP(){
             <div><span>${t('pdp.brand')}</span><b>${brandName(brand)}</b></div>
             <div><span>${t('pdp.cat')}</span><b>${catName(p.category)}${p.sub?' / '+subName(p.sub):''}</b></div>
             <div><span>${t('pdp.unit')}</span><b>${p.unit||'—'}</b></div>
-            <div><span>${t('pdp.moq')}</span><b>${p.moq} pcs</b></div>
+            <div><span>${t('pdp.moq')}</span><b>${p.moq}</b></div>
             <div><span>${t('pdp.jan')}</span><b>${p.jan||p.id}</b></div>
-            <div><span>${t('pdp.sku')}</span><b>${p.sku||p.id}</b></div>
             <div><span>${t('pdp.origin')}</span><b>Japan</b></div>
           </div>
           <div class="pdp-actions">
