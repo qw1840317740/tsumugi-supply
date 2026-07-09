@@ -174,6 +174,15 @@ const BRAND_IMAGES = {
   'Look':'look.jpg','Bathtub Cleanser':'bathtub_cleanser.jpg',
   'Toilet Cleanser':'toilet_cleanser.jpg','Mamepika':'mamepika.jpg'
 };
+// Trilingual brand name in current UI language. Falls back to canonical name if data is missing.
+function brandName(b){
+  if(!b) return '';
+  let lang = 'en';
+  try { lang = localStorage.getItem('tsumugi_lang') || 'en'; } catch(e){}
+  if(lang === 'zh' && b.name_zh) return b.name_zh;
+  if(lang === 'ja' && b.name_ja) return b.name_ja;
+  return b.name;
+}
 function brandLogo(b, size=44){
   const imgName = BRAND_IMAGES[b.name];
   // Prefer the real Amazon product image when available
@@ -293,7 +302,7 @@ function buildHeader(){
   const letters = [...new Set(BRANDS.map(b=>b.letter))].sort();
   const megaBrands = letters.map(L =>
     `<div class="mega-col"><h5>${L}</h5>${
-      BRANDS.filter(b=>b.letter===L).map(b=>`<a href="brands.html#${b.name}">${b.name}</a>`).join('')
+      BRANDS.filter(b=>b.letter===L).map(b=>`<a href="brands.html#${encodeURIComponent(b.name)}">${brandName(b)}</a>`).join('')
     }</div>`).join('');
 
   return `
@@ -353,7 +362,7 @@ function buildHeader(){
 
 function buildMobileMenu(){
   const cats = CATEGORIES.map(c=>`<a href="products.html?cat=${c.id}" data-i18n="c.${c.id}"></a>`).join('');
-  const brands = BRANDS.map(b=>`<a href="brands.html#${b.name}">${b.name}</a>`).join('');
+  const brands = BRANDS.map(b=>`<a href="brands.html#${encodeURIComponent(b.name)}">${brandName(b)}</a>`).join('');
   return `
   <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Site menu" tabindex="-1">
     <div class="mm-head">
@@ -731,7 +740,7 @@ function initShop(){
   let buildBrands = ()=>{};
   if(brandList){
     buildBrands = ()=>{
-      brandList.innerHTML = BRANDS.map(b=>{ const n=PRODUCTS.filter(p=>p.brand===b.name).length; if(n===0) return ''; return `<li><a data-brand="${b.name}" class="${state.brand===b.name?'on':''}">${b.name} <span class="n">${n}</span></a></li>`; }).join('');
+      brandList.innerHTML = BRANDS.map(b=>{ const n=PRODUCTS.filter(p=>p.brand===b.name).length; if(n===0) return ''; return `<li><a data-brand="${b.name}" class="${state.brand===b.name?'on':''}">${brandName(b)} <span class="n">${n}</span></a></li>`; }).join('');
     };
     buildBrands();
     brandList.addEventListener('click', e=>{
@@ -796,7 +805,7 @@ function initPDP(){
         <div class="pdp-info">
           <span class="cat">${subOf(p)}</span>
           <h1>${p.name}</h1>
-          <a class="brandlink" href="brands.html#${p.brand}">${brandLogo(brand,28)} <span>${p.brand}</span> ${ICON.arrow}</a>
+          <a class="brandlink" href="brands.html#${encodeURIComponent(p.brand)}">${brandLogo(brand,28)} <span>${brandName(brand)}</span> ${ICON.arrow}</a>
           <p class="pdp-blurb">${brand.blurb||t('pdp.desc')}</p>
           <div class="pdp-specs">
             <div><span>${t('pdp.brand')}</span><b>${p.brand}</b></div>
@@ -930,6 +939,19 @@ function mount(){
   const footerHost=$('#site-footer'); if(footerHost) footerHost.outerHTML = buildFooter();
   document.body.insertAdjacentHTML('beforeend', buildMobileMenu());
   document.body.insertAdjacentHTML('beforeend', buildCartDrawer());
+
+  // Re-render header/footer/mobile menu on language change so brand names
+  // in the mega menu and mobile drawer pick up name_zh / name_ja.
+  addRenderer(()=>{
+    const h=$('#site-header'); if(h) h.outerHTML = buildHeader();
+    const f=$('#site-footer'); if(f) f.outerHTML = buildFooter();
+    const m=$('#mobileMenu'); if(m) m.outerHTML = buildMobileMenu();
+    // re-bind the buttons we just rebuilt
+    $('#cartBtn')?.addEventListener('click', openCart);
+    $('#cartClose')?.addEventListener('click', closeCart);
+    $('#navToggle')?.addEventListener('click', ()=>{ $('#mobileMenu').classList.add('open'); $('#scrim').classList.add('open'); document.body.style.overflow='hidden'; openTrap($('#mobileMenu')); });
+    $('#mmClose')?.addEventListener('click', closeMobile);
+  });
 
   $('#cartBtn')?.addEventListener('click', openCart);
   $('#cartClose')?.addEventListener('click', closeCart);

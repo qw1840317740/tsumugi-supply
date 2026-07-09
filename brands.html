@@ -74,7 +74,7 @@
           <div class="brand-grid">
             ${list.map(b=>`
               <a class="brand-card" id="${b.name}" href="products.html?brand=${encodeURIComponent(b.name)}">
-                <div class="bj">${brandLogo(b,56)}<div><h4>${b.name}</h4><p>${t('c.'+b.kind)}</p></div></div>
+                <div class="bj">${brandLogo(b,56)}<div><h4>${brandName(b)}</h4><p>${t('c.'+b.kind)}</p></div></div>
                 <p>${b.blurb}</p>
                 <span class="mk">${b.items} ${t('bp.products')}</span>
               </a>`).join('')}

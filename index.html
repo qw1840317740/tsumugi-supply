@@ -268,7 +268,7 @@
       const bs = document.getElementById('brandStrip');
       if(bs) bs.innerHTML = BRANDS.slice(0,8).map(b=>`
         <a class="brand-card reveal" href="products.html?brand=${encodeURIComponent(b.name)}">
-          <div class="bj">${brandLogo(b,44)}<div><h4>${b.name}</h4><p>${kindLoc(b.kind)}</p></div></div>
+          <div class="bj">${brandLogo(b,44)}<div><h4>${brandName(b)}</h4><p>${kindLoc(b.kind)}</p></div></div>
           <p>${b.blurb}</p>
           <span class="mk">${b.items} ${t('bs.products')} →</span>
         </a>`).join('');

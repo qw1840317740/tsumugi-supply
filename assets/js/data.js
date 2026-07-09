@@ -100,7 +100,7 @@ const BRANDS = [
     "hue": "#BE5A38",
     "blurb": "LION · oral",
     "items": 1,
-    "kind": "health"
+    "kind": "health", "name_ja": "白", "name_zh": "White&White 美白"
   },
   {
     "name": "Clinica",
@@ -109,7 +109,7 @@ const BRANDS = [
     "hue": "#21463D",
     "blurb": "LION · oral",
     "items": 68,
-    "kind": "health"
+    "kind": "health", "name_ja": "クリニカ", "name_zh": "Clinica 洁丽雅"
   },
   {
     "name": "Denter",
@@ -118,7 +118,7 @@ const BRANDS = [
     "hue": "#BE9B4A",
     "blurb": "LION · oral",
     "items": 2,
-    "kind": "health"
+    "kind": "health", "name_ja": "デンター", "name_zh": "Denter 登特"
   },
   {
     "name": "Systema",
@@ -127,7 +127,7 @@ const BRANDS = [
     "hue": "#2F5A4F",
     "blurb": "LION · oral",
     "items": 62,
-    "kind": "health"
+    "kind": "health", "name_ja": "システマ", "name_zh": "Systema 细洁"
   },
   {
     "name": "Dent Health",
@@ -136,7 +136,7 @@ const BRANDS = [
     "hue": "#5B8C7F",
     "blurb": "LION · oral",
     "items": 10,
-    "kind": "health"
+    "kind": "health", "name_ja": "デントヘルス", "name_zh": "Dent Health 牙康"
   },
   {
     "name": "NONIO",
@@ -145,7 +145,7 @@ const BRANDS = [
     "hue": "#C2603F",
     "blurb": "LION · oral",
     "items": 34,
-    "kind": "health"
+    "kind": "health", "name_ja": "ノニオ", "name_zh": "NONIO 诺尼欧"
   },
   {
     "name": "Lightee",
@@ -154,7 +154,7 @@ const BRANDS = [
     "hue": "#3E5A45",
     "blurb": "LION · oral",
     "items": 6,
-    "kind": "health"
+    "kind": "health", "name_ja": "ライト", "name_zh": "Lightee 亮齿"
   },
   {
     "name": "Zact",
@@ -163,7 +163,7 @@ const BRANDS = [
     "hue": "#3A4A66",
     "blurb": "LION · home",
     "items": 1,
-    "kind": "daily"
+    "kind": "daily", "name_ja": "ザクト", "name_zh": "Zact 洁克"
   },
   {
     "name": "Between",
@@ -172,7 +172,7 @@ const BRANDS = [
     "hue": "#9C3B2E",
     "blurb": "LION · oral",
     "items": 9,
-    "kind": "health"
+    "kind": "health", "name_ja": "ビトイーン", "name_zh": "Between 齿间刷"
   },
   {
     "name": "LION Kids",
@@ -181,7 +181,7 @@ const BRANDS = [
     "hue": "#B8923D",
     "blurb": "LION · oral",
     "items": 5,
-    "kind": "babykids"
+    "kind": "babykids", "name_ja": "こども", "name_zh": "LION Kids 狮王儿童"
   },
   {
     "name": "LION e-Toothbrush",
@@ -190,7 +190,7 @@ const BRANDS = [
     "hue": "#4A7C59",
     "blurb": "LION · oral",
     "items": 1,
-    "kind": "health"
+    "kind": "health", "name_ja": "電動ブラシ", "name_zh": "LION 电动牙刷"
   },
   {
     "name": "OCH-TUNE",
@@ -199,7 +199,7 @@ const BRANDS = [
     "hue": "#20211C",
     "blurb": "LION · oral",
     "items": 4,
-    "kind": "health"
+    "kind": "health", "name_ja": "オチューン", "name_zh": "OCH-TUNE 矫正"
   },
   {
     "name": "Migacot",
@@ -208,7 +208,7 @@ const BRANDS = [
     "hue": "#BE5A38",
     "blurb": "LION · oral",
     "items": 1,
-    "kind": "health"
+    "kind": "health", "name_ja": "ミガコット", "name_zh": "Migacot 美齿"
   },
   {
     "name": "Dental Rinse",
@@ -217,7 +217,7 @@ const BRANDS = [
     "hue": "#21463D",
     "blurb": "LION · oral",
     "items": 1,
-    "kind": "health"
+    "kind": "health", "name_ja": "デンタルリンス", "name_zh": "Dental Rinse 漱口液"
   },
   {
     "name": "Soft in One",
@@ -226,7 +226,7 @@ const BRANDS = [
     "hue": "#BE9B4A",
     "blurb": "LION · haircare",
     "items": 5,
-    "kind": "beauty"
+    "kind": "beauty", "name_ja": "ソフトインワン", "name_zh": "Soft in One 柔洁"
   },
   {
     "name": "Oct",
@@ -235,7 +235,7 @@ const BRANDS = [
     "hue": "#2F5A4F",
     "blurb": "LION · haircare",
     "items": 4,
-    "kind": "beauty"
+    "kind": "beauty", "name_ja": "オクト", "name_zh": "Oct 洁齿"
   },
   {
     "name": "Kirei Kirei",
@@ -244,7 +244,7 @@ const BRANDS = [
     "hue": "#5B8C7F",
     "blurb": "LION · home",
     "items": 38,
-    "kind": "health"
+    "kind": "health", "name_ja": "キレイキレイ", "name_zh": "Kirei Kirei 洁净"
   },
   {
     "name": "Hadakara",
@@ -253,7 +253,7 @@ const BRANDS = [
     "hue": "#C2603F",
     "blurb": "LION · bodycare",
     "items": 20,
-    "kind": "beauty"
+    "kind": "beauty", "name_ja": "ハダカラ", "name_zh": "Hadakara 肌柔"
   },
   {
     "name": "Ban",
@@ -262,7 +262,7 @@ const BRANDS = [
     "hue": "#3E5A45",
     "blurb": "LION · bodycare",
     "items": 13,
-    "kind": "beauty"
+    "kind": "beauty", "name_ja": "バン", "name_zh": "Ban 洁霸"
   },
   {
     "name": "Top",
@@ -271,7 +271,7 @@ const BRANDS = [
     "hue": "#3A4A66",
     "blurb": "LION · home",
     "items": 16,
-    "kind": "daily"
+    "kind": "daily", "name_ja": "トップ", "name_zh": "Top 洁霸"
   },
   {
     "name": "NANOX",
@@ -280,7 +280,7 @@ const BRANDS = [
     "hue": "#9C3B2E",
     "blurb": "LION · home",
     "items": 24,
-    "kind": "daily"
+    "kind": "daily", "name_ja": "ナノックス", "name_zh": "NANOX 纳米"
   },
   {
     "name": "Acron",
@@ -289,7 +289,7 @@ const BRANDS = [
     "hue": "#B8923D",
     "blurb": "LION · home",
     "items": 12,
-    "kind": "daily"
+    "kind": "daily", "name_ja": "アクロン", "name_zh": "Acron 雅纯"
   },
   {
     "name": "Bright",
@@ -298,7 +298,7 @@ const BRANDS = [
     "hue": "#4A7C59",
     "blurb": "LION · home",
     "items": 3,
-    "kind": "daily"
+    "kind": "daily", "name_ja": "ブライト", "name_zh": "Bright 亮洁"
   },
   {
     "name": "Soflan",
@@ -307,7 +307,7 @@ const BRANDS = [
     "hue": "#20211C",
     "blurb": "LION · home",
     "items": 24,
-    "kind": "daily"
+    "kind": "daily", "name_ja": "ソフラン", "name_zh": "Soflan 柔顺"
   },
   {
     "name": "Soflan Premium",
@@ -316,7 +316,7 @@ const BRANDS = [
     "hue": "#BE5A38",
     "blurb": "LION · home",
     "items": 2,
-    "kind": "daily"
+    "kind": "daily", "name_ja": "ソフラン", "name_zh": "Soflan Premium 柔顺 高级"
   },
   {
     "name": "Soflan Aroma",
@@ -325,7 +325,7 @@ const BRANDS = [
     "hue": "#21463D",
     "blurb": "LION · home",
     "items": 16,
-    "kind": "daily"
+    "kind": "daily", "name_ja": "ソフラン", "name_zh": "Soflan Aroma 柔顺 香氛"
   },
   {
     "name": "Style Guard",
@@ -334,7 +334,7 @@ const BRANDS = [
     "hue": "#BE9B4A",
     "blurb": "LION · home",
     "items": 3,
-    "kind": "daily"
+    "kind": "daily", "name_ja": "スタイルガード", "name_zh": "Style Guard 发型防护"
   },
   {
     "name": "Elegard",
@@ -343,7 +343,7 @@ const BRANDS = [
     "hue": "#2F5A4F",
     "blurb": "LION · home",
     "items": 2,
-    "kind": "daily"
+    "kind": "daily", "name_ja": "エレガード", "name_zh": "Elegard 怡丽"
   },
   {
     "name": "Rain Guard",
@@ -352,7 +352,7 @@ const BRANDS = [
     "hue": "#5B8C7F",
     "blurb": "LION · home",
     "items": 1,
-    "kind": "daily"
+    "kind": "daily", "name_ja": "レインガード", "name_zh": "Rain Guard 防雨"
   },
   {
     "name": "Mama Lemon",
@@ -361,7 +361,7 @@ const BRANDS = [
     "hue": "#C2603F",
     "blurb": "LION · home",
     "items": 2,
-    "kind": "daily"
+    "kind": "daily", "name_ja": "ママレモン", "name_zh": "Mama Lemon 妈妈柠檬"
   },
   {
     "name": "Magica",
@@ -370,7 +370,7 @@ const BRANDS = [
     "hue": "#3E5A45",
     "blurb": "LION · home",
     "items": 17,
-    "kind": "daily"
+    "kind": "daily", "name_ja": "マジカ", "name_zh": "Magica 魔力"
   },
   {
     "name": "LION",
@@ -379,7 +379,7 @@ const BRANDS = [
     "hue": "#3A4A66",
     "blurb": "LION · home",
     "items": 8,
-    "kind": "daily"
+    "kind": "daily", "name_ja": "ライオン", "name_zh": "LION 狮王"
   },
   {
     "name": "Look",
@@ -388,7 +388,7 @@ const BRANDS = [
     "hue": "#9C3B2E",
     "blurb": "LION · home",
     "items": 11,
-    "kind": "daily"
+    "kind": "daily", "name_ja": "ルック", "name_zh": "Look 洁厕"
   },
   {
     "name": "Bathtub Cleanser",
@@ -397,7 +397,7 @@ const BRANDS = [
     "hue": "#B8923D",
     "blurb": "LION · home",
     "items": 20,
-    "kind": "daily"
+    "kind": "daily", "name_ja": "バスタブ", "name_zh": "Bathtub Cleanser 浴缸清洁"
   },
   {
     "name": "Toilet Cleanser",
@@ -406,7 +406,7 @@ const BRANDS = [
     "hue": "#4A7C59",
     "blurb": "LION · home",
     "items": 4,
-    "kind": "daily"
+    "kind": "daily", "name_ja": "トイレ", "name_zh": "Toilet Cleanser 马桶清洁"
   },
   {
     "name": "Mamepika",
@@ -415,29 +415,29 @@ const BRANDS = [
     "hue": "#20211C",
     "blurb": "LION · home",
     "items": 4,
-    "kind": "daily"
+    "kind": "daily", "name_ja": "まめピカ", "name_zh": "Mamepika 豆亮"
   },
   /* === KOSE 2026-07-08: 7 sub-brands === */
-  {"name": "Kose Ouvi Blue", "kana": "OBK", "letter": "O", "hue": "#3E5A45", "blurb": "KOSE · one by kose / リンクレス", "items": 31, "kind": "beauty"},
-  {"name": "Kose Make Keep", "kana": "CCS", "letter": "C", "hue": "#BE5A38", "blurb": "KOSE · メイクキープ", "items": 8, "kind": "beauty"},
-  {"name": "Kose Sekkisei", "kana": "雪肌精", "letter": "S", "hue": "#2F5A4F", "blurb": "KOSE · 雪肌精", "items": 14, "kind": "beauty"},
-  {"name": "Kose Infinity", "kana": "茵菲妮", "letter": "I", "hue": "#9C3B2E", "blurb": "KOSE · INFINITY 茵菲妮", "items": 63, "kind": "beauty"},
-  {"name": "Kose Grace One", "kana": "GraceOne", "letter": "G", "hue": "#B8923D", "blurb": "KOSE · 卓萃 Grace One", "items": 32, "kind": "beauty"},
-  {"name": "Visee", "kana": "VISEE", "letter": "V", "hue": "#BE5A38", "blurb": "KOSE · VISEE 彩妆", "items": 182, "kind": "beauty"},
-  {"name": "Fasio", "kana": "FASIO", "letter": "F", "hue": "#C2603F", "blurb": "KOSE · FASIO 底妆 / 眼妆", "items": 127, "kind": "beauty"},
+  {"name": "Kose Ouvi Blue", "kana": "OBK", "letter": "O", "hue": "#3E5A45", "blurb": "KOSE · one by kose / リンクレス", "items": 31, "kind": "beauty", "name_ja": "OBK", "name_zh": "Kose Ouvi Blue 澄肌"},
+  {"name": "Kose Make Keep", "kana": "CCS", "letter": "C", "hue": "#BE5A38", "blurb": "KOSE · メイクキープ", "items": 8, "kind": "beauty", "name_ja": "CCS", "name_zh": "Kose Make Keep 持妆"},
+  {"name": "Kose Sekkisei", "kana": "雪肌精", "letter": "S", "hue": "#2F5A4F", "blurb": "KOSE · 雪肌精", "items": 14, "kind": "beauty", "name_ja": "雪肌精", "name_zh": "Kose Sekkisei 雪肌精"},
+  {"name": "Kose Infinity", "kana": "茵菲妮", "letter": "I", "hue": "#9C3B2E", "blurb": "KOSE · INFINITY 茵菲妮", "items": 63, "kind": "beauty", "name_ja": "茵菲妮", "name_zh": "Kose Infinity 茵菲妮"},
+  {"name": "Kose Grace One", "kana": "GraceOne", "letter": "G", "hue": "#B8923D", "blurb": "KOSE · 卓萃 Grace One", "items": 32, "kind": "beauty", "name_ja": "GraceOne", "name_zh": "Kose Grace One 卓萃"},
+  {"name": "Visee", "kana": "VISEE", "letter": "V", "hue": "#BE5A38", "blurb": "KOSE · VISEE 彩妆", "items": 182, "kind": "beauty", "name_ja": "VISEE", "name_zh": "Visee 维丝"},
+  {"name": "Fasio", "kana": "FASIO", "letter": "F", "hue": "#C2603F", "blurb": "KOSE · FASIO 底妆 / 眼妆", "items": 127, "kind": "beauty", "name_ja": "FASIO", "name_zh": "Fasio 菲希欧"},
   /* === 日常用品 2026-07-08: 12 brands === */
-  {"name": "Kumano Beauty", "kana": "熊野油脂", "letter": "K", "hue": "#3A4A66", "blurb": "Kumano Beauty · Japanese daily goods", "items": 5, "kind": "beauty", "site": "https://www.kumanobeauty.com/"},
-  {"name": "Kumano Vuea", "kana": "ビューア", "letter": "K", "hue": "#5B8C7F", "blurb": "Kumano Vuea · Japanese daily goods", "items": 1, "kind": "beauty", "site": "https://www.kumanobeauty.com/"},
-  {"name": "Seihaku", "kana": "麗白", "letter": "S", "hue": "#2F5A4F", "blurb": "Seihaku · Japanese daily goods", "items": 23, "kind": "beauty", "site": "https://www.kumanobeauty.com/reiha/"},
-  {"name": "cyclea", "kana": "cyclea", "letter": "C", "hue": "#C2603F", "blurb": "cyclea · Japanese daily goods", "items": 16, "kind": "beauty", "site": "https://www.kumanobeauty.com/cyclear/"},
-  {"name": "and honey", "kana": "アンドハニー", "letter": "A", "hue": "#BE9B4A", "blurb": "and honey · Japanese daily goods", "items": 29, "kind": "beauty", "site": "https://and-honey.com/"},
-  {"name": "BOTANIST", "kana": "ボタニスト", "letter": "B", "hue": "#4A7C59", "blurb": "BOTANIST · Japanese daily goods", "items": 19, "kind": "beauty", "site": "https://www.botanist.jp/"},
-  {"name": "Salon Link", "kana": "サロンリンク", "letter": "S", "hue": "#9C3B2E", "blurb": "Salon Link · Japanese daily goods", "items": 6, "kind": "beauty", "site": "https://www.kosecosme.jp/brand/salonlink/"},
-  {"name": "Fino", "kana": "フィーノ", "letter": "F", "hue": "#B8923D", "blurb": "Fino · Japanese daily goods", "items": 2, "kind": "beauty", "site": "https://www.fino.tokyo/"},
-  {"name": "Pixy", "kana": "ピクシー", "letter": "P", "hue": "#BE5A38", "blurb": "Pixy · Japanese daily goods", "items": 2, "kind": "beauty", "site": "https://pixy.jp/"},
-  {"name": "DEVECICA", "kana": "デベシカ", "letter": "D", "hue": "#9C6B3B", "blurb": "DEVECICA · Japanese daily goods", "items": 21, "kind": "beauty", "site": "https://devecica.com/"},
-  {"name": "Chacott", "kana": "チャコット", "letter": "C", "hue": "#BE5A38", "blurb": "Chacott · Japanese daily goods", "items": 3, "kind": "beauty", "site": "https://www.chacott.co.jp/"},
-  {"name": "The", "kana": "The", "letter": "T", "hue": "#5B8C7F", "blurb": "The · Japanese daily goods", "items": 3, "kind": "beauty", "site": "https://www.kumanobeauty.com/"}
+  {"name": "Kumano Beauty", "kana": "熊野油脂", "letter": "K", "hue": "#3A4A66", "blurb": "Kumano Beauty · Japanese daily goods", "items": 5, "kind": "beauty", "site": "https://www.kumanobeauty.com/", "name_ja": "熊野油脂", "name_zh": "Kumano Beauty 熊野"},
+  {"name": "Kumano Vuea", "kana": "ビューア", "letter": "K", "hue": "#5B8C7F", "blurb": "Kumano Vuea · Japanese daily goods", "items": 1, "kind": "beauty", "site": "https://www.kumanobeauty.com/", "name_ja": "ビューア", "name_zh": "Kumano Vuea 熊野 Vuea"},
+  {"name": "Seihaku", "kana": "麗白", "letter": "S", "hue": "#2F5A4F", "blurb": "Seihaku · Japanese daily goods", "items": 23, "kind": "beauty", "site": "https://www.kumanobeauty.com/reiha/", "name_ja": "麗白", "name_zh": "Seihaku 麗白"},
+  {"name": "cyclea", "kana": "cyclea", "letter": "C", "hue": "#C2603F", "blurb": "cyclea · Japanese daily goods", "items": 16, "kind": "beauty", "site": "https://www.kumanobeauty.com/cyclear/", "name_ja": "cyclea", "name_zh": "cyclea 维生素C"},
+  {"name": "and honey", "kana": "アンドハニー", "letter": "A", "hue": "#BE9B4A", "blurb": "and honey · Japanese daily goods", "items": 29, "kind": "beauty", "site": "https://and-honey.com/", "name_ja": "アンドハニー", "name_zh": "and honey 安德蜂蜜"},
+  {"name": "BOTANIST", "kana": "ボタニスト", "letter": "B", "hue": "#4A7C59", "blurb": "BOTANIST · Japanese daily goods", "items": 19, "kind": "beauty", "site": "https://www.botanist.jp/", "name_ja": "ボタニスト", "name_zh": "BOTANIST 植物学家"},
+  {"name": "Salon Link", "kana": "サロンリンク", "letter": "S", "hue": "#9C3B2E", "blurb": "Salon Link · Japanese daily goods", "items": 6, "kind": "beauty", "site": "https://www.kosecosme.jp/brand/salonlink/", "name_ja": "サロンリンク", "name_zh": "Salon Link 美发连锁"},
+  {"name": "Fino", "kana": "フィーノ", "letter": "F", "hue": "#B8923D", "blurb": "Fino · Japanese daily goods", "items": 2, "kind": "beauty", "site": "https://www.fino.tokyo/", "name_ja": "フィーノ", "name_zh": "Fino 芬浓"},
+  {"name": "Pixy", "kana": "ピクシー", "letter": "P", "hue": "#BE5A38", "blurb": "Pixy · Japanese daily goods", "items": 2, "kind": "beauty", "site": "https://pixy.jp/", "name_ja": "ピクシー", "name_zh": "Pixy 皮克西"},
+  {"name": "DEVECICA", "kana": "デベシカ", "letter": "D", "hue": "#9C6B3B", "blurb": "DEVECICA · Japanese daily goods", "items": 21, "kind": "beauty", "site": "https://devecica.com/", "name_ja": "デベシカ", "name_zh": "DEVECICA 德贝希卡"},
+  {"name": "Chacott", "kana": "チャコット", "letter": "C", "hue": "#BE5A38", "blurb": "Chacott · Japanese daily goods", "items": 3, "kind": "beauty", "site": "https://www.chacott.co.jp/", "name_ja": "チャコット", "name_zh": "Chacott 查科特"},
+  {"name": "The", "kana": "The", "letter": "T", "hue": "#5B8C7F", "blurb": "The · Japanese daily goods", "items": 3, "kind": "beauty", "site": "https://www.kumanobeauty.com/", "name_ja": "The", "name_zh": "The 维C"}
 ];
 
 const PRODUCTS = [
