@@ -374,8 +374,8 @@ function buildMobileMenu(){
       <div class="mm-sub" id="mmCats">${cats}<a href="products.html" class="more" data-i18n="mm.viewall"></a></div>
       <div class="mm-toggle" data-toggle="mmBrands"><span data-i18n="nav.brands"></span> ${ICON.chev}</div>
       <div class="mm-sub" id="mmBrands">${brands}<a href="brands.html" class="more" data-i18n="mm.allBrands"></a></div>
-      <a href="how-to-order.html"><span data-i18n="nav.howto"></span> ${ICON.arrow}</a>
-      <a href="faq.html"><span data-i18n="nav.faq"></span></a>
+      <a href="how-to-order.html" data-i18n="nav.howto" aria-label="How to order"> ${ICON.arrow}</a>
+      <a href="faq.html" data-i18n="nav.faq" aria-label="FAQ"></a>
     </div>
     <div class="mm-foot">
       <a class="btn btn-primary btn-block" href="how-to-order.html#request" data-i18n="mm.quote"></a>
@@ -540,7 +540,7 @@ function syncDD(ddId, val, label){
 
 function buildCartDrawer(){
   return `
-  <aside class="cart-drawer" id="cartDrawer" role="dialog" aria-modal="true" aria-label="Shopping cart" tabindex="-1">
+  <div class="cart-drawer" id="cartDrawer" role="dialog" aria-modal="true" aria-label="Shopping cart" tabindex="-1">
     <div class="cart-head">
       <h3><span data-i18n="cart.title"></span><span id="cartItemsHead" class="muted"></span></h3>
       <button class="icon-btn" id="cartClose" aria-label="Close cart">${ICON.close}</button>
