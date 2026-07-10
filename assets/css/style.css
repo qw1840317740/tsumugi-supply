@@ -827,3 +827,7 @@ table.t td b{ color:var(--clay); font-family:var(--f-serif); font-size:1.1rem; }
   #catGrid, #featuredGrid, #brandStrip{ min-height:640px; }
 }
 
+/* Kanji glyph in category tile — make the single character readable
+   (the existing .cat-card .ic was designed for 22px SVG icons). */
+.cat-card .ic{ font-family:var(--f-serif); font-size:1.5rem; line-height:1; }
+

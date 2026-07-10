@@ -1033,11 +1033,65 @@ function mount(){
   initShop();
   initPDP();
   initFAQ();
+  initHomeGrids();
   injectSEO();      // after initPDP so document.title/meta reflect the product
   addRenderer(injectSEO);  // re-fire on language change so title/og follow i18n
   applyI18n();      // set language on all static + dynamic nodes
   revealObs();
   if(typeof initAuth==="function") initAuth();
+}
+
+/* =========================================================
+   HOME PAGE GRIDS
+   Three empty host divs (#catGrid / #featuredGrid / #brandStrip)
+   live in index.html. They were never filled — make them real.
+   ========================================================= */
+function initHomeGrids(){
+  // 1. Category tiles
+  const cg = document.getElementById('catGrid');
+  if(cg && !cg.dataset.filled){
+    cg.dataset.filled = '1';
+    cg.innerHTML = CATEGORIES.map(c => {
+      const n = PRODUCTS.filter(p => p.category === c.id).length;
+      if(n === 0) return '';
+      return `
+        <a class="cat-card" href="products.html?cat=${c.id}">
+          <span class="ic" aria-hidden="true">${c.glyph}</span>
+          <h4>${catName(c.id)}</h4>
+          <span class="count">${n} ${t('cat.skusPl')}</span>
+        </a>`;
+    }).join('');
+  }
+  // 2. Featured products (best/new tags first, capped at 8)
+  const fg = document.getElementById('featuredGrid');
+  if(fg && !fg.dataset.filled){
+    fg.dataset.filled = '1';
+    const pool = PRODUCTS.filter(p => p.tag === 'best' || p.tag === 'new');
+    const picks = pool.slice(0, 8);
+    if(picks.length){
+      fg.innerHTML = picks.map(productCard).join('');
+    } else {
+      // Fallback to first 8 by category spread
+      fg.innerHTML = PRODUCTS.slice(0, 8).map(productCard).join('');
+    }
+  }
+  // 3. Brand strip (top 12 brands by SKU count)
+  const bs = document.getElementById('brandStrip');
+  if(bs && !bs.dataset.filled){
+    bs.dataset.filled = '1';
+    const counts = new Map();
+    for(const p of PRODUCTS) counts.set(p.brand, (counts.get(p.brand)||0) + 1);
+    const top = [...counts.entries()].sort((a,b) => b[1]-a[1]).slice(0, 12);
+    bs.innerHTML = top.map(([name, n]) => {
+      const brand = BRANDS.find(b => b.name === name) || { name, hue: '#21463D' };
+      const blurb = brand.blurb || '';
+      return `<a class="brand-card" href="brands.html#${encodeURIComponent(name)}">
+        <div class="bj">${brandLogo(brand, 44)}<h4>${brandName(brand)}</h4></div>
+        <p>${blurb}</p>
+        <span class="mk">${n} ${t('cat.skusPl')}</span>
+      </a>`;
+    }).join('');
+  }
 }
 function closeMobile(){ $('#mobileMenu')?.classList.remove('open'); closeScrim(); closeTrap(); }
 
