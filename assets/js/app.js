@@ -896,35 +896,88 @@ function _ld(id, obj){
   s.textContent = JSON.stringify(obj);
 }
 function injectSEO(){
-  // Static SEO (favicon, canonical, OG, Twitter, Organization schema) lives in each
-  // page's <head> so it works without JavaScript. Here we only add the dynamic,
-  // product-specific structured data that depends on the ?id= query param.
-  const path = location.pathname.split('/').pop() || 'index.html';
-  if(path.indexOf('product') !== 0) return;
-  const id = new URLSearchParams(location.search).get('id');
-  const p = PRODUCTS.find(x => x.id === id);
-  if(!p) return;
-  const descP = (BRANDS.find(b => b.name === p.brand) || {}).blurb || '';
-  const fullDesc = `${p.name} by ${p.brand} — ${descP} Wholesale Japanese daily goods from ${SITE.full}.`;
-  // per-product canonical + OG url (strip any cache-bust params)
-  const cleanUrl = location.origin + location.pathname + '?id=' + encodeURIComponent(p.id);
+  // Per-page SEO rewrite.
+  // Static SEO tags in <head> act as the no-JS fallback. Here we rewrite
+  // <title>, description, og:*, twitter:* and canonical for the active
+  // language and (where applicable) the active product.
+  const path = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
+  const params = new URLSearchParams(location.search);
+  const isProd = path.indexOf('product') === 0;
+  // Brand link (used in PDP branch)
+  const brand = isProd ? (BRANDS.find(b => b.name === (PRODUCTS.find(x => x.id === params.get('id')) || {}).brand) || {}) : null;
+
+  // ----- PDP branch -----
+  if(isProd){
+    const id = params.get('id');
+    const p  = PRODUCTS.find(x => x.id === id);
+    if(!p) return;
+    const catHuman = p.sub ? subName(p.sub) : catName(p.category);
+    const brObj    = BRANDS.find(b => b.name === p.brand) || {};
+    const brHuman  = brandName(brObj);
+    const title    = t2('seo.pdp.title', {NAME: p.name, BRAND: brHuman, CAT: catHuman});
+    const desc     = t2('seo.pdp.desc',  {NAME: p.name, BRAND: brHuman, CAT: catHuman});
+    const ogDesc   = t2('seo.pdp.ogdesc',{NAME: p.name, BRAND: brHuman, CAT: catHuman});
+    const twDesc   = t2('seo.pdp.twdesc',{NAME: p.name, BRAND: brHuman, CAT: catHuman});
+    document.title = title;
+    const m = document.head.querySelector('meta[name="description"]'); if(m) m.setAttribute('content', desc);
+    const cleanUrl = location.origin + location.pathname + '?id=' + encodeURIComponent(p.id);
+    _setLink('canonical', cleanUrl);
+    _setMeta('property','og:url', cleanUrl);
+    _setMeta('property','og:title', title);
+    _setMeta('property','og:description', ogDesc);
+    // PDP-specific og:image = real product photo
+    const imgUrl = location.origin + '/' + productPhoto(p);
+    _setMeta('property','og:image', imgUrl);
+    _setMeta('property','og:image:width',  '1200');
+    _setMeta('property','og:image:height', '1200');
+    _setMeta('name','twitter:title', title);
+    _setMeta('name','twitter:description', twDesc);
+    _setMeta('name','twitter:image', imgUrl);
+    // JSON-LD: Product (with image) + BreadcrumbList
+    const photoRel = productPhoto(p).replace(/^\/+/, '');
+    _ld('product', { '@context':'https://schema.org','@type':'Product',
+      name:p.name, brand:{'@type':'Brand', name:brHuman}, category:catHuman,
+      sku:p.id, mpn:p.id, gtin13:(p.jan||p.id).replace(/^0+/, ''), description:desc,
+      image: location.origin + '/' + photoRel,
+      offers:{ '@type':'Offer', availability:'https://schema.org/InStock', url:cleanUrl } });
+    _ld('breadcrumb', { '@context':'https://schema.org','@type':'BreadcrumbList',
+      itemListElement:[
+        {'@type':'ListItem', position:1, name:'Home', item:location.origin+'/'},
+        {'@type':'ListItem', position:2, name:'Products', item:new URL('products.html', location.origin).href},
+        {'@type':'ListItem', position:3, name:catName(p.category), item:new URL('products.html?cat='+p.category, location.origin).href},
+        ...(p.sub?[{'@type':'ListItem', position:4, name:catHuman, item:new URL('products.html?cat='+p.category+'&sub='+p.sub, location.origin).href},{'@type':'ListItem', position:5, name:p.name, item:cleanUrl}]:[{'@type':'ListItem', position:4, name:p.name, item:cleanUrl}]) ] });
+    return;
+  }
+
+  // ----- Non-PDP branches (home / products / brands / how-to-order / faq) -----
+  const pageKey = ({
+    'index.html':'home',
+    '':'home', // bare domain
+    'products.html':'products',
+    'brands.html':'brands',
+    'how-to-order.html':'how',
+    'faq.html':'faq',
+  })[path] || 'home';
+  const title   = t('seo.' + pageKey + '.title');
+  const desc    = t('seo.' + pageKey + '.desc');
+  const ogDesc  = t('seo.' + pageKey + '.ogdesc');
+  const twDesc  = t('seo.' + pageKey + '.twdesc');
+  document.title = title;
+  const m = document.head.querySelector('meta[name="description"]'); if(m) m.setAttribute('content', desc);
+  // cleanUrl drops any ?cat/sub/brand/q query so each canonical points at the page root.
+  const cleanUrl = location.origin + location.pathname;
   _setLink('canonical', cleanUrl);
   _setMeta('property','og:url', cleanUrl);
-  const m = document.head.querySelector('meta[name="description"]');
-  if(m) m.setAttribute('content', fullDesc);
-  // also reflect product in OG tags (helps JS-aware preview tools)
-  _setMeta('property','og:title', document.title);
-  _setMeta('property','og:description', fullDesc);
-  _ld('product', { '@context':'https://schema.org','@type':'Product',
-    name:p.name, brand:{'@type':'Brand', name:brandName(brand)}, category:(p.sub?subName(p.sub):catName(p.category)),
-    sku:p.sku||p.id, mpn:p.sku||p.id, gtin13:(p.jan||p.id).replace(/^0+/, ''), description:descP,
-    offers:{ '@type':'Offer', availability:'https://schema.org/InStock', url:location.href } });
-  _ld('breadcrumb', { '@context':'https://schema.org','@type':'BreadcrumbList',
-    itemListElement:[
-      {'@type':'ListItem', position:1, name:'Home', item:location.origin+'/'},
-      {'@type':'ListItem', position:2, name:'Products', item:new URL('products.html', location.origin).href},
-      {'@type':'ListItem', position:3, name:catName(p.category), item:new URL('products.html?cat='+p.category, location.origin).href},
-      ...(p.sub?[{'@type':'ListItem', position:4, name:subName(p.sub), item:new URL('products.html?cat='+p.category+'&sub='+p.sub, location.origin).href},{'@type':'ListItem', position:5, name:p.name, item:location.href}]:[{'@type':'ListItem', position:4, name:p.name, item:location.href}]) ] });
+  _setMeta('property','og:title', title);
+  _setMeta('property','og:description', ogDesc);
+  // og:image = brand PNG (shared across non-PDP pages)
+  const imgUrl = location.origin + '/assets/og.png';
+  _setMeta('property','og:image', imgUrl);
+  _setMeta('property','og:image:width',  '1200');
+  _setMeta('property','og:image:height', '630');
+  _setMeta('name','twitter:title', title);
+  _setMeta('name','twitter:description', twDesc);
+  _setMeta('name','twitter:image', imgUrl);
 }
 
 /* =========================================================
@@ -981,6 +1034,7 @@ function mount(){
   initPDP();
   initFAQ();
   injectSEO();      // after initPDP so document.title/meta reflect the product
+  addRenderer(injectSEO);  // re-fire on language change so title/og follow i18n
   applyI18n();      // set language on all static + dynamic nodes
   revealObs();
   if(typeof initAuth==="function") initAuth();
