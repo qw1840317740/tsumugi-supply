@@ -1034,11 +1034,65 @@ function mount(){
   initPDP();
   initFAQ();
   initHomeGrids();
+  injectHomeIcons();
   injectSEO();      // after initPDP so document.title/meta reflect the product
   addRenderer(injectSEO);  // re-fire on language change so title/og follow i18n
   applyI18n();      // set language on all static + dynamic nodes
   revealObs();
   if(typeof initAuth==="function") initAuth();
+}
+
+/* Inject SVG icons into orphan <span id="..."> shells on the home page.
+   Lives in app.js (not the inline <script>) so it executes AFTER defer'd
+   data.js sets window.ICON. */
+function injectHomeIcons(){
+  const set = (id, html) => { const e = document.getElementById(id); if(e) e.innerHTML = html; };
+  const I = window.ICON || {};
+  // Trust strip + footer arrow tails
+  set('heroBadgeIc', I.box);
+  set('icTruck',  I.truck);
+  set('icShield', I.shield);
+  set('icYen',    I.yen);
+  set('icClock',  I.clock);
+  set('icLayers', I.layers);
+  set('icLeaf',     I.leaf);
+  set('icTag2',     I.tag);
+  set('icShip2',    I.ship);
+  set('icShield2',  I.shield);
+  set('crPhil',     I.spark);
+  set('crLic',      I.shield);
+  set('crArea',     I.globe);
+  set('seeAllArr',  I.arrow);
+  set('brandsArr',  I.arrow);
+  set('howArr',     I.arrow);
+  set('ctaChatIc',  I.phone);
+  // category-grid icon mapping (was in inline <script>, now here)
+  const ICONS = { health:I.check, beauty:I.spark, daily:I.box, food:I.leaf,
+    sweets:I.spark, babykids:I.leaf, hobby:I.tag, seasonaltop:I.box };
+  // Steps teaser (4 step cards)
+  const st = document.getElementById('stepsTeaser');
+  if(st){
+    const steps = [
+      { n:'1', t:t('s1t'), d:t('s1d') },
+      { n:'2', t:t('s2t'), d:t('s2d') },
+      { n:'3', t:t('s3t'), d:t('s3d') },
+      { n:'4', t:t('s4t'), d:t('s4d') },
+    ];
+    st.innerHTML = steps.map((s,i) => `
+      <div class="step reveal">
+        <div class="n">${s.n}</div><h4>${s.t}</h4><p>${s.d}</p>
+        ${i<3?`<span class="step-line"></span>`:''}
+      </div>`).join('');
+  }
+  // Re-render categories now that ICONS is available
+  const cg = document.getElementById('catGrid');
+  if(cg && cg.dataset.filled){
+    CATEGORIES.forEach((c, i) => {
+      const a = cg.children[i]; if(!a) return;
+      const ic = a.querySelector('.ic');
+      if(ic) ic.innerHTML = ICONS[c.id] || I.box;
+    });
+  }
 }
 
 /* =========================================================
@@ -1047,6 +1101,9 @@ function mount(){
    live in index.html. They were never filled — make them real.
    ========================================================= */
 function initHomeGrids(){
+  const I = window.ICON || {};
+  const ICONS = { health:I.check, beauty:I.spark, daily:I.box, food:I.leaf,
+    sweets:I.spark, babykids:I.leaf, hobby:I.tag, seasonaltop:I.box };
   // 1. Category tiles
   const cg = document.getElementById('catGrid');
   if(cg && !cg.dataset.filled){
@@ -1054,11 +1111,12 @@ function initHomeGrids(){
     cg.innerHTML = CATEGORIES.map(c => {
       const n = PRODUCTS.filter(p => p.category === c.id).length;
       if(n === 0) return '';
+      const usedSubs = (c.subs || []).filter(s => (s.count || 0) > 0).length;
       return `
-        <a class="cat-card" href="products.html?cat=${c.id}">
-          <span class="ic" aria-hidden="true">${c.glyph}</span>
-          <h4>${catName(c.id)}</h4>
-          <span class="count">${n} ${t('cat.skusPl')}</span>
+        <a class="cat-card reveal" href="products.html?cat=${c.id}">
+          <div class="ic">${ICONS[c.id] || I.box || ''}</div>
+          <div><h4>${catName(c.id)}</h4><div class="count">${n} ${t(n===1?'cat.skus':'cat.skusPl')} · ${usedSubs} ${t('cat.subs')}</div></div>
+          <span class="arr">${I.arrow || ''}</span>
         </a>`;
     }).join('');
   }
