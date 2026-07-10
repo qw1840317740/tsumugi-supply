@@ -1084,15 +1084,8 @@ function injectHomeIcons(){
         ${i<3?`<span class="step-line"></span>`:''}
       </div>`).join('');
   }
-  // Re-render categories now that ICONS is available
-  const cg = document.getElementById('catGrid');
-  if(cg && cg.dataset.filled){
-    CATEGORIES.forEach((c, i) => {
-      const a = cg.children[i]; if(!a) return;
-      const ic = a.querySelector('.ic');
-      if(ic) ic.innerHTML = ICONS[c.id] || I.box;
-    });
-  }
+  // Category tile icons were set in initHomeGrids (kanji + per-cat hue).
+  // Don't overwrite here — the kanji glyph IS the icon.
 }
 
 /* =========================================================
