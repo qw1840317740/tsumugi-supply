@@ -1113,9 +1113,10 @@ function initHomeGrids(){
       if(n === 0) return '';
       const usedSubs = (c.subs || []).filter(s => (s.count || 0) > 0).length;
       return `
-        <a class="cat-card reveal" href="products.html?cat=${c.id}">
-          <div class="ic">${ICONS[c.id] || I.box || ''}</div>
-          <div><h4>${catName(c.id)}</h4><div class="count">${n} ${t(n===1?'cat.skus':'cat.skusPl')} · ${usedSubs} ${t('cat.subs')}</div></div>
+        <a class="cat-card reveal" href="products.html?cat=${c.id}" style="--cat-hue:${c.hue}">
+          <div class="ic" aria-hidden="true">${c.glyph || ''}</div>
+          <h4>${catName(c.id)}</h4>
+          <div class="count">${n} ${t(n===1?'cat.skus':'cat.skusPl')} · ${usedSubs} ${t('cat.subs')}</div>
           <span class="arr">${I.arrow || ''}</span>
         </a>`;
     }).join('');
