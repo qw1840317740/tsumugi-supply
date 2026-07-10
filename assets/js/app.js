@@ -635,7 +635,15 @@ function initShop(){
     if(state.sub)   list = list.filter(p=>p.sub===state.sub);
     if(state.brand) list = list.filter(p=>p.brand===state.brand);
     if(state.inStock) list = list.filter(p=>p.tag!=='low');
-    if(state.q){ const q=state.q.toLowerCase(); list = list.filter(p=>(p.name+p.brand+catName(p.category)+(p.sub?subName(p.sub):'')).toLowerCase().includes(q)); }
+    if(state.q){ const q=state.q.toLowerCase().trim();
+      // Numeric-only queries (>=3 digits) are treated as a JAN / id lookup so
+      // wholesalers can paste a code from a catalogue and jump straight to it.
+      const isJan = /^\d{3,}$/.test(q);
+      list = list.filter(p => {
+        if(isJan) return (p.id||'').includes(q) || (p.jan||'').includes(q);
+        return (p.name+p.brand+catName(p.category)+(p.sub?subName(p.sub):'')).toLowerCase().includes(q);
+      });
+    }
     if(state.sort==='brand') list.sort((a,b)=>a.brand.localeCompare(b.brand));
     shown = PAGE;
     currentList = list;
