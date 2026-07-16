@@ -619,13 +619,23 @@ function productCard(p){
 /* =========================================================
    SHOP PAGE
    ========================================================= */
+// Date-seeded shuffle for "featured" sort: stable per day, varies across
+// days. Hash a JAN with the yyyymmdd seed, compare two hash values to
+// give a deterministic-but-rotating order. Avoids the bug where the
+// "all products" page always shows the same insertion-order SKUs.
+function dailyShuffle(a, b){
+  const d = new Date();
+  const seed = d.getFullYear()*10000 + (d.getMonth()+1)*100 + d.getDate();
+  const h = s => { let n = seed; for (let i=0;i<s.length;i++){ n = (n*31 + s.charCodeAt(i)) >>> 0; } return n; };
+  return h(a) - h(b);
+}
 function initShop(){
   const grid = $('#productGrid'); if(!grid) return;
   const params = new URLSearchParams(location.search);
   let state = { cat: params.get('cat')||'', sub: params.get('sub')||'', brand:params.get('brand')||'', q:params.get('q')||'', sort:'featured', inStock:false };
   // Pre-fill the visible search input if we arrived with ?q=...
   const searchEl = $('#shopSearch'); if(searchEl && state.q) searchEl.value = state.q;
-  const PAGE = 24;
+  const PAGE = 12;
   let shown = PAGE;
   let currentList = [];
 
@@ -645,6 +655,19 @@ function initShop(){
       });
     }
     if(state.sort==='brand') list.sort((a,b)=>a.brand.localeCompare(b.brand));
+    else if(state.sort==='featured'){
+      // Smart featured sort: best/new first, then shuffle the rest so the
+      // "all products" landing page doesn't always show the same oral-care
+      // SKUs that are inserted first in data.js. The shuffle uses a daily
+      // seed so it stays stable for the rest of the day (good for SEO/cache
+      // and reduces user confusion from layout shifts).
+      const rank = t => (t==='best'?0 : t==='new'?1 : 2);
+      list.sort((a,b)=>{
+        const ra = rank(a.tag), rb = rank(b.tag);
+        if(ra !== rb) return ra - rb;
+        return dailyShuffle(a.id, b.id);
+      });
+    }
     shown = PAGE;
     currentList = list;
     // mirror state into the URL so refresh / share preserves the filter view
