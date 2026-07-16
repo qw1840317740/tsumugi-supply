@@ -1142,17 +1142,34 @@ function initHomeGrids(){
         </a>`;
     }).join('');
   }
-  // 2. Featured products (best/new tags first, capped at 8)
+  // 2. Featured products: pick across sub-categories from best+new pool
+  // so the home page doesn't always show the same oral-care SKUs.
   const fg = document.getElementById('featuredGrid');
   if(fg && !fg.dataset.filled){
     fg.dataset.filled = '1';
     const pool = PRODUCTS.filter(p => p.tag === 'best' || p.tag === 'new');
-    const picks = pool.slice(0, 8);
-    if(picks.length){
+    // Group by sub-category, then pick one from each, then fill remainder.
+    const bySub = new Map();
+    for (const p of pool){ const arr = bySub.get(p.sub) || []; arr.push(p); bySub.set(p.sub, arr); }
+    // Shuffle each sub's pool so picks rotate
+    for (const arr of bySub.values()) arr.sort((a,b)=>dailyShuffle(a.id, b.id));
+    const picks = [];
+    // Round-robin one from each sub until we have 8
+    const subs = [...bySub.keys()];
+    let i = 0;
+    while (picks.length < 8 && subs.length){
+      const sub = subs[i % subs.length];
+      const arr = bySub.get(sub);
+      if (arr.length){ picks.push(arr.shift()); }
+      else { subs.splice(i % subs.length, 1); continue; }
+      i++;
+    }
+    if (picks.length >= 4){
       fg.innerHTML = picks.map(productCard).join('');
     } else {
-      // Fallback to first 8 by category spread
-      fg.innerHTML = PRODUCTS.slice(0, 8).map(productCard).join('');
+      // Fallback: just shuffle pool
+      const shuffled = pool.slice().sort((a,b)=>dailyShuffle(a.id, b.id));
+      fg.innerHTML = shuffled.slice(0, 8).map(productCard).join('');
     }
   }
   // 3. Brand strip (top 12 brands by SKU count)
