@@ -98,7 +98,7 @@ html{ scrollbar-color:var(--line) var(--paper); scrollbar-width:thin; }
 /* ---------- Layout ---------- */
 .container{ width:100%; max-width:var(--container); margin:0 auto; padding:0 24px; }
 .section{ padding:84px 0; }
-.section-sm{ padding:56px 0; }
+.section-sm{ padding:56px 0 36px; }
 .section-tight{ padding:40px 0; }
 /* Every in-page anchor (footer #request, PDP #brand, etc.) lands
    underneath the sticky .site-header unless we offset it. */
@@ -349,7 +349,7 @@ h2.h{ font-size:clamp(1.7rem,3.2vw,2.4rem); }
 .product-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:18px; }
 .product-grid.cols-3{ grid-template-columns:repeat(3,1fr); }
 .product-grid.cols-5{ grid-template-columns:repeat(5,1fr); }
-.load-more-wrap{ display:flex; flex-direction:column; align-items:center; gap:10px; margin:28px 0 8px; }
+.load-more-wrap{ display:flex; flex-direction:column; align-items:center; gap:10px; margin:28px 0 0; }
 .load-more-lbl{ font-size:13px; }
 .product{
   border:1px solid var(--line-soft); border-radius:var(--radius); background:var(--paper-2);
