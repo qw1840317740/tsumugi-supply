@@ -52,7 +52,7 @@
   <section class="section-sm">
     <div class="container">
       <div class="shop">
-        <details class="filters" id="filtersPanel">
+        <details class="filters" id="filtersPanel" open>
           <summary class="filters-toggle">
             <span class="filters-toggle-ic" aria-hidden="true">
               <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M6 12h12M10 18h4"/></svg>
@@ -108,6 +108,11 @@
   <script defer src="assets/js/auth.js"></script>
   <script>
     document.getElementById('searchIc').innerHTML = ICON.search;
+    // Mobile: start with the filters panel collapsed. Desktop keeps it open
+    // (the <details open> attribute in markup is the default for >=861px).
+    if (window.matchMedia('(max-width: 860px)').matches) {
+      document.getElementById('filtersPanel')?.removeAttribute('open');
+    }
   </script>
 </body>
 </html>
