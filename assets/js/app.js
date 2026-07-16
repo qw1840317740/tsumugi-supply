@@ -680,10 +680,15 @@ function initShop(){
     if(state.brand) chips.push({k:'brand', label:state.brand});
     if(state.q)     chips.push({k:'q',     label:`“${state.q}”`});
     if(state.inStock) chips.push({k:'inStock', label:t('shop.inStock')});
-    if(!chips.length){ wrap.style.display='none'; wrap.innerHTML=''; return; }
+    if(!chips.length){ wrap.style.display='none'; wrap.innerHTML=''; updateFiltersCount(0); return; }
     wrap.style.display='';
+    updateFiltersCount(chips.length);
     const x = ICON.x;
     wrap.innerHTML = `<span class="lbl">${t('shop.activeL')}</span>` + chips.map(c=>`<span class="chip">${c.label}<span class="x" data-clear="${c.k}">${x}</span></span>`).join('') + `<button class="clear" data-clear="all">${t('shop.clearAll')}</button>`;
+  }
+  function updateFiltersCount(n){
+    const badge = $('#filtersCount'); if(!badge) return;
+    badge.textContent = n ? `· ${n}` : '';
   }
   $('#activeFilters')?.addEventListener('click', e=>{
     const k = e.target.closest('[data-clear]')?.dataset?.clear; if(!k) return;
