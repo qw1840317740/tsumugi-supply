@@ -1,0 +1,248 @@
+{
+  "version": 1,
+  "shipCountries": ["JP","SG","HK","TW","MY","TH","VN","PH","ID","AU","NZ","US","CA","MX","BR","GB","DE","FR","IT","ES","NL","SE","AE","SA","ZA","EG"],
+  "countryNames": {
+    "en": {"JP":"Japan","SG":"Singapore","HK":"Hong Kong","TW":"Taiwan","MY":"Malaysia","TH":"Thailand","VN":"Vietnam","PH":"Philippines","ID":"Indonesia","AU":"Australia","NZ":"New Zealand","US":"the United States","CA":"Canada","MX":"Mexico","BR":"Brazil","GB":"the United Kingdom","DE":"Germany","FR":"France","IT":"Italy","ES":"Spain","NL":"the Netherlands","SE":"Sweden","AE":"the UAE","SA":"Saudi Arabia","ZA":"South Africa","EG":"Egypt"},
+    "zh": {"JP":"日本","SG":"新加坡","HK":"香港","TW":"台湾","MY":"马来西亚","TH":"泰国","VN":"越南","PH":"菲律宾","ID":"印度尼西亚","AU":"澳大利亚","NZ":"新西兰","US":"美国","CA":"加拿大","MX":"墨西哥","BR":"巴西","GB":"英国","DE":"德国","FR":"法国","IT":"意大利","ES":"西班牙","NL":"荷兰","SE":"瑞典","AE":"阿联酋","SA":"沙特阿拉伯","ZA":"南非","EG":"埃及"},
+    "ja": {"JP":"日本","SG":"シンガポール","HK":"香港","TW":"台湾","MY":"マレーシア","TH":"タイ","VN":"ベトナム","PH":"フィリピン","ID":"インドネシア","AU":"オーストラリア","NZ":"ニュージーランド","US":"アメリカ","CA":"カナダ","MX":"メキシコ","BR":"ブラジル","GB":"イギリス","DE":"ドイツ","FR":"フランス","IT":"イタリア","ES":"スペイン","NL":"オランダ","SE":"スウェーデン","AE":"UAE","SA":"サウジアラビア","ZA":"南アフリカ","EG":"エジプト"}
+  },
+  "entries": [
+    {
+      "id": "shipping",
+      "keywords": {
+        "en": ["shipping","ship","delivery","freight","ems","air","sea","consolidated","dispatch","courier","logistics"],
+        "zh": ["运费","运输","配送","快递","空运","海运","发货","物流","寄到","寄"],
+        "ja": ["送料","配送","発送","出荷","届ける","空輸","船便","EMS","運ぶ","届ける"]
+      },
+      "phrases": {
+        "en": ["shipping to","how long shipping","shipping cost","lead time","do you ship","how much shipping","delivery time"],
+        "zh": ["能寄到","运费多少","多久到","寄到","发货时间","几天到","寄送","快递几天","送货"],
+        "ja": ["届きますか","送料はいくら","届くまでの日数","発送まで","送れますか","何日届く","届くまで","送って"]
+      },
+      "answerKey": "cb.a.shipping",
+      "followUps": ["leadtime","countries","samples"],
+      "asksCountry": true,
+      "links": [
+        {"labelKey": "cb.lnk.howto", "href": "how-to-order.html#shipping"}
+      ]
+    },
+    {
+      "id": "countries",
+      "keywords": {
+        "en": ["countries","country","nations","regions","where","markets"],
+        "zh": ["国家","地区","哪些国家","哪里","市场","国"],
+        "ja": ["国","地域","どの国","国々","対応国","エリア"]
+      },
+      "phrases": {
+        "en": ["which countries","do you ship to","countries do you","list of countries","where do you","delivery to"],
+        "zh": ["哪些国家","能发到哪些","发货到哪些","寄到哪些","能发到"],
+        "ja": ["どの国に","発送できる国","対応する国","送れる国"]
+      },
+      "answerKey": "cb.a.countries",
+      "followUps": ["shipping","moq","contact"]
+    },
+    {
+      "id": "moq",
+      "keywords": {
+        "en": ["moq","minimum","order","quantity","carton"],
+        "zh": ["起订","起订量","最低","最小数量","起订金额"],
+        "ja": ["最小","注文数量","ロット","最低","必要数量","個数"]
+      },
+      "phrases": {
+        "en": ["minimum order","moq for","how many","how much do i need to order","smallest order","order quantity"],
+        "zh": ["最少订多少","起订量是多少","最小订单","要订多少","起订量"],
+        "ja": ["最小注文","いくつから","最低いくら","何個から","最小ロット"]
+      },
+      "answerKey": "cb.a.moq",
+      "followUps": ["quote","howto","samples"]
+    },
+    {
+      "id": "quote",
+      "keywords": {
+        "en": ["quote","price","pricing","cost","how much"],
+        "zh": ["报价","价格","价钱","费用","多少钱"],
+        "ja": ["見積","価格","料金","金額","値段"]
+      },
+      "phrases": {
+        "en": ["get a quote","wholesale price","how much does","what's the price","request a quote","price list","bulk price"],
+        "zh": ["怎么报价","批发价","询价","价格表","多少钱一个","要报价"],
+        "ja": ["見積依頼","卸価格","いくらですか","価格表","見積もりたい"]
+      },
+      "answerKey": "cb.a.quote",
+      "followUps": ["howto","moq","contact"]
+    },
+    {
+      "id": "howto",
+      "keywords": {
+        "en": ["how","order","steps","process","flow","procedure"],
+        "zh": ["怎么","步骤","流程","如何","方法","下单","订购"],
+        "ja": ["どうやって","手順","流れ","方法","注文","やり方"]
+      },
+      "phrases": {
+        "en": ["how to order","how do i","ordering process","place an order","start ordering","wholesale process"],
+        "zh": ["怎么下单","如何订购","下单流程","怎么进货","怎么买","怎么开始"],
+        "ja": ["注文方法","どうやって注文","購入方法","どう注文","手順を教えて","始め方"]
+      },
+      "answerKey": "cb.a.howto",
+      "followUps": ["quote","payment","contact"]
+    },
+    {
+      "id": "payment",
+      "keywords": {
+        "en": ["payment","pay","transfer","wise","paypal","card","t/t","wire","bank","deposit","balance"],
+        "zh": ["付款","支付","转账","汇款","信用卡","银行卡","订金","尾款","预付"],
+        "ja": ["支払い","決済","振込","送金","カード","前払い","後払い","T/T","手付金"]
+      },
+      "phrases": {
+        "en": ["payment method","how to pay","payment terms","wire transfer","tt payment","deposit required"],
+        "zh": ["怎么付款","支付方式","付款条件","汇款方式","要付订金吗","尾款怎么付"],
+        "ja": ["支払い方法","どうやって払う","支払い条件","振込先","前払い必要","後払い可能"]
+      },
+      "answerKey": "cb.a.payment",
+      "followUps": ["howto","quote","contact"]
+    },
+    {
+      "id": "leadtime",
+      "keywords": {
+        "en": ["leadtime","ready","stock","dispatch","ship","days","weeks"],
+        "zh": ["多久","时间","几天","备货","现货","发货","周","出货"],
+        "ja": ["納期","日数","週","リードタイム","いつ届く","出荷まで","準備"]
+      },
+      "phrases": {
+        "en": ["lead time","how long does","how fast","how quickly","ready to ship","delivery time","in stock","when can you ship"],
+        "zh": ["要多久","几天能发","多久能到","什么时候发货","有现货吗","出货时间","几天发货"],
+        "ja": ["納期は","いつ届く","いつ出荷","どれくらい","即日出荷","在庫あり","発送まで何日"]
+      },
+      "answerKey": "cb.a.leadtime",
+      "followUps": ["shipping","moq","howto"]
+    },
+    {
+      "id": "samples",
+      "keywords": {
+        "en": ["sample","samples","trial","demo","test"],
+        "zh": ["样品","样","试用","试","打样"],
+        "ja": ["サンプル","見本","試供","試作品","試す"]
+      },
+      "phrases": {
+        "en": ["can i get a sample","send sample","sample order","free sample","sample policy","trial order"],
+        "zh": ["可以寄样品吗","要样品","样品费","送样","试用品","样品政策"],
+        "ja": ["サンプルもらえますか","サンプル送って","サンプル購入","試供品","サンプルは","無料サンプル"]
+      },
+      "answerKey": "cb.a.samples",
+      "followUps": ["moq","quote","contact"]
+    },
+    {
+      "id": "returns",
+      "keywords": {
+        "en": ["return","refund","defect","damaged","broken","warranty","exchange"],
+        "zh": ["退货","退款","不良","损坏","换货","保修","质量"],
+        "ja": ["返品","返金","不良","破損","交換","保証","不具合"]
+      },
+      "phrases": {
+        "en": ["return policy","refund policy","what if defective","damaged goods","exchange policy","warranty period"],
+        "zh": ["退货政策","可以退货吗","不良品怎么办","换货政策","保修多久","破损了"],
+        "ja": ["返品ポリシー","不良品対応","壊れたら","交換できますか","保証期間","返品できますか"]
+      },
+      "answerKey": "cb.a.returns",
+      "followUps": ["contact","auth","quote"]
+    },
+    {
+      "id": "auth",
+      "keywords": {
+        "en": ["authentic","genuine","real","original","counterfeit","fake","authorized"],
+        "zh": ["正品","真品","原装","真假","假冒","授权","水货","假货"],
+        "ja": ["正規","本物","偽物","真正","並行","模倣品","直営","正規品"]
+      },
+      "phrases": {
+        "en": ["is it authentic","genuine product","real product","original japanese","authorized dealer","counterfeit risk"],
+        "zh": ["是正品吗","是真的吗","原装进口","正品保证","正规渠道","官方授权"],
+        "ja": ["本物ですか","正規品ですか","並行輸入ですか","偽物じゃない","正規ルート","正規品保証"]
+      },
+      "answerKey": "cb.a.auth",
+      "followUps": ["countries","quote","contact"]
+    },
+    {
+      "id": "catalog",
+      "keywords": {
+        "en": ["catalog","products","skus","range","selection","brands","categories"],
+        "zh": ["商品","目录","品类","品牌","类目","款式","品种"],
+        "ja": ["カタログ","商品","ブランド","カテゴリ","種類","品ぞろえ"]
+      },
+      "phrases": {
+        "en": ["product catalog","browse products","what do you have","show me products","your selection","all products","how many products"],
+        "zh": ["有什么商品","商品目录","品类有哪些","品牌有哪些","有多少商品","所有商品"],
+        "ja": ["商品一覧","どんな商品","取り扱い商品","ブランド一覧","品ぞろえ","商品数"]
+      },
+      "answerKey": "cb.a.catalog",
+      "followUps": ["search","quote","contact"]
+    },
+    {
+      "id": "distributor",
+      "keywords": {
+        "en": ["distributor","exclusive","agency","territory","represent","partner"],
+        "zh": ["代理","独家","经销","区域","合作","加盟","区域代理"],
+        "ja": ["代理","独占","販売店","代理店","テリトリー","パートナー"]
+      },
+      "phrases": {
+        "en": ["become a distributor","exclusive distributor","distribution rights","territory rights","agency agreement"],
+        "zh": ["做代理","独家代理","区域经销","代理合作","经销权"],
+        "ja": ["代理店募集","独占契約","販売代理店","代理店契約","パートナーシップ"]
+      },
+      "answerKey": "cb.a.distributor",
+      "followUps": ["contact","moq","howto"]
+    },
+    {
+      "id": "consolidate",
+      "keywords": {
+        "en": ["consolidate","combine","mixed","multiple","brands","one shipment"],
+        "zh": ["拼箱","混装","合箱","混载","拼柜","一起发","混合"],
+        "ja": ["混載","まとめて","複数","混合","同梱","一緒に","1便に"]
+      },
+      "phrases": {
+        "en": ["consolidate shipment","mixed brands","combine multiple","one shipment","ship together","mixed order"],
+        "zh": ["拼箱发货","可以混装吗","多品牌拼箱","一起发货","合箱运输","混载"],
+        "ja": ["混載できますか","同梱できますか","まとめて送って","複数ブランドまとめ","1便にまとめて","混載便"]
+      },
+      "answerKey": "cb.a.consolidate",
+      "followUps": ["shipping","moq","quote"]
+    },
+    {
+      "id": "contact",
+      "keywords": {
+        "en": ["contact","phone","email","call","reach","speak","talk","address"],
+        "zh": ["联系","电话","邮箱","联系","联络","地址","微信","微信"],
+        "ja": ["連絡","電話","メール","問い合わせ","連絡先","住所","話し"]
+      },
+      "phrases": {
+        "en": ["contact you","phone number","email address","how to contact","reach you","talk to someone","customer service"],
+        "zh": ["怎么联系","联系电话","邮箱地址","联系方式","客服","人工","找客服"],
+        "ja": ["連絡方法","電話番号","メールアドレス","問い合わせ先","話したい","直通電話"]
+      },
+      "answerKey": "cb.a.contact",
+      "followUps": ["howto","quote","shipping"]
+    },
+    {
+      "id": "search",
+      "keywords": {
+        "en": ["search","find","looking","need","want","show me","do you have"],
+        "zh": ["找","搜","需要","有吗","查","看看"],
+        "ja": ["探す","検索","欲しい","ありますか","見たい","探して"]
+      },
+      "phrases": {
+        "en": ["i'm looking for","do you have","show me","find me","search for","i need","i want","where can i find"],
+        "zh": ["我在找","有没有","有卖吗","想找","帮我找","找一下","能找"],
+        "ja": ["探しています","ありますか","見せてください","探して","探したい","見つかる"]
+      },
+      "answerKey": "cb.a.search",
+      "followUps": ["catalog","quote","contact"],
+      "asksProductQuery": true
+    },
+    {
+      "id": "fallback",
+      "keywords": {"en":[],"zh":[],"ja":[]},
+      "phrases": {"en":[],"zh":[],"ja":[]},
+      "answerKey": "cb.a.fallback",
+      "followUps": ["shipping","moq","quote","contact"]
+    }
+  ]
+}
