@@ -181,6 +181,7 @@ const BRAND_IMAGES = {
   'Pampers':'pampers.jpg','Whisper':'whisper.jpg','Oral-B':'oral_b.jpg',
   // I-ne (YOLU + BOTANIST, 2026-07-17)
   'YOLU':'yolu.jpg','BOTANIST':'botanist.jpg',
+  'DHC':'dhc.jpg',
 };
 // Trilingual brand name in current UI language. Falls back to canonical name if data is missing.
 function brandName(b){
