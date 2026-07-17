@@ -452,6 +452,8 @@ const BRANDS = [
   {"name":"Pampers","kana":"パンパース","letter":"P","hue":"#4A7C59","blurb":"P&G · baby","items":74,"kind":"babykids","name_ja":"パンパース","name_zh":"Pampers 帮宝适"},
   {"name":"Whisper","kana":"ウィスパー","letter":"W","hue":"#BE5A38","blurb":"P&G · femcare","items":72,"kind":"beauty","name_ja":"ウィスパー","name_zh":"Whisper 护舒宝"},
   {"name":"Oral-B","kana":"オーラルB","letter":"O","hue":"#3A4A66","blurb":"P&G · oral","items":3,"kind":"health","name_ja":"オーラルB","name_zh":"Oral-B 欧乐B"},
+  {"name":"YOLU","kana":"ヨル","letter":"Y","hue":"#2F3E5C","blurb":"I-ne · night haircare","items":1,"kind":"beauty","name_ja":"ヨル","name_zh":"YOLU 夜护"},
+  {"name":"BOTANIST","kana":"ボタニスト","letter":"B","hue":"#7A9A6E","blurb":"I-ne · botanical haircare & body","items":14,"kind":"beauty","name_ja":"ボタニスト","name_zh":"BOTANIST 植物学家"},
 ];
 
 const PRODUCTS = [
@@ -8373,6 +8375,21 @@ const PRODUCTS = [
 {"id": "4902430899796", "jan": "4902430899796", "name": "ｵｰﾗﾙB ﾌﾟﾚﾐｱﾑﾃﾞﾝﾀﾙﾌﾛｽ 40m", "brand": "Oral-B", "category": "health", "sub": "hygiene", "price": 0, "moq": 48, "unit": "", "tag": "new", "glyph": "歯", "hue": "#3A4A66"},
 {"id": "4987176262295", "jan": "4987176262295", "name": "ｵｰﾗﾙB ﾌﾛｽﾋﾟｯｸ ﾎﾜｲﾄﾆﾝｸﾞ 60本入", "brand": "Oral-B", "category": "health", "sub": "hygiene", "price": 0, "moq": 48, "unit": "", "tag": "new", "glyph": "歯", "hue": "#3A4A66"},
 {"id": "4987176262301", "jan": "4987176262301", "name": "ｵｰﾗﾙB ﾌﾛｽﾋﾟｯｸ ﾃﾞｨｰﾌﾟｸﾘｰﾝ 60本入", "brand": "Oral-B", "category": "health", "sub": "hygiene", "price": 0, "moq": 48, "unit": "", "tag": "new", "glyph": "歯", "hue": "#3A4A66"},
+{"id": "4582521687732", "jan": "4582521687732", "name": "ヨル カームナイトリペアシャンプー", "brand": "YOLU", "category": "beauty", "sub": "haircare", "price": 0, "moq": 12, "unit": "", "tag": "new", "glyph": "夜", "hue": "#2F3E5C"},
+{"id": "4582521686056", "jan": "4582521686056", "name": "ボタニスト（BOTANIST） モイスト シャンプー 460mL [12]", "brand": "BOTANIST", "category": "beauty", "sub": "haircare", "price": 0, "moq": 12, "unit": "", "tag": "new", "glyph": "髪", "hue": "#7A9A6E"},
+{"id": "4582521686063", "jan": "4582521686063", "name": "ボタニカルトリートメント モイスト / 460g [12]", "brand": "BOTANIST", "category": "beauty", "sub": "haircare", "price": 0, "moq": 12, "unit": "", "tag": "new", "glyph": "髪", "hue": "#7A9A6E"},
+{"id": "4582521686070", "jan": "4582521686070", "name": "ボタニカルシャンプー スムース / 460mL [12]", "brand": "BOTANIST", "category": "beauty", "sub": "haircare", "price": 0, "moq": 12, "unit": "", "tag": "new", "glyph": "髪", "hue": "#7A9A6E"},
+{"id": "4582521686087", "jan": "4582521686087", "name": "Ｉ－ｎｅ ボタニスト ボタニカルトリートメント スムース ４６０ｇ", "brand": "BOTANIST", "category": "beauty", "sub": "haircare", "price": 0, "moq": 12, "unit": "", "tag": "new", "glyph": "髪", "hue": "#7A9A6E"},
+{"id": "4582521686094", "jan": "4582521686094", "name": "ボタニカルシャンプー ダメージケア ４６０ｍＬ", "brand": "BOTANIST", "category": "beauty", "sub": "haircare", "price": 0, "moq": 12, "unit": "", "tag": "new", "glyph": "髪", "hue": "#7A9A6E"},
+{"id": "4582521686100", "jan": "4582521686100", "name": "ボタニカルトリートメント ダメージケア / 460g", "brand": "BOTANIST", "category": "beauty", "sub": "haircare", "price": 0, "moq": 12, "unit": "", "tag": "new", "glyph": "髪", "hue": "#7A9A6E"},
+{"id": "4582521686117", "jan": "4582521686117", "name": "ボタニカルシャンプー スカルプクレンズ / 4 [12]", "brand": "BOTANIST", "category": "beauty", "sub": "haircare", "price": 0, "moq": 12, "unit": "", "tag": "new", "glyph": "髪", "hue": "#7A9A6E"},
+{"id": "4582521686124", "jan": "4582521686124", "name": "ボタニカルトリートメント スカルプクレンズ / 460g [12]", "brand": "BOTANIST", "category": "beauty", "sub": "haircare", "price": 0, "moq": 12, "unit": "", "tag": "new", "glyph": "髪", "hue": "#7A9A6E"},
+{"id": "4582521686131", "jan": "4582521686131", "name": "ボタニスト ボタニカルシャンプー [12]", "brand": "BOTANIST", "category": "beauty", "sub": "haircare", "price": 0, "moq": 12, "unit": "", "tag": "new", "glyph": "髪", "hue": "#7A9A6E"},
+{"id": "4582521686148", "jan": "4582521686148", "name": "ボタニカルトリートメント バウンシーボリューム / 460g [12]", "brand": "BOTANIST", "category": "beauty", "sub": "haircare", "price": 0, "moq": 12, "unit": "", "tag": "new", "glyph": "髪", "hue": "#7A9A6E"},
+{"id": "4582521685257", "jan": "4582521685257", "name": "ボタニスト ボタニカル ボディソープ モイスト 490ml", "brand": "BOTANIST", "category": "beauty", "sub": "bodycare", "price": 0, "moq": 12, "unit": "", "tag": "new", "glyph": "肌", "hue": "#A5B89A"},
+{"id": "4582521685264", "jan": "4582521685264", "name": "ボタニスト ボディーソープ ディープモイスト ４９０ｍＬ", "brand": "BOTANIST", "category": "beauty", "sub": "bodycare", "price": 0, "moq": 12, "unit": "", "tag": "new", "glyph": "肌", "hue": "#A5B89A"},
+{"id": "4582521685271", "jan": "4582521685271", "name": "ボタニスト ボディーソープ クリアクレンズ ４９０ｍＬ", "brand": "BOTANIST", "category": "beauty", "sub": "bodycare", "price": 0, "moq": 12, "unit": "", "tag": "new", "glyph": "肌", "hue": "#A5B89A"},
+{"id": "4582521685240", "jan": "4582521685240", "name": "ボタニスト ボタニカルボディーソープ マイルドケア 490ml", "brand": "BOTANIST", "category": "beauty", "sub": "bodycare", "price": 0, "moq": 12, "unit": "", "tag": "new", "glyph": "肌", "hue": "#A5B89A"},
 ];
 
 window.CATEGORIES = CATEGORIES;
