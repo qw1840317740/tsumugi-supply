@@ -188,6 +188,10 @@
   <script defer src="assets/js/auth.js"></script>
   <script defer src="assets/js/chatbot.js?v=2"></script>
   <script>
+    // Wait for app.js (defer) to define ICON/handleInquiry before running.
+    // Without this wrapper, the script runs while app.js is still loading,
+    // so ICON is undefined and a ReferenceError aborts the pre-fill below.
+    window.addEventListener('DOMContentLoaded', function(){
     const set=(id,h)=>{const e=document.getElementById(id);if(e)e.innerHTML=h;};
     function injectIcons(){
       set('moqIc', ICON.info);
@@ -237,6 +241,7 @@
         wait();
       }
     })();
+    }); // end DOMContentLoaded
   </script>
 </body>
 </html>
