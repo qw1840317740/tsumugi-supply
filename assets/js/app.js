@@ -172,7 +172,15 @@ const BRAND_IMAGES = {
   'Style Guard':'style_guard.jpg','Elegard':'elegard.jpg','Rain Guard':'rain_guard.jpg',
   'Mama Lemon':'mama_lemon.jpg','Magica':'magica.jpg','LION':'lion.jpg',
   'Look':'look.jpg','Bathtub Cleanser':'bathtub_cleanser.jpg',
-  'Toilet Cleanser':'toilet_cleanser.jpg','Mamepika':'mamepika.jpg'
+  'Toilet Cleanser':'toilet_cleanser.jpg','Mamepika':'mamepika.jpg',
+  // P&G (added 2026-07-17)
+  'Ariel':'ariel.jpg','Bold':'bold.jpg','Sarasa':'sarasa.jpg',
+  'Lenor':'lenor.jpg','Joy':'joy.jpg','Febreze':'febreze.jpg',
+  'Pantene':'pantene.jpg','H&E':'h_e.jpg','Head & Shoulders':'head_shoulders.jpg',
+  'Head & Shoulders for Men':'head_shoulders_for_men.jpg','Hair Recipe':'hair_recipe.jpg',
+  'Pampers':'pampers.jpg','Whisper':'whisper.jpg','Oral-B':'oral_b.jpg',
+  // I-ne (YOLU + BOTANIST, 2026-07-17)
+  'YOLU':'yolu.jpg','BOTANIST':'botanist.jpg',
 };
 // Trilingual brand name in current UI language. Falls back to canonical name if data is missing.
 function brandName(b){
