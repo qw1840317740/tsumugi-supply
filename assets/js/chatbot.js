@@ -10,8 +10,19 @@
   const KB_URL = 'assets/data/chatbot.json';
   const LS_KEY = 'cb_kb_cache_v1';
   const LANG_KEY = 'cb_lang';
-  let lang = (localStorage.getItem(LANG_KEY) || document.documentElement.lang || 'en').slice(0,2);
-  if (!['en','zh','ja'].includes(lang)) lang = 'en';
+  const SITE_LANG_KEY = 'tsumugi_lang';
+  // Read from both keys (site's tsumugi_lang takes precedence; fall back to
+  // cb_lang for back-compat). Without this, the chatbot always sees 'en'
+  // and matches English keywords only — Japanese / Chinese queries all
+  // miss and fall back to the "I don't understand" reply.
+  function readLang(){
+    const site = (localStorage.getItem(SITE_LANG_KEY) || '').slice(0,2);
+    const cb   = (localStorage.getItem(LANG_KEY)        || '').slice(0,2);
+    const doc  = (document.documentElement.lang      || '').slice(0,2);
+    const raw  = site || cb || doc || 'en';
+    return ['en','zh','ja'].includes(raw) ? raw : 'en';
+  }
+  let lang = readLang();
 
   let KB = null;       // knowledge base
   let state = null;    // { awaitingCountry, awaitingProductQuery, lastIntent }
@@ -33,15 +44,14 @@
     return key;
   }
   function pickLang(){
-    const stored = localStorage.getItem(LANG_KEY);
-    if (stored && ['en','zh','ja'].includes(stored)) return stored;
-    if (window.LANG && window.LANG.cur) return window.LANG.cur;
-    return document.documentElement.lang || 'en';
+    return readLang();
   }
   function setLang(l){
     if (!['en','zh','ja'].includes(l)) return;
     lang = l;
-    localStorage.setItem(LANG_KEY, l);
+    // Keep BOTH keys in sync so any future read sees the latest.
+    try { localStorage.setItem(SITE_LANG_KEY, l); } catch(e){}
+    try { localStorage.setItem(LANG_KEY, l); } catch(e){}
     renderHeader();
     renderQuickChipsForLastBot();
     refreshInputPlaceholder();
