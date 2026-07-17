@@ -841,7 +841,7 @@ function initPDP(){
         <div class="pdp-info">
           <span class="cat">${subOf(p)}</span>
           <h1>${p.name}</h1>
-          <a class="brandlink" href="brands.html#${encodeURIComponent(p.brand)}">${brandLogo(brand,28)} <span>${brandName(brand)}</span> ${ICON.arrow}</a>
+          <a class="brandlink" href="products.html?brand=${encodeURIComponent(p.brand)}">${brandLogo(brand,28)} <span>${brandName(brand)}</span> ${ICON.arrow}</a>
           <p class="pdp-blurb">${brand.blurb||t('pdp.desc')}</p>
           <div class="pdp-specs">
             <div><span>${t('pdp.brand')}</span><b>${brandName(brand)}</b></div>

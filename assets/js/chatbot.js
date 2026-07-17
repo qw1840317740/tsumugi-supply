@@ -495,5 +495,26 @@
   // expose a tiny hook so other scripts can sync language
   window.cbSetLang = (l) => { if (['en','zh','ja'].includes(l)) setLang(l); };
 
+  // Hook into site-level language changes (window.setLang is exposed by i18n.js)
+  // Patch setLang so we re-render when the user picks a language elsewhere on the page.
+  function patchSiteLang(){
+    if (typeof window.setLang !== 'function' || window.setLang.__cbPatched) return;
+    const orig = window.setLang;
+    window.setLang = function(l){
+      const r = orig.apply(this, arguments);
+      try { setLang(l); } catch(e){}
+      return r;
+    };
+    window.setLang.__cbPatched = true;
+  }
+  patchSiteLang();
+  // Re-attempt after i18n.js loads
+  if (document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', patchSiteLang);
+  } else {
+    setTimeout(patchSiteLang, 0);
+    setTimeout(patchSiteLang, 100);
+  }
+
   boot();
 })();
