@@ -419,7 +419,7 @@ const BRANDS = [
   },
   /* === KOSE 2026-07-08: 7 sub-brands === */
   {"name": "Kose Ouvi Blue", "kana": "OBK", "letter": "O", "hue": "#3E5A45", "blurb": "KOSE · one by kose / リンクレス", "items": 31, "kind": "beauty", "name_ja": "OBK", "name_zh": "Kose Ouvi Blue 澄肌"},
-  {"name": "Kose Make Keep", "kana": "CCS", "letter": "C", "hue": "#BE5A38", "blurb": "KOSE · メイクキープ", "items": 8, "kind": "beauty", "name_ja": "CCS", "name_zh": "Kose Make Keep 持妆"},
+  {"name": "Kose Make Keep", "kana": "CCS", "letter": "C", "hue": "#BE5A38", "blurb": "KOSE · メイクキープ", "items": 10, "kind": "beauty", "name_ja": "CCS", "name_zh": "Kose Make Keep 持妆"},
   {"name": "Kose Sekkisei", "kana": "雪肌精", "letter": "S", "hue": "#2F5A4F", "blurb": "KOSE · 雪肌精", "items": 14, "kind": "beauty", "name_ja": "雪肌精", "name_zh": "Kose Sekkisei 雪肌精"},
   {"name": "Kose Infinity", "kana": "茵菲妮", "letter": "I", "hue": "#9C3B2E", "blurb": "KOSE · INFINITY 茵菲妮", "items": 63, "kind": "beauty", "name_ja": "茵菲妮", "name_zh": "Kose Infinity 茵菲妮"},
   {"name": "Kose Grace One", "kana": "GraceOne", "letter": "G", "hue": "#B8923D", "blurb": "KOSE · 卓萃 Grace One", "items": 32, "kind": "beauty", "name_ja": "GraceOne", "name_zh": "Kose Grace One 卓萃"},
@@ -8559,7 +8559,36 @@ const PRODUCTS = [
   {"id": "4511413310250", "jan": "4511413310250", "name": "DHCリップクリーム　シアーレット", "brand": "DHC", "category": "beauty", "sub": "skincare", "price": 706, "moq": 48, "unit": "個", "tag": "", "glyph": "肌", "hue": "#BE5A38"},
   {"id": "4511413310243", "jan": "4511413310243", "name": "DHCリップクリーム　シアーボルドー", "brand": "DHC", "category": "beauty", "sub": "skincare", "price": 706, "moq": 48, "unit": "個", "tag": "", "glyph": "肌", "hue": "#BE5A38"},
   {"id": "4511413310267", "jan": "4511413310267", "name": "DHCリップクリーム　シアーローズピンク", "brand": "DHC", "category": "beauty", "sub": "skincare", "price": 706, "moq": 48, "unit": "個", "tag": "", "glyph": "肌", "hue": "#BE5A38"},
-  {"id": "4511413310281", "jan": "4511413310281", "name": "DHC リップクリ-ムボタニカル", "brand": "DHC", "category": "beauty", "sub": "skincare", "price": 706, "moq": 48, "unit": "個", "tag": "", "glyph": "肌", "hue": "#BE5A38"},];
+  {"id": "4511413310281", "jan": "4511413310281", "name": "DHC リップクリ-ムボタニカル", "brand": "DHC", "category": "beauty", "sub": "skincare", "price": 706, "moq": 48, "unit": "個", "tag": "", "glyph": "肌", "hue": "#BE5A38"},
+
+  {
+    "id": "4971710639933",
+    "jan": "4971710639933",
+    "name": "メイク キープ 衝撃のカールキープマジック",
+    "brand": "Kose Make Keep",
+    "category": "beauty",
+    "sub": "makeup",
+    "price": 1200,
+    "moq": 30,
+    "unit": "個",
+    "tag": "",
+    "glyph": "艶",
+    "hue": "#BE5A38"
+  },
+  {
+    "id": "4971710639964",
+    "jan": "4971710639964",
+    "name": "メイク キープ パウダー EX ピンク  限定品  5g   無香料",
+    "brand": "Kose Make Keep",
+    "category": "beauty",
+    "sub": "makeup",
+    "price": 1300,
+    "moq": 30,
+    "unit": "個",
+    "tag": "",
+    "glyph": "艶",
+    "hue": "#BE5A38"
+  },];
 
 window.CATEGORIES = CATEGORIES;
 window.BRANDS = BRANDS;
