@@ -336,7 +336,7 @@ function buildHeader(){
     <div class="container">
       <nav class="nav">
         <a class="brand" href="index.html" aria-label="${SITE.full}">
-          <span class="mark">開</span>
+          <span class="mark">J</span>
           <span class="wordmark"><b>${SITE.name}</b><span>${SITE.tagline}</span></span>
         </a>
         <ul class="nav-primary">
@@ -389,7 +389,7 @@ function buildMobileMenu(){
   return `
   <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Site menu" tabindex="-1">
     <div class="mm-head">
-      <span class="brand"><span class="mark">開</span><span class="wordmark"><b>${SITE.name}</b></span></span>
+      <span class="brand"><span class="mark">J</span><span class="wordmark"><b>${SITE.name}</b></span></span>
       <button class="icon-btn" id="mmClose" aria-label="Close">${ICON.close}</button>
     </div>
     <div class="mm-list">
@@ -414,7 +414,7 @@ function buildFooter(){
     <div class="container">
       <div class="footer-top">
         <div class="footer-brand">
-          <a class="brand" href="index.html"><span class="mark">開</span><span class="wordmark"><b>${SITE.name}</b><span>${SITE.tagline}</span></span></a>
+          <a class="brand" href="index.html"><span class="mark">J</span><span class="wordmark"><b>${SITE.name}</b><span>${SITE.tagline}</span></span></a>
           <p data-i18n="foot.about"></p>
           <div class="social">
             <a href="${SITE.url}" target="_blank" rel="noopener" aria-label="Website">${ICON.spark}</a>
