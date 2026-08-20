@@ -16,8 +16,8 @@ const SITE = {
   url: 'https://japanitem.com',
   minOrder: 25000,
   currency: 'JPY',
-  phone: '+81 3-6373-4210',
-  fax: '+81 3-6373-4211',
+  phone: '+81 90-7120-3239',
+  fax: '+81 90-7120-3239',
   email: 'info@japanitem.com',
   // 特定商取引法に基づく表示 — 法人登記住所 (北区豊島1-8-5-203号)
   postalCode: '〒114-0001',
