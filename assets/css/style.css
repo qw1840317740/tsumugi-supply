@@ -307,9 +307,37 @@ h2.h{ font-size:clamp(1.7rem,3.2vw,2.4rem); }
     linear-gradient(160deg,#2F5A4F,#15302A);
   color:var(--paper-2);
 }
-.hero-card .seal .kanji{ font-family:var(--f-serif); font-size:9rem; line-height:1; opacity:.9; letter-spacing:-.04em; }
-.hero-card .seal .ring{ position:absolute; width:64%; aspect-ratio:1; border:1px solid rgba(255,255,255,.22); border-radius:50%; }
-.hero-card .seal .ring2{ width:46%; border-color:rgba(255,255,255,.14); }
+/* JAPANITEM hero card: full brand wordmark + katakana + subtle ring frame.
+   Replaces the old 開 kanji seal — cleaner B2B catalog feel. */
+.hero-card .brandmark{
+  position:absolute; inset:0; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; gap:10px; color:var(--paper-2);
+  padding:24px; text-align:center;
+}
+.hero-card .bm-kanji{
+  font-family:'Noto Serif JP','Hiragino Mincho ProN',serif;
+  font-size:1rem; letter-spacing:.32em; opacity:.7;
+  border:1px solid rgba(255,255,255,.22); padding:5px 14px; border-radius:999px;
+  text-indent:.32em;
+}
+.hero-card .bm-name{
+  font-family:'Inter','Helvetica Neue',system-ui,sans-serif;
+  font-weight:800; font-size:3.6rem; line-height:1; letter-spacing:-.025em;
+  background:linear-gradient(180deg,#FBF6E7 0%,#E9DCB0 100%);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  filter:drop-shadow(0 2px 0 rgba(0,0,0,.18));
+}
+.hero-card .bm-tag{
+  font-family:var(--f-mono); font-size:.7rem; letter-spacing:.32em; opacity:.8;
+  margin-top:6px;
+}
+/* Decorative concentric rings (kept subtle, behind text). */
+.hero-card .seal-rings{ position:absolute; inset:0; pointer-events:none; }
+.hero-card .seal-rings .ring{
+  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+  width:78%; aspect-ratio:1; border:1px dashed rgba(255,255,255,.18); border-radius:50%;
+}
+.hero-card .seal-rings .ring2{ width:60%; border-style:solid; border-color:rgba(255,255,255,.10); }
 .hero-card .badge{
   position:absolute; left:22px; bottom:22px; right:22px; display:flex; gap:14px; align-items:center;
   background:rgba(251,248,241,.94); border-radius:14px; padding:14px 16px; color:var(--ink);
