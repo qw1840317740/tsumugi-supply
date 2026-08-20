@@ -932,3 +932,10 @@ table.t td b{ color:var(--clay); font-family:var(--f-serif); font-size:1.1rem; }
 .cat-card .arr{ position:absolute; bottom:18px; right:18px; opacity:0; transform:translate(-4px,0); transition:.24s; color:var(--cat-hue); }
 .cat-card:hover .arr{ opacity:1; transform:translate(0,0); }
 
+
+/* 特定商取引法に基づく表示 */
+.legal-table th,.legal-table td{ padding:10px 14px; border-bottom:1px solid var(--line-soft); text-align:left; vertical-align:top; }
+.legal-table th{ width:30%; min-width:140px; font-weight:600; color:var(--ink); background:rgba(0,0,0,.02); }
+.legal-table td{ color:var(--ink); }
+.legal-table td a{ color:var(--clay); text-decoration:underline; text-underline-offset:3px; }
+@media(max-width:680px){ .legal-table th,.legal-table td{ padding:9px 10px; font-size:.86rem; } }

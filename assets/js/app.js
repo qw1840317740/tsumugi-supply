@@ -4,16 +4,27 @@
    ========================================================= */
 
 const SITE = {
-  name: 'Kaisei',
-  full: 'KAISEI SANGYOU LLC',
-  jaName: '開成産業合同会社',
+  name: 'JAPANITEM',
+  full: 'JAPANITEM by 和潤合同会社',
+  jaName: '和潤合同会社',
+  legalNo: 'T2011503004303',          // 法人番号 (jpn gov corporate number)
+  repName: '陳雲華',                  // 代表者
+  repKana: 'チン ウンカ',
+  brandRomanized: 'WAJŪN GŌDŌ KAISHA',
   tagline: 'JAPAN WHOLESALE & TRADING',
+  domain: 'japanitem.com',
+  url: 'https://japanitem.com',
   minOrder: 25000,
   currency: 'JPY',
-  phone: '+81 4-9257-4332',
-  fax: '+81 4-9265-8258',
-  email: 'info@kaiseisg.com',
-  address: '〒354-0021 3465 Tsuruba, Fujimi, Saitama, Japan',
+  phone: '+81 3-6373-4210',
+  fax: '+81 3-6373-4211',
+  email: 'info@japanitem.com',
+  // 特定商取引法に基づく表示 — 法人登記住所 (北区豊島1-8-5-203号)
+  postalCode: '〒114-0001',
+  address: '東京都北区豊島1-8-5-203号',
+  // 法人名 (ワジュンゴウドウガイシャ)
+  // 法人番号 2011503004303
+  // 代表者 陳雲華 (チン・ウンカ)
   year: 2024,
 };
 const STORE_KEY = 'tsumugi_cart_v1';
@@ -406,8 +417,8 @@ function buildFooter(){
           <a class="brand" href="index.html"><span class="mark">開</span><span class="wordmark"><b>${SITE.name}</b><span>${SITE.tagline}</span></span></a>
           <p data-i18n="foot.about"></p>
           <div class="social">
-            <a href="https://kaiseisg.com" target="_blank" rel="noopener" aria-label="Website">${ICON.spark}</a>
-            <a href="mailto:info@kaiseisg.com" aria-label="Email">${ICON.globe}</a>
+            <a href="${SITE.url}" target="_blank" rel="noopener" aria-label="Website">${ICON.spark}</a>
+            <a href="mailto:${SITE.email}" aria-label="Email">${ICON.globe}</a>
             <a href="mailto:${SITE.email}" aria-label="Email">${ICON.mail}</a>
           </div>
         </div>

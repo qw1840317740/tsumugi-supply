@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /api/
 
-Sitemap: https://www.kaiseisg.com/sitemap.xml
+Sitemap: https://japanitem.com/sitemap.xml
