@@ -204,8 +204,9 @@ function brandLogo(b, size=44){
 }
 function brandMonogram(b, size=44){
   const hue = b.hue || '#21463D';
-  const mark = (b.mark && b.mark.length<=3 ? b.mark : (BRAND_MARKS[b.name] || (b.kana||'?').slice(0,2)));
-  const shapeBucket = [...b.name].reduce((a,c)=>a + c.charCodeAt(0), 0) % 3;
+  const name = (b && b.name) || '';
+  const mark = (b.mark && b.mark.length<=3 ? b.mark : (BRAND_MARKS[name] || (b.kana||'?').slice(0,2)));
+  const shapeBucket = [...name].reduce((a,c)=>a + c.charCodeAt(0), 0) % 3;
   const isWide = mark.length > 1;
   const fs = isWide ? (size * (mark.length===2 ? 0.42 : 0.34)) : (size * 0.5);
   const ring = `<circle cx="${size/2}" cy="${size/2}" r="${size/2-3}" fill="none" stroke="rgba(255,255,255,.22)" stroke-width="1"/>`;
@@ -837,7 +838,7 @@ function initPDP(){
     applyStatic(); return;
   }
   document.title = `${p.name} · ${SITE.name}`;
-  const brand = BRANDS.find(b=>b.name===p.brand) || {blurb:''};
+  const brand = BRANDS.find(b => (b.name||'').toLowerCase() === (p.brand||'').toLowerCase()) || {blurb:''};
   const related = (PRODUCTS.filter(x=>x.sub===p.sub && x.id!==p.id).length>=4
     ? PRODUCTS.filter(x=>x.sub===p.sub && x.id!==p.id)
     : PRODUCTS.filter(x=>x.category===p.category && x.id!==p.id)).slice(0,4);
