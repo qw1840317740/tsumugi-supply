@@ -16,8 +16,8 @@ const CATEGORIES = [
     { id:"drink", ja:"栄養ドリンク", count:0 },
     { id:"supplement", ja:"サプリメント", count:106 },
   ] },
-  { id:"beauty", glyph:"艶", hue:"#BE5A38", count:103, subs:[
-    { id:"skincare", ja:"スキンケア", count:62 },
+  { id:"beauty", glyph:"艶", hue:"#BE5A38", count:134, subs:[
+    { id:"skincare", ja:"スキンケア", count:93 },
     { id:"makeup", ja:"メイクアップ", count:0 },
     { id:"haircare", ja:"ヘアケア", count:8 },
     { id:"bodycare", ja:"ボディケア", count:33 },
@@ -456,7 +456,40 @@ const BRANDS = [
   {"name":"BOTANIST","kana":"ボタニスト","letter":"B","hue":"#7A9A6E","blurb":"I-ne · botanical haircare & body","items":14,"kind":"beauty","name_ja":"ボタニスト","name_zh":"BOTANIST 植物学家"},
   /* === 2026-07-17 DHC: supplements + skincare === */
   {"name":"DHC","kana":"ディーエイチシー","letter":"D","hue":"#7A4A8E","blurb":"DHC · supplements & skincare","items":168,"kind":"beauty","site":"https://www.dhc.co.jp/","name_ja":"DHC","name_zh":"DHC 蝶翠诗"},
-];
+  /* === 2026-08-14 Cocochi: AG抗糖 + ANETOS === */
+  {"name":"Cocochi","kana":"ココチ","letter":"C","hue":"#C9A06B","blurb":"Cocochi · AG抗糖面膜","items":22,"kind":"beauty","site":"https://cocochi.co.jp/","name_ja":"ココチ","name_zh":"Cocochi 蔻蔻琪"},
+  {"name":"ANETOS","kana":"アネトス","letter":"A","hue":"#8E7B6B","blurb":"ANETOS · 敏感干燥肌护肤","items":9,"kind":"beauty","site":"https://www.anetos.jp/","name_ja":"アネトス","name_zh":"ANETOS 安耐投"},
+  {"id": "4580504131609", "jan": "4580504131609", "name": "ココチ エージー グローイング エッセンス クリーム マスク (60g+20)", "name_zh": "蔻蔻琪第三代AG抗糖小金罐", "brand": "cocochi", "category": "beauty", "sub": "skincare", "price": 4608, "moq": 24, "unit": "個", "tag": "", "glyph": "肌", "hue": "#C9A06B"},
+  {"id": "4580504132033", "jan": "4580504132033", "name": "ココチ エージー グローイング エッセンス クリーム マスク T (21g+7g)", "name_zh": "蔻蔻琪第三代AG抗糖小金罐 旅行装", "brand": "cocochi", "category": "beauty", "sub": "skincare", "price": 1689, "moq": 36, "unit": "個", "tag": "", "glyph": "肌", "hue": "#C9A06B"},
+  {"id": "4580504131555", "jan": "4580504131555", "name": "ココチ エージー ピュリファイング クレンジングフォーム", "name_zh": "蔻蔻琪奢养净澈洁面乳", "brand": "cocochi", "category": "beauty", "sub": "skincare", "price": 1536, "moq": 36, "unit": "個", "tag": "", "glyph": "肌", "hue": "#C9A06B"},
+  {"id": "4580504131425", "jan": "4580504131425", "name": "ココチ エージー ブライトニング クレンジング マスク", "name_zh": "蔻蔻琪专研净透分区面膜", "brand": "cocochi", "category": "beauty", "sub": "skincare", "price": 3816, "moq": 36, "unit": "個", "tag": "", "glyph": "肌", "hue": "#C9A06B"},
+  {"id": "4580504132071", "jan": "4580504132071", "name": "ココチ フェイシャル クリーム リザーブ （15g）", "name_zh": "蔻蔻琪凝时奢养霜 迷你版", "brand": "cocochi", "category": "beauty", "sub": "skincare", "price": 2035, "moq": 72, "unit": "個", "tag": "", "glyph": "肌", "hue": "#C9A06B"},
+  {"id": "4580504131081", "jan": "4580504131081", "name": "ココチ フェイシャル クリーム リザーブ （50g）", "name_zh": "蔻蔻琪凝时奢养霜", "brand": "cocochi", "category": "beauty", "sub": "skincare", "price": 8480, "moq": 24, "unit": "個", "tag": "", "glyph": "肌", "hue": "#C9A06B"},
+  {"id": "4573259170993", "jan": "4573259170993", "name": "ココチフェイシャルエッセンスマスク", "name_zh": "蔻蔻琪可思曼奢养深层修护面膜", "brand": "cocochi", "category": "beauty", "sub": "skincare", "price": 2120, "moq": 36, "unit": "個", "tag": "", "glyph": "肌", "hue": "#C9A06B"},
+  {"id": "4580504130039", "jan": "4580504130039", "name": "AGオーシャンマスク", "name_zh": "蔻蔻琪可思曼海洋深层补水面膜", "brand": "cocochi", "category": "beauty", "sub": "skincare", "price": 2120, "moq": 36, "unit": "個", "tag": "", "glyph": "肌", "hue": "#C9A06B"},
+  {"id": "4580504130107", "jan": "4580504130107", "name": "AGアコヤ真珠マスク", "name_zh": "蔻蔻琪可思曼阿古屋珍珠提亮面膜", "brand": "cocochi", "category": "beauty", "sub": "skincare", "price": 2120, "moq": 36, "unit": "個", "tag": "", "glyph": "肌", "hue": "#C9A06B"},
+  {"id": "4580504132293", "jan": "4580504132293", "name": "ココチ エージー エッセンス ローション EX N", "name_zh": "蔻蔻琪可思曼奢养修护嫩肤水 3.0新版", "brand": "cocochi", "category": "beauty", "sub": "skincare", "price": 3307, "moq": 24, "unit": "個", "tag": "", "glyph": "肌", "hue": "#C9A06B"},
+  {"id": "4580504132316", "jan": "4580504132316", "name": "ココチ エージー リュクス エマルジョン EX N", "name_zh": "蔻蔻琪可思曼奢养修护润肤乳 3.0新版", "brand": "cocochi", "category": "beauty", "sub": "skincare", "price": 3646, "moq": 24, "unit": "個", "tag": "", "glyph": "肌", "hue": "#C9A06B"},
+  {"id": "4580504131937", "jan": "4580504131937", "name": "ココチ エージ― クラリファイング クレンジングバーム", "name_zh": "蔻蔻琪奢养净透卸妆膏 新版", "brand": "cocochi", "category": "beauty", "sub": "skincare", "price": 1696, "moq": 36, "unit": "個", "tag": "", "glyph": "肌", "hue": "#C9A06B"},
+  {"id": "4580504130817", "jan": "4580504130817", "name": "ココチ アイゾーン ファーミング マスク", "name_zh": "蔻蔻琪可思曼抗糖双闪修护精华闪光眼膜", "brand": "cocochi", "category": "beauty", "sub": "skincare", "price": 1526, "moq": 36, "unit": "個", "tag": "", "glyph": "肌", "hue": "#C9A06B"},
+  {"id": "4580504130084", "jan": "4580504130084", "name": "AG フェイシャル マスク桜", "name_zh": "AG限定樱花面膜", "brand": "cocochi", "category": "beauty", "sub": "skincare", "price": 1865, "moq": 36, "unit": "個", "tag": "", "glyph": "肌", "hue": "#C9A06B"},
+  {"id": "4580504131333", "jan": "4580504131333", "name": "ココチ エージング フェイシャル トリプル インテンシブ SPA トリートメント", "name_zh": "AG金绷带灌肤SPA", "brand": "cocochi", "category": "beauty", "sub": "skincare", "price": 2374, "moq": 36, "unit": "個", "tag": "", "glyph": "肌", "hue": "#C9A06B"},
+  {"id": "4580504132378", "jan": "4580504132378", "name": "ココチ シートマスク アプデ ブースター", "name_zh": "蔻蔻琪导入面膜肌底精华霜", "brand": "cocochi", "category": "beauty", "sub": "skincare", "price": 1040, "moq": 72, "unit": "個", "tag": "", "glyph": "肌", "hue": "#C9A06B"},
+  {"id": "4580504132286", "jan": "4580504132286", "name": "ココチ エージー マイクロ オイル ローション", "name_zh": "蔻蔻琪循养晶妍弹塑精粹水", "brand": "cocochi", "category": "beauty", "sub": "skincare", "price": 1584, "moq": 24, "unit": "個", "tag": "", "glyph": "肌", "hue": "#C9A06B"},
+  {"id": "4580504132897", "jan": "4580504132897", "name": "ココチ エージー ハイドロ オイル マスク", "name_zh": "AG循养金珠油覆膜", "brand": "cocochi", "category": "beauty", "sub": "skincare", "price": 792, "moq": 36, "unit": "個", "tag": "", "glyph": "肌", "hue": "#C9A06B"},
+  {"id": "4580504132712", "jan": "4580504132712", "name": "ココチ エージー CG ユース セラム", "name_zh": "蔻蔻琪循养晶妍弹塑焕颜蜜", "brand": "cocochi", "category": "beauty", "sub": "skincare", "price": 1936, "moq": 36, "unit": "個", "tag": "", "glyph": "肌", "hue": "#C9A06B"},
+  {"id": "4580504132736", "jan": "4580504132736", "name": "ココチ トリートメント リセット セラム", "name_zh": "COCOCHI童颜炮精华", "brand": "cocochi", "category": "beauty", "sub": "skincare", "price": 3960, "moq": 24, "unit": "個", "tag": "", "glyph": "肌", "hue": "#C9A06B"},
+  {"id": "4580504132798", "jan": "4580504132798", "name": "ココチ トリートメント リセット マスク", "name_zh": "COCOCHI幹細胞面膜", "brand": "cocochi", "category": "beauty", "sub": "skincare", "price": 792, "moq": 36, "unit": "個", "tag": "", "glyph": "肌", "hue": "#C9A06B"},
+  {"id": "4580504133061", "jan": "4580504133061", "name": "ココチ SCスカルプ エッセンス", "name_zh": "COCOCHI幹細胞头皮精华", "brand": "cocochi", "category": "beauty", "sub": "skincare", "price": 5280, "moq": 36, "unit": "個", "tag": "", "glyph": "肌", "hue": "#C9A06B"},
+  {"id": "4580504131388", "jan": "4580504131388", "name": "アネトス リフレッシング フェイシャル クレンジング ウォーター", "name_zh": "ANETOS 清爽净颜卸妆水", "brand": "ANETOS", "category": "beauty", "sub": "skincare", "price": 1232, "moq": 20, "unit": "個", "tag": "", "glyph": "肌", "hue": "#8E7B6B"},
+  {"id": "4580504131371", "jan": "4580504131371", "name": "アネトス マイルド フェイシャル クレンザー", "name_zh": "ANETOS 温和洁面乳", "brand": "ANETOS", "category": "beauty", "sub": "skincare", "price": 1144, "moq": 24, "unit": "個", "tag": "", "glyph": "肌", "hue": "#8E7B6B"},
+  {"id": "4580504131814", "jan": "4580504131814", "name": "アネトス バランシングトリートメント トナー", "name_zh": "ANETOS 平衡调理化妆水", "brand": "ANETOS", "category": "beauty", "sub": "skincare", "price": 1496, "moq": 48, "unit": "個", "tag": "", "glyph": "肌", "hue": "#8E7B6B"},
+  {"id": "4580504132866", "jan": "4580504132866", "name": "アネトス AC トリートメント セラム", "name_zh": "ANETOS AC调理精华液", "brand": "ANETOS", "category": "beauty", "sub": "skincare", "price": 1584, "moq": 72, "unit": "個", "tag": "", "glyph": "肌", "hue": "#8E7B6B"},
+  {"id": "4580504131906", "jan": "4580504131906", "name": "アネトスバランシングトリートメント クリーム", "name_zh": "ANETOS 平衡调理面霜", "brand": "ANETOS", "category": "beauty", "sub": "skincare", "price": 1936, "moq": 48, "unit": "個", "tag": "", "glyph": "肌", "hue": "#8E7B6B"},
+  {"id": "4580504132934", "jan": "4580504132934", "name": "アネトス ウォータリーUVエマルジョン", "name_zh": "ANETOS 水感UV乳液", "brand": "ANETOS", "category": "beauty", "sub": "skincare", "price": 1425, "moq": 108, "unit": "個", "tag": "", "glyph": "肌", "hue": "#8E7B6B"},
+  {"id": "4580504132910", "jan": "4580504132910", "name": "アネトス クラリファイング エッセンス", "name_zh": "ANETOS 净澈精华液", "brand": "ANETOS", "category": "beauty", "sub": "skincare", "price": 1584, "moq": 24, "unit": "個", "tag": "", "glyph": "肌", "hue": "#8E7B6B"},
+  {"id": "4580504133115", "jan": "4580504133115", "name": "アネトス PHA Pバランス セラム", "name_zh": "ANETOS PHA平衡精华液", "brand": "ANETOS", "category": "beauty", "sub": "skincare", "price": 1760, "moq": 36, "unit": "個", "tag": "", "glyph": "肌", "hue": "#8E7B6B"},
+  {"id": "4580504132743", "jan": "4580504132743", "name": "アネトス クラリファイング クレー パック", "name_zh": "ANETOS 净澈泥膜", "brand": "ANETOS", "category": "beauty", "sub": "skincare", "price": 1320, "moq": 60, "unit": "個", "tag": "", "glyph": "肌", "hue": "#8E7B6B"},];
 
 const PRODUCTS = [
   {

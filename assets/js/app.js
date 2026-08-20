@@ -183,6 +183,7 @@ const BRAND_IMAGES = {
   'YOLU':'yolu.jpg','BOTANIST':'botanist.jpg',
   'DHC':'dhc.jpg',
   'Kose Make Keep':'ccs.jpg',
+  'Cocochi':'cocochi.jpg','ANETOS':'anetos.jpg',
 };
 // Trilingual brand name in current UI language. Falls back to canonical name if data is missing.
 function brandName(b){
