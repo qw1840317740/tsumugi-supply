@@ -1,0 +1,81 @@
+{
+  "flagged": [
+    {
+      "jan": "4902430036023",
+      "size": 24645,
+      "reasons": [
+        "placeholder_dim:500x500"
+      ],
+      "width": 500,
+      "height": 500,
+      "phash": "83a38babacaaae8c"
+    },
+    {
+      "jan": "4903301318194",
+      "size": 9704,
+      "reasons": [
+        "near_white:252,248,246"
+      ],
+      "width": 640,
+      "height": 640,
+      "phash": "b389cccc993399cc"
+    },
+    {
+      "jan": "4903301318958",
+      "size": 18466,
+      "reasons": [
+        "near_white:246,247,247"
+      ],
+      "width": 640,
+      "height": 640,
+      "phash": "b333326666cc8d99"
+    },
+    {
+      "jan": "4971710288261",
+      "size": 2847,
+      "reasons": [
+        "too_small:2847B"
+      ],
+      "width": 92,
+      "height": 306,
+      "phash": "efb0b8a4e8d8a9c4"
+    },
+    {
+      "jan": "4971710513615",
+      "size": 27921,
+      "reasons": [
+        "near_white:247,246,246"
+      ],
+      "width": 883,
+      "height": 1354,
+      "phash": "8f709cddc94326b4"
+    },
+    {
+      "jan": "4971710513622",
+      "size": 28775,
+      "reasons": [
+        "near_white:248,246,246"
+      ],
+      "width": 880,
+      "height": 1354,
+      "phash": "8f709cddc94326b4"
+    },
+    {
+      "jan": "4971710513639",
+      "size": 44436,
+      "reasons": [
+        "near_white:248,246,246"
+      ],
+      "width": 1500,
+      "height": 1127,
+      "phash": "8c5ba5f5f0500aaf"
+    }
+  ],
+  "missing_in_data": [
+    "4971710235432",
+    "4971710288285",
+    "4971710593563",
+    "4987176388889",
+    "4987176388872"
+  ]
+}

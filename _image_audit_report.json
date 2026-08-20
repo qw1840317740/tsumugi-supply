@@ -1,0 +1,11 @@
+{
+  "elapsed_sec": 51.112695932388306,
+  "counts": {
+    "match": 0,
+    "mismatch": 0,
+    "no_amazon": 3,
+    "local_missing": 0,
+    "compare_error": 0
+  },
+  "mismatches": []
+}
