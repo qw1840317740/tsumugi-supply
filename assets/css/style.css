@@ -299,45 +299,52 @@ h2.h{ font-size:clamp(1.7rem,3.2vw,2.4rem); }
   position:relative; border-radius:var(--radius-lg); overflow:hidden; background:var(--sumi);
   aspect-ratio:4/4.4; box-shadow:var(--shadow-lg);
 }
-.hero-card .seal{
-  position:absolute; inset:0; display:grid; place-items:center;
-  background:
-    radial-gradient(120% 90% at 80% 0%, rgba(190,155,74,.30), transparent 55%),
-    radial-gradient(120% 120% at 0% 100%, rgba(190,90,56,.30), transparent 50%),
-    linear-gradient(160deg,#2F5A4F,#15302A);
+/* JAPANITEM hero card: a stacked photo collage of 5 real catalog SKUs.
+   Replaces the old 開 kanji seal / gradient wordmark — real products > decoration. */
+.hero-card .photo-stack{
+  position:absolute; inset:0;
+  display:grid; grid-template-columns:repeat(6,1fr); grid-template-rows:repeat(6,1fr);
+  gap:6px; padding:14px;
+}
+.hero-card .photo-stack > a{
+  position:relative; overflow:hidden; border-radius:8px;
+  background:var(--sumi-700);
+  box-shadow:0 2px 6px rgba(0,0,0,.18), inset 0 0 0 1px rgba(255,255,255,.06);
+  transition:transform .35s var(--ease-soft), box-shadow .35s var(--ease-soft), z-index 0s;
+  display:block;
+}
+.hero-card .photo-stack > a img{
+  width:100%; height:100%; object-fit:cover; display:block;
+  filter:saturate(.96) contrast(.99);
+}
+.hero-card .photo-stack > a:hover{ transform:translateY(-4px) scale(1.02); z-index:2; box-shadow:0 14px 30px rgba(0,0,0,.32); }
+/* Span placements so 5 tiles fill a 6x6 grid asymmetrically (anti-Bento) */
+.hero-card .photo-stack > a:nth-child(1){ grid-column:1/4; grid-row:1/4; }   /* top-left, large */
+.hero-card .photo-stack > a:nth-child(2){ grid-column:4/7; grid-row:1/3; }   /* top-right, wide   */
+.hero-card .photo-stack > a:nth-child(3){ grid-column:4/6; grid-row:3/5; }   /* mid-right top     */
+.hero-card .photo-stack > a:nth-child(4){ grid-column:1/3; grid-row:4/7; }   /* bottom-left, tall */
+.hero-card .photo-stack > a:nth-child(5){ grid-column:3/7; grid-row:5/7; }   /* bottom-right      */
+/* Light label sliver on hover */
+.hero-card .photo-stack > a::after{
+  content:attr(data-label);
+  position:absolute; left:8px; bottom:8px; right:8px;
+  font-family:var(--f-mono); font-size:.62rem; letter-spacing:.16em;
+  color:#fff; text-transform:uppercase; opacity:0; transform:translateY(4px);
+  transition:.25s var(--ease-soft);
+  background:linear-gradient(180deg,transparent,rgba(0,0,0,.55));
+  padding:14px 4px 2px;
+}
+.hero-card .photo-stack > a:hover::after{ opacity:1; transform:translateY(0); }
+/* Tiny "view all 2,200+ SKUs" link below the collage */
+.hero-card .stack-foot{
+  position:absolute; left:18px; right:18px; bottom:14px;
+  display:flex; justify-content:space-between; align-items:center;
+  font-family:var(--f-mono); font-size:.7rem; letter-spacing:.18em; text-transform:uppercase;
   color:var(--paper-2);
 }
-/* JAPANITEM hero card: full brand wordmark + katakana + subtle ring frame.
-   Replaces the old 開 kanji seal — cleaner B2B catalog feel. */
-.hero-card .brandmark{
-  position:absolute; inset:0; display:flex; flex-direction:column;
-  align-items:center; justify-content:center; gap:10px; color:var(--paper-2);
-  padding:24px; text-align:center;
-}
-.hero-card .bm-kanji{
-  font-family:'Noto Serif JP','Hiragino Mincho ProN',serif;
-  font-size:1rem; letter-spacing:.32em; opacity:.7;
-  border:1px solid rgba(255,255,255,.22); padding:5px 14px; border-radius:999px;
-  text-indent:.32em;
-}
-.hero-card .bm-name{
-  font-family:'Inter','Helvetica Neue',system-ui,sans-serif;
-  font-weight:800; font-size:3.6rem; line-height:1; letter-spacing:-.025em;
-  background:linear-gradient(180deg,#FBF6E7 0%,#E9DCB0 100%);
-  -webkit-background-clip:text; background-clip:text; color:transparent;
-  filter:drop-shadow(0 2px 0 rgba(0,0,0,.18));
-}
-.hero-card .bm-tag{
-  font-family:var(--f-mono); font-size:.7rem; letter-spacing:.32em; opacity:.8;
-  margin-top:6px;
-}
-/* Decorative concentric rings (kept subtle, behind text). */
-.hero-card .seal-rings{ position:absolute; inset:0; pointer-events:none; }
-.hero-card .seal-rings .ring{
-  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
-  width:78%; aspect-ratio:1; border:1px dashed rgba(255,255,255,.18); border-radius:50%;
-}
-.hero-card .seal-rings .ring2{ width:60%; border-style:solid; border-color:rgba(255,255,255,.10); }
+.hero-card .stack-foot .dot{ width:6px; height:6px; border-radius:50%; background:var(--ok); display:inline-block; margin-right:6px; box-shadow:0 0 0 3px rgba(62,125,82,.18); }
+.hero-card .stack-foot a{ color:var(--paper-2); opacity:.85; transition:.2s; }
+.hero-card .stack-foot a:hover{ opacity:1; }
 .hero-card .badge{
   position:absolute; left:22px; bottom:22px; right:22px; display:flex; gap:14px; align-items:center;
   background:rgba(251,248,241,.94); border-radius:14px; padding:14px 16px; color:var(--ink);
