@@ -302,27 +302,21 @@ h2.h{ font-size:clamp(1.7rem,3.2vw,2.4rem); }
 .hero-art{ position:relative; }
 .hero-card{
   position:relative; border-radius:var(--radius-lg); overflow:hidden;
-  background:#E8DAB8;
+  background:#E5D5B0;
   box-shadow:var(--shadow);
   border:1px solid var(--line-soft);
   aspect-ratio: 5/4;
 }
-/* Editorial still-life: ONE unified SVG illustration of a Japanese
-   daily-goods arrangement on a warm wood surface. Not a product grid,
-   not a product detail — a magazine-quality scene that hints at the
-   catalog. Items partially overlap, rotate, and rest on a tray. */
-.hero-card .still-life{
+/* Single editorial photograph from Unsplash — a Japanese tea-ceremony
+   still-life that suggests our catalog without showing product packaging.
+   Cover-fit; the brand caption + stamp overlay remain on top so this
+   still reads as the JAPANITEM hero. */
+.hero-card .still-photo{
   position:absolute; inset:0;
-  background:
-    /* top-left warm sunlight wash */
-    radial-gradient(120% 80% at 18% 12%, rgba(255,233,196,.45), transparent 55%),
-    /* soft shadow on the right edge */
-    linear-gradient(105deg, transparent 70%, rgba(32,33,28,.07) 100%),
-    /* warm wood-grain base */
-    linear-gradient(180deg, #E8DAB8 0%, #DCC79C 60%, #CDB58A 100%);
-  display:grid; place-items:center;
+  width:100%; height:100%; object-fit:cover; object-position:center 35%;
+  display:block; transition:transform .6s var(--ease-soft);
 }
-.hero-card .still-life svg{ display:block; width:100%; height:100%; }
+.hero-card:hover .still-photo{ transform:scale(1.025); }
 /* Tiny label annotations — minimal, like editorial captions */
 .hero-card .caption{
   position:absolute; bottom:18px; left:24px;
