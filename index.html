@@ -10,10 +10,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Noto+Serif+JP:wght@500;700&display=swap" onload="this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Noto+Serif+JP:wght@500;700&display=swap"></noscript>
-  <link rel="preload" as="style" href="assets/css/style.css?v=56">
+  <link rel="preload" as="style" href="assets/css/style.css?v=57">
   <style>body{background:#FBF8F1;color:#20211C;margin:0;font-family:Inter,system-ui,sans-serif}#site-header{min-height:109px}</style>
-  <link rel="stylesheet" href="assets/css/style.css?v=56" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="assets/css/style.css?v=56"></noscript>
+  <link rel="stylesheet" href="assets/css/style.css?v=57" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="assets/css/style.css?v=57"></noscript>
   <link rel="stylesheet" href="assets/css/chatbot.css?v=2">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="assets/favicon.svg">
@@ -46,174 +46,48 @@
     <div class="container">
       <div>
         <span class="eyebrow" data-i18n="hero.eyebrow"></span>
-        <h1 class="tight" style="margin-top:18px" data-i18n-html="hero.h1"></h1>
-        <p class="lead" data-i18n="hero.lead"></p>
+        <h1 class="tight" style="margin-top:18px"><span data-i18n="hero.h1.1"></span> <em data-i18n="hero.h1.2"></em> <span data-i18n="hero.h1.3"></span></h1>
+        <p class="lead" data-i18n="hero.lead" style="margin-top:22px"></p>
         <div class="hero-cta">
           <a class="btn btn-primary btn-lg" href="products.html"><span data-i18n="hero.browse"></span></a>
-          <a class="btn-link" href="how-to-order.html" data-i18n="hero.howto"></a>
+          <a class="btn btn-ghost btn-lg" href="how-to-order.html" data-i18n="hero.howto"></a>
+        </div>
+        <div class="hero-meta">
+          <div class="m"><b data-i18n="hero.sku"></b><span data-i18n="hero.skuL"></span></div>
+          <div class="m"><b data-i18n="hero.brands"></b><span data-i18n="hero.brandsL"></span></div>
+          <div class="m"><b data-i18n="hero.countries"></b><span data-i18n="hero.countriesL"></span></div>
+          <div class="m"><b data-i18n="hero.day"></b><span data-i18n="hero.dayL"></span></div>
         </div>
       </div>
       <div class="hero-art">
         <div class="hero-card">
-          <img class="still-photo" src="https://images.unsplash.com/photo-1767469194958-a6efd5cc5963?fm=jpg&q=85&w=1200&auto=format&fit=crop" alt="A Japanese still life: bamboo whisk, tea bowl, and wooden spoon on a warm wood table." loading="eager" decoding="async">
-              <defs>
-                <!-- Warm wood surface with a directional light wash -->
-                <linearGradient id="wood" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0"   stop-color="#E5D5B0"/>
-                  <stop offset=".55" stop-color="#D2BC93"/>
-                  <stop offset="1"   stop-color="#B79766"/>
-                </linearGradient>
-                <linearGradient id="woodShade" x1="0" y1="0" x2="1" y2="0">
-                  <stop offset="0"   stop-color="#FFE9C4" stop-opacity=".55"/>
-                  <stop offset=".45" stop-color="#FFE9C4" stop-opacity="0"/>
-                  <stop offset="1"   stop-color="#000"     stop-opacity=".15"/>
-                </linearGradient>
-                <pattern id="grain" width="600" height="20" patternUnits="userSpaceOnUse">
-                  <path d="M0 10 Q150 4 300 10 T600 10" stroke="#A88E5B" stroke-width=".5" fill="none" opacity=".2"/>
-                  <path d="M0 16 Q200 11 400 16 T600 16" stroke="#9A8050" stroke-width=".4" fill="none" opacity=".14"/>
-                </pattern>
-                <linearGradient id="glassH" x1="0" y1="0" x2="1" y2="0">
-                  <stop offset="0"   stop-color="#FFFFFF" stop-opacity=".55"/>
-                  <stop offset=".5"  stop-color="#FFFFFF" stop-opacity="0"/>
-                  <stop offset="1"   stop-color="#000"    stop-opacity=".12"/>
-                </linearGradient>
-                <filter id="ds" x="-30%" y="-30%" width="160%" height="160%">
-                  <feGaussianBlur stdDeviation="6"/>
-                </filter>
-                <filter id="ds2" x="-30%" y="-30%" width="160%" height="160%">
-                  <feGaussianBlur stdDeviation="2.5"/>
-                </filter>
-              </defs>
-              <!-- 1. Wood surface + directional light wash -->
-              <rect width="600" height="480" fill="url(#wood)"/>
-              <rect width="600" height="480" fill="url(#grain)"/>
-              <rect width="600" height="480" fill="url(#grain)" transform="translate(0,12)"/>
-              <rect width="600" height="480" fill="url(#grain)" transform="translate(0,24)"/>
-              <rect width="600" height="480" fill="url(#woodShade)"/>
-
-              <!-- 2. Wood tray — soft oval underneath the items -->
-              <g>
-                <ellipse cx="310" cy="320" rx="270" ry="48" fill="#000" opacity=".18" filter="url(#ds)"/>
-                <ellipse cx="310" cy="315" rx="262" ry="42" fill="#8A6A3D"/>
-                <ellipse cx="310" cy="312" rx="258" ry="40" fill="#9C7B4A"/>
-                <ellipse cx="310" cy="310" rx="252" ry="37" fill="#7C5E32" opacity=".85"/>
-                <ellipse cx="310" cy="307" rx="248" ry="35" fill="#896840"/>
-                <path d="M70 307 Q310 300 550 307" stroke="#5C4321" stroke-width=".4" fill="none" opacity=".4"/>
-                <path d="M85 312 Q310 306 535 312" stroke="#5C4321" stroke-width=".4" fill="none" opacity=".3"/>
-                <path d="M62 308 Q310 290 558 308" stroke="#C49E70" stroke-width=".8" fill="none" opacity=".5"/>
-              </g>
-              <!-- 3. Folded towel — lower-left, slight rotation -->
-              <g transform="translate(70 295) rotate(-7)">
-                <ellipse cx="100" cy="76" rx="115" ry="6" fill="#000" opacity=".15" filter="url(#ds2)"/>
-                <rect x="0" y="0" width="220" height="76" rx="4" fill="#F7F1E2"/>
-                <rect x="0" y="0" width="220" height="10" fill="#EDE4CC"/>
-                <rect x="0" y="66" width="220" height="10" fill="#EDE4CC"/>
-                <rect x="0" y="0" width="10" height="76" fill="#EDE4CC"/>
-                <rect x="210" y="0" width="10" height="76" fill="#EDE4CC"/>
-                <g stroke="#E2D6B8" stroke-width=".5" opacity=".5">
-                  <line x1="0" y1="22" x2="220" y2="22"/>
-                  <line x1="0" y1="32" x2="220" y2="32"/>
-                  <line x1="0" y1="42" x2="220" y2="42"/>
-                  <line x1="0" y1="52" x2="220" y2="52"/>
-                </g>
-                <line x1="6" y1="38" x2="214" y2="38" stroke="#C9B98E" stroke-width=".6" opacity=".7"/>
-              </g>
-
-              <!-- 4. Bath-salt pouch (refill pack) — center, behind bottle -->
-              <g transform="translate(280 245) rotate(4)">
-                <ellipse cx="70" cy="80" rx="78" ry="6" fill="#000" opacity=".18" filter="url(#ds2)"/>
-                <path d="M0 12 Q0 0 12 0 L128 0 Q140 0 140 12 L140 78 Q140 86 132 86 L8 86 Q0 86 0 78 Z" fill="#EFE3BE"/>
-                <rect x="0" y="0" width="140" height="6" fill="#C9B98E"/>
-                <g stroke="#A88E5B" stroke-width=".5">
-                  <line x1="6" y1="0" x2="6" y2="6"/><line x1="14" y1="0" x2="14" y2="6"/>
-                  <line x1="22" y1="0" x2="22" y2="6"/><line x1="30" y1="0" x2="30" y2="6"/>
-                  <line x1="38" y1="0" x2="38" y2="6"/><line x1="46" y1="0" x2="46" y2="6"/>
-                  <line x1="54" y1="0" x2="54" y2="6"/><line x1="62" y1="0" x2="62" y2="6"/>
-                  <line x1="70" y1="0" x2="70" y2="6"/><line x1="78" y1="0" x2="78" y2="6"/>
-                  <line x1="86" y1="0" x2="86" y2="6"/><line x1="94" y1="0" x2="94" y2="6"/>
-                  <line x1="102" y1="0" x2="102" y2="6"/><line x1="110" y1="0" x2="110" y2="6"/>
-                  <line x1="118" y1="0" x2="118" y2="6"/><line x1="126" y1="0" x2="126" y2="6"/>
-                  <line x1="134" y1="0" x2="134" y2="6"/>
-                </g>
-                <rect x="22" y="26" width="96" height="44" fill="#E2D6B8" opacity=".55"/>
-                <text x="70" y="56" font-family="Noto Serif JP, serif" font-size="18" fill="#7A5A30" text-anchor="middle" font-weight="600" opacity=".85">塩</text>
-                <text x="70" y="78" font-family="Inter, sans-serif" font-size="5" fill="#7A5A30" text-anchor="middle" letter-spacing="1" opacity=".7">REFILL · 600g</text>
-                <line x1="0" y1="84" x2="140" y2="84" stroke="#C9B98E" stroke-width=".5" opacity=".5"/>
-              </g>
-
-              <!-- 5. Skincare bottle — front-center, slightly leaning -->
-              <g transform="translate(225 145) rotate(-2)">
-                <ellipse cx="68" cy="186" rx="76" ry="9" fill="#000" opacity=".22" filter="url(#ds)"/>
-                <path d="M22 36 L114 36 L114 178 Q114 188 104 188 L32 188 Q22 188 22 178 Z" fill="#1F4A3E"/>
-                <path d="M22 36 L114 36 L114 178 Q114 188 104 188 L32 188 Q22 188 22 178 Z" fill="url(#glassH)" opacity=".8"/>
-                <rect x="22" y="50" width="92" height="3" fill="#BE9B4A" opacity=".75"/>
-                <rect x="22" y="56" width="92" height="1" fill="#BE9B4A" opacity=".45"/>
-                <path d="M30 56 L32 174" stroke="#FFFFFF" stroke-width="2" opacity=".22"/>
-                <path d="M22 36 Q34 18 50 16 L86 16 Q102 18 114 36 Z" fill="#1F4A3E"/>
-                <rect x="50" y="-2" width="36" height="20" rx="2" fill="#0E2E26"/>
-                <rect x="48" y="-8" width="40" height="8" rx="2" fill="#3a2c1a"/>
-                <rect x="34" y="98" width="68" height="58" rx="2" fill="#F4ECDD" opacity=".92"/>
-                <line x1="48" y1="112" x2="88" y2="112" stroke="#1F4A3E" stroke-width=".6"/>
-                <text x="68" y="128" font-family="Noto Serif JP, serif" font-size="13" fill="#1F4A3E" text-anchor="middle" font-weight="600">護</text>
-                <line x1="48" y1="138" x2="88" y2="138" stroke="#1F4A3E" stroke-width=".4" opacity=".6"/>
-                <text x="68" y="148" font-family="Inter, sans-serif" font-size="5" fill="#1F4A3E" text-anchor="middle" letter-spacing="1.2" opacity=".8">DAILY ESSENTIALS</text>
-                <text x="68" y="156" font-family="Inter, sans-serif" font-size="4" fill="#1F4A3E" text-anchor="middle" letter-spacing=".6" opacity=".6">200 ml</text>
-              </g>
-
-              <!-- 6. Notepad — top-right, slight overlap with bottle shoulder -->
-              <g transform="translate(370 145) rotate(-9)">
-                <ellipse cx="80" cy="118" rx="92" ry="6" fill="#000" opacity=".18" filter="url(#ds2)"/>
-                <rect x="0" y="0" width="170" height="116" rx="3" fill="#F4ECDD"/>
-                <rect x="2" y="3" width="166" height="113" fill="none" stroke="#D8C9A8" stroke-width=".6"/>
-                <line x1="0" y1="116" x2="170" y2="116" stroke="#C9B98E" stroke-width=".5"/>
-                <line x1="85" y1="0" x2="85" y2="116" stroke="#E2D6B8" stroke-width=".6"/>
-                <g stroke="#E2D6B8" stroke-width=".5" opacity=".65">
-                  <line x1="14" y1="24" x2="156" y2="24"/>
-                  <line x1="14" y1="36" x2="156" y2="36"/>
-                  <line x1="14" y1="48" x2="156" y2="48"/>
-                  <line x1="14" y1="60" x2="156" y2="60"/>
-                  <line x1="14" y1="72" x2="156" y2="72"/>
-                  <line x1="14" y1="84" x2="156" y2="84"/>
-                  <line x1="14" y1="96" x2="156" y2="96"/>
-                </g>
-                <rect x="155" y="-4" width="14" height="124" fill="#21463D"/>
-                <rect x="155" y="-4" width="14" height="3" fill="#1F4A3E"/>
-                <text x="38" y="22" font-family="Noto Serif JP, serif" font-size="11" fill="#21463D" font-weight="600" letter-spacing="3">記</text>
-              </g>
-
-              <!-- 7. Pencil across the notepad -->
-              <g transform="translate(390 130) rotate(22)">
-                <rect x="0" y="0" width="120" height="5" rx="1" fill="#3a2c1a"/>
-                <rect x="0" y="0" width="120" height="1.5" fill="#5C4321"/>
-                <rect x="115" y="-2" width="8" height="9" rx="1" fill="#BE9B4A"/>
-                <rect x="118" y="-3" width="3" height="11" fill="#3a2c1a"/>
-                <rect x="-6" y="0" width="6" height="5" fill="#B7402C"/>
-                <rect x="-9" y="-1" width="3" height="7" fill="#BE9B4A"/>
-              </g>
-
-              <!-- Far-right edge depth shadow -->
-              <ellipse cx="540" cy="430" rx="80" ry="14" fill="#000" opacity=".12" filter="url(#ds)"/>
-            <div class="caption" data-i18n="hero.caption">本日の入荷</div>
-          <div class="stamp" data-i18n="hero.stamp">Tokyo · since 2017</div>
+          <div class="brandmark">
+            <span class="bm-eyebrow">JAPAN WHOLESALE · TRADING</span>
+            <div class="bm-accent" aria-hidden="true"></div>
+            <div>
+              <h2 class="bm-name">JAPAN<span class="accent">ITEM</span></h2>
+              <div class="bm-kana">ジャパニタム</div>
+            </div>
+            <div class="bm-footer">
+              <span class="pill">B2B</span>
+              <span>Tokyo</span>
+            </div>
+          </div>
         </div>
+        <div class="floating f1"><span class="pin" style="background:var(--clay)"></span> <span data-i18n="hero.f1"></span></div>
+        <div class="floating f2"><span class="pin" style="background:var(--ok)"></span> <span data-i18n="hero.f2"></span></div>
       </div>
     </div>
   </section>
 
-  <!-- TRUST BAR — sits BELOW hero: 4 metrics + 2 trust points -->
+  <!-- TRUST -->
   <section class="trust">
     <div class="container">
-      <div class="metrics">
-        <div class="metric"><b data-i18n="hero.sku"></b><span data-i18n="hero.skuL"></span></div>
-        <div class="metric"><b data-i18n="hero.brands"></b><span data-i18n="hero.brandsL"></span></div>
-        <div class="metric"><b data-i18n="hero.countries"></b><span data-i18n="hero.countriesL"></span></div>
-        <div class="metric"><b data-i18n="hero.day"></b><span data-i18n="hero.dayL"></span></div>
-      </div>
-      <div class="divider" aria-hidden="true"></div>
-      <div class="points">
-        <div class="p"><span id="icShield"></span><span><b data-i18n="t.auth"></b> — <span data-i18n="t.authL"></span></span></div>
-        <div class="p"><span id="icTruck"></span><span><b data-i18n="t.logistics"></b> — <span data-i18n="t.logisticsL"></span></span></div>
-      </div>
+      <div class="t"><span id="icTruck"></span><span><b data-i18n="t.logistics"></b></span></div>
+      <div class="t"><span id="icShield"></span><span><b data-i18n="t.auth"></b></span></div>
+      <div class="t"><span id="icYen"></span><span><b data-i18n="t.price"></b></span></div>
+      <div class="t"><span id="icClock"></span><span><b data-i18n="t.day"></b></span></div>
+      <div class="t"><span id="icLayers"></span><span><b data-i18n="t.label"></b></span></div>
     </div>
   </section>
 
@@ -365,7 +239,7 @@
   <div id="site-footer"></div>
 
   <script defer src="assets/js/data.js?v=43"></script>
-  <script defer src="assets/js/i18n.js?v=42"></script>
+  <script defer src="assets/js/i18n.js?v=40"></script>
   <script defer src="assets/js/app.js?v=52"></script>
   <script defer src="assets/js/auth.js"></script>
   <script defer src="assets/js/chatbot.js?v=4"></script>
