@@ -10,10 +10,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Noto+Serif+JP:wght@500;700&display=swap" onload="this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Noto+Serif+JP:wght@500;700&display=swap"></noscript>
-  <link rel="preload" as="style" href="assets/css/style.css?v=54">
+  <link rel="preload" as="style" href="assets/css/style.css?v=55">
   <style>body{background:#FBF8F1;color:#20211C;margin:0;font-family:Inter,system-ui,sans-serif}#site-header{min-height:109px}</style>
-  <link rel="stylesheet" href="assets/css/style.css?v=54" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="assets/css/style.css?v=54"></noscript>
+  <link rel="stylesheet" href="assets/css/style.css?v=55" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="assets/css/style.css?v=55"></noscript>
   <link rel="stylesheet" href="assets/css/chatbot.css?v=2">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="assets/favicon.svg">
@@ -56,144 +56,144 @@
       <div class="hero-art">
         <div class="hero-card">
           <div class="still-life">
-            <svg viewBox="0 0 600 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A Japanese daily-goods still life on a wood tray with sunlight.">
-              <!-- Wood grain (subtle horizontal bands) -->
+            <svg viewBox="0 0 600 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A Japanese daily-goods still life: skincare bottle, bath-salt pouch, stationery, towel, on a wood tray.">
               <defs>
-                <linearGradient id="woodBase" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0"   stop-color="#E8DAB8"/>
-                  <stop offset=".55" stop-color="#D9C49A"/>
-                  <stop offset="1"   stop-color="#BFA478"/>
+                <!-- Warm wood surface with a directional light wash -->
+                <linearGradient id="wood" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0"   stop-color="#E5D5B0"/>
+                  <stop offset=".55" stop-color="#D2BC93"/>
+                  <stop offset="1"   stop-color="#B79766"/>
                 </linearGradient>
-                <pattern id="grain" width="600" height="14" patternUnits="userSpaceOnUse">
-                  <path d="M0 7 Q150 1 300 7 T600 7" stroke="#A88E5B" stroke-width=".6" fill="none" opacity=".22"/>
+                <linearGradient id="woodShade" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0"   stop-color="#FFE9C4" stop-opacity=".55"/>
+                  <stop offset=".45" stop-color="#FFE9C4" stop-opacity="0"/>
+                  <stop offset="1"   stop-color="#000"     stop-opacity=".15"/>
+                </linearGradient>
+                <pattern id="grain" width="600" height="20" patternUnits="userSpaceOnUse">
+                  <path d="M0 10 Q150 4 300 10 T600 10" stroke="#A88E5B" stroke-width=".5" fill="none" opacity=".2"/>
+                  <path d="M0 16 Q200 11 400 16 T600 16" stroke="#9A8050" stroke-width=".4" fill="none" opacity=".14"/>
                 </pattern>
-                <radialGradient id="sun" cx="0" cy="0" r="1">
-                  <stop offset="0" stop-color="#FFE9C4" stop-opacity=".95"/>
-                  <stop offset="1" stop-color="#FFE9C4" stop-opacity="0"/>
-                </radialGradient>
-                <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
-                  <feGaussianBlur stdDeviation="1.4"/>
+                <linearGradient id="glassH" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0"   stop-color="#FFFFFF" stop-opacity=".55"/>
+                  <stop offset=".5"  stop-color="#FFFFFF" stop-opacity="0"/>
+                  <stop offset="1"   stop-color="#000"    stop-opacity=".12"/>
+                </linearGradient>
+                <filter id="ds" x="-30%" y="-30%" width="160%" height="160%">
+                  <feGaussianBlur stdDeviation="6"/>
+                </filter>
+                <filter id="ds2" x="-30%" y="-30%" width="160%" height="160%">
+                  <feGaussianBlur stdDeviation="2.5"/>
                 </filter>
               </defs>
-              <!-- Base wood surface -->
-              <rect width="600" height="480" fill="url(#woodBase)"/>
+              <!-- 1. Wood surface + directional light wash -->
+              <rect width="600" height="480" fill="url(#wood)"/>
               <rect width="600" height="480" fill="url(#grain)"/>
-              <rect width="600" height="480" fill="url(#grain)" transform="translate(0,8)"/>
-              <rect width="600" height="480" fill="url(#grain)" transform="translate(0,16)"/>
-              <!-- Soft sun pool top-left -->
-              <ellipse cx="80" cy="60" rx="260" ry="200" fill="url(#sun)"/>
-              <!-- Long paper sheet, slightly rotated, bottom-right -->
-              <g transform="translate(380 220) rotate(-7)">
-                <rect x="0" y="0" width="220" height="170" fill="#F4ECDD" stroke="#D8C9A8" stroke-width=".6" opacity=".92"/>
-                <!-- hairline grid lines like ledger paper -->
-                <g stroke="#C9B98E" stroke-width=".5" opacity=".45">
-                  <line x1="20" y1="36" x2="200" y2="36"/>
-                  <line x1="20" y1="56" x2="200" y2="56"/>
-                  <line x1="20" y1="76" x2="200" y2="76"/>
-                  <line x1="20" y1="96" x2="200" y2="96"/>
-                  <line x1="20" y1="116" x2="200" y2="116"/>
-                  <line x1="20" y1="136" x2="200" y2="136"/>
+              <rect width="600" height="480" fill="url(#grain)" transform="translate(0,12)"/>
+              <rect width="600" height="480" fill="url(#grain)" transform="translate(0,24)"/>
+              <rect width="600" height="480" fill="url(#woodShade)"/>
+
+              <!-- 2. Wood tray — soft oval underneath the items -->
+              <g>
+                <ellipse cx="310" cy="320" rx="270" ry="48" fill="#000" opacity=".18" filter="url(#ds)"/>
+                <ellipse cx="310" cy="315" rx="262" ry="42" fill="#8A6A3D"/>
+                <ellipse cx="310" cy="312" rx="258" ry="40" fill="#9C7B4A"/>
+                <ellipse cx="310" cy="310" rx="252" ry="37" fill="#7C5E32" opacity=".85"/>
+                <ellipse cx="310" cy="307" rx="248" ry="35" fill="#896840"/>
+                <path d="M70 307 Q310 300 550 307" stroke="#5C4321" stroke-width=".4" fill="none" opacity=".4"/>
+                <path d="M85 312 Q310 306 535 312" stroke="#5C4321" stroke-width=".4" fill="none" opacity=".3"/>
+                <path d="M62 308 Q310 290 558 308" stroke="#C49E70" stroke-width=".8" fill="none" opacity=".5"/>
+              </g>
+              <!-- 3. Folded towel — lower-left, slight rotation -->
+              <g transform="translate(70 295) rotate(-7)">
+                <ellipse cx="100" cy="76" rx="115" ry="6" fill="#000" opacity=".15" filter="url(#ds2)"/>
+                <rect x="0" y="0" width="220" height="76" rx="4" fill="#F7F1E2"/>
+                <rect x="0" y="0" width="220" height="10" fill="#EDE4CC"/>
+                <rect x="0" y="66" width="220" height="10" fill="#EDE4CC"/>
+                <rect x="0" y="0" width="10" height="76" fill="#EDE4CC"/>
+                <rect x="210" y="0" width="10" height="76" fill="#EDE4CC"/>
+                <g stroke="#E2D6B8" stroke-width=".5" opacity=".5">
+                  <line x1="0" y1="22" x2="220" y2="22"/>
+                  <line x1="0" y1="32" x2="220" y2="32"/>
+                  <line x1="0" y1="42" x2="220" y2="42"/>
+                  <line x1="0" y1="52" x2="220" y2="52"/>
                 </g>
-                <!-- A handwritten Kanji mark, like a shop seal stamp -->
-                <g transform="translate(170 150)" opacity=".75">
-                  <rect x="-18" y="-18" width="36" height="36" fill="#B7402C" rx="2"/>
-                  <text x="0" y="6" font-family="Noto Serif JP, serif" font-size="22" fill="#F4ECDD" text-anchor="middle" font-weight="700">商</text>
+                <line x1="6" y1="38" x2="214" y2="38" stroke="#C9B98E" stroke-width=".6" opacity=".7"/>
+              </g>
+
+              <!-- 4. Bath-salt pouch (refill pack) — center, behind bottle -->
+              <g transform="translate(280 245) rotate(4)">
+                <ellipse cx="70" cy="80" rx="78" ry="6" fill="#000" opacity=".18" filter="url(#ds2)"/>
+                <path d="M0 12 Q0 0 12 0 L128 0 Q140 0 140 12 L140 78 Q140 86 132 86 L8 86 Q0 86 0 78 Z" fill="#EFE3BE"/>
+                <rect x="0" y="0" width="140" height="6" fill="#C9B98E"/>
+                <g stroke="#A88E5B" stroke-width=".5">
+                  <line x1="6" y1="0" x2="6" y2="6"/><line x1="14" y1="0" x2="14" y2="6"/>
+                  <line x1="22" y1="0" x2="22" y2="6"/><line x1="30" y1="0" x2="30" y2="6"/>
+                  <line x1="38" y1="0" x2="38" y2="6"/><line x1="46" y1="0" x2="46" y2="6"/>
+                  <line x1="54" y1="0" x2="54" y2="6"/><line x1="62" y1="0" x2="62" y2="6"/>
+                  <line x1="70" y1="0" x2="70" y2="6"/><line x1="78" y1="0" x2="78" y2="6"/>
+                  <line x1="86" y1="0" x2="86" y2="6"/><line x1="94" y1="0" x2="94" y2="6"/>
+                  <line x1="102" y1="0" x2="102" y2="6"/><line x1="110" y1="0" x2="110" y2="6"/>
+                  <line x1="118" y1="0" x2="118" y2="6"/><line x1="126" y1="0" x2="126" y2="6"/>
+                  <line x1="134" y1="0" x2="134" y2="6"/>
                 </g>
+                <rect x="22" y="26" width="96" height="44" fill="#E2D6B8" opacity=".55"/>
+                <text x="70" y="56" font-family="Noto Serif JP, serif" font-size="18" fill="#7A5A30" text-anchor="middle" font-weight="600" opacity=".85">塩</text>
+                <text x="70" y="78" font-family="Inter, sans-serif" font-size="5" fill="#7A5A30" text-anchor="middle" letter-spacing="1" opacity=".7">REFILL · 600g</text>
+                <line x1="0" y1="84" x2="140" y2="84" stroke="#C9B98E" stroke-width=".5" opacity=".5"/>
               </g>
-              <!-- Wood tray, large oval, slightly off-axis -->
-              <g transform="translate(80 150)">
-                <ellipse cx="220" cy="200" rx="250" ry="62" fill="#8C6A3A" opacity=".55" filter="url(#soft)"/>
-                <ellipse cx="220" cy="195" rx="244" ry="58" fill="#9D7944"/>
-                <ellipse cx="220" cy="190" rx="240" ry="55" fill="#7A5A30"/>
-                <ellipse cx="220" cy="188" rx="234" ry="51" fill="#876539" opacity=".85"/>
-                <!-- subtle grain on tray -->
-                <path d="M40 188 Q220 178 400 188" stroke="#5C4321" stroke-width=".5" fill="none" opacity=".4"/>
-                <path d="M50 196 Q220 184 390 196" stroke="#5C4321" stroke-width=".5" fill="none" opacity=".35"/>
+
+              <!-- 5. Skincare bottle — front-center, slightly leaning -->
+              <g transform="translate(225 145) rotate(-2)">
+                <ellipse cx="68" cy="186" rx="76" ry="9" fill="#000" opacity=".22" filter="url(#ds)"/>
+                <path d="M22 36 L114 36 L114 178 Q114 188 104 188 L32 188 Q22 188 22 178 Z" fill="#1F4A3E"/>
+                <path d="M22 36 L114 36 L114 178 Q114 188 104 188 L32 188 Q22 188 22 178 Z" fill="url(#glassH)" opacity=".8"/>
+                <rect x="22" y="50" width="92" height="3" fill="#BE9B4A" opacity=".75"/>
+                <rect x="22" y="56" width="92" height="1" fill="#BE9B4A" opacity=".45"/>
+                <path d="M30 56 L32 174" stroke="#FFFFFF" stroke-width="2" opacity=".22"/>
+                <path d="M22 36 Q34 18 50 16 L86 16 Q102 18 114 36 Z" fill="#1F4A3E"/>
+                <rect x="50" y="-2" width="36" height="20" rx="2" fill="#0E2E26"/>
+                <rect x="48" y="-8" width="40" height="8" rx="2" fill="#3a2c1a"/>
+                <rect x="34" y="98" width="68" height="58" rx="2" fill="#F4ECDD" opacity=".92"/>
+                <line x1="48" y1="112" x2="88" y2="112" stroke="#1F4A3E" stroke-width=".6"/>
+                <text x="68" y="128" font-family="Noto Serif JP, serif" font-size="13" fill="#1F4A3E" text-anchor="middle" font-weight="600">護</text>
+                <line x1="48" y1="138" x2="88" y2="138" stroke="#1F4A3E" stroke-width=".4" opacity=".6"/>
+                <text x="68" y="148" font-family="Inter, sans-serif" font-size="5" fill="#1F4A3E" text-anchor="middle" letter-spacing="1.2" opacity=".8">DAILY ESSENTIALS</text>
+                <text x="68" y="156" font-family="Inter, sans-serif" font-size="4" fill="#1F4A3E" text-anchor="middle" letter-spacing=".6" opacity=".6">200 ml</text>
               </g>
-              <!-- Folded white towel, lower-left, rotated 8° -->
-              <g transform="translate(60 290) rotate(-8)" filter="url(#soft)">
-                <rect x="0" y="0" width="180" height="60" rx="3" fill="#F7F1E2"/>
-                <rect x="0" y="0" width="180" height="6" fill="#EDE4CC"/>
-                <rect x="0" y="54" width="180" height="6" fill="#EDE4CC"/>
-                <rect x="0" y="0" width="6" height="60" fill="#EDE4CC"/>
-                <rect x="174" y="0" width="6" height="60" fill="#EDE4CC"/>
-                <!-- subtle stripe -->
-                <line x1="0" y1="30" x2="180" y2="30" stroke="#E2D6B8" stroke-width=".6" opacity=".6"/>
-              </g>
-              <!-- Bath-salt jar (dark navy with white label), centered-left on tray -->
-              <g transform="translate(180 175)">
-                <!-- shadow -->
-                <ellipse cx="60" cy="118" rx="58" ry="6" fill="#3a2c1a" opacity=".25"/>
-                <!-- jar body -->
-                <rect x="6" y="20" width="108" height="98" rx="6" fill="#1F3B49"/>
-                <rect x="6" y="20" width="108" height="20" fill="#16303C"/>
-                <!-- cap -->
-                <rect x="0" y="0" width="120" height="22" rx="3" fill="#E8DAB8"/>
-                <rect x="0" y="0" width="120" height="22" rx="3" fill="none" stroke="#B39368" stroke-width=".6"/>
-                <!-- white label -->
-                <rect x="14" y="46" width="92" height="60" fill="#F7F1E2"/>
-                <!-- Kanji label text -->
-                <text x="60" y="68" font-family="Noto Serif JP, serif" font-size="11" fill="#1F3B49" text-anchor="middle" font-weight="700">温泉</text>
-                <text x="60" y="84" font-family="Noto Serif JP, serif" font-size="7" fill="#1F3B49" text-anchor="middle" letter-spacing="1">入浴剤</text>
-                <line x1="22" y1="92" x2="98" y2="92" stroke="#1F3B49" stroke-width=".4" opacity=".5"/>
-                <text x="60" y="100" font-family="Inter, sans-serif" font-size="5" fill="#1F3B49" text-anchor="middle" letter-spacing=".5">ONSEN · 500g</text>
-              </g>
-              <!-- Amber glass bottle (skincare oil), right-of-jar, leaning slightly -->
-              <g transform="translate(310 195) rotate(8)">
-                <ellipse cx="32" cy="98" rx="36" ry="5" fill="#3a2c1a" opacity=".22"/>
-                <!-- body -->
-                <path d="M14 18 Q14 12 22 12 L42 12 Q50 12 50 18 L52 92 Q52 100 44 100 L20 100 Q12 100 12 92 Z" fill="#C97B2B"/>
-                <path d="M14 18 Q14 12 22 12 L42 12 Q50 12 50 18 L52 92 Q52 100 44 100 L20 100 Q12 100 12 92 Z" fill="#A85B17" opacity=".35"/>
-                <!-- highlight -->
-                <path d="M18 24 L20 92" stroke="#FBD9A0" stroke-width="2" opacity=".55"/>
-                <!-- neck + cap -->
-                <rect x="22" y="0" width="20" height="14" fill="#C97B2B"/>
-                <rect x="20" y="-8" width="24" height="10" rx="2" fill="#3a2c1a"/>
-                <!-- label -->
-                <rect x="20" y="48" width="24" height="32" fill="#F4ECDD"/>
-                <text x="32" y="60" font-family="Inter, sans-serif" font-size="5" fill="#3a2c1a" text-anchor="middle" font-weight="700">OIL</text>
-                <line x1="22" y1="64" x2="42" y2="64" stroke="#3a2c1a" stroke-width=".3"/>
-                <text x="32" y="72" font-family="Inter, sans-serif" font-size="4" fill="#3a2c1a" text-anchor="middle">100ml</text>
-              </g>
-              <!-- Small ceramic dish with bath salts, lower-right on tray -->
-              <g transform="translate(380 305) rotate(-5)">
-                <ellipse cx="40" cy="30" rx="50" ry="10" fill="#3a2c1a" opacity=".25"/>
-                <ellipse cx="40" cy="28" rx="48" ry="9" fill="#E8DAB8"/>
-                <ellipse cx="40" cy="26" rx="44" ry="7" fill="#D9C49A"/>
-                <!-- heap of salts -->
-                <path d="M16 24 Q40 12 64 24 Q40 22 16 24 Z" fill="#FBF6E7" stroke="#D9C49A" stroke-width=".5"/>
-                <circle cx="32" cy="22" r="1.2" fill="#D9C49A" opacity=".7"/>
-                <circle cx="46" cy="20" r="1" fill="#D9C49A" opacity=".7"/>
-                <circle cx="40" cy="18" r="1.4" fill="#D9C49A" opacity=".7"/>
-              </g>
-              <!-- Wooden comb (small, low-key), peeking out behind the bottle -->
-              <g transform="translate(370 200) rotate(28)">
-                <rect x="0" y="0" width="80" height="14" rx="2" fill="#6E4A22"/>
-                <rect x="0" y="0" width="80" height="3" fill="#7E5A32"/>
-                <!-- teeth -->
-                <g fill="#6E4A22">
-                  <rect x="6"  y="14" width="3" height="6"/>
-                  <rect x="13" y="14" width="3" height="6"/>
-                  <rect x="20" y="14" width="3" height="6"/>
-                  <rect x="27" y="14" width="3" height="6"/>
-                  <rect x="34" y="14" width="3" height="6"/>
-                  <rect x="41" y="14" width="3" height="6"/>
-                  <rect x="48" y="14" width="3" height="6"/>
-                  <rect x="55" y="14" width="3" height="6"/>
-                  <rect x="62" y="14" width="3" height="6"/>
-                  <rect x="69" y="14" width="3" height="6"/>
+
+              <!-- 6. Notepad — top-right, slight overlap with bottle shoulder -->
+              <g transform="translate(370 145) rotate(-9)">
+                <ellipse cx="80" cy="118" rx="92" ry="6" fill="#000" opacity=".18" filter="url(#ds2)"/>
+                <rect x="0" y="0" width="170" height="116" rx="3" fill="#F4ECDD"/>
+                <rect x="2" y="3" width="166" height="113" fill="none" stroke="#D8C9A8" stroke-width=".6"/>
+                <line x1="0" y1="116" x2="170" y2="116" stroke="#C9B98E" stroke-width=".5"/>
+                <line x1="85" y1="0" x2="85" y2="116" stroke="#E2D6B8" stroke-width=".6"/>
+                <g stroke="#E2D6B8" stroke-width=".5" opacity=".65">
+                  <line x1="14" y1="24" x2="156" y2="24"/>
+                  <line x1="14" y1="36" x2="156" y2="36"/>
+                  <line x1="14" y1="48" x2="156" y2="48"/>
+                  <line x1="14" y1="60" x2="156" y2="60"/>
+                  <line x1="14" y1="72" x2="156" y2="72"/>
+                  <line x1="14" y1="84" x2="156" y2="84"/>
+                  <line x1="14" y1="96" x2="156" y2="96"/>
                 </g>
+                <rect x="155" y="-4" width="14" height="124" fill="#21463D"/>
+                <rect x="155" y="-4" width="14" height="3" fill="#1F4A3E"/>
+                <text x="38" y="22" font-family="Noto Serif JP, serif" font-size="11" fill="#21463D" font-weight="600" letter-spacing="3">記</text>
               </g>
-              <!-- Small bottle/serum (left side, behind towel) -->
-              <g transform="translate(220 220) rotate(-3)">
-                <ellipse cx="20" cy="62" rx="22" ry="4" fill="#3a2c1a" opacity=".2"/>
-                <path d="M6 10 L34 10 L34 60 Q34 64 30 64 L10 64 Q6 64 6 60 Z" fill="#3A6B5A"/>
-                <rect x="2" y="2" width="36" height="9" fill="#21463D"/>
-                <rect x="14" y="32" width="16" height="22" fill="#F4ECDD" opacity=".95"/>
-                <text x="22" y="46" font-family="Inter, sans-serif" font-size="5" fill="#21463D" text-anchor="middle" font-weight="700">SERUM</text>
+
+              <!-- 7. Pencil across the notepad -->
+              <g transform="translate(390 130) rotate(22)">
+                <rect x="0" y="0" width="120" height="5" rx="1" fill="#3a2c1a"/>
+                <rect x="0" y="0" width="120" height="1.5" fill="#5C4321"/>
+                <rect x="115" y="-2" width="8" height="9" rx="1" fill="#BE9B4A"/>
+                <rect x="118" y="-3" width="3" height="11" fill="#3a2c1a"/>
+                <rect x="-6" y="0" width="6" height="5" fill="#B7402C"/>
+                <rect x="-9" y="-1" width="3" height="7" fill="#BE9B4A"/>
               </g>
-              <!-- Subtle leaf shadow under the tray (light side) -->
-              <ellipse cx="240" cy="380" rx="280" ry="14" fill="#3a2c1a" opacity=".08"/>
+
+              <!-- Far-right edge depth shadow -->
+              <ellipse cx="540" cy="430" rx="80" ry="14" fill="#000" opacity=".12" filter="url(#ds)"/>
             </svg>
           </div>
           <div class="caption" data-i18n="hero.caption">本日の入荷</div>
