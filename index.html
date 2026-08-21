@@ -10,10 +10,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Noto+Serif+JP:wght@500;700&display=swap" onload="this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Noto+Serif+JP:wght@500;700&display=swap"></noscript>
-  <link rel="preload" as="style" href="assets/css/style.css?v=59">
+  <link rel="preload" as="style" href="assets/css/style.css?v=60">
   <style>body{background:#FBF8F1;color:#20211C;margin:0;font-family:Inter,system-ui,sans-serif}#site-header{min-height:109px}</style>
-  <link rel="stylesheet" href="assets/css/style.css?v=59" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="assets/css/style.css?v=59"></noscript>
+  <link rel="stylesheet" href="assets/css/style.css?v=60" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="assets/css/style.css?v=60"></noscript>
   <link rel="stylesheet" href="assets/css/chatbot.css?v=2">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="assets/favicon.svg">
@@ -52,21 +52,61 @@
           <a class="btn btn-primary btn-lg" href="products.html"><span data-i18n="hero.browse"></span></a>
           <a class="btn btn-ghost btn-lg" href="how-to-order.html" data-i18n="hero.howto"></a>
         </div>
+        <div class="hero-chips" aria-label="Browse categories">
+          <a class="hero-chip" href="products.html?cat=beauty"><span class="hc-ic" id="icSkincare"></span><span data-i18n="hero.chip.skincare">Skincare</span></a>
+          <a class="hero-chip" href="products.html?cat=daily"><span class="hc-ic" id="icBath"></span><span data-i18n="hero.chip.bath">Bath &amp; Body</span></a>
+          <a class="hero-chip" href="products.html?cat=hobby"><span class="hc-ic" id="icStat"></span><span data-i18n="hero.chip.stationery">Stationery</span></a>
+          <a class="hero-chip" href="products.html?cat=daily"><span class="hc-ic" id="icHome"></span><span data-i18n="hero.chip.homecare">Home Care</span></a>
+          <a class="hero-chip" href="products.html?cat=food"><span class="hc-ic" id="icFood"></span><span data-i18n="hero.chip.food">Food &amp; Snacks</span></a>
+          <a class="hero-chip hero-chip-all" href="products.html"><span data-i18n="hero.chip.viewall">View all</span><span id="chipViewArr"></span></a>
+        </div>
       </div>
       <div class="hero-art">
-        <div class="hero-card">
-          <div class="brandmark">
-            <span class="bm-eyebrow">JAPAN WHOLESALE · TRADING</span>
-            <div class="bm-accent" aria-hidden="true"></div>
-            <div>
-              <h2 class="bm-name">JAPAN<span class="accent">ITEM</span></h2>
-              <div class="bm-kana">ジャパニタム</div>
+        <div class="hero-grid-top">
+          <a class="hero-photo hero-photo-main" href="products.html?cat=beauty">
+            <img src="https://images.unsplash.com/photo-1555820585-c5ae44394b79?w=900&amp;q=85&amp;fm=jpg&amp;auto=format&amp;fit=crop" alt="Japanese skincare still life" loading="eager" decoding="async">
+          </a>
+          <div class="hero-card">
+            <div class="brandmark">
+              <span class="bm-eyebrow">JAPAN WHOLESALE · TRADING</span>
+              <div class="bm-accent" aria-hidden="true"></div>
+              <div>
+                <h2 class="bm-name">JAPAN<span class="accent">ITEM</span></h2>
+                <div class="bm-kana">ジャパニタム</div>
+              </div>
+              <div class="bm-footer">
+                <span class="pill">B2B</span>
+                <span>Tokyo</span>
+              </div>
             </div>
-            <div class="bm-footer">
-              <span class="pill">B2B</span>
-              <span>Tokyo</span>
-            </div>
+            <p class="bm-tagline" data-i18n="hero.tagline">Curated Japanese brands.<br>Delivered to your business.</p>
+            <svg class="authentic-seal" viewBox="0 0 120 120" aria-hidden="true">
+              <defs>
+                <path id="seal-arc-top" d="M 60,60 m -42,0 a 42,42 0 1,1 84,0"/>
+                <path id="seal-arc-bot" d="M 60,60 m -42,0 a 42,42 0 1,0 84,0"/>
+              </defs>
+              <circle cx="60" cy="60" r="50" fill="none" stroke="currentColor" stroke-width="1.5"/>
+              <circle cx="60" cy="60" r="44" fill="none" stroke="currentColor" stroke-width=".7"/>
+              <text font-family="var(--f-mono)" font-size="8" letter-spacing="3" fill="currentColor">
+                <textPath href="#seal-arc-top" startOffset="50%" text-anchor="middle">AUTHENTIC · JAPAN</textPath>
+              </text>
+              <text font-family="var(--f-mono)" font-size="8" letter-spacing="3" fill="currentColor">
+                <textPath href="#seal-arc-bot" startOffset="50%" text-anchor="middle">DIRECT · FROM · TOKYO</textPath>
+              </text>
+              <path d="M 56,52 L 60,48 L 64,52 L 68,50 L 70,55 L 65,62 L 58,60 L 54,58 Z" fill="var(--clay)" opacity=".85"/>
+            </svg>
           </div>
+        </div>
+        <div class="hero-grid-bot">
+          <a class="hero-photo" href="products.html?cat=hobby">
+            <img src="https://images.unsplash.com/photo-1581182815808-b6eb627a8798?w=600&amp;q=80&amp;fm=jpg&amp;auto=format&amp;fit=crop" alt="Japanese notebook" loading="lazy" decoding="async">
+          </a>
+          <a class="hero-photo" href="products.html?cat=daily">
+            <img src="https://images.unsplash.com/photo-1573461160327-b450ce3d8e7f?w=600&amp;q=80&amp;fm=jpg&amp;auto=format&amp;fit=crop" alt="Japanese bath products" loading="lazy" decoding="async">
+          </a>
+          <a class="hero-photo" href="products.html?cat=beauty">
+            <img src="https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=600&amp;q=80&amp;fm=jpg&amp;auto=format&amp;fit=crop" alt="Japanese spray bottle" loading="lazy" decoding="async">
+          </a>
         </div>
       </div>
     </div>
@@ -238,7 +278,7 @@
 
   <script defer src="assets/js/data.js?v=43"></script>
   <script defer src="assets/js/i18n.js?v=40"></script>
-  <script defer src="assets/js/app.js?v=52"></script>
+  <script defer src="assets/js/app.js?v=53"></script>
   <script defer src="assets/js/auth.js"></script>
   <script defer src="assets/js/chatbot.js?v=4"></script>
 </body>

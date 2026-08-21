@@ -1117,6 +1117,13 @@ function injectHomeIcons(){
   set('brandsArr',  I.arrow);
   set('howArr',     I.arrow);
   set('ctaChatIc',  I.phone);
+  // Hero category chips
+  set('icSkincare', I.spark);
+  set('icBath',     I.box);
+  set('icStat',     I.tag);
+  set('icHome',     I.box);
+  set('icFood',     I.leaf);
+  set('chipViewArr',I.arrow);
   // category-grid icon mapping (was in inline <script>, now here)
   const ICONS = { health:I.check, beauty:I.spark, daily:I.box, food:I.leaf,
     sweets:I.spark, babykids:I.leaf, hobby:I.tag, seasonaltop:I.box };
