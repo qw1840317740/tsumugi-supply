@@ -297,53 +297,42 @@ h2.h{ font-size:clamp(1.7rem,3.2vw,2.4rem); }
 .hero-art{ position:relative; }
 .hero-card{
   position:relative; border-radius:var(--radius-lg); overflow:hidden;
-  background:var(--paper-2);
-  aspect-ratio:4/4.4; box-shadow:var(--shadow-lg);
-  border:1px solid var(--line-soft);
+  background:var(--sumi);
+  box-shadow:var(--shadow-lg);
 }
-/* JAPANITEM hero card: typography-only brand mark — no decorative seal,
-   no AI-generated concentric rings. A real corporate identity card. */
+/* JAPANITEM hero card: typography-only brand mark.
+   No aspect-ratio lock — height follows content. Linear / Vercel / Stripe school. */
 .hero-card .brandmark{
-  position:absolute; inset:0;
-  display:flex; flex-direction:column; align-items:flex-start; justify-content:space-between;
-  padding:34px 32px; color:var(--sumi);
+  position:relative;
+  display:flex; flex-direction:column; align-items:flex-start; gap:24px;
+  padding:40px 36px 36px; color:var(--paper-2);
 }
-.hero-card .bm-eyebrow{
+.hero-card .bm-top{
+  display:flex; align-items:center; justify-content:space-between; width:100%;
   font-family:var(--f-mono); font-size:.7rem; letter-spacing:.32em; text-transform:uppercase;
-  color:var(--clay); font-weight:600;
-  display:flex; align-items:center; gap:10px;
+  color:var(--paper-2); opacity:.78;
 }
-.hero-card .bm-eyebrow::before{
-  content:""; width:24px; height:1px; background:var(--clay); display:inline-block;
-}
+.hero-card .bm-top .accent{ width:12px; height:12px; background:var(--clay); border-radius:2px; }
 .hero-card .bm-name{
   font-family:var(--f-sans);
-  font-weight:800; font-size:clamp(2.4rem,5.2vw,4rem);
-  line-height:.92; letter-spacing:-.04em; color:var(--sumi);
-  margin-top:auto;
+  font-weight:800; font-size:clamp(2.6rem,5.8vw,4.2rem);
+  line-height:.94; letter-spacing:-.045em; color:var(--paper-2);
 }
-.hero-card .bm-name .accent{
-  color:var(--clay); font-style:normal;
-}
+.hero-card .bm-name .accent{ color:var(--clay); font-style:normal; }
 .hero-card .bm-kana{
   font-family:'Noto Serif JP','Hiragino Mincho ProN',serif;
-  font-size:1.1rem; letter-spacing:.18em; color:var(--ink-3);
-  text-indent:.18em; margin-top:-2px;
+  font-size:1.1rem; letter-spacing:.18em; color:var(--paper-2); opacity:.7;
+  margin-top:-14px;
 }
 .hero-card .bm-footer{
-  display:flex; align-items:center; gap:12px; width:100%;
-  font-family:var(--f-mono); font-size:.7rem; letter-spacing:.22em; text-transform:uppercase;
-  color:var(--ink-3); margin-top:18px;
+  display:flex; align-items:center; gap:14px;
+  font-family:var(--f-mono); font-size:.68rem; letter-spacing:.22em; text-transform:uppercase;
+  color:var(--paper-2); opacity:.6; margin-top:6px;
 }
 .hero-card .bm-footer .pill{
-  border:1px solid var(--line); padding:5px 11px; border-radius:999px;
-  color:var(--ink-2); background:var(--paper);
+  border:1px solid rgba(255,255,255,.24); padding:4px 10px; border-radius:999px;
 }
-/* Small accent square — single geometric mark, anti-decoration. */
-.hero-card .bm-accent{
-  position:absolute; top:28px; right:28px;
-  width:18px; height:18px; background:var(--clay); border-radius:4px;
-}
+.hero-card .bm-footer .sep{ opacity:.4; }
 .hero-card .badge{
   position:absolute; left:22px; bottom:22px; right:22px; display:flex; gap:14px; align-items:center;
   background:rgba(251,248,241,.94); border-radius:14px; padding:14px 16px; color:var(--ink);
