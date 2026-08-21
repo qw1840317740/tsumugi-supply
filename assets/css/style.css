@@ -302,39 +302,54 @@ h2.h{ font-size:clamp(1.7rem,3.2vw,2.4rem); }
 .hero-art{ position:relative; }
 .hero-card{
   position:relative; border-radius:var(--radius-lg); overflow:hidden;
-  background:#E5D5B0;
-  box-shadow:var(--shadow);
+  background:var(--paper-2);
+  box-shadow:var(--shadow-lg);
   border:1px solid var(--line-soft);
-  aspect-ratio: 5/4;
+  min-height:420px;
 }
-/* Single editorial photograph from Unsplash — a Japanese tea-ceremony
-   still-life that suggests our catalog without showing product packaging.
-   Cover-fit; the brand caption + stamp overlay remain on top so this
-   still reads as the JAPANITEM hero. */
-.hero-card .still-photo{
+/* JAPANITEM hero card: typography-only brand mark — no decorative seal,
+   no AI-generated concentric rings. A real corporate identity card. */
+.hero-card .brandmark{
   position:absolute; inset:0;
-  width:100%; height:100%; object-fit:cover; object-position:center 35%;
-  display:block; transition:transform .6s var(--ease-soft);
+  display:flex; flex-direction:column; align-items:flex-start; justify-content:space-between;
+  padding:34px 32px; color:var(--sumi);
 }
-.hero-card:hover .still-photo{ transform:scale(1.025); }
-/* Tiny label annotations — minimal, like editorial captions */
-.hero-card .caption{
-  position:absolute; bottom:18px; left:24px;
-  font-family:'Noto Serif JP',serif; font-size:.7rem; letter-spacing:.04em;
-  color:var(--ink-2); background:rgba(244,236,221,.86);
-  padding:4px 9px; border-radius:3px;
-  backdrop-filter:blur(2px);
+.hero-card .bm-eyebrow{
+  font-family:var(--f-mono); font-size:.7rem; letter-spacing:.32em; text-transform:uppercase;
+  color:var(--clay); font-weight:600;
+  display:flex; align-items:center; gap:10px;
 }
-.hero-card .stamp{
-  position:absolute; bottom:14px; right:18px;
-  font-family:var(--f-mono); font-size:.6rem; letter-spacing:.22em; text-transform:uppercase;
-  color:var(--ink-3); opacity:.7;
+.hero-card .bm-eyebrow::before{
+  content:""; width:24px; height:1px; background:var(--clay); display:inline-block;
 }
-.hero-card .badge{
-  position:absolute; left:22px; bottom:22px; right:22px; display:flex; gap:14px; align-items:center;
-  background:rgba(251,248,241,.94); border-radius:14px; padding:14px 16px; color:var(--ink);
+.hero-card .bm-name{
+  font-family:var(--f-sans);
+  font-weight:800; font-size:clamp(2rem,3.8vw,3rem);
+  line-height:.94; letter-spacing:-.04em; color:var(--sumi);
+  margin-top:auto;
 }
-.hero-card .badge .ic{ width:42px;height:42px;border-radius:10px;background:var(--clay);color:#fff;display:grid;place-items:center;flex:none; }
+.hero-card .bm-name .accent{
+  color:var(--clay); font-style:normal;
+}
+.hero-card .bm-kana{
+  font-family:'Noto Serif JP','Hiragino Mincho ProN',serif;
+  font-size:1.1rem; letter-spacing:.18em; color:var(--ink-3);
+  text-indent:.18em; margin-top:-2px;
+}
+.hero-card .bm-footer{
+  display:flex; align-items:center; gap:12px; width:100%;
+  font-family:var(--f-mono); font-size:.7rem; letter-spacing:.22em; text-transform:uppercase;
+  color:var(--ink-3); margin-top:18px;
+}
+.hero-card .bm-footer .pill{
+  border:1px solid var(--line); padding:5px 11px; border-radius:999px;
+  color:var(--ink-2); background:var(--paper);
+}
+/* Small accent square — single geometric mark, anti-decoration. */
+.hero-card .bm-accent{
+  position:absolute; top:28px; right:28px;
+  width:18px; height:18px; background:var(--clay); border-radius:4px;
+}
 .floating{
   position:absolute; background:var(--paper-2); border:1px solid var(--line-soft); border-radius:13px;
   padding:11px 14px; box-shadow:var(--shadow); font-size:.8rem; display:flex; align-items:center; gap:9px;
