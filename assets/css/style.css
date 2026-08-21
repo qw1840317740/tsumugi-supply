@@ -290,7 +290,7 @@ h2.h{ font-size:clamp(1.7rem,3.2vw,2.4rem); }
   --ink2: #4D4A44;
   --border: #DED5C5;
 }
-.hero{ position:relative; overflow:hidden; background:var(--bg); border-bottom:1px solid rgba(90,70,40,0.14); }
+.hero{ position:relative; overflow:hidden; background:var(--bg); border-top:1px solid rgba(90,70,40,0.14); border-bottom:1px solid rgba(90,70,40,0.14); }
 .hero .container{
   display:grid; grid-template-columns:520px minmax(0,1fr);
   gap:90px; align-items:start;
