@@ -1117,6 +1117,10 @@ function injectHomeIcons(){
   set('brandsArr',  I.arrow);
   set('howArr',     I.arrow);
   set('ctaChatIc',  I.phone);
+  // Trust bar icons (new spec — left trust items + right trusted card)
+  set('tIcShield', I.shield);
+  set('tIcTruck',  I.truck);
+  set('tIcHand',   I.handshake || I.shield);
   // Hero category chips
   set('icSkincare', I.spark);
   set('icBath',     I.box);
