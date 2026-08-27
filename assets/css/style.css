@@ -390,7 +390,7 @@ h2.h{ font-size:clamp(1.7rem,3.2vw,2.4rem); }
   position:absolute; top:0; right:0; bottom:0; left:35%;
   color:#174C43; opacity:.08; pointer-events:none; overflow:hidden;
 }
-.hero-card-bg .jp-map{ width:100%; height:100%; }
+.hero-card-bg .jp-map{ width:100%; height:100%; object-fit:contain; }
 .brandmark{ position:relative; z-index:2; }
 .bm-name{
   font-family:'Inter','Helvetica Neue',Arial,sans-serif;
@@ -1112,3 +1112,79 @@ table.t td b{ color:var(--clay); font-family:var(--f-serif); font-size:1.1rem; }
 .legal-table td{ color:var(--ink); }
 .legal-table td a{ color:var(--clay); text-decoration:underline; text-underline-offset:3px; }
 @media(max-width:680px){ .legal-table th,.legal-table td{ padding:9px 10px; font-size:.86rem; } }
++
+/* ---------- JAPANITEM reference rebuild · 1586 × 992 ---------- */
+@media (min-width:1025px){
+  .site-header{ background:rgba(248,245,238,.96); backdrop-filter:none; -webkit-backdrop-filter:none; }
+  .site-header > .container{ max-width:1586px; padding-inline:82px; }
+  .nav{ min-height:89px; gap:0; }
+  .brand{ gap:13px; }
+  .brand .mark{ width:48px; height:48px; border-radius:13px; font-size:25px; }
+  .brand .wordmark b{ font-family:'DM Serif Display',Georgia,serif; font-size:25px; letter-spacing:.025em; }
+  .brand .wordmark span{ font-size:9px; margin-top:5px; letter-spacing:.19em; color:#34332f; }
+  .nav-primary{ margin-left:68px; gap:18px; }
+  .nav-link{ padding:10px 12px; font-size:16px; border-radius:0; color:#3f403c; }
+  .nav-link:hover{ background:transparent; color:var(--green); }
+  .nav-actions{ gap:8px; }
+  .dd-trigger{ min-width:98px; height:45px; justify-content:center; padding-inline:14px; background:#fbf8f1; }
+  .icon-btn{ width:46px; height:46px; border-radius:50%; }
+
+  .hero{ overflow:clip; }
+  .hero .container{ position:relative; grid-template-columns:560px minmax(0,1fr); gap:68px; max-width:1586px; min-height:752px; padding:82px 82px 65px; }
+  .hero-copy{ position:relative; min-height:605px; padding-top:8px; }
+  .hero .eyebrow{ font-size:12px; gap:12px; }
+  .hero-h1{ margin-top:32px; font-size:62px; line-height:1.02; letter-spacing:-.026em; }
+  .hero .lead{ margin-top:26px; max-width:450px; font-size:16px; line-height:1.72; }
+  .hero-cta{ margin-top:27px; gap:15px; }
+  .hero-cta .btn{ height:54px; }
+  .hero-chips{ position:absolute; left:0; bottom:0; width:max-content; margin:0; gap:10px; }
+  .hero-chip{ height:40px; padding-inline:16px; border-radius:22px; }
+
+  .hero-art{ grid-template-columns:minmax(0,1fr) minmax(0,1.02fr); grid-template-rows:605px; min-height:605px; gap:6px; }
+  .hero-photo{ border-radius:12px; box-shadow:none; }
+  .hero-photo-main{ width:100%; height:506px; align-self:start; }
+  .hero-photo-main img{ object-position:center center; }
+  .hero-art-right{ height:605px; gap:6px; }
+  .hero-card{ height:322px; padding:70px 31px 28px; border-radius:12px; }
+  .hero-card-bg{ left:52%; top:13px; right:-6px; bottom:8px; opacity:.075; }
+  .bm-name{ font-size:42px; }
+  .bm-kana{ margin-top:10px; font-size:14px; }
+  .bm-rule{ margin-top:31px; width:32px; }
+  .bm-tagline{ margin-top:25px; line-height:1.55; }
+  .authentic-seal{ width:74px; height:74px; right:24px; bottom:22px; }
+  .hero-grid-bot{ grid-template-columns:repeat(3,minmax(0,1fr)); height:277px; gap:6px; }
+  .hero-photo-sm{ height:277px; aspect-ratio:auto; }
+
+  .trust{ margin-top:0; }
+  .trust .container{ max-width:1586px; min-height:148px; padding:30px 82px; gap:28px; }
+  .trust-item{ gap:16px; min-width:260px; }
+  .trust-item:nth-child(2){ min-width:270px; }
+  .trust-ic{ width:42px; height:42px; background:transparent; border:0; }
+  .trust-ic svg{ width:30px; height:30px; }
+  .trust-divider{ height:58px; }
+  .trust-metric{ min-width:83px; align-items:center; text-align:center; }
+  .trust-card{ min-width:250px; justify-content:center; padding:17px 20px; }
+}
+
+@media (max-width:1250px) and (min-width:1025px){
+  .site-header > .container, .hero .container, .trust .container{ padding-inline:40px; }
+  .hero .container{ grid-template-columns:460px minmax(0,1fr); gap:44px; }
+  .hero-h1{ font-size:52px; }
+  .nav-primary{ margin-left:30px; gap:4px; }
+  .nav-link{ font-size:14px; padding-inline:8px; }
+  .trust .container{ gap:18px; }
+  .trust-item{ min-width:215px; }
+  .trust-item:nth-child(2){ min-width:225px; }
+}
+
+@media (max-width:1024px){
+  .hero .container{ grid-template-columns:minmax(0,1fr); gap:36px; padding:38px 40px 48px; }
+  .hero-copy{ min-height:0; padding-top:0; }
+  .hero-chips{ position:static; width:auto; margin-top:32px; flex-wrap:wrap; }
+  .hero-art{ grid-template-columns:minmax(0,1fr); grid-template-rows:auto; min-height:0; }
+  .hero-photo-main{ height:auto; aspect-ratio:4/3; }
+  .hero-art-right{ height:auto; }
+  .hero-grid-bot{ height:auto; }
+  .hero-photo-sm{ height:auto; aspect-ratio:3/4; }
+  .trust{ margin-top:0; }
+}
