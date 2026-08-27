@@ -75,6 +75,7 @@ const ICON = {
   tag:   svg('<path d="M3 12V4h8l9 9-8 8z"/><circle cx="7.5" cy="7.5" r="1.4"/>'),
   leaf:  svg('<path d="M4 20c0-9 6-14 16-15-1 9-6 15-15 15"/><path d="M4 20c2-5 5-8 9-10"/>'),
   truck: svg('<rect x="2" y="4" width="13" height="11" rx="1"/><path d="M15 8h3.5L21 11v4h-6"/><circle cx="6" cy="17.5" r="1.6"/><circle cx="17" cy="17.5" r="1.6"/>'),
+  handshake:svg('<path d="m8.5 12.5 3 3a2 2 0 0 0 3 0l4.5-4.5"/><path d="m15.5 8.5-2-2a2.4 2.4 0 0 0-3.2 0L6 10.5"/><path d="M3 7.5 6.5 11 4 13.5.5 10zM21 7.5 17.5 11l2.5 2.5 3.5-3.5z"/><path d="m7 13 2.5 2.5M5.5 15l2 2M10 16.5l1 1"/>'),
   clock: svg('<circle cx="12" cy="12" r="9"/><path d="M12 7.5V12l3 2"/>'),
   yen:   svg('<path d="M6 4l6 8 6-8M12 12v8M8 14h8M8 17h8"/>'),
   layers:svg('<path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/>'),
@@ -1121,7 +1122,7 @@ function injectHomeIcons(){
   // Trust bar icons (new spec — left trust items + right trusted card)
   set('tIcShield', I.shield);
   set('tIcTruck',  I.truck);
-  set('tIcHand',   I.handshake || I.shield);
+  set('tIcHand',   I.handshake);
   // Hero category chips
   set('icSkincare', I.spark);
   set('icBath',     I.box);
