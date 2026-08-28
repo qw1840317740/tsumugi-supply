@@ -1,10 +1,10 @@
-const jwt = require('jsonwebtoken');
+const authToken = require('./_auth');
 const { pool, genCode } = require('./_db');
 
 function getUserId(req) {
   const auth = req.headers.authorization;
   if (!auth || !auth.startsWith('Bearer ')) return null;
-  try { return jwt.verify(auth.slice(7), process.env.JWT_SECRET || 'dev-secret-7d').id; }
+  try { return authToken.verify(auth.slice(7)).id; }
   catch { return null; }
 }
 

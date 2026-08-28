@@ -63,5 +63,3 @@ function genCode(prefix) {
   return code;
 }
 module.exports = { pool, genCode };
-
-module.exports = { pool };

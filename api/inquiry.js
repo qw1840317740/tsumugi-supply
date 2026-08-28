@@ -1,4 +1,4 @@
-const jwt = require('jsonwebtoken');
+const authToken = require('./_auth');
 const { pool } = require('./_db');
 
 module.exports = async (req, res) => {
@@ -10,7 +10,7 @@ module.exports = async (req, res) => {
   let userId = null;
   const auth = req.headers.authorization;
   if (auth && auth.startsWith('Bearer ')) {
-    try { userId = jwt.verify(auth.slice(7), process.env.JWT_SECRET || 'dev-secret-7d').id; } catch {}
+    try { userId = authToken.verify(auth.slice(7)).id; } catch {}
   }
 
   try {

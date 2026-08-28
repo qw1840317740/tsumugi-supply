@@ -117,9 +117,11 @@
   <script defer src="assets/js/auth.js"></script>
   <script defer src="assets/js/chatbot.js?v=4"></script>
   <script>
-    const set=(id,h)=>{const e=document.getElementById(id);if(e)e.innerHTML=h;};
-    set('faqWaIc', ICON.phone); set('faqMailIc', ICON.mail);
-    document.querySelectorAll('.pmi').forEach(e=>e.innerHTML=ICON.plus);
+    window.addEventListener('DOMContentLoaded', () => {
+      const set=(id,h)=>{const e=document.getElementById(id);if(e)e.innerHTML=h;};
+      set('faqWaIc', ICON.phone); set('faqMailIc', ICON.mail);
+      document.querySelectorAll('.pmi').forEach(e=>e.innerHTML=ICON.plus);
+    });
   </script>
 </body>
 </html>

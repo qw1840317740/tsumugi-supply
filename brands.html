@@ -62,6 +62,7 @@
   <script defer src="assets/js/auth.js"></script>
   <script defer src="assets/js/chatbot.js?v=4"></script>
   <script>
+    window.addEventListener('DOMContentLoaded', () => {
     function render(){
       const letters = [...new Set(BRANDS.map(b=>b.letter))].sort();
       const az = document.getElementById('azIndex');
@@ -91,6 +92,7 @@
     addRenderer(render);
     render();
     requestAnimationFrame(()=>revealObs());
+    });
   </script>
 </body>
 </html>

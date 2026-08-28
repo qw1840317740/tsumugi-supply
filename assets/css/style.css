@@ -1112,7 +1112,6 @@ table.t td b{ color:var(--clay); font-family:var(--f-serif); font-size:1.1rem; }
 .legal-table td{ color:var(--ink); }
 .legal-table td a{ color:var(--clay); text-decoration:underline; text-underline-offset:3px; }
 @media(max-width:680px){ .legal-table th,.legal-table td{ padding:9px 10px; font-size:.86rem; } }
-+
 /* ---------- JAPANITEM reference rebuild · 1586 × 992 ---------- */
 @media (min-width:1025px){
   .site-header{ background:rgba(248,245,238,.96); backdrop-filter:none; -webkit-backdrop-filter:none; }
@@ -1253,4 +1252,32 @@ table.t td b{ color:var(--clay); font-family:var(--f-serif); font-size:1.1rem; }
   .trust-item:nth-child(2){ min-width:0; padding:0; }
   .trust-metric{ min-width:0; align-items:center; text-align:center; border:0; }
   .trust-card{ min-width:0; margin:0; }
+}
+
+@media (min-width:681px) and (max-width:1024px){
+  .trust .container{
+    display:grid;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:26px 18px;
+    padding:28px 40px;
+  }
+  .trust-item{ min-width:0; padding:0; grid-column:span 2; }
+  .trust-item:nth-child(2){ min-width:0; padding:0; }
+  .trust-divider{ display:none; }
+  .trust-metric{ min-width:0; align-items:center; text-align:center; border:0; }
+  .trust-card{ grid-column:1 / -1; width:min(100%,320px); min-width:0; margin:0 auto; justify-content:center; }
+}
+
+@media (max-width:680px){
+  .trust .container{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:22px 16px;
+    padding:24px 16px;
+  }
+  .trust-item{ grid-column:1 / -1; min-width:0; padding:0; }
+  .trust-item:nth-child(2){ min-width:0; padding:0; }
+  .trust-divider{ display:none; }
+  .trust-metric{ min-width:0; align-items:center; text-align:center; border:0; }
+  .trust-card{ grid-column:1 / -1; width:100%; min-width:0; margin:0; justify-content:center; }
 }

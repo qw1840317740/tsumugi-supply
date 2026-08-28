@@ -1,5 +1,5 @@
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
+const auth = require('./_auth');
 const { pool, genCode } = require('./_db');
 
 module.exports = async (req, res) => {
@@ -20,7 +20,7 @@ module.exports = async (req, res) => {
       [email.toLowerCase(), hash, company || null, customerCode]
     );
     const user = result.rows[0];
-    const token = jwt.sign({ id: user.id, email: user.email, cc: user.customer_code }, process.env.JWT_SECRET || 'dev-secret-7d', { expiresIn: '7d' });
+    const token = auth.sign({ id: user.id, email: user.email, cc: user.customer_code });
     return res.status(201).json({ token, user });
   } catch (err) {
     console.error('Register error:', err);

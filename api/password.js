@@ -1,12 +1,12 @@
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
+const authToken = require('./_auth');
 const { pool } = require('./_db');
 
 module.exports = async (req, res) => {
   const auth = req.headers.authorization;
   if (!auth || !auth.startsWith('Bearer ')) return res.status(401).json({ error: 'NOT_AUTHENTICATED' });
   let uid;
-  try { uid = jwt.verify(auth.slice(7), process.env.JWT_SECRET || 'dev-secret-7d').id; }
+  try { uid = authToken.verify(auth.slice(7)).id; }
   catch { return res.status(401).json({ error: 'NOT_AUTHENTICATED' }); }
 
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });

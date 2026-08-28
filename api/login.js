@@ -1,5 +1,5 @@
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
+const auth = require('./_auth');
 const { pool } = require('./_db');
 
 module.exports = async (req, res) => {
@@ -15,7 +15,7 @@ module.exports = async (req, res) => {
     const valid = await bcrypt.compare(password, user.password_hash);
     if (!valid) return res.status(401).json({ error: 'INVALID_CREDENTIALS' });
 
-    const token = jwt.sign({ id: user.id, email: user.email, cc: user.customer_code }, process.env.JWT_SECRET || 'dev-secret-7d', { expiresIn: '7d' });
+    const token = auth.sign({ id: user.id, email: user.email, cc: user.customer_code });
     return res.status(200).json({ token, user: { id: user.id, email: user.email, company: user.company, customer_code: user.customer_code } });
   } catch (err) {
     console.error('Login error:', err);

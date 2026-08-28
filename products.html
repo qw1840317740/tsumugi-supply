@@ -109,12 +109,14 @@
   <script defer src="assets/js/auth.js"></script>
   <script defer src="assets/js/chatbot.js?v=4"></script>
   <script>
-    document.getElementById('searchIc').innerHTML = ICON.search;
-    // Mobile: start with the filters panel collapsed. Desktop keeps it open
-    // (the <details open> attribute in markup is the default for >=861px).
-    if (window.matchMedia('(max-width: 860px)').matches) {
-      document.getElementById('filtersPanel')?.removeAttribute('open');
-    }
+    window.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('searchIc').innerHTML = ICON.search;
+      // Mobile: start with the filters panel collapsed. Desktop keeps it open
+      // (the <details open> attribute in markup is the default for >=861px).
+      if (window.matchMedia('(max-width: 860px)').matches) {
+        document.getElementById('filtersPanel')?.removeAttribute('open');
+      }
+    });
   </script>
 </body>
 </html>
