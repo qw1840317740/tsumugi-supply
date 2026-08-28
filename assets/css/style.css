@@ -1196,3 +1196,61 @@ table.t td b{ color:var(--clay); font-family:var(--f-serif); font-size:1.1rem; }
   .hero-photo-sm{ height:auto; aspect-ratio:3/4; }
   .trust{ margin-top:0; }
 }
+
+/* Trust bar final geometry — one owner, no inherited flex offsets. */
+@media (min-width:1500px){
+  .trust .container{
+    display:grid;
+    grid-template-columns:280px 290px 1px repeat(4,110px) 1px 256px;
+    column-gap:13px;
+    align-items:center;
+    justify-content:center;
+    width:100%; max-width:1586px; min-height:148px;
+    padding:30px 62px;
+  }
+  .trust-item,
+  .trust-metric,
+  .trust-card{
+    box-sizing:border-box;
+    min-width:0; margin:0; padding:0;
+    align-self:center;
+  }
+  .trust-item{ display:grid; grid-template-columns:42px minmax(0,1fr); gap:16px; align-items:center; }
+  .trust-item:nth-child(2){ padding:0; }
+  .trust-item > div,
+  .trust-card > div{ min-width:0; }
+  .trust-item b,
+  .trust-card b{ line-height:1.25; margin:0 0 5px; white-space:nowrap; }
+  .trust-item span,
+  .trust-card span{ line-height:1.35; margin:0; white-space:nowrap; }
+  .trust-ic{ width:42px; height:42px; display:grid; place-items:center; background:transparent; border:0; }
+  .trust-ic svg{ width:31px; height:31px; }
+  .trust-divider{ display:block; width:1px; height:58px; margin:0; justify-self:center; align-self:center; }
+  .trust-metric{
+    display:grid; grid-template-rows:30px 18px; gap:7px;
+    height:auto; place-items:center; text-align:center;
+    border:0;
+  }
+  .trust-metric b{ margin:0; line-height:30px; }
+  .trust-metric span{ margin:0; line-height:18px; }
+  .trust-card{
+    display:grid; grid-template-columns:34px minmax(0,1fr); gap:14px; align-items:center;
+    width:256px; min-height:72px; padding:14px 18px;
+  }
+  .trust-card-ic{ width:34px; height:34px; display:grid; place-items:center; background:transparent; border:0; }
+  .trust-card-ic svg{ width:27px; height:27px; }
+}
+
+@media (min-width:1025px) and (max-width:1499px){
+  .trust .container{
+    display:grid;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:24px 18px;
+    padding:28px 40px;
+  }
+  .trust-divider{ display:none; }
+  .trust-item{ min-width:0; padding:0; }
+  .trust-item:nth-child(2){ min-width:0; padding:0; }
+  .trust-metric{ min-width:0; align-items:center; text-align:center; border:0; }
+  .trust-card{ min-width:0; margin:0; }
+}
