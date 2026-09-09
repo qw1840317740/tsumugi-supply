@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /api/
 
-Sitemap: https://japanitem.com/sitemap.xml
+Sitemap: https://www.japanitem.com/sitemap.xml

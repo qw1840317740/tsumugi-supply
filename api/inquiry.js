@@ -4,7 +4,7 @@ const { pool } = require('./_db');
 module.exports = async (req, res) => {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
-  const { name, company, email, country, product, quantity, notes } = req.body || {};
+  const { name, company, email, country, product, brand, quantity, notes } = req.body || {};
   if (!name || !email) return res.status(400).json({ error: 'MISSING_FIELDS' });
 
   let userId = null;
@@ -15,8 +15,8 @@ module.exports = async (req, res) => {
 
   try {
     await pool.query(
-      'INSERT INTO inquiries (user_id, name, company, email, country, product, quantity, notes) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)',
-      [userId, name, company||null, email.toLowerCase(), country||null, product||null, quantity||null, notes||null]
+      'INSERT INTO inquiries (user_id, name, company, email, country, product, brand, quantity, notes) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)',
+      [userId, name, company||null, email.toLowerCase(), country||null, product||null, brand||null, quantity||null, notes||null]
     );
     return res.status(201).json({ ok: true });
   } catch {

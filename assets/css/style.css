@@ -1281,3 +1281,6 @@ table.t td b{ color:var(--clay); font-family:var(--f-serif); font-size:1.1rem; }
   .trust-metric{ min-width:0; align-items:center; text-align:center; border:0; }
   .trust-card{ grid-column:1 / -1; width:100%; min-width:0; margin:0; justify-content:center; }
 }
+.form-status{min-height:1.4em;margin-top:12px;font-size:.88rem;color:var(--ink-3)}
+.form-status.success{color:var(--sumi);font-weight:600}
+.form-status.error{color:#a33a24;font-weight:600}

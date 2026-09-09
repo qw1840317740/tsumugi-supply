@@ -260,7 +260,7 @@ async function renderWishlist(el){
     const items=ids.map(id=>(typeof PRODUCTS!=='undefined'?PRODUCTS.find(p=>p.id===id):null)).filter(Boolean);
     el.innerHTML=items.map(p=>`
       <div class="acct-wish">
-        <a href="product.html?id=${p.id}" style="display:flex;gap:10px;align-items:center;flex:1;min-width:0" onclick="closeAccountPanel()">
+        <a href="/products/${encodeURIComponent(p.id)}.html" style="display:flex;gap:10px;align-items:center;flex:1;min-width:0" onclick="closeAccountPanel()">
           <div class="thumb" style="background:${p.hue};color:#fff;width:36px;height:36px;border-radius:8px;display:grid;place-items:center;font-family:var(--f-serif);font-size:.9rem;flex:none">${(typeof brandKana==='function'?brandKana(p.brand):p.brand.charAt(0))}</div>
           <div style="min-width:0"><div style="font-size:.86rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${p.name}</div><div class="muted" style="font-size:.76rem">${p.brand} · ${p.unit}</div></div>
         </a>

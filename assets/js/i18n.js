@@ -169,6 +169,7 @@ const L = {
     'req.notes':'Notes (link, photo reference, packaging needs)','req.notesPh':"Paste a product URL or describe what you're looking for…",
     'req.q1':'12–48 pcs','req.q2':'48–240 pcs','req.q3':'240–1,000 pcs','req.q4':'1,000–5,000 pcs','req.q5':'5,000+ pcs (bulk quote)',
     'req.send':'Send product request','req.phName':'Jane Tanaka','req.phCo':'Tanaka Beauty Co.','req.phEm':'you@shop.com','req.phCountry':'e.g. Singapore',
+    'req.sending':'Sending your request…','req.sent':'Request received. We will reply within 1 business day.','req.error':'We could not send your request. Please try again or email info@japanitem.com.','req.errorRequired':'Please enter your name and email address.',
     // faq
     'faq.crumb':'FAQ','faq.eyebrow':'Help centre','faq.title':'Frequently asked questions',
     'faq.lead':'Everything about pricing, payment, shipping, authenticity and after-sales. Can’t find your answer? Message us by phone or email.',
@@ -462,6 +463,7 @@ const L = {
     'req.notes':'备注（链接、参考图、包装需求）','req.notesPh':'粘贴商品链接或描述你的需求…',
     'req.q1':'12–48 件','req.q2':'48–240 件','req.q3':'240–1,000 件','req.q4':'1,000–5,000 件','req.q5':'5,000+ 件（批量报价）',
     'req.send':'发送寻货需求','req.phName':'张 三','req.phCo':'某某美妆有限公司','req.phEm':'you@shop.com','req.phCountry':'例如：新加坡',
+    'req.sending':'正在发送请求…','req.sent':'已收到询价，我们将在 1 个工作日内回复。','req.error':'发送失败，请重试或邮件联系 info@japanitem.com。','req.errorRequired':'请填写姓名和邮箱。',
     'faq.crumb':'常见问题','faq.eyebrow':'帮助中心','faq.title':'常见问题',
     'faq.lead':'关于价格、付款、运输、正品与售后的所有解答。没找到答案？电话或邮件联系我们。',
     'faq.ctaEy':'还有疑问？','faq.ctaT':'与采购顾问聊聊','faq.ctaP':'我们一个工作日内回复 —— 电话通常更快。',
@@ -662,6 +664,7 @@ const L = {
     'req.notes':'備考（URL・画像・パッケージ要件）','req.notesPh':'商品URLを貼るか、ご要望を記入…',
     'req.q1':'12〜48個','req.q2':'48〜240個','req.q3':'240〜1,000個','req.q4':'1,000〜5,000個','req.q5':'5,000+個（特別見積）',
     'req.send':'商品リクエストを送信','req.phName':'山田 花子','req.phCo':'〇〇ビューティー株式会社','req.phEm':'you@shop.com','req.phCountry':'例：シンガポール',
+    'req.sending':'リクエストを送信中…','req.sent':'お問い合わせを受け付けました。1営業日以内にご返信します。','req.error':'送信できませんでした。再度お試しいただくか info@japanitem.com までメールしてください。','req.errorRequired':'お名前とメールアドレスを入力してください。',
     'faq.crumb':'よくある質問','faq.eyebrow':'ヘルプセンター','faq.title':'よくある質問',
     'faq.lead':'価格・支払い・配送・正規品・アフターサービスについて。解決しない場合はお電話・メールへ。',
     'faq.ctaEy':'まだ質問がありますか？','faq.ctaT':'仕入スペシャリストに相談','faq.ctaP':'1営業日以内に返信 — お電話ならさらに早いです。',
@@ -755,7 +758,10 @@ function t(key, fallback){
 // t with token replacement: t2('pc.add', {QTY:12, UNIT:'150ml'})
 function t2(key, vars, fallback){
   let s = t(key, fallback);
-  if(vars) for(const k in vars){ s = s.split(k).join(vars[k]); }
+  if(vars) for(const k in vars){
+    s = s.split(`{${k}}`).join(vars[k]);
+    s = s.split(k).join(vars[k]);
+  }
   return s;
 }
 

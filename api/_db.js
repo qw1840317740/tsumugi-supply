@@ -42,6 +42,7 @@ pool.query(`
     email VARCHAR(255) NOT NULL,
     country VARCHAR(255),
     product VARCHAR(500),
+    brand VARCHAR(255),
     quantity VARCHAR(100),
     notes TEXT,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
@@ -51,6 +52,7 @@ pool.query(`
     email VARCHAR(255) UNIQUE NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
   );
+  ALTER TABLE inquiries ADD COLUMN IF NOT EXISTS brand VARCHAR(255);
 `).catch(() => {});
 
 // Backfill customer_code for existing users

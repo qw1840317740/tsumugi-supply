@@ -622,19 +622,28 @@ function catName(id){ const v = t('c.'+id); return (v===('c.'+id))? id : v; }
 function subName(id){ const v = t('cs.'+id); return (v===('cs.'+id))? id : v; }
 function catOf(p){ return catName(p.category); }
 function subOf(p){ return p.sub ? subName(p.sub) : catName(p.category); }
+function productUrl(p){ return `/products/${encodeURIComponent(p.id)}.html`; }
+function activeProductId(){
+  const queryId = new URLSearchParams(location.search).get('id');
+  if(queryId) return queryId;
+  const embeddedId = document.getElementById('pdp')?.dataset.productId;
+  if(embeddedId) return embeddedId;
+  const match = location.pathname.match(/\/products\/([^/]+)\.html$/i);
+  return match ? decodeURIComponent(match[1]) : null;
+}
 function productCard(p){
   const tag = p.tag==='best' ? `<span class="tag tag-best">${t('pc.best')}</span>`
             : p.tag==='new'  ? `<span class="tag tag-new">${t('pc.new')}</span>`
             : p.tag==='low'  ? `<span class="tag tag-low">${t('pc.low')}</span>` : '';
   return `
   <article class="product">
-    <a class="media" href="product.html?id=${p.id}">${productArt(p)}${tag}</a>
+    <a class="media" href="${productUrl(p)}">${productArt(p)}${tag}</a>
     <div class="body">
       <span class="cat">${subOf(p)}</span>
-      <h4><a href="product.html?id=${p.id}">${p.name}</a></h4>
+      <h4><a href="${productUrl(p)}">${p.name}</a></h4>
       <span class="brand">${p.brand} <span class="d"></span> ${p.unit}</span>
       <div class="foot">
-        <a class="btn btn-primary" href="product.html?id=${p.id}">${t('pc.view')}</a>
+        <a class="btn btn-primary" href="${productUrl(p)}">${t('pc.view')}</a>
         <button class="icon-btn save" aria-label="Save" onclick="handleSave(this,'${p.id}')">${ICON.heart}</button>
       </div>
     </div>
@@ -840,7 +849,7 @@ function initShop(){
    ========================================================= */
 function initPDP(){
   const host = $('#pdp'); if(!host) return;
-  const id = new URLSearchParams(location.search).get('id');
+  const id = activeProductId();
   const p = PRODUCTS.find(x=>x.id===id);
   if(!p){
     host.innerHTML = `<div class="container" style="padding:80px 24px;text-align:center">
@@ -955,13 +964,14 @@ function injectSEO(){
   // language and (where applicable) the active product.
   const path = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
   const params = new URLSearchParams(location.search);
-  const isProd = path.indexOf('product') === 0;
+  const activeId = activeProductId();
+  const isProd = Boolean(activeId) && Boolean(document.getElementById('pdp'));
   // Brand link (used in PDP branch)
-  const brand = isProd ? (BRANDS.find(b => b.name === (PRODUCTS.find(x => x.id === params.get('id')) || {}).brand) || {}) : null;
+  const brand = isProd ? (BRANDS.find(b => b.name === (PRODUCTS.find(x => x.id === activeId) || {}).brand) || {}) : null;
 
   // ----- PDP branch -----
   if(isProd){
-    const id = params.get('id');
+    const id = activeId;
     const p  = PRODUCTS.find(x => x.id === id);
     if(!p) return;
     const catHuman = p.sub ? subName(p.sub) : catName(p.category);
@@ -973,7 +983,7 @@ function injectSEO(){
     const twDesc   = t2('seo.pdp.twdesc',{NAME: p.name, BRAND: brHuman, CAT: catHuman});
     document.title = title;
     const m = document.head.querySelector('meta[name="description"]'); if(m) m.setAttribute('content', desc);
-    const cleanUrl = location.origin + location.pathname + '?id=' + encodeURIComponent(p.id);
+    const cleanUrl = location.origin + productUrl(p);
     _setLink('canonical', cleanUrl);
     _setMeta('property','og:url', cleanUrl);
     _setMeta('property','og:title', title);
@@ -1264,18 +1274,32 @@ async function handleSubscribe(form){
 /* ---------- Product request form (DB-backed) ---------- */
 async function handleInquiry(form){
   const data = Object.fromEntries(new FormData(form).entries());
-  if(!data.email || !data.name) return;
+  const status = form.querySelector('.form-status');
+  const button = form.querySelector('button[type="submit"]');
+  if(!data.email || !data.name){
+    if(status){ status.className='form-status error'; status.textContent=t('req.errorRequired'); }
+    return;
+  }
   const token = localStorage.getItem('kaisei_token');
   const headers = { 'Content-Type':'application/json' };
   if(token) headers.Authorization = 'Bearer '+token;
+  if(button){ button.disabled=true; button.setAttribute('aria-busy','true'); }
+  if(status){ status.className='form-status'; status.textContent=t('req.sending'); }
   try{
-    await fetch('/api/inquiry', {
+    const response = await fetch('/api/inquiry', {
       method:'POST', headers,
       body: JSON.stringify(data),
     });
-  }catch{}
-  form.reset();
-  toast(typeof t === 'function' ? t('t.requestSent') : 'Request sent!');
+    if(!response.ok) throw new Error(`Inquiry failed: ${response.status}`);
+    form.reset();
+    if(status){ status.className='form-status success'; status.textContent=t('req.sent'); }
+    toast(typeof t === 'function' ? t('t.requestSent') : 'Request sent!');
+  }catch(error){
+    console.error(error);
+    if(status){ status.className='form-status error'; status.textContent=t('req.error'); }
+  }finally{
+    if(button){ button.disabled=false; button.removeAttribute('aria-busy'); }
+  }
 }
 
 /* mega menu: click-to-toggle + click-outside/Escape to close (hover still works via CSS) */

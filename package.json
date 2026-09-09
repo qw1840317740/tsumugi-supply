@@ -1,6 +1,9 @@
 {
   "name": "kaisei-wholesale",
   "private": true,
+  "scripts": {
+    "build:seo": "node tools/generate-seo-pages.js"
+  },
   "dependencies": {
     "pg": "^8.11.3",
     "bcryptjs": "^2.4.3",
