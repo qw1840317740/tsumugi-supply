@@ -14,12 +14,17 @@ module.exports = async (req, res) => {
   }
 
   try {
+    // Older production databases may predate the brand field. The schema
+    // bootstrap in _db runs asynchronously, so ensure this migration has
+    // completed before accepting the first inquiry on a cold start.
+    await pool.query('ALTER TABLE inquiries ADD COLUMN IF NOT EXISTS brand VARCHAR(255)');
     await pool.query(
       'INSERT INTO inquiries (user_id, name, company, email, country, product, brand, quantity, notes) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)',
       [userId, name, company||null, email.toLowerCase(), country||null, product||null, brand||null, quantity||null, notes||null]
     );
     return res.status(201).json({ ok: true });
-  } catch {
+  } catch (error) {
+    console.error('Inquiry submission failed:', error);
     return res.status(500).json({ error: 'SERVER_ERROR' });
   }
 };
