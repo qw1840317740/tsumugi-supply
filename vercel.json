@@ -12,12 +12,25 @@
       "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
     },
     {
-      "source": "/assets/(.*).(svg|png)",
+      "source": "/assets/(.*).(svg|png|jpg|jpeg|webp|avif)",
       "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
     },
     {
       "source": "/(.*)\\.html",
       "headers": [{ "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/catalog.html",
+      "destination": "/products.html",
+      "permanent": true
+    },
+    {
+      "source": "/product.html",
+      "has": [{ "type": "query", "key": "id", "value": "(?<id>[0-9]+)" }],
+      "destination": "/products/:id.html",
+      "permanent": true
     }
   ]
 }

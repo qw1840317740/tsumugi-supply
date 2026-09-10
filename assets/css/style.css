@@ -544,7 +544,7 @@ h2.h{ font-size:clamp(1.7rem,3.2vw,2.4rem); }
 .tag-low{ background:var(--gold); color:#241d09; }
 .product .body{ padding:15px 15px 16px; display:flex; flex-direction:column; gap:7px; flex:1; }
 .product .cat{ font-family:var(--f-mono); font-size:.64rem; letter-spacing:.16em; text-transform:uppercase; color:var(--clay); }
-.product h4{ font-size:1.02rem; line-height:1.25; }
+.product h4, .product .body h2{ font-size:1.02rem; line-height:1.25; margin:0; }
 .product .brand{ font-size:.8rem; color:var(--ink-3); margin-top:-3px; gap:7px; }
 .product .brand .d{ width:3px;height:3px;border-radius:50%;background:var(--ink-3); }
 .product .price{ display:flex; align-items:baseline; gap:7px; margin-top:6px; }
@@ -964,7 +964,7 @@ table.t td b{ color:var(--clay); font-family:var(--f-serif); font-size:1.1rem; }
   .product-grid, .product-grid.cols-5, .product-grid.cols-3{ grid-template-columns:repeat(3,1fr); gap:8px; }
   .product-grid.cols-4{ grid-template-columns:repeat(2,1fr); }
   .product .body{ padding:9px 9px 10px; gap:4px; }
-  .product h4{ font-size:.78rem; line-height:1.18; }
+  .product h4, .product .body h2{ font-size:.78rem; line-height:1.18; }
   .product .brand{ font-size:.68rem; gap:5px; }
   .product .cat{ font-size:.58rem; letter-spacing:.12em; }
   .product .foot{ display:none; }
@@ -1284,3 +1284,33 @@ table.t td b{ color:var(--clay); font-family:var(--f-serif); font-size:1.1rem; }
 .form-status{min-height:1.4em;margin-top:12px;font-size:.88rem;color:var(--ink-3)}
 .form-status.success{color:var(--sumi);font-weight:600}
 .form-status.error{color:#a33a24;font-weight:600}
+/* Crawlable catalog and collection pages. These links remain useful and
+   visible with or without JavaScript, so discovery never depends on filters. */
+.seo-directory{ border-top:1px solid var(--line-soft); background:var(--paper-2); }
+.seo-index-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-bottom:28px; }
+.seo-index-card{ display:flex; flex-direction:column; gap:5px; padding:18px 20px; border:1px solid var(--line); border-radius:var(--radius-sm); background:var(--paper); transition:transform .2s var(--ease-soft),border-color .2s; }
+.seo-index-card:hover{ transform:translateY(-2px); border-color:var(--sumi); }
+.seo-index-card strong{ font-family:var(--f-serif); font-size:1.08rem; }
+.seo-index-card span,.seo-count{ color:var(--ink-3); font-family:var(--f-mono); font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; }
+.seo-brand-links{ display:flex; flex-wrap:wrap; gap:8px; }
+.seo-brand-links a{ padding:8px 12px; border:1px solid var(--line); border-radius:999px; background:var(--paper); font-size:.82rem; }
+.seo-brand-links a:hover{ border-color:var(--clay); color:var(--clay); }
+.seo-collection-hero h1{ margin-top:12px; }
+.seo-count{ display:inline-flex; margin-top:22px; padding:9px 12px; border:1px solid var(--line); border-radius:999px; background:rgba(255,255,255,.44); }
+.seo-link-list{ list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1px; border:1px solid var(--line-soft); background:var(--line-soft); border-radius:var(--radius-sm); overflow:hidden; }
+.seo-link-list li{ min-width:0; background:var(--paper); }
+.seo-link-list a{ min-height:72px; padding:13px 15px; display:flex; flex-direction:column; justify-content:center; gap:4px; }
+.seo-link-list a:hover{ background:var(--paper-3); }
+.seo-link-list span{ overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-weight:600; font-size:.88rem; }
+.seo-link-list small{ overflow:hidden; text-overflow:ellipsis; white-space:nowrap; color:var(--ink-3); font-family:var(--f-mono); font-size:.64rem; }
+.seo-related{ margin-top:64px; }
+.hero-photo picture{ display:contents; }
+@media (max-width:860px){
+  .seo-index-grid{ grid-template-columns:repeat(2,1fr); }
+  .seo-link-list{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+}
+@media (max-width:560px){
+  .seo-index-grid,.seo-link-list{ grid-template-columns:1fr; }
+  .seo-brand-links{ gap:6px; }
+  .seo-brand-links a{ font-size:.76rem; padding:7px 10px; }
+}

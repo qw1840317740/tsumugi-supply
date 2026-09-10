@@ -28,6 +28,10 @@ const SITE = {
   year: 2024,
 };
 const STORE_KEY = 'tsumugi_cart_v1';
+// The source catalog can contain repeated imports of the same JAN. Keep one
+// canonical record per id so counts, filters, related items and SEO agree.
+const CATALOG_PRODUCTS = [...new Map(PRODUCTS.map(product => [product.id, product])).values()];
+const CATALOG_BRANDS = [...new Map(BRANDS.map(brand => [brand.name, brand])).values()];
 
 /* ---------- helpers ---------- */
 const $  = (s, r=document) => r.querySelector(s);
@@ -311,7 +315,7 @@ function productPhoto(p){
   // art underneath shows as a graceful fallback.
   if (p.jan) return `assets/products/${p.jan}.jpg`;
   const pool = CAT_IMG[p.category] || BEAUTY_IMG;
-  const id = pool[Math.abs(PRODUCTS.indexOf(p)) % pool.length];
+  const id = pool[Math.abs(CATALOG_PRODUCTS.indexOf(p)) % pool.length];
   return `https://images.unsplash.com/${id}?w=600&h=600&q=80&auto=format&fit=crop`;
 }
 
@@ -468,11 +472,11 @@ function buildFooter(){
 function loadCart(){ try{ return JSON.parse(localStorage.getItem(STORE_KEY)) || {}; }catch{ return {}; } }
 function saveCart(c){ localStorage.setItem(STORE_KEY, JSON.stringify(c)); refreshCartUI(); }
 function cartQty(){ return Object.values(loadCart()).reduce((s,l)=>s+l,0); }
-function cartTotal(){ return Object.entries(loadCart()).reduce((s,[id,q])=>{ const p=PRODUCTS.find(x=>x.id===id); return s + (p?p.price*q:0); },0); }
+function cartTotal(){ return Object.entries(loadCart()).reduce((s,[id,q])=>{ const p=CATALOG_PRODUCTS.find(x=>x.id===id); return s + (p?p.price*q:0); },0); }
 
 function addToCart(id, qty=1){
   const c = loadCart(); c[id] = (c[id]||0) + qty; saveCart(c);
-  const p = PRODUCTS.find(x=>x.id===id);
+  const p = CATALOG_PRODUCTS.find(x=>x.id===id);
   toast(t2('t.added', {ITEM:p?p.name:'', QTY:qty}));
   openCart();
 }
@@ -487,7 +491,7 @@ function renderCartItems(){
     body.innerHTML = `<div class="cart-empty">${ICON.box}<p>${t('cart.empty')}<br><a href="products.html" style="color:var(--sumi);font-weight:600">${t('cart.browse')}</a> →</p></div>`;
   } else {
     body.innerHTML = ids.map(id=>{
-      const p = PRODUCTS.find(x=>x.id===id); if(!p) return '';
+      const p = CATALOG_PRODUCTS.find(x=>x.id===id); if(!p) return '';
       const q = c[id];
       return `<div class="cart-item">
         <div class="thumb" style="background:${p.hue};color:#fff">${brandKana(p.brand)}</div>
@@ -596,7 +600,7 @@ async function requestQuote(){
   // Build order items from cart
   const cart = loadCart();
   const items = Object.entries(cart).map(([id, qty])=>{
-    const p = PRODUCTS.find(x=>x.id===id);
+    const p = CATALOG_PRODUCTS.find(x=>x.id===id);
     return p ? { id:p.id, name:p.name, brand:p.brand, price:p.price, qty } : null;
   }).filter(Boolean);
   // Save to DB
@@ -623,6 +627,23 @@ function subName(id){ const v = t('cs.'+id); return (v===('cs.'+id))? id : v; }
 function catOf(p){ return catName(p.category); }
 function subOf(p){ return p.sub ? subName(p.sub) : catName(p.category); }
 function productUrl(p){ return `/products/${encodeURIComponent(p.id)}.html`; }
+function seoSlug(value){
+  return String(value || '').toLowerCase().replace(/&/g,'-and-').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'') || 'brand';
+}
+function brandSeoUrl(name){ return `/brands/${encodeURIComponent(seoSlug(name))}.html`; }
+function categorySeoUrl(id){ return `/categories/${encodeURIComponent(id)}.html`; }
+function gtinForSchema(value){
+  const gtin = String(value || '');
+  return /^\d{8}$/.test(gtin) ? {gtin8:gtin}
+       : /^\d{12}$/.test(gtin) ? {gtin12:gtin}
+       : /^\d{13}$/.test(gtin) ? {gtin13:gtin}
+       : /^\d{14}$/.test(gtin) ? {gtin14:gtin}
+       : {};
+}
+function truncateSeo(value, max){
+  const text = String(value || '').replace(/\s+/g,' ').trim();
+  return text.length <= max ? text : text.slice(0, Math.max(1, max - 1)).trim() + '…';
+}
 function activeProductId(){
   const queryId = new URLSearchParams(location.search).get('id');
   if(queryId) return queryId;
@@ -640,7 +661,7 @@ function productCard(p){
     <a class="media" href="${productUrl(p)}">${productArt(p)}${tag}</a>
     <div class="body">
       <span class="cat">${subOf(p)}</span>
-      <h4><a href="${productUrl(p)}">${p.name}</a></h4>
+      <h2><a href="${productUrl(p)}">${p.name}</a></h2>
       <span class="brand">${p.brand} <span class="d"></span> ${p.unit}</span>
       <div class="foot">
         <a class="btn btn-primary" href="${productUrl(p)}">${t('pc.view')}</a>
@@ -674,7 +695,7 @@ function initShop(){
   let currentList = [];
 
   function apply(){
-    let list = PRODUCTS.slice();
+    let list = CATALOG_PRODUCTS.slice();
     if(state.cat)   list = list.filter(p=>p.category===state.cat);
     if(state.sub)   list = list.filter(p=>p.sub===state.sub);
     if(state.brand) list = list.filter(p=>p.brand===state.brand);
@@ -771,10 +792,10 @@ function initShop(){
   if(catList){
     buildCats = ()=>{
       const topsHtml = CATEGORIES.map(c=>{
-        const n = PRODUCTS.filter(p=>p.category===c.id).length;
+        const n = CATALOG_PRODUCTS.filter(p=>p.category===c.id).length;
         if(n===0) return '';
         const liveSubs = c.subs
-          .map(s=>({id:s.id, n:PRODUCTS.filter(p=>p.category===c.id && p.sub===s.id).length}))
+          .map(s=>({id:s.id, n:CATALOG_PRODUCTS.filter(p=>p.category===c.id && p.sub===s.id).length}))
           .filter(s=>s.n>0);
         const expanded = (state.cat===c.id);
         const subsHtml = (expanded && liveSubs.length)
@@ -786,7 +807,7 @@ function initShop(){
         const caret = liveSubs.length ? `<span class="caret ${expanded?'open':''}">${ICON.chev}</span>` : '';
         return `<li><a data-cat="${c.id}" class="${state.cat===c.id&&!state.sub?'on':''}">${catName(c.id)} <span class="n">${n}</span>${caret}</a>${subsHtml}</li>`;
       }).join('');
-      catList.innerHTML = `<li><a data-cat="" data-sub="" class="${!state.cat?'on':''}">${t('shop.allP')} <span class="n">${PRODUCTS.length}</span></a></li>` + topsHtml;
+      catList.innerHTML = `<li><a data-cat="" data-sub="" class="${!state.cat?'on':''}">${t('shop.allP')} <span class="n">${CATALOG_PRODUCTS.length}</span></a></li>` + topsHtml;
     };
     buildCats();
     catList.addEventListener('click', e=>{
@@ -810,7 +831,7 @@ function initShop(){
   let buildBrands = ()=>{};
   if(brandList){
     buildBrands = ()=>{
-      brandList.innerHTML = BRANDS.map(b=>{ const n=PRODUCTS.filter(p=>p.brand===b.name).length; if(n===0) return ''; return `<li><a data-brand="${b.name}" class="${state.brand===b.name?'on':''}">${brandName(b)} <span class="n">${n}</span></a></li>`; }).join('');
+      brandList.innerHTML = CATALOG_BRANDS.map(b=>{ const n=CATALOG_PRODUCTS.filter(p=>p.brand===b.name).length; if(n===0) return ''; return `<li><a data-brand="${b.name}" class="${state.brand===b.name?'on':''}">${brandName(b)} <span class="n">${n}</span></a></li>`; }).join('');
     };
     buildBrands();
     brandList.addEventListener('click', e=>{
@@ -850,7 +871,7 @@ function initShop(){
 function initPDP(){
   const host = $('#pdp'); if(!host) return;
   const id = activeProductId();
-  const p = PRODUCTS.find(x=>x.id===id);
+  const p = CATALOG_PRODUCTS.find(x=>x.id===id);
   if(!p){
     host.innerHTML = `<div class="container" style="padding:80px 24px;text-align:center">
       <h1 class="h" data-i18n="pdp.notfound"></h1>
@@ -861,21 +882,21 @@ function initPDP(){
   }
   document.title = `${p.name} · ${SITE.name}`;
   const brand = BRANDS.find(b => (b.name||'').toLowerCase() === (p.brand||'').toLowerCase()) || {blurb:''};
-  const related = (PRODUCTS.filter(x=>x.sub===p.sub && x.id!==p.id).length>=4
-    ? PRODUCTS.filter(x=>x.sub===p.sub && x.id!==p.id)
-    : PRODUCTS.filter(x=>x.category===p.category && x.id!==p.id)).slice(0,4);
+  const related = (CATALOG_PRODUCTS.filter(x=>x.sub===p.sub && x.id!==p.id).length>=4
+    ? CATALOG_PRODUCTS.filter(x=>x.sub===p.sub && x.id!==p.id)
+    : CATALOG_PRODUCTS.filter(x=>x.category===p.category && x.id!==p.id)).slice(0,4);
   const tag = p.tag==='best'?t('pdp.tag.best'):p.tag==='new'?t('pdp.tag.new'):p.tag==='low'?t('pdp.tag.low'):'';
 
   function build(){
     host.innerHTML = `
     <div class="container pdp-wrap">
-      <div class="breadcrumb"><a href="index.html">${t('nav.home')}</a><span class="sep">/</span><a href="products.html">${t('nav.products')}</a><span class="sep">/</span><a href="products.html?cat=${p.category}">${catName(p.category)}</a>${p.sub?`<span class="sep">/</span><a href="products.html?cat=${p.category}&sub=${p.sub}">${subName(p.sub)}</a>`:''}<span class="sep">/</span><span class="cur">${p.name}</span></div>
+      <div class="breadcrumb"><a href="index.html">${t('nav.home')}</a><span class="sep">/</span><a href="products.html">${t('nav.products')}</a><span class="sep">/</span><a href="${categorySeoUrl(p.category)}">${catName(p.category)}</a>${p.sub?`<span class="sep">/</span><a href="products.html?cat=${p.category}&sub=${p.sub}">${subName(p.sub)}</a>`:''}<span class="sep">/</span><span class="cur">${p.name}</span></div>
       <div class="pdp-grid">
         <div class="pdp-media">${productArt(p)}${tag?`<span class="tag ${p.tag==='best'?'tag-best':p.tag==='new'?'tag-new':'tag-low'}" style="top:16px;left:16px">${tag}</span>`:''}</div>
         <div class="pdp-info">
           <span class="cat">${subOf(p)}</span>
           <h1>${p.name}</h1>
-          <a class="brandlink" href="products.html?brand=${encodeURIComponent(p.brand)}">${brandLogo(brand,28)} <span>${brandName(brand)}</span> ${ICON.arrow}</a>
+          <a class="brandlink" href="${brandSeoUrl(p.brand)}">${brandLogo(brand,28)} <span>${brandName(brand)}</span> ${ICON.arrow}</a>
           <p class="pdp-blurb">${brand.blurb||t('pdp.desc')}</p>
           <div class="pdp-specs">
             <div><span>${t('pdp.brand')}</span><b>${brandName(brand)}</b></div>
@@ -967,18 +988,20 @@ function injectSEO(){
   const activeId = activeProductId();
   const isProd = Boolean(activeId) && Boolean(document.getElementById('pdp'));
   // Brand link (used in PDP branch)
-  const brand = isProd ? (BRANDS.find(b => b.name === (PRODUCTS.find(x => x.id === activeId) || {}).brand) || {}) : null;
+  const brand = isProd ? (BRANDS.find(b => b.name === (CATALOG_PRODUCTS.find(x => x.id === activeId) || {}).brand) || {}) : null;
 
   // ----- PDP branch -----
   if(isProd){
     const id = activeId;
-    const p  = PRODUCTS.find(x => x.id === id);
+    const p  = CATALOG_PRODUCTS.find(x => x.id === id);
     if(!p) return;
     const catHuman = p.sub ? subName(p.sub) : catName(p.category);
     const brObj    = BRANDS.find(b => b.name === p.brand) || {};
     const brHuman  = brandName(brObj);
-    const title    = t2('seo.pdp.title', {NAME: p.name, BRAND: brHuman, CAT: catHuman});
-    const desc     = t2('seo.pdp.desc',  {NAME: p.name, BRAND: brHuman, CAT: catHuman});
+    const jan      = String(p.jan || p.id);
+    const suffix   = ` | JAN ${jan} | JAPANITEM`;
+    const title    = `${truncateSeo(`${p.name} — ${brHuman}`, 65 - suffix.length)}${suffix}`;
+    const desc     = truncateSeo(t2('seo.pdp.desc',  {NAME: p.name, BRAND: brHuman, CAT: catHuman}), 155);
     const ogDesc   = t2('seo.pdp.ogdesc',{NAME: p.name, BRAND: brHuman, CAT: catHuman});
     const twDesc   = t2('seo.pdp.twdesc',{NAME: p.name, BRAND: brHuman, CAT: catHuman});
     document.title = title;
@@ -1000,14 +1023,13 @@ function injectSEO(){
     const photoRel = productPhoto(p).replace(/^\/+/, '');
     _ld('product', { '@context':'https://schema.org','@type':'Product',
       name:p.name, brand:{'@type':'Brand', name:brHuman}, category:catHuman,
-      sku:p.id, mpn:p.id, gtin13:(p.jan||p.id).replace(/^0+/, ''), description:desc,
-      image: location.origin + '/' + photoRel,
-      offers:{ '@type':'Offer', availability:'https://schema.org/InStock', url:cleanUrl } });
+      sku:p.id, mpn:p.id, ...gtinForSchema(p.jan||p.id), description:desc,
+      image: location.origin + '/' + photoRel, url:cleanUrl });
     _ld('breadcrumb', { '@context':'https://schema.org','@type':'BreadcrumbList',
       itemListElement:[
         {'@type':'ListItem', position:1, name:'Home', item:location.origin+'/'},
         {'@type':'ListItem', position:2, name:'Products', item:new URL('products.html', location.origin).href},
-        {'@type':'ListItem', position:3, name:catName(p.category), item:new URL('products.html?cat='+p.category, location.origin).href},
+        {'@type':'ListItem', position:3, name:catName(p.category), item:new URL(categorySeoUrl(p.category), location.origin).href},
         ...(p.sub?[{'@type':'ListItem', position:4, name:catHuman, item:new URL('products.html?cat='+p.category+'&sub='+p.sub, location.origin).href},{'@type':'ListItem', position:5, name:p.name, item:cleanUrl}]:[{'@type':'ListItem', position:4, name:p.name, item:cleanUrl}]) ] });
     return;
   }
@@ -1052,7 +1074,7 @@ function mount(){
   skip.className = 'skip-link';
   skip.setAttribute('data-i18n','a11y.skip'); skip.textContent = 'Skip to content';
   document.body.insertBefore(skip, document.body.firstChild);
-  const tgt = document.querySelector('.hero, .page-hero, main, #pdp');
+  const tgt = document.querySelector('main, #pdp, .hero, .page-hero');
   if(tgt){
     if(!tgt.id) tgt.id = 'content';
     tgt.setAttribute('tabindex','-1');
@@ -1176,7 +1198,7 @@ function initHomeGrids(){
   if(cg && !cg.dataset.filled){
     cg.dataset.filled = '1';
     cg.innerHTML = CATEGORIES.map(c => {
-      const n = PRODUCTS.filter(p => p.category === c.id).length;
+      const n = CATALOG_PRODUCTS.filter(p => p.category === c.id).length;
       if(n === 0) return '';
       const usedSubs = (c.subs || []).filter(s => (s.count || 0) > 0).length;
       return `
@@ -1193,7 +1215,7 @@ function initHomeGrids(){
   const fg = document.getElementById('featuredGrid');
   if(fg && !fg.dataset.filled){
     fg.dataset.filled = '1';
-    const pool = PRODUCTS.filter(p => p.tag === 'best' || p.tag === 'new');
+    const pool = CATALOG_PRODUCTS.filter(p => p.tag === 'best' || p.tag === 'new');
     // Group by sub-category, then pick one from each, then fill remainder.
     const bySub = new Map();
     for (const p of pool){ const arr = bySub.get(p.sub) || []; arr.push(p); bySub.set(p.sub, arr); }
@@ -1223,7 +1245,7 @@ function initHomeGrids(){
   if(bs && !bs.dataset.filled){
     bs.dataset.filled = '1';
     const counts = new Map();
-    for(const p of PRODUCTS) counts.set(p.brand, (counts.get(p.brand)||0) + 1);
+    for(const p of CATALOG_PRODUCTS) counts.set(p.brand, (counts.get(p.brand)||0) + 1);
     const top = [...counts.entries()].sort((a,b) => b[1]-a[1]).slice(0, 12);
     bs.innerHTML = top.map(([name, n]) => {
       const brand = BRANDS.find(b => b.name === name) || { name, hue: '#21463D' };

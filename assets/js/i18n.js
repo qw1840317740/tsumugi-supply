@@ -57,7 +57,7 @@ const L = {
     't.day':'1-day quotes','t.dayL':'Proforma invoice next business day',
     't.label':'Export docs','t.labelL':'Invoices & customs paperwork',
     // categories
-    'cat.eyebrow':'Browse by category','cat.title.1':'Eight shelves of','cat.title.2':'Japanese daily life',
+    'cat.eyebrow':'Browse by category','cat.title.1':'Four essential aisles of','cat.title.2':'Japanese daily life',
     'cat.lead':'From the beauty counter to the laundry room — every category Japanese households reach for, ready to wholesale.',
     'cat.skus':'SKU','cat.skusPl':'SKUs',
     // featured
@@ -366,7 +366,7 @@ const L = {
     't.logistics':'全球物流','t.logisticsL':'EMS 空运与拼箱海运','t.auth':'100% 正品','t.authL':'日本正规渠道直采',
     't.price':'询价批发','t.priceL':'价格询价即得 · 无隐藏费用','t.day':'1 天报价','t.dayL':'次工作日出形式发票',
     't.label':'出口单证','t.labelL':'发票与清关单证',
-    'cat.eyebrow':'按品类浏览','cat.title.1':'八个货架的','cat.title.2':'日本日常好物',
+    'cat.eyebrow':'按品类浏览','cat.title.1':'四大核心品类的','cat.title.2':'日本日常好物',
     'cat.lead':'从美妆柜台到洗衣房 —— 日本家庭日常所需的每一个品类，皆可批发。',
     'cat.skus':'款','cat.skusPl':'款',
     'feat.eyebrow':'本月热销','feat.title':'零售商正在下单的商品','feat.seeall':'查看全部商品',
@@ -567,7 +567,7 @@ const L = {
     't.logistics':'世界の物流','t.logisticsL':'EMS航空便と混載船便','t.auth':'100%正規品','t.authL':'日本の正規ルートから直接',
     't.price':'見積卸売','t.priceL':'価格は問合せ次第 · 隠し費用なし','t.day':'1日の見積','t.dayL':'翌営業日にインボイス',
     't.label':'輸出書類','t.labelL':'インボイス・通関書類',
-    'cat.eyebrow':'カテゴリーから探す','cat.title.1':'日本の毎日を','cat.title.2':'8つの棚に。',
+    'cat.eyebrow':'カテゴリーから探す','cat.title.1':'日本の毎日を','cat.title.2':'4つの主要カテゴリーに。',
     'cat.lead':'美容コーナーから洗濯室まで —— 日本の家庭が毎日手にするカテゴリーを卸売で。',
     'cat.skus':'SKU','cat.skusPl':'SKU',
     'feat.eyebrow':'今月のベストセラー','feat.title':'今、小売店が買っている商品','feat.seeall':'すべての商品',
