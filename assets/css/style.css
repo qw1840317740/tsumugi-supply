@@ -164,10 +164,11 @@ h2.h{ font-size:clamp(1.7rem,3.2vw,2.4rem); }
 .brand{ display:flex; align-items:center; gap:11px; font-family:var(--f-serif); font-weight:600; }
 .brand .mark{
   width:40px;height:40px;border-radius:11px; flex:none;
-  background:var(--sumi); color:var(--paper-2);
-  display:grid; place-items:center; font-family:var(--f-serif); font-size:1.25rem;
-  box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);
+  display:block; object-fit:contain;
+  filter:drop-shadow(0 5px 12px rgba(18,63,56,.12));
+  transition:transform .22s ease, filter .22s ease;
 }
+.brand:hover .mark{ transform:translateY(-1px); filter:drop-shadow(0 7px 15px rgba(18,63,56,.18)); }
 .brand .wordmark{ line-height:1; }
 .brand .wordmark b{ font-size:1.18rem; letter-spacing:.01em; }
 .brand .wordmark span{ display:block; font-family:var(--f-mono); font-size:.58rem; letter-spacing:.24em; text-transform:uppercase; color:var(--ink-3); margin-top:3px; }
@@ -815,6 +816,7 @@ table.t td b{ color:var(--clay); font-family:var(--f-serif); font-size:1.1rem; }
 .footer-top{ display:grid; grid-template-columns:1.5fr 1fr 1fr 1fr 1.4fr; gap:34px; padding-bottom:44px; border-bottom:1px solid rgba(255,255,255,.1); }
 .footer-brand .brand .wordmark b{ color:var(--paper-2); }
 .footer-brand .brand .wordmark span{ color:rgba(251,248,241,.5); }
+.footer-brand .brand .mark{ filter:drop-shadow(0 7px 18px rgba(0,0,0,.25)); }
 .footer-brand p{ font-size:.88rem; margin-top:16px; max-width:30ch; color:rgba(251,248,241,.66); }
 .footer-brand .social{ display:flex; gap:10px; margin-top:18px; }
 .footer-brand .social a{ width:38px;height:38px;border-radius:10px; border:1px solid rgba(255,255,255,.16); display:grid;place-items:center; transition:.18s; }

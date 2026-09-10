@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="192" viewBox="0 0 470 96" role="img" aria-labelledby="title desc">
+  <title id="title">JAPANITEM</title>
+  <desc id="desc">JAPANITEM Japan Wholesale and Trading logo.</desc>
+  <g transform="translate(8 8)">
+    <rect width="80" height="80" rx="18" fill="#123F38"/>
+    <rect x="1.25" y="1.25" width="77.5" height="77.5" rx="16.75" fill="none" stroke="#F7F1E5" stroke-opacity=".16" stroke-width="1.5"/>
+    <path d="M21 17.5h36.25v8.75H43.5v26.5C43.5 63.75 37.4 70 27 70c-6.9 0-12.1-2.9-16-8.5l7.6-5.6c2.4 3.5 5 5.2 8.3 5.2 4.4 0 6.9-3 6.9-8.4V26.25H21z" fill="#F7F1E5"/>
+    <path d="M43.5 26.25h13.75L43.5 37.5z" fill="#D9C9AC"/>
+    <circle cx="57.5" cy="17.5" r="5.6" fill="#B94C2E"/>
+  </g>
+  <g fill="#20211D">
+    <text x="112" y="49" font-family="Georgia, 'Times New Roman', serif" font-size="36" font-weight="700" letter-spacing="1.1">JAPANITEM</text>
+    <text x="114" y="72" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="600" letter-spacing="3.1">JAPAN WHOLESALE &amp; TRADING</text>
+  </g>
+  <circle cx="449" cy="43" r="4" fill="#B94C2E"/>
+</svg>

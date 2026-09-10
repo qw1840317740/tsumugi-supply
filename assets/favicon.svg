@@ -1,4 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="JAPANITEM">
-  <rect width="64" height="64" rx="11" fill="#174C43"/>
-  <text x="32" y="46" font-family="Georgia, 'Times New Roman', serif" font-size="34" font-weight="400" fill="#F4EFE4" text-anchor="middle">J</text>
+  <rect width="64" height="64" rx="14" fill="#123F38"/>
+  <path d="M17 14h29v7H35v21.2C35 51 30.1 56 21.8 56c-5.5 0-9.7-2.3-12.8-6.8l6.1-4.5c1.9 2.8 4 4.2 6.6 4.2 3.5 0 5.5-2.4 5.5-6.7V21H17z" fill="#F7F1E5"/>
+  <path d="M35 21h11l-11 9z" fill="#D9C9AC"/>
+  <circle cx="46" cy="14" r="4.5" fill="#B94C2E"/>
 </svg>

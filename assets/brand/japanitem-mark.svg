@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
+  <title id="title">JAPANITEM brand mark</title>
+  <desc id="desc">A cream J shaped like a folded trading ribbon with a vermilion sun on deep Japanese green.</desc>
+  <rect width="64" height="64" rx="14" fill="#123F38"/>
+  <rect x="1" y="1" width="62" height="62" rx="13" fill="none" stroke="#F7F1E5" stroke-opacity=".16"/>
+  <path d="M17 14h29v7H35v21.2C35 51 30.1 56 21.8 56c-5.5 0-9.7-2.3-12.8-6.8l6.1-4.5c1.9 2.8 4 4.2 6.6 4.2 3.5 0 5.5-2.4 5.5-6.7V21H17z" fill="#F7F1E5"/>
+  <path d="M35 21h11l-11 9z" fill="#D9C9AC"/>
+  <circle cx="46" cy="14" r="4.5" fill="#B94C2E"/>
+</svg>
