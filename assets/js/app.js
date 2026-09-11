@@ -419,7 +419,10 @@ function buildFooter(){
     <div class="container">
       <div class="footer-top">
         <div class="footer-brand">
-          <a class="brand site-brand" href="index.html" aria-label="${SITE.full}"><img class="brand-lockup" src="/assets/brand/japanitem-logo-user.png" alt="JAPANITEM" width="223" height="50"></a>
+          <a class="brand site-brand footer-logo" href="index.html" aria-label="${SITE.full}">
+            <img class="footer-logo-mark" src="/assets/brand/japanitem-mark-user.png" alt="" width="48" height="54">
+            <span class="footer-logo-name">JAPANITEM</span>
+          </a>
           <p data-i18n="foot.about"></p>
           <div class="social">
             <a href="${SITE.url}" target="_blank" rel="noopener" aria-label="Website">${ICON.spark}</a>

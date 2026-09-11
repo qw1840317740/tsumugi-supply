@@ -815,8 +815,12 @@ table.t td b{ color:var(--clay); font-family:var(--f-serif); font-size:1.1rem; }
 .footer-top{ display:grid; grid-template-columns:1.5fr 1fr 1fr 1fr 1.4fr; gap:34px; padding-bottom:44px; border-bottom:1px solid rgba(255,255,255,.1); }
 .footer-brand .brand .wordmark b{ color:var(--paper-2); }
 .footer-brand .brand .wordmark span{ color:rgba(251,248,241,.5); }
-.footer-brand .site-brand .brand-lockup{ height:48px; filter:brightness(0) invert(1); opacity:.92; }
-.footer-brand .site-brand:hover .brand-lockup{ opacity:1; }
+.footer-logo{ gap:11px; width:max-content; }
+.footer-logo-mark{ display:block; width:43px; height:49px; object-fit:contain; }
+.footer-logo-name{ color:var(--paper-2); font-family:var(--f-sans); font-size:20px; font-weight:500; letter-spacing:.16em; line-height:1; }
+.footer-logo:hover .footer-logo-mark{ transform:translateY(-1px); }
+.footer-logo:hover .footer-logo-name{ color:var(--gold); }
+.footer-logo-mark,.footer-logo-name{ transition:transform .22s ease,color .22s ease; }
 .footer-brand p{ font-size:.88rem; margin-top:16px; max-width:30ch; color:rgba(251,248,241,.66); }
 .footer-brand .social{ display:flex; gap:10px; margin-top:18px; }
 .footer-brand .social a{ width:38px;height:38px;border-radius:10px; border:1px solid rgba(255,255,255,.16); display:grid;place-items:center; transition:.18s; }
