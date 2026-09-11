@@ -872,6 +872,9 @@ function initShop(){
    ========================================================= */
 function initPDP(){
   const host = $('#pdp'); if(!host) return;
+  // Generated SEO pages include a server-rendered editorial section. Preserve
+  // it when the interactive PDP replaces the rest of the static markup.
+  const seoEditorial = host.querySelector('.product-editorial')?.outerHTML || '';
   const id = activeProductId();
   const p = CATALOG_PRODUCTS.find(x=>x.id===id);
   if(!p){
@@ -920,6 +923,7 @@ function initPDP(){
           </div>
         </div>
       </div>
+      ${seoEditorial}
       ${related.length?`<div class="related"><h2 class="h">${t('pdp.related')}</h2><div class="product-grid cols-4">${related.map(productCard).join('')}</div></div>`:''}
     </div>`;
   }
@@ -1003,7 +1007,11 @@ function injectSEO(){
     const jan      = String(p.jan || p.id);
     const suffix   = ` | JAN ${jan} | JAPANITEM`;
     const title    = `${truncateSeo(`${p.name} — ${brHuman}`, 65 - suffix.length)}${suffix}`;
-    const desc     = truncateSeo(t2('seo.pdp.desc',  {NAME: p.name, BRAND: brHuman, CAT: catHuman}), 155);
+    const renderedDescription = document.head.querySelector('meta[name="description"]')?.getAttribute('content') || '';
+    const isGeneratedProductPage = /\/products\/[^/]+\.html$/i.test(location.pathname);
+    const desc     = isGeneratedProductPage && renderedDescription
+      ? truncateSeo(renderedDescription, 155)
+      : truncateSeo(t2('seo.pdp.desc',  {NAME: p.name, BRAND: brHuman, CAT: catHuman}), 155);
     const ogDesc   = t2('seo.pdp.ogdesc',{NAME: p.name, BRAND: brHuman, CAT: catHuman});
     const twDesc   = t2('seo.pdp.twdesc',{NAME: p.name, BRAND: brHuman, CAT: catHuman});
     document.title = title;
@@ -1044,7 +1052,10 @@ function injectSEO(){
     'brands.html':'brands',
     'how-to-order.html':'how',
     'faq.html':'faq',
-  })[path] || 'home';
+  })[path];
+  // Brand/category collection pages already ship with page-specific static
+  // metadata. Do not overwrite it with the home-page title after hydration.
+  if(!pageKey) return;
   const title   = t('seo.' + pageKey + '.title');
   const desc    = t('seo.' + pageKey + '.desc');
   const ogDesc  = t('seo.' + pageKey + '.ogdesc');

@@ -62,6 +62,125 @@ const productDescription = p => truncate(
   155,
 );
 
+// Editorial content for the first major-brand rollout. Keep claims limited to
+// catalog facts and purchasing guidance that can be verified from product data.
+const majorBrandContent = {
+  'Febreze': {
+    overview: 'The JAPANITEM Febreze range brings together Japanese-market home, fabric and space-care formats for wholesale buyers.',
+    buyerFit: 'Relevant to supermarkets, household-goods stores, drugstores and online retailers building a Japanese home-care assortment.',
+    handling: 'Confirm whether the selected JAN is a main unit, refill, bundle or limited package before finalising the order.',
+  },
+  'Visee': {
+    overview: 'Our Visee catalog covers Japanese color cosmetics across complexion, eye, lip and point-makeup selections.',
+    buyerFit: 'Designed for beauty retailers, cosmetics specialists and e-commerce sellers that merchandise Japanese makeup by shade and finish.',
+    handling: 'Shade number, color name and package version should be matched to the JAN because visually similar variants may be separate SKUs.',
+  },
+  'DHC': {
+    overview: 'The DHC wholesale selection spans Japanese-market supplements, beauty care and personal-care products.',
+    buyerFit: 'Suitable for health-and-beauty retailers, pharmacies, specialist stores and online sellers seeking a broad Japanese DHC assortment.',
+    handling: 'Product type, pack size and destination-market labeling or import requirements should be reviewed before ordering.',
+  },
+  'Lenor': {
+    overview: 'Our Lenor catalog groups Japanese-market laundry-care products, including multiple scents, pack formats and refill options.',
+    buyerFit: 'A practical range for supermarkets, drugstores, household-goods retailers and e-commerce laundry-care categories.',
+    handling: 'Use the JAN to distinguish scent, concentration, pack size and bottle-versus-refill formats; legacy packages may have successor SKUs.',
+  },
+  'Pantene': {
+    overview: 'The Pantene selection includes Japanese-market hair-care products across shampoo, conditioner, treatment and related formats.',
+    buyerFit: 'Suitable for drugstores, beauty retailers, supermarkets and online hair-care assortments.',
+    handling: 'Check the exact line, product step, volume and bottle or refill format against the JAN before confirming quantities.',
+  },
+  'Fasio': {
+    overview: 'Our Fasio assortment focuses on Japanese color cosmetics, with complexion, eye, brow and lip products represented in the catalog.',
+    buyerFit: 'Built for cosmetics retailers and online beauty sellers that need individual Japanese shade and format references.',
+    handling: 'Match shade, finish, size and package version to the JAN; names alone may not separate closely related variants.',
+  },
+  'Joy': {
+    overview: 'The JAPANITEM Joy catalog covers Japanese-market kitchen and household cleaning formats for wholesale sourcing.',
+    buyerFit: 'Relevant to supermarkets, home-care retailers, drugstores and e-commerce household categories.',
+    handling: 'Confirm usage type, fragrance, volume and main-container or refill format using the product name and JAN.',
+  },
+  'Pampers': {
+    overview: 'Our Pampers selection groups Japanese-market baby-care products across multiple sizes, formats and pack counts.',
+    buyerFit: 'Suitable for baby stores, supermarkets, pharmacies and online retailers serving parents and family shoppers.',
+    handling: 'Size, weight guide, tape-or-pants format and units per pack are essential variant checks before ordering.',
+  },
+  'Bold': {
+    overview: 'The Bold range in our catalog covers Japanese-market laundry products across different scents, pack sizes and formats.',
+    buyerFit: 'Relevant to supermarkets, household-goods stores, drugstores and online laundry-care assortments.',
+    handling: 'Confirm fragrance, product form, pack size and refill or container format by JAN before purchase.',
+  },
+  'Whisper': {
+    overview: 'Our Whisper catalog brings together Japanese-market feminine and personal-care formats with distinct sizes and pack counts.',
+    buyerFit: 'Suitable for pharmacies, supermarkets, personal-care retailers and online health-and-beauty stores.',
+    handling: 'Product type, length or size, absorbency designation and units per pack should be verified for each JAN.',
+  },
+  'Clinica': {
+    overview: 'The Clinica selection covers Japanese-market oral-care products, including toothpaste, toothbrush and related daily-care formats.',
+    buyerFit: 'Relevant to pharmacies, supermarkets, oral-care specialists and e-commerce health categories.',
+    handling: 'Confirm product form, firmness or type where applicable, pack size and current package version by JAN.',
+  },
+  'Kose Infinity': {
+    overview: 'Our Kose Infinity catalog focuses on Japanese prestige skin-care and beauty-care items across multiple product steps and sizes.',
+    buyerFit: 'Suitable for specialist beauty retailers, cosmetics counters and e-commerce stores curating Japanese premium skin care.',
+    handling: 'Check the exact product step, size, set contents and package version against the JAN before quotation.',
+  },
+  'Systema': {
+    overview: 'The Systema catalog groups Japanese-market oral-care products across toothpaste, toothbrush and supporting care formats.',
+    buyerFit: 'Relevant to pharmacies, supermarkets, oral-care retailers and health-focused online stores.',
+    handling: 'Use the JAN to confirm product form, brush type or firmness where applicable, pack count and package version.',
+  },
+  'Ariel': {
+    overview: 'Our Ariel assortment covers Japanese-market laundry products across detergent forms, pack sizes and refill options.',
+    buyerFit: 'A core range for supermarkets, drugstores, household-goods retailers and e-commerce laundry categories.',
+    handling: 'Product form, number of uses, pack size and bottle or refill format should be checked against the JAN.',
+  },
+  'Head & Shoulders': {
+    overview: 'The Head & Shoulders selection includes Japanese-market hair-care products across shampoo, conditioner and treatment formats.',
+    buyerFit: 'Suitable for drugstores, supermarkets, beauty retailers and online hair-care assortments.',
+    handling: 'Confirm the exact line, product step, volume and bottle or refill format for the selected JAN.',
+  },
+};
+
+const categoryGuidance = {
+  makeup: 'This SKU belongs to the color-cosmetics range. Shade, finish and package version are key ordering details.',
+  laundry: 'This SKU belongs to the laundry-care range. Product form, scent, size and refill format may identify separate variants.',
+  cleaning: 'This SKU belongs to the household-care range. Intended use, fragrance, size and container type should be checked.',
+  haircare: 'This SKU belongs to the hair-care range. Line, product step, volume and bottle or refill format should be checked.',
+  diaper: 'This SKU belongs to the baby-care range. Size, fit format and units per pack are key ordering details.',
+  supplement: 'This SKU belongs to the health-products range. Pack format and destination-market regulatory requirements should be reviewed.',
+  quasidrug: 'This SKU belongs to the health and personal-care range. Format, pack size and local import requirements should be reviewed.',
+  serum: 'This SKU belongs to the skin-care range. Product step, size and package version should be confirmed.',
+  bodycare: 'This SKU belongs to the personal-care range. Type, size and pack count should be confirmed.',
+};
+
+function editorialFor(p) {
+  const brand = majorBrandContent[p.brand];
+  if (!brand) return null;
+  const jan = String(p.jan || p.id);
+  const category = categories[p.category] || p.category || 'Japanese consumer goods';
+  const unit = p.unit && p.unit !== '—' ? p.unit : 'quoted case configuration';
+  const moq = p.moq || 'confirmed at quotation';
+  const variantGuidance = categoryGuidance[p.sub] || `This SKU is listed under ${category}. Confirm the exact variant and package configuration before ordering.`;
+  const status = p.tag === 'discontinued'
+    ? 'This may be a legacy or discontinued catalog record; current availability and any successor JAN must be confirmed.'
+    : 'Current packaging, lead time and lot availability are confirmed when we prepare your quotation.';
+  return {
+    summary: truncate(`${p.name} by ${p.brand}, JAN ${jan}. Japanese wholesale sourcing information, MOQ ${moq}, product identification and quotation guidance from JAPANITEM.`, 155),
+    lead: `${p.name} is listed in JAPANITEM's ${p.brand} wholesale catalog under ${category}. The exact catalog identifier is JAN / GTIN ${jan}, helping buyers distinguish this item from similar sizes, colors, scents or package revisions.`,
+    overview: brand.overview,
+    buyerFit: brand.buyerFit,
+    variantGuidance,
+    orderFacts: [
+      `Quote identifier: JAN / GTIN ${jan}`,
+      `Catalog order unit: ${unit}; listed MOQ: ${moq}`,
+      `Catalog origin: Japan; export destination and delivery terms are confirmed with the quote`,
+      status,
+    ],
+    handling: brand.handling,
+  };
+}
+
 function commonHead({ title, description, canonical, type = 'website', image = 'https://www.japanitem.com/assets/og.png', ld = [] }) {
   return `  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -82,7 +201,7 @@ function commonHead({ title, description, canonical, type = 'website', image = '
   <meta name="twitter:image" content="${image}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="assets/css/style.css?v=71">
+  <link rel="stylesheet" href="assets/css/style.css?v=72">
   <link rel="stylesheet" href="assets/css/chatbot.css?v=2">
   <link rel="icon" href="assets/brand/japanitem-mark-user.png" type="image/png">
   <meta name="theme-color" content="#174C43">
@@ -92,7 +211,7 @@ ${ld.map(item => `  <script type="application/ld+json">${jsonForHtml(item)}</scr
 function scripts() {
   return `  <script defer src="assets/js/data.js?v=43"></script>
   <script defer src="assets/js/i18n.js?v=45"></script>
-  <script defer src="assets/js/app.js?v=60"></script>
+  <script defer src="assets/js/app.js?v=62"></script>
   <script defer src="assets/js/auth.js"></script>
   <script defer src="assets/js/chatbot.js?v=4"></script>`;
 }
@@ -131,7 +250,8 @@ for (const p of products) {
   const canonical = productUrl(p);
   const image = productImage(p);
   const title = productTitle(p);
-  const description = productDescription(p);
+  const editorial = editorialFor(p);
+  const description = editorial?.summary || productDescription(p);
   const related = [
     ...products.filter(x => x.id !== p.id && x.brand === p.brand),
     ...products.filter(x => x.id !== p.id && x.brand !== p.brand && x.category === p.category),
@@ -162,7 +282,7 @@ ${commonHead({ title, description, canonical, type: 'product', image, ld: [produ
           <span class="cat">${escapeHtml(category)}</span>
           <h1>${escapeHtml(p.name)}</h1>
           <p class="brand"><a href="brands/${escapeHtml(brandSlugs.get(p.brand))}.html">${escapeHtml(p.brand)}</a></p>
-          <p class="pdp-blurb">${escapeHtml(brand.blurb || description)}</p>
+          <p class="pdp-blurb">${escapeHtml(editorial?.lead || brand.blurb || description)}</p>
           <div class="pdp-specs">
             <div><span>Brand</span><b>${escapeHtml(p.brand)}</b></div><div><span>Category</span><b>${escapeHtml(category)}</b></div>
             <div><span>Unit</span><b>${escapeHtml(p.unit || '—')}</b></div><div><span>MOQ</span><b>${escapeHtml(p.moq || '—')}</b></div>
@@ -171,6 +291,13 @@ ${commonHead({ title, description, canonical, type: 'product', image, ld: [produ
           <p><a class="btn btn-primary btn-lg" href="how-to-order.html?product=${encodeURIComponent(p.id)}&amp;name=${encodeURIComponent(p.name)}&amp;brand=${encodeURIComponent(p.brand)}#request">Request wholesale quote</a></p>
         </div>
       </div>
+      ${editorial ? `<section class="product-editorial" aria-labelledby="product-overview">
+        <div class="product-copy-grid">
+          <div class="product-copy-main"><span class="eyebrow">PRODUCT INFORMATION</span><h2 id="product-overview">About this ${escapeHtml(p.brand)} product</h2><p>${escapeHtml(editorial.overview)}</p><p>${escapeHtml(editorial.buyerFit)}</p></div>
+          <aside class="product-order-card"><span class="eyebrow">WHOLESALE CHECKLIST</span><h2>Before you order</h2><ul>${editorial.orderFacts.map(fact => `<li>${escapeHtml(fact)}</li>`).join('')}</ul></aside>
+        </div>
+        <div class="product-variant-note"><div><span class="eyebrow">VARIANT GUIDANCE</span><h2>Identify the exact SKU</h2></div><div><p>${escapeHtml(editorial.variantGuidance)}</p><p>${escapeHtml(editorial.handling)}</p><p class="product-compliance-note">Images and catalog details are for product identification. Buyers are responsible for confirming destination-market labeling, import and sales requirements.</p></div></div>
+      </section>` : ''}
       <section class="related seo-related" aria-labelledby="related-products"><div class="section-head"><div><span class="eyebrow">MORE FROM JAPAN</span><h2 class="h" id="related-products">Related wholesale products</h2></div><a href="brands/${escapeHtml(brandSlugs.get(p.brand))}.html">View ${escapeHtml(p.brand)} products →</a></div><div class="product-grid cols-4">${related.map(productCard).join('')}</div></section>
     </div>
   </main>
@@ -182,7 +309,7 @@ ${scripts()}
   fs.writeFileSync(path.join(productDir, `${p.id}.html`), html, 'utf8');
 }
 
-function writeCollectionPage({ output, canonical, title, description, eyebrow, heading, intro, list, parent }) {
+function writeCollectionPage({ output, canonical, title, description, eyebrow, heading, intro, list, parent, editorial = null }) {
   const collectionLd = {
     '@context': 'https://schema.org', '@type': 'CollectionPage', name: heading,
     description, url: canonical,
@@ -197,6 +324,7 @@ ${commonHead({ title, description, canonical, ld: [collectionLd, breadcrumb([{ n
   <div id="site-header"></div>
   <main id="content">
     <section class="page-hero seo-collection-hero"><div class="container"><nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span class="sep">/</span><a href="products.html">Catalog</a><span class="sep">/</span><span class="cur">${escapeHtml(heading)}</span></nav><span class="eyebrow">${escapeHtml(eyebrow)}</span><h1 class="tight">${escapeHtml(heading)}</h1><p>${escapeHtml(intro)}</p><div class="seo-count">${list.length.toLocaleString('en-US')} wholesale products · Searchable by JAN / GTIN</div></div></section>
+    ${editorial ? `<section class="section-sm brand-editorial"><div class="container"><div class="brand-editorial-grid"><div><span class="eyebrow">BRAND SOURCING GUIDE</span><h2 class="h">Source ${escapeHtml(heading.replace(/ Wholesale$/, ''))} from Japan</h2><p>${escapeHtml(editorial.overview)}</p><p>${escapeHtml(editorial.buyerFit)}</p></div><aside><strong>Ordering note</strong><p>${escapeHtml(editorial.handling)}</p><a href="how-to-order.html#request">Ask for availability and export pricing →</a></aside></div></div></section>` : ''}
     <section class="section-sm"><div class="container"><div class="section-head"><div><span class="eyebrow">FEATURED SELECTION</span><h2 class="h">Products from Japan</h2></div><a href="how-to-order.html#request">Request a quote →</a></div><div class="product-grid cols-4">${list.slice(0, 12).map(productCard).join('')}</div></div></section>
     <section class="section-sm seo-directory"><div class="container"><div class="section-head"><div><span class="eyebrow">COMPLETE INDEX</span><h2 class="h">Browse every product</h2></div><a href="products.html">Search and filter →</a></div>${compactProductLinks(list)}</div></section>
   </main>
@@ -222,13 +350,16 @@ for (const [id, name] of activeCategories) {
 for (const name of activeBrands) {
   const list = products.filter(p => p.brand === name).sort((a, b) => a.name.localeCompare(b.name));
   const brand = brandData.get(name) || {};
+  const editorial = majorBrandContent[name] || null;
   writeCollectionPage({
     output: path.join(brandDir, `${brandSlugs.get(name)}.html`), canonical: brandUrl(name),
     title: `${name} Wholesale Japan | ${list.length} Products | JAPANITEM`,
-    description: `Browse ${list.length} authentic ${name} products for Japanese B2B wholesale. Search JAN/GTIN codes and request export pricing from JAPANITEM.`,
+    description: editorial
+      ? truncate(`Browse ${list.length} ${name} products for Japanese B2B wholesale. Search exact JAN/GTIN codes, compare variants and request export pricing from JAPANITEM.`, 155)
+      : `Browse ${list.length} authentic ${name} products for Japanese B2B wholesale. Search JAN/GTIN codes and request export pricing from JAPANITEM.`,
     eyebrow: 'JAPANESE WHOLESALE BRAND', heading: `${name} Wholesale`,
-    intro: brand.blurb || `Source authentic ${name} products from Japan for wholesale and international export.`,
-    list, parent: 'Brands',
+    intro: editorial?.overview || brand.blurb || `Source authentic ${name} products from Japan for wholesale and international export.`,
+    list, parent: 'Brands', editorial,
   });
 }
 
