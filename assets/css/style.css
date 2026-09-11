@@ -162,13 +162,12 @@ h2.h{ font-size:clamp(1.7rem,3.2vw,2.4rem); }
 
 .nav{ display:flex; align-items:center; gap:22px; min-height:var(--nav-h); }
 .brand{ display:flex; align-items:center; gap:11px; font-family:var(--f-serif); font-weight:600; }
-.brand .mark{
-  width:40px;height:40px;border-radius:11px; flex:none;
-  display:block; object-fit:contain;
-  filter:drop-shadow(0 5px 12px rgba(18,63,56,.12));
-  transition:transform .22s ease, filter .22s ease;
+.site-brand{ flex:none; }
+.site-brand .brand-lockup{
+  display:block; width:auto; height:44px; object-fit:contain;
+  transition:transform .22s ease, opacity .22s ease;
 }
-.brand:hover .mark{ transform:translateY(-1px); filter:drop-shadow(0 7px 15px rgba(18,63,56,.18)); }
+.site-brand:hover .brand-lockup{ transform:translateY(-1px); opacity:.88; }
 .brand .wordmark{ line-height:1; }
 .brand .wordmark b{ font-size:1.18rem; letter-spacing:.01em; }
 .brand .wordmark span{ display:block; font-family:var(--f-mono); font-size:.58rem; letter-spacing:.24em; text-transform:uppercase; color:var(--ink-3); margin-top:3px; }
@@ -816,7 +815,8 @@ table.t td b{ color:var(--clay); font-family:var(--f-serif); font-size:1.1rem; }
 .footer-top{ display:grid; grid-template-columns:1.5fr 1fr 1fr 1fr 1.4fr; gap:34px; padding-bottom:44px; border-bottom:1px solid rgba(255,255,255,.1); }
 .footer-brand .brand .wordmark b{ color:var(--paper-2); }
 .footer-brand .brand .wordmark span{ color:rgba(251,248,241,.5); }
-.footer-brand .brand .mark{ filter:drop-shadow(0 7px 18px rgba(0,0,0,.25)); }
+.footer-brand .site-brand .brand-lockup{ height:48px; filter:brightness(0) invert(1); opacity:.92; }
+.footer-brand .site-brand:hover .brand-lockup{ opacity:1; }
 .footer-brand p{ font-size:.88rem; margin-top:16px; max-width:30ch; color:rgba(251,248,241,.66); }
 .footer-brand .social{ display:flex; gap:10px; margin-top:18px; }
 .footer-brand .social a{ width:38px;height:38px;border-radius:10px; border:1px solid rgba(255,255,255,.16); display:grid;place-items:center; transition:.18s; }
@@ -1119,10 +1119,7 @@ table.t td b{ color:var(--clay); font-family:var(--f-serif); font-size:1.1rem; }
   .site-header{ background:rgba(248,245,238,.96); backdrop-filter:none; -webkit-backdrop-filter:none; }
   .site-header > .container{ max-width:1586px; padding-inline:82px; }
   .nav{ min-height:89px; gap:0; }
-  .brand{ gap:13px; }
-  .brand .mark{ width:48px; height:48px; border-radius:13px; font-size:25px; }
-  .brand .wordmark b{ font-family:'DM Serif Display',Georgia,serif; font-size:25px; letter-spacing:.025em; }
-  .brand .wordmark span{ font-size:9px; margin-top:5px; letter-spacing:.19em; color:#34332f; }
+  .site-brand .brand-lockup{ height:54px; }
   .nav-primary{ margin-left:68px; gap:18px; }
   .nav-link{ padding:10px 12px; font-size:16px; border-radius:0; color:#3f403c; }
   .nav-link:hover{ background:transparent; color:var(--green); }
@@ -1271,6 +1268,7 @@ table.t td b{ color:var(--clay); font-family:var(--f-serif); font-size:1.1rem; }
 }
 
 @media (max-width:680px){
+  .nav .site-brand .brand-lockup{ height:36px; }
   .trust .container{
     display:grid;
     grid-template-columns:repeat(2,minmax(0,1fr));

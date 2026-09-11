@@ -82,9 +82,9 @@ function commonHead({ title, description, canonical, type = 'website', image = '
   <meta name="twitter:image" content="${image}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="assets/css/style.css?v=69">
+  <link rel="stylesheet" href="assets/css/style.css?v=70">
   <link rel="stylesheet" href="assets/css/chatbot.css?v=2">
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/brand/japanitem-mark-user.png" type="image/png">
   <meta name="theme-color" content="#174C43">
 ${ld.map(item => `  <script type="application/ld+json">${jsonForHtml(item)}</script>`).join('\n')}`;
 }
@@ -92,7 +92,7 @@ ${ld.map(item => `  <script type="application/ld+json">${jsonForHtml(item)}</scr
 function scripts() {
   return `  <script defer src="assets/js/data.js?v=43"></script>
   <script defer src="assets/js/i18n.js?v=45"></script>
-  <script defer src="assets/js/app.js?v=58"></script>
+  <script defer src="assets/js/app.js?v=59"></script>
   <script defer src="assets/js/auth.js"></script>
   <script defer src="assets/js/chatbot.js?v=4"></script>`;
 }
