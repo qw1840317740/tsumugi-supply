@@ -204,7 +204,7 @@ function commonHead({ title, description, canonical, type = 'website', image = '
   <link rel="stylesheet" href="assets/css/style.min.css?v=73">
   <link rel="preload" as="style" href="assets/css/chatbot.css?v=2" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="assets/css/chatbot.css?v=2"></noscript>
-  <link rel="icon" href="assets/brand/japanitem-mark-user.png" type="image/png">
+  <link rel="icon" href="assets/brand/japanitem-mark-user.png?v=2" type="image/png">
   <meta name="theme-color" content="#174C43">
 ${ld.map(item => `  <script type="application/ld+json">${jsonForHtml(item)}</script>`).join('\n')}`;
 }
