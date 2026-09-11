@@ -40,7 +40,7 @@
   --ease:         cubic-bezier(0.22, 1, 0.36, 1);   /* smooth ease-out, premium feel */
   --ease-soft:    cubic-bezier(0.33, 1, 0.68, 1);  /* gentle ease-out for hovers   */
 
-  --f-serif: "Noto Serif JP", "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --f-serif: "Yu Mincho", "Hiragino Mincho ProN", "DM Serif Display", Georgia, "Times New Roman", serif;
   --f-sans:  "Inter", "Helvetica Neue", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --f-mono:  "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
 }
@@ -81,7 +81,6 @@ input,select,textarea{ font:inherit; }
 
 /* text selection */
 ::selection{ background:var(--clay); color:#fff; }
-::selection:window-inactive{ background:var(--line); }
 
 /* scrollbar (webkit) */
 *::-webkit-scrollbar{ width:12px; height:12px; }
@@ -399,7 +398,7 @@ h2.h{ font-size:clamp(1.7rem,3.2vw,2.4rem); }
 }
 .bm-name .accent{ color:var(--rust); }
 .bm-kana{
-  font-family:'Noto Serif JP',serif;
+  font-family:"Yu Mincho","Hiragino Mincho ProN",serif;
   font-size:13px; letter-spacing:.18em; color:#6A6957;
   margin-top:6px;
 }

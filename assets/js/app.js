@@ -268,7 +268,29 @@ function fixAnchorJump(){
 window.addEventListener('hashchange', fixAnchorJump);
 window.addEventListener('load', fixAnchorJump);
 
-function productArt(p){
+let _productImageObserver;
+function observeProductImages(root=document){
+  const images = [...root.querySelectorAll('img.prod-photo[data-src]')];
+  if(!images.length) return;
+  const load = img => {
+    if(!img.dataset.src) return;
+    img.src = img.dataset.src;
+    delete img.dataset.src;
+  };
+  if(!('IntersectionObserver' in window)){ images.forEach(load); return; }
+  if(!_productImageObserver){
+    _productImageObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if(!entry.isIntersecting) return;
+        _productImageObserver.unobserve(entry.target);
+        load(entry.target);
+      });
+    }, { rootMargin:'320px 0px' });
+  }
+  images.forEach(img => _productImageObserver.observe(img));
+}
+
+function productArt(p, eager=false){
   const h = p.hue || '#21463D';
   const kana = brandKana(p.brand);
   const id = 'art'+(_artId++);
@@ -287,7 +309,8 @@ function productArt(p){
   // Real photo on top (temporary stand-ins from Unsplash); SVG remains as a
   // graceful fallback if the photo fails to load.
   const photo = productPhoto(p);
-  return `<span class="prod-art-wrap">${svgArt}<img class="prod-photo" src="${photo}" alt="${p.name}" loading="lazy" decoding="async" onerror="this.classList.add('failed')" onload="this.classList.add('loaded')"></span>`;
+  const source = eager ? `src="${photo}" loading="eager" fetchpriority="high"` : `data-src="${photo}" loading="lazy" fetchpriority="low"`;
+  return `<span class="prod-art-wrap">${svgArt}<img class="prod-photo" ${source} alt="${p.name}" width="600" height="600" decoding="async" onerror="this.classList.add('failed')" onload="this.classList.add('loaded')"></span>`;
 }
 
 /* Real product photography (temporary category stand-ins, Unsplash).
@@ -341,7 +364,7 @@ function buildHeader(){
     <div class="container">
       <nav class="nav">
         <a class="brand site-brand" href="index.html" aria-label="${SITE.full}">
-          <img class="brand-lockup" src="/assets/brand/japanitem-logo-user.png" alt="JAPANITEM" width="241" height="54">
+          <img class="brand-lockup" src="/assets/brand/japanitem-logo-user.webp" alt="JAPANITEM" width="241" height="54" decoding="async">
         </a>
         <ul class="nav-primary">
           <li class="nav-item">
@@ -394,7 +417,7 @@ function buildMobileMenu(){
   return `
   <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Site menu" tabindex="-1">
     <div class="mm-head">
-      <span class="brand site-brand"><img class="brand-lockup" src="/assets/brand/japanitem-logo-user.png" alt="JAPANITEM" width="196" height="44"></span>
+      <span class="brand site-brand"><img class="brand-lockup" src="/assets/brand/japanitem-logo-user.webp" alt="JAPANITEM" width="196" height="44" decoding="async"></span>
       <button class="icon-btn" id="mmClose" aria-label="Close">${ICON.close}</button>
     </div>
     <div class="mm-list">
@@ -420,7 +443,7 @@ function buildFooter(){
       <div class="footer-top">
         <div class="footer-brand">
           <a class="brand site-brand footer-logo" href="index.html" aria-label="${SITE.full}">
-            <img class="footer-logo-mark" src="/assets/brand/japanitem-mark-user.png" alt="" width="48" height="54">
+            <img class="footer-logo-mark" src="/assets/brand/japanitem-mark-user.webp" alt="" width="48" height="54" loading="lazy" decoding="async">
             <span class="footer-logo-name">JAPANITEM</span>
           </a>
           <p data-i18n="foot.about"></p>
@@ -750,6 +773,7 @@ function initShop(){
       updateMore(0); return;
     }
     grid.innerHTML = list.slice(0, shown).map(productCard).join('');
+    observeProductImages(grid);
     updateMore(list.length);
   }
   function renderActiveFilters(){
@@ -897,7 +921,7 @@ function initPDP(){
     <div class="container pdp-wrap">
       <div class="breadcrumb"><a href="index.html">${t('nav.home')}</a><span class="sep">/</span><a href="products.html">${t('nav.products')}</a><span class="sep">/</span><a href="${categorySeoUrl(p.category)}">${catName(p.category)}</a>${p.sub?`<span class="sep">/</span><a href="products.html?cat=${p.category}&sub=${p.sub}">${subName(p.sub)}</a>`:''}<span class="sep">/</span><span class="cur">${p.name}</span></div>
       <div class="pdp-grid">
-        <div class="pdp-media">${productArt(p)}${tag?`<span class="tag ${p.tag==='best'?'tag-best':p.tag==='new'?'tag-new':'tag-low'}" style="top:16px;left:16px">${tag}</span>`:''}</div>
+        <div class="pdp-media">${productArt(p, true)}${tag?`<span class="tag ${p.tag==='best'?'tag-best':p.tag==='new'?'tag-new':'tag-low'}" style="top:16px;left:16px">${tag}</span>`:''}</div>
         <div class="pdp-info">
           <span class="cat">${subOf(p)}</span>
           <h1>${p.name}</h1>
@@ -926,6 +950,7 @@ function initPDP(){
       ${seoEditorial}
       ${related.length?`<div class="related"><h2 class="h">${t('pdp.related')}</h2><div class="product-grid cols-4">${related.map(productCard).join('')}</div></div>`:''}
     </div>`;
+    observeProductImages(host);
   }
   build();
   addRenderer(build);
@@ -1132,6 +1157,7 @@ function mount(){
   initPDP();
   initFAQ();
   initHomeGrids();
+  observeProductImages();
   injectHomeIcons();
   injectSEO();      // after initPDP so document.title/meta reflect the product
   addRenderer(injectSEO);  // re-fire on language change so title/og follow i18n

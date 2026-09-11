@@ -85,6 +85,15 @@ warn((catalog.match(/href="brands\//g) || []).length === brandFiles.length, 'Cat
 const heroWebp = path.join(root, 'assets/hero/japanitem-hero-products-v2.webp');
 warn(fs.existsSync(heroWebp), 'Optimized hero WebP is missing');
 if (fs.existsSync(heroWebp)) warn(fs.statSync(heroWebp).size < 100 * 1024, 'Optimized hero WebP is larger than 100 KiB');
+const minCss = path.join(root, 'assets/css/style.min.css');
+const headerLogoWebp = path.join(root, 'assets/brand/japanitem-logo-user.webp');
+const footerMarkWebp = path.join(root, 'assets/brand/japanitem-mark-user.webp');
+warn(fs.existsSync(minCss), 'Minified production stylesheet is missing');
+warn(fs.existsSync(headerLogoWebp), 'Optimized header logo WebP is missing');
+warn(fs.existsSync(footerMarkWebp), 'Optimized footer mark WebP is missing');
+if (fs.existsSync(headerLogoWebp)) warn(fs.statSync(headerLogoWebp).size < 20 * 1024, 'Header logo WebP is larger than 20 KiB');
+if (fs.existsSync(footerMarkWebp)) warn(fs.statSync(footerMarkWebp).size < 8 * 1024, 'Footer logo mark WebP is larger than 8 KiB');
+warn(!catalog.includes('Noto+Serif+JP'), 'Catalog still requests the large Noto Serif JP webfont');
 
 const result = {
   products: productFiles.length,
@@ -95,6 +104,8 @@ const result = {
   uniqueDescriptions: descriptions.size,
   uniqueCanonicals: canonicals.size,
   heroWebpBytes: fs.existsSync(heroWebp) ? fs.statSync(heroWebp).size : null,
+  minCssBytes: fs.existsSync(minCss) ? fs.statSync(minCss).size : null,
+  headerLogoWebpBytes: fs.existsSync(headerLogoWebp) ? fs.statSync(headerLogoWebp).size : null,
   failures: failures.length,
 };
 console.log(JSON.stringify(result, null, 2));
