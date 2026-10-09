@@ -926,7 +926,7 @@ function initPDP(){
           <span class="cat">${subOf(p)}</span>
           <h1>${p.name}</h1>
           <a class="brandlink" href="${brandSeoUrl(p.brand)}">${brandLogo(brand,28)} <span>${brandName(brand)}</span> ${ICON.arrow}</a>
-          <p class="pdp-blurb">${brand.blurb||t('pdp.desc')}</p>
+          <p class="pdp-blurb">${p.seo_lead||brand.blurb||t('pdp.desc')}</p>
           <div class="pdp-specs">
             <div><span>${t('pdp.brand')}</span><b>${brandName(brand)}</b></div>
             <div><span>${t('pdp.cat')}</span><b>${catName(p.category)}${p.sub?' / '+subName(p.sub):''}</b></div>
@@ -934,6 +934,7 @@ function initPDP(){
             <div><span>${t('pdp.moq')}</span><b>${p.moq}</b></div>
             <div><span>${t('pdp.jan')}</span><b>${p.jan||p.id}</b></div>
             <div><span>${t('pdp.origin')}</span><b>Japan</b></div>
+            ${p.shelf_life?`<div><span>Catalog shelf life</span><b>${p.shelf_life}</b></div>`:''}
           </div>
           <div class="pdp-actions">
             <a class="btn btn-primary btn-lg" href="how-to-order.html?product=${encodeURIComponent(p.id)}&name=${encodeURIComponent(p.name)}&brand=${encodeURIComponent(p.brand)}#request">${t('pdp.inquire')}</a>

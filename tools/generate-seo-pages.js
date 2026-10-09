@@ -47,7 +47,13 @@ for (const brand of activeBrands) {
 const productUrl = p => `https://www.japanitem.com/products/${encodeURIComponent(p.id)}.html`;
 const categoryUrl = id => `https://www.japanitem.com/categories/${encodeURIComponent(id)}.html`;
 const brandUrl = name => `https://www.japanitem.com/brands/${encodeURIComponent(brandSlugs.get(name))}.html`;
-const productImage = p => `https://www.japanitem.com/assets/products/${encodeURIComponent(p.jan || p.id)}.jpg`;
+const productImage = p => {
+  const jan = String(p.jan || p.id);
+  const localPath = path.join(root, 'assets', 'products', `${jan}.jpg`);
+  return fs.existsSync(localPath)
+    ? `https://www.japanitem.com/assets/products/${encodeURIComponent(jan)}.jpg`
+    : null;
+};
 const gtinProperty = jan => {
   const length = /^\d+$/.test(jan) ? jan.length : 0;
   return [8, 12, 13, 14].includes(length) ? { [`gtin${length}`]: jan } : {};
@@ -58,7 +64,7 @@ const productTitle = p => {
   return `${truncate(`${p.name} — ${p.brand}`, 65 - suffix.length)}${suffix}`;
 };
 const productDescription = p => truncate(
-  `${p.name}（${p.brand}）の業務用卸売。JAN/GTIN ${p.jan || p.id}。日本正規流通品を海外発送。法人向け見積もりをJAPANITEMへご依頼ください。`,
+  p.seo_description || `${p.name}（${p.brand}）の業務用卸売。JAN/GTIN ${p.jan || p.id}。日本正規流通品を海外発送。法人向け見積もりをJAPANITEMへご依頼ください。`,
   155,
 );
 
@@ -140,6 +146,26 @@ const majorBrandContent = {
     buyerFit: 'Suitable for drugstores, supermarkets, beauty retailers and online hair-care assortments.',
     handling: 'Confirm the exact line, product step, volume and bottle or refill format for the selected JAN.',
   },
+  'Wakodo': {
+    overview: 'The Wakodo range covers Japanese-market baby food, snacks, drinks and family-care products supplied by Asahi Group Foods.',
+    buyerFit: 'Suitable for baby stores, pharmacies, supermarkets and online retailers sourcing Japanese infant and family-care assortments.',
+    handling: 'Check the age-stage guidance, flavor or recipe, net content, case pack and current package version for each JAN before ordering.',
+  },
+  'Akai Bohshi': {
+    overview: 'Akai Bohshi is a Japanese confectionery brand known for cookies, chocolate-filled Kukkia and assorted baked-gift formats.',
+    buyerFit: 'Suitable for confectionery retailers, gift shops, department stores and online sellers building a Japanese sweets assortment.',
+    handling: 'Confirm the flavor assortment, piece count, case pack, shelf life and seasonal shipping conditions for the selected JAN.',
+  },
+  'Moegino': {
+    overview: 'The Moegino range presents Japanese baked confectionery in multiple piece-count and gift-assortment formats.',
+    buyerFit: 'Relevant to confectionery retailers, gift shops and online sellers sourcing Japanese packaged sweets.',
+    handling: 'Confirm the exact assortment, piece count, case pack and remaining shelf-life requirement before quotation.',
+  },
+  'RUYSDAEL': {
+    overview: 'RUYSDAEL products in this catalog are Japanese baked confectionery selected for wholesale and gift-channel sourcing.',
+    buyerFit: 'Relevant to confectionery retailers, gift shops, specialty grocers and online sellers.',
+    handling: 'Confirm the flavor, net content, case configuration, availability and shelf-life requirement before ordering.',
+  },
 };
 
 const categoryGuidance = {
@@ -152,6 +178,11 @@ const categoryGuidance = {
   quasidrug: 'This SKU belongs to the health and personal-care range. Format, pack size and local import requirements should be reviewed.',
   serum: 'This SKU belongs to the skin-care range. Product step, size and package version should be confirmed.',
   bodycare: 'This SKU belongs to the personal-care range. Type, size and pack count should be confirmed.',
+  babyfood: 'This SKU belongs to the baby-food range. Recipe, age-stage guidance, net content and case pack should be checked.',
+  kidsdrink: 'This SKU belongs to the baby snack and drink range. Flavor, age-stage guidance, unit size and case pack should be checked.',
+  babyhygiene: 'This SKU belongs to the baby and family-care range. Intended use, net content and case pack should be checked.',
+  biscuit: 'This SKU belongs to the Japanese cookie and baked-confectionery range. Flavor, piece count and case pack should be checked.',
+  yogashi: 'This SKU belongs to the Japanese baked-confectionery range. Flavor, net content, shelf life and case pack should be checked.',
 };
 
 function editorialFor(p) {
@@ -166,8 +197,8 @@ function editorialFor(p) {
     ? 'This may be a legacy or discontinued catalog record; current availability and any successor JAN must be confirmed.'
     : 'Current packaging, lead time and lot availability are confirmed when we prepare your quotation.';
   return {
-    summary: truncate(`${p.name} by ${p.brand}, JAN ${jan}. Japanese wholesale sourcing information, MOQ ${moq}, product identification and quotation guidance from JAPANITEM.`, 155),
-    lead: `${p.name} is listed in JAPANITEM's ${p.brand} wholesale catalog under ${category}. The exact catalog identifier is JAN / GTIN ${jan}, helping buyers distinguish this item from similar sizes, colors, scents or package revisions.`,
+    summary: truncate(p.seo_description || `${p.name} by ${p.brand}, JAN ${jan}. Japanese wholesale sourcing information, MOQ ${moq}, product identification and quotation guidance from JAPANITEM.`, 155),
+    lead: p.seo_lead || `${p.name} is listed in JAPANITEM's ${p.brand} wholesale catalog under ${category}. The exact catalog identifier is JAN / GTIN ${jan}, helping buyers distinguish this item from similar sizes, colors, scents or package revisions.`,
     overview: brand.overview,
     buyerFit: brand.buyerFit,
     variantGuidance,
@@ -249,7 +280,8 @@ for (const p of products) {
   const brand = brandData.get(p.brand) || {};
   const category = categories[p.category] || p.category || 'Japanese daily goods';
   const canonical = productUrl(p);
-  const image = productImage(p);
+  const productPhoto = productImage(p);
+  const image = productPhoto || 'https://www.japanitem.com/assets/og.png';
   const title = productTitle(p);
   const editorial = editorialFor(p);
   const description = editorial?.summary || productDescription(p);
@@ -260,7 +292,12 @@ for (const p of products) {
   const productLd = {
     '@context': 'https://schema.org', '@type': 'Product', name: p.name,
     brand: { '@type': 'Brand', name: p.brand }, category, sku: String(p.id),
-    ...gtinProperty(jan), description, image: [image], url: canonical,
+    ...gtinProperty(jan), description, ...(productPhoto ? { image: [productPhoto] } : {}), url: canonical,
+    additionalProperty: [
+      { '@type': 'PropertyValue', name: 'Catalog unit', value: p.unit || '1 unit' },
+      { '@type': 'PropertyValue', name: 'Case pack / MOQ', value: String(p.moq || 'Confirm at quotation') },
+      ...(p.shelf_life ? [{ '@type': 'PropertyValue', name: 'Catalog shelf life', value: p.shelf_life }] : []),
+    ],
   };
   const breadcrumbLd = breadcrumb([
     { name: 'Home', url: 'https://www.japanitem.com/' },
@@ -278,7 +315,7 @@ ${commonHead({ title, description, canonical, type: 'product', image, ld: [produ
     <div class="container pdp-wrap">
       <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span class="sep">/</span><a href="categories/${escapeHtml(p.category)}.html">${escapeHtml(category)}</a><span class="sep">/</span><span class="cur">${escapeHtml(p.name)}</span></nav>
       <div class="pdp-grid">
-        <div class="pdp-media"><img class="prod-photo loaded" src="assets/products/${encodeURIComponent(jan)}.jpg" alt="${escapeHtml(p.name)} — JAN ${escapeHtml(jan)}" width="600" height="600" loading="eager" decoding="async"></div>
+        <div class="pdp-media"><img class="prod-photo loaded" src="${productPhoto ? `assets/products/${encodeURIComponent(jan)}.jpg` : 'assets/og.png'}" alt="${escapeHtml(p.name)} — JAN ${escapeHtml(jan)}" width="600" height="600" loading="eager" decoding="async"></div>
         <div class="pdp-info">
           <span class="cat">${escapeHtml(category)}</span>
           <h1>${escapeHtml(p.name)}</h1>
@@ -288,7 +325,7 @@ ${commonHead({ title, description, canonical, type: 'product', image, ld: [produ
             <div><span>Brand</span><b>${escapeHtml(p.brand)}</b></div><div><span>Category</span><b>${escapeHtml(category)}</b></div>
             <div><span>Unit</span><b>${escapeHtml(p.unit || '—')}</b></div><div><span>MOQ</span><b>${escapeHtml(p.moq || '—')}</b></div>
             <div><span>JAN / GTIN</span><b>${escapeHtml(jan)}</b></div><div><span>Origin</span><b>Japan</b></div>
-          </div>
+${p.shelf_life ? `            <div><span>Catalog shelf life</span><b>${escapeHtml(p.shelf_life)}</b></div>\n` : ''}          </div>
           <p><a class="btn btn-primary btn-lg" href="how-to-order.html?product=${encodeURIComponent(p.id)}&amp;name=${encodeURIComponent(p.name)}&amp;brand=${encodeURIComponent(p.brand)}#request">Request wholesale quote</a></p>
         </div>
       </div>
