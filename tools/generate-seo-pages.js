@@ -6,12 +6,14 @@ const root = path.resolve(__dirname, '..');
 const assetVersion = name => crypto.createHash('sha256').update(fs.readFileSync(path.join(root, 'assets/js', name))).digest('hex').slice(0, 12);
 const dataVersion = assetVersion('data.js');
 const appVersion = assetVersion('app.js');
+const i18nVersion = assetVersion('i18n.js');
 const cssVersion = crypto.createHash('sha256').update(fs.readFileSync(path.join(root, 'assets/css/style.min.css'))).digest('hex').slice(0, 12);
 for (const name of fs.readdirSync(root).filter(name => name.endsWith('.html'))) {
   const file = path.join(root, name);
   const original = fs.readFileSync(file, 'utf8');
   const updated = original.replace(/assets\/js\/data\.js\?v=[^"\s]+/g, `assets/js/data.js?v=${dataVersion}`)
     .replace(/assets\/js\/app\.js\?v=[^"\s]+/g, `assets/js/app.js?v=${appVersion}`)
+    .replace(/assets\/js\/i18n\.js\?v=[^"\s]+/g, `assets/js/i18n.js?v=${i18nVersion}`)
     .replace(/assets\/css\/style\.min\.css\?v=[^"\s]+/g, `assets/css/style.min.css?v=${cssVersion}`);
   if(updated !== original) fs.writeFileSync(file, updated, 'utf8');
 }
@@ -255,7 +257,7 @@ ${ld.map(item => `  <script type="application/ld+json">${jsonForHtml(item)}</scr
 
 function scripts() {
   return `  <script defer src="assets/js/data.js?v=${dataVersion}"></script>
-  <script defer src="assets/js/i18n.js?v=45"></script>
+  <script defer src="assets/js/i18n.js?v=${i18nVersion}"></script>
   <script defer src="assets/js/app.js?v=${appVersion}"></script>
   <script defer src="assets/js/auth.js"></script>
   <script defer src="assets/js/chatbot.js?v=4"></script>`;
@@ -334,23 +336,25 @@ ${commonHead({ title, description, canonical, type: 'product', image, ld: [produ
           <span class="cat">${escapeHtml(category)}</span>
           <h1>${escapeHtml(p.name)}</h1>
           <p class="brand"><a href="brands/${escapeHtml(brandSlugs.get(p.brand))}.html">${escapeHtml(p.brand)}</a></p>
-          <p class="pdp-blurb">${escapeHtml(p.seo_lead || editorial?.lead || brand.blurb || description)}</p>
+          <p class="pdp-blurb">Request availability and wholesale pricing for this exact item using the JAN / GTIN below.</p>
           <div class="pdp-specs">
-            <div><span>Brand</span><b>${escapeHtml(p.brand)}</b></div><div><span>Category</span><b>${escapeHtml(category)}</b></div>
             <div><span>Unit</span><b>${escapeHtml(p.unit || '—')}</b></div><div><span>MOQ</span><b>${escapeHtml(p.moq || '—')}</b></div>
-            <div><span>JAN / GTIN</span><b>${escapeHtml(jan)}</b></div><div><span>Origin</span><b>${escapeHtml(p.origin || 'Not independently verified')}</b></div>
-${p.shelf_life ? `            <div><span>Catalog shelf life (quote sheet; not remaining shelf life)</span><b>${escapeHtml(p.shelf_life)}</b></div>\n` : ''}${(p.verified_specs || []).map(spec => `<div><span>${escapeHtml(spec.name)}</span><b>${escapeHtml(spec.value)}</b></div>`).join('\n')}          </div>
+            <div><span>JAN / GTIN</span><b>${escapeHtml(jan)}</b></div><div><span>Origin</span><b>${escapeHtml(!p.origin || /not verified|not independently verified/i.test(p.origin) ? 'Confirm with quotation' : p.origin)}</b></div>
+          </div>
+          <div class="pdp-actions"><a class="btn btn-primary btn-lg" href="how-to-order.html?product=${encodeURIComponent(p.id)}&amp;name=${encodeURIComponent(p.name)}&amp;brand=${encodeURIComponent(p.brand)}#request">Request price</a><a class="btn btn-outline btn-lg" href="mailto:info@japanitem.com?subject=${encodeURIComponent('Quote request: '+p.name+' ('+p.id+')')}">Contact us</a></div>
+          <p class="pdp-package-note">Packaging, lead time and supplied-lot details are confirmed with your quotation.</p>
+          ${(p.verified_specs?.length || p.shelf_life || p.spec_source || p.spec_range_source) ? `<details class="pdp-evidence"><summary>Specifications &amp; sources</summary><div class="pdp-evidence-body"><dl class="pdp-evidence-list">${p.shelf_life ? `<div><dt>Catalog shelf life (not remaining shelf life)</dt><dd>${escapeHtml(p.shelf_life)}</dd></div>` : ''}${(p.verified_specs||[]).map(spec=>`<div><dt>${escapeHtml(spec.name)}</dt><dd>${escapeHtml(spec.value)}</dd></div>`).join('')}</dl>` : ''}
           ${p.spec_source ? `<p class="product-compliance-note">Source: <a href="${escapeHtml(p.spec_source)}" target="_blank" rel="noopener noreferrer">${escapeHtml(p.spec_source_name || 'Manufacturer product information')}</a> · Checked ${escapeHtml(p.spec_checked_on)}. ${escapeHtml(p.spec_match_note)}. The supplied package label takes precedence.</p>` : ''}
           ${p.spec_range_source ? `<p class="product-compliance-note">Additional manufacturer reference: <a href="${escapeHtml(p.spec_range_source)}" target="_blank" rel="noopener noreferrer">Lion product-family information</a>. ${escapeHtml(p.spec_range_note)}</p>` : ''}
-          <p><a class="btn btn-primary btn-lg" href="how-to-order.html?product=${encodeURIComponent(p.id)}&amp;name=${encodeURIComponent(p.name)}&amp;brand=${encodeURIComponent(p.brand)}#request">Request wholesale quote</a></p>
+          ${(p.verified_specs?.length || p.shelf_life || p.spec_source || p.spec_range_source) ? '</div></details>' : ''}
         </div>
       </div>
       ${editorial ? `<section class="product-editorial" aria-labelledby="product-overview">
         <div class="product-copy-grid">
-          <div class="product-copy-main"><span class="eyebrow">PRODUCT INFORMATION</span><h2 id="product-overview">About this ${escapeHtml(p.brand)} product</h2><p>${escapeHtml(editorial.overview)}</p><p>${escapeHtml(editorial.buyerFit)}</p></div>
-          <aside class="product-order-card"><span class="eyebrow">WHOLESALE CHECKLIST</span><h2>Before you order</h2><ul>${editorial.orderFacts.map(fact => `<li>${escapeHtml(fact)}</li>`).join('')}</ul></aside>
+          <div class="product-copy-main"><h2 id="product-overview">About ${escapeHtml(p.brand)}</h2><p>${escapeHtml(editorial.overview)}</p><p>${escapeHtml(editorial.buyerFit)}</p></div>
+          <aside class="product-order-card"><h2>Ordering notes</h2><ul><li>Include this JAN / GTIN and your required quantity in the inquiry.</li><li>Tell us your destination market so we can confirm export terms.</li><li>Current packaging, lead time and lot availability are confirmed with your quotation.</li></ul></aside>
         </div>
-        <div class="product-variant-note"><div><span class="eyebrow">VARIANT GUIDANCE</span><h2>Identify the exact SKU</h2></div><div><p>${escapeHtml(editorial.variantGuidance)}</p><p>${escapeHtml(editorial.handling)}</p><p class="product-compliance-note">Images and catalog details are for product identification. Buyers are responsible for confirming destination-market labeling, import and sales requirements.</p></div></div>
+        <details class="pdp-evidence product-variant-note"><summary>Identification &amp; import notes</summary><div class="pdp-evidence-body"><p>${escapeHtml(editorial.variantGuidance)}</p><p>${escapeHtml(editorial.handling)}</p><p class="product-compliance-note">Images and catalog details are for product identification. Buyers are responsible for confirming destination-market labeling, import and sales requirements.</p></div></details>
       </section>` : ''}
       <section class="related seo-related" aria-labelledby="related-products"><div class="section-head"><div><span class="eyebrow">MORE FROM JAPAN</span><h2 class="h" id="related-products">Related wholesale products</h2></div><a href="brands/${escapeHtml(brandSlugs.get(p.brand))}.html">View ${escapeHtml(p.brand)} products →</a></div><div class="product-grid cols-4">${related.map(productCard).join('')}</div></section>
     </div>
@@ -360,7 +364,7 @@ ${scripts()}
 </body>
 </html>
 `;
-  fs.writeFileSync(path.join(productDir, `${p.id}.html`), html, 'utf8');
+  fs.writeFileSync(path.join(productDir, `${p.id}.html`), html.replace(/[\t ]+$/gm, ''), 'utf8');
 }
 
 function writeCollectionPage({ output, canonical, title, description, eyebrow, heading, intro, list, parent, editorial = null }) {

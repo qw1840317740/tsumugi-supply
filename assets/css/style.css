@@ -1,4 +1,5 @@
 /* Hallmark · macrostructure: split editorial hero · tone: premium Japanese wholesale · anchor hue: forest green */
+@import '../../tokens.css';
 /* =========================================================
    TSUMUGI SUPPLY CO. — Stylesheet
    Original design. Warm "washi" palette + sumi-ink typography.
@@ -1350,4 +1351,74 @@ table.t td b{ color:var(--clay); font-family:var(--f-serif); font-size:1.1rem; }
   .seo-brand-links a{ font-size:.76rem; padding:7px 10px; }
   .product-editorial{ margin-top:48px; padding-top:38px; }
   .product-order-card,.product-variant-note{ padding:24px 20px; }
+}
+
+/* Hallmark · macrostructure: Catalogue dossier (PDP only) · theme: existing JAPANITEM
+   Hallmark · pre-emit critique: P4 H4 E4 S4 R5 V3.
+   Nav/footer and catalog facts intentionally preserved; no additional animation. */
+html { overflow-x:clip; }
+.cart-drawer:not(.open) { visibility:hidden; }
+.mobile-menu:not(.open) { visibility:hidden; }
+.footer-news input { min-width:0; }
+.footer-news button { flex-shrink:0; white-space:nowrap; }
+#pdp .pdp-grid { grid-template-columns:minmax(0,1fr); gap:var(--pdp-space-lg); }
+#pdp .pdp-media { position:relative; top:auto; width:100%; max-width:30rem; margin-inline:auto; box-shadow:none; border-radius:var(--radius); }
+#pdp .pdp-media .prod-photo { padding:var(--pdp-space-lg); }
+#pdp .pdp-info { min-width:0; }
+#pdp .pdp-info h1 { font-size:clamp(1.5rem,2.3vw,2.15rem); line-height:1.3; overflow-wrap:anywhere; min-width:0; margin-block:var(--pdp-space-xs) var(--pdp-space-md); text-wrap:pretty; }
+#pdp .pdp-info .brandlink { margin-bottom:var(--pdp-space-md); }
+#pdp .pdp-blurb { margin-bottom:var(--pdp-space-lg); font-size:.9375rem; line-height:1.65; }
+#pdp .pdp-specs { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); background:transparent; border:0; border-radius:0; gap:0 var(--pdp-space-lg); margin-bottom:var(--pdp-space-lg); }
+#pdp .pdp-specs > div { background:transparent; padding:var(--pdp-space-sm) 0; border-block-start:1px solid var(--line); min-width:0; gap:var(--pdp-space-xs); }
+#pdp .pdp-specs > div > span { font-family:var(--f-sans); font-size:.8125rem; text-transform:none; letter-spacing:0; color:var(--ink-2); }
+#pdp .pdp-specs b { font-family:var(--f-sans); font-size:1rem; font-weight:600; overflow-wrap:anywhere; font-variant-numeric:tabular-nums; }
+#pdp .pdp-actions { display:grid; grid-template-columns:minmax(0,1fr) auto; gap:var(--pdp-space-sm); }
+#pdp .pdp-actions .btn { min-width:0; width:100%; white-space:nowrap; padding-inline:var(--pdp-space-md); }
+#pdp .pdp-actions .btn-primary { grid-column:1 / -1; }
+#pdp .pdp-actions .btn-outline { border:1px solid var(--line); background:transparent; color:var(--sumi); }
+#pdp .pdp-actions .btn-outline:hover { background:var(--paper-2); }
+#pdp .pdp-trust { margin-top:var(--pdp-space-lg); padding-top:var(--pdp-space-md); gap:var(--pdp-space-xs) var(--pdp-space-md); font-size:.8125rem; }
+#pdp .pdp-package-note { margin-block:var(--pdp-space-md); color:var(--ink-2); font-size:.875rem; line-height:1.6; }
+#pdp .pdp-evidence { border-block:1px solid var(--line); background:transparent; border-radius:0; color:var(--ink); padding:0; }
+#pdp .pdp-evidence summary { cursor:pointer; display:flex; justify-content:space-between; align-items:center; gap:var(--pdp-space-sm); padding-block:var(--pdp-space-md); font-size:.875rem; font-weight:600; list-style:none; }
+#pdp .pdp-evidence summary::-webkit-details-marker { display:none; }
+#pdp .pdp-evidence summary::after { content:'+'; font-size:1.25rem; color:var(--sumi); flex:none; }
+#pdp .pdp-evidence[open] > summary::after { content:'−'; }
+#pdp .pdp-evidence summary:focus-visible { outline:2px solid var(--sumi); outline-offset:4px; }
+#pdp .pdp-evidence-body { padding-bottom:var(--pdp-space-lg); min-width:0; overflow-wrap:anywhere; }
+#pdp .pdp-evidence-list { margin:0; font-size:.875rem; }
+#pdp .pdp-evidence-list > div { display:grid; gap:var(--pdp-space-xs); padding-block:var(--pdp-space-sm); border-top:1px solid var(--line-soft); }
+#pdp .pdp-evidence-list dt { color:var(--ink-2); }
+#pdp .pdp-evidence-list dd { margin:0; color:var(--ink); }
+#pdp .pdp-evidence-body .product-compliance-note { font-size:.875rem; color:var(--ink-2); line-height:1.65; margin-top:var(--pdp-space-md); }
+#pdp .pdp-evidence-body a { text-decoration:underline; text-underline-offset:3px; }
+#pdp .product-editorial { margin-top:var(--pdp-space-xl); padding-top:var(--pdp-space-xl); }
+#pdp .product-copy-grid { grid-template-columns:minmax(0,1fr); gap:var(--pdp-space-lg); }
+#pdp .product-copy-main h2, #pdp .product-order-card h2 { font-size:1.5625rem; line-height:1.25; margin:0 0 var(--pdp-space-md); }
+#pdp .product-copy-main p { margin:0 0 var(--pdp-space-sm); font-size:.9375rem; line-height:1.65; }
+#pdp .product-order-card { padding:0; background:transparent; border:0; border-radius:0; box-shadow:none; }
+#pdp .product-order-card li { font-size:.9375rem; padding-block:var(--pdp-space-sm); }
+#pdp .product-variant-note { display:block; margin-top:var(--pdp-space-lg); }
+#pdp .product-variant-note p { color:var(--ink-2); font-size:.875rem; line-height:1.65; }
+#pdp .product-variant-note .product-compliance-note { border-color:var(--line); }
+@media (max-width:39.999rem) {
+  #pdp .pdp-media { aspect-ratio:4 / 3; }
+  body:has(#pdp) .fab, body:has(#pdp) .cb-fab { display:none; }
+}
+@media (max-width:25rem) {
+  body:has(#pdp) .nav { gap:var(--pdp-space-xs); }
+  body:has(#pdp) .nav .site-brand .brand-lockup { width:124px; height:auto; }
+  body:has(#pdp) .nav-actions { gap:4px; }
+  body:has(#pdp) .nav-actions .icon-btn { width:34px; height:40px; }
+}
+@media (min-width:40rem) {
+  #pdp .pdp-actions { grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto; }
+  #pdp .pdp-actions .btn-primary { grid-column:auto; }
+  #pdp .pdp-evidence-list > div { grid-template-columns:minmax(0,1fr) minmax(0,1.2fr); gap:var(--pdp-space-lg); }
+}
+@media (min-width:60rem) {
+  #pdp .pdp-grid { grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr); gap:var(--pdp-space-xl); }
+  #pdp .pdp-media { max-width:none; }
+  #pdp .product-copy-grid { grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr); gap:var(--pdp-space-xl); }
+  #pdp .product-order-card { padding-inline-start:var(--pdp-space-xl); border-inline-start:1px solid var(--line); }
 }

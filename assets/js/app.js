@@ -928,23 +928,17 @@ function initPDP(){
         <div class="pdp-info">
           <span class="cat">${subOf(p)}</span>
           <h1>${p.name}</h1>
-          <a class="brandlink" href="${brandSeoUrl(p.brand)}">${brandLogo(brand,28)} <span>${brandName(brand)}</span> ${ICON.arrow}</a>
-          <p class="pdp-blurb">${p.seo_lead||brand.blurb||t('pdp.desc')}</p>
+          <a class="brandlink" href="${brandSeoUrl(p.brand)}"><span>${brandName(brand)}</span> ${ICON.arrow}</a>
+          <p class="pdp-blurb">${t('pdp.procurement')}</p>
           <div class="pdp-specs">
-            <div><span>${t('pdp.brand')}</span><b>${brandName(brand)}</b></div>
-            <div><span>${t('pdp.cat')}</span><b>${catName(p.category)}${p.sub?' / '+subName(p.sub):''}</b></div>
             <div><span>${t('pdp.unit')}</span><b>${p.unit||'—'}</b></div>
             <div><span>${t('pdp.moq')}</span><b>${p.moq}</b></div>
             <div><span>${t('pdp.jan')}</span><b>${p.jan||p.id}</b></div>
-            <div><span>${t('pdp.origin')}</span><b>${escapeSpec(p.origin||'Not independently verified')}</b></div>
-            ${p.shelf_life?`<div><span>Catalog shelf life (quote sheet; not remaining shelf life)</span><b>${p.shelf_life}</b></div>`:''}
-            ${(p.verified_specs||[]).map(spec=>`<div><span>${escapeSpec(spec.name)}</span><b>${escapeSpec(spec.value)}</b></div>`).join('')}
+            <div><span>${t('pdp.origin')}</span><b>${escapeSpec(!p.origin || /not verified|not independently verified/i.test(p.origin) ? t('pdp.confirmOrigin') : p.origin)}</b></div>
           </div>
-          ${p.spec_source?`<p class="product-compliance-note">Source: <a href="${escapeSpec(p.spec_source)}" target="_blank" rel="noopener noreferrer">${escapeSpec(p.spec_source_name||'Manufacturer product information')}</a> · Checked ${escapeSpec(p.spec_checked_on)}. ${escapeSpec(p.spec_match_note)}. The supplied package label takes precedence.</p>`:''}
-          ${p.spec_range_source?`<p class="product-compliance-note">Additional manufacturer reference: <a href="${escapeSpec(p.spec_range_source)}" target="_blank" rel="noopener noreferrer">Lion product-family information</a>. ${escapeSpec(p.spec_range_note)}</p>`:''}
           <div class="pdp-actions">
             <a class="btn btn-primary btn-lg" href="how-to-order.html?product=${encodeURIComponent(p.id)}&name=${encodeURIComponent(p.name)}&brand=${encodeURIComponent(p.brand)}#request">${t('pdp.inquire')}</a>
-            <a class="btn btn-clay btn-lg" href="mailto:${SITE.email}?subject=${encodeURIComponent('Quote request: '+p.name+' ('+p.id+')')}&body=${encodeURIComponent(t('pdp.emailBody').replace('{NAME}',p.name).replace('{BRAND}',p.brand).replace('{ID}',p.id).replace('{URL}',location.href))}">${t('pdp.contact')}</a>
+            <a class="btn btn-outline btn-lg" href="mailto:${SITE.email}?subject=${encodeURIComponent('Quote request: '+p.name+' ('+p.id+')')}&body=${encodeURIComponent(t('pdp.emailBody').replace('{NAME}',p.name).replace('{BRAND}',p.brand).replace('{ID}',p.id).replace('{URL}',location.href))}">${t('pdp.contact')}</a>
             <button class="icon-btn save" aria-label="Save" onclick="handleSave(this,'${p.id}')">${ICON.heart}</button>
           </div>
           <div class="pdp-trust">
@@ -952,6 +946,12 @@ function initPDP(){
             <span>${ICON.truck} ${t('t.logistics')}</span>
             <span>${ICON.clock} ${t('t.day')}</span>
           </div>
+          <p class="pdp-package-note">${t('pdp.packageNote')}</p>
+          ${(p.verified_specs?.length || p.shelf_life || p.spec_source || p.spec_range_source) ? `<details class="pdp-evidence"><summary>${t('pdp.evidence')}</summary><div class="pdp-evidence-body">
+            <dl class="pdp-evidence-list">${p.shelf_life ? `<div><dt>Catalog shelf life (not remaining shelf life)</dt><dd>${escapeSpec(p.shelf_life)}</dd></div>` : ''}${(p.verified_specs||[]).map(spec=>`<div><dt>${escapeSpec(spec.name)}</dt><dd>${escapeSpec(spec.value)}</dd></div>`).join('')}</dl>
+            ${p.spec_source?`<p class="product-compliance-note">Source: <a href="${escapeSpec(p.spec_source)}" target="_blank" rel="noopener noreferrer">${escapeSpec(p.spec_source_name||'Manufacturer product information')}</a> · Checked ${escapeSpec(p.spec_checked_on)}. ${escapeSpec(p.spec_match_note)}. The supplied package label takes precedence.</p>`:''}
+            ${p.spec_range_source?`<p class="product-compliance-note">Additional manufacturer reference: <a href="${escapeSpec(p.spec_range_source)}" target="_blank" rel="noopener noreferrer">Lion product-family information</a>. ${escapeSpec(p.spec_range_note)}</p>`:''}
+          </div></details>` : ''}
         </div>
       </div>
       ${seoEditorial}
