@@ -1,14 +1,14 @@
 {
   "checked_on": "2026-10-09",
   "catalog_products": 2348,
-  "researched_products": 680,
+  "researched_products": 1048,
   "source_types": {
     "retailer": 143,
-    "manufacturer-range": 203,
-    "retailer-title": 191,
+    "retailer-title": 673,
+    "manufacturer-range": 89,
     "manufacturer": 143
   },
-  "fact_fields": 1854,
+  "fact_fields": 3321,
   "limitations": [
     "Sundrug individual requests encountered rate limiting and were stopped; this does not mean a product has no specifications.",
     "Public retailer feed pagination ended after 25,000 records (page 101 returned HTTP 400); the entire retailer catalog was not exhausted.",
@@ -24,9 +24,9 @@
     },
     "Clinica": {
       "catalog": 68,
-      "sku_specs": 40,
-      "range_only": 21,
-      "unresearched": 7
+      "sku_specs": 49,
+      "range_only": 13,
+      "unresearched": 6
     },
     "Denter": {
       "catalog": 2,
@@ -36,21 +36,21 @@
     },
     "Systema": {
       "catalog": 62,
-      "sku_specs": 37,
-      "range_only": 19,
+      "sku_specs": 52,
+      "range_only": 4,
       "unresearched": 6
     },
     "Dent Health": {
       "catalog": 10,
-      "sku_specs": 8,
+      "sku_specs": 10,
       "range_only": 0,
-      "unresearched": 2
+      "unresearched": 0
     },
     "NONIO": {
       "catalog": 34,
-      "sku_specs": 8,
-      "range_only": 15,
-      "unresearched": 11
+      "sku_specs": 26,
+      "range_only": 2,
+      "unresearched": 6
     },
     "Lightee": {
       "catalog": 6,
@@ -84,9 +84,9 @@
     },
     "OCH-TUNE": {
       "catalog": 4,
-      "sku_specs": 0,
-      "range_only": 2,
-      "unresearched": 2
+      "sku_specs": 4,
+      "range_only": 0,
+      "unresearched": 0
     },
     "Migacot": {
       "catalog": 1,
@@ -96,56 +96,56 @@
     },
     "Dental Rinse": {
       "catalog": 1,
-      "sku_specs": 0,
-      "range_only": 1,
+      "sku_specs": 1,
+      "range_only": 0,
       "unresearched": 0
     },
     "Soft in One": {
       "catalog": 5,
-      "sku_specs": 0,
-      "range_only": 4,
+      "sku_specs": 4,
+      "range_only": 0,
       "unresearched": 1
     },
     "Oct": {
       "catalog": 4,
-      "sku_specs": 0,
-      "range_only": 4,
+      "sku_specs": 4,
+      "range_only": 0,
       "unresearched": 0
     },
     "Kirei Kirei": {
       "catalog": 38,
-      "sku_specs": 1,
-      "range_only": 30,
-      "unresearched": 7
+      "sku_specs": 25,
+      "range_only": 7,
+      "unresearched": 6
     },
     "Hadakara": {
       "catalog": 20,
-      "sku_specs": 8,
-      "range_only": 10,
+      "sku_specs": 15,
+      "range_only": 3,
       "unresearched": 2
     },
     "Ban": {
       "catalog": 13,
-      "sku_specs": 0,
-      "range_only": 13,
+      "sku_specs": 13,
+      "range_only": 0,
       "unresearched": 0
     },
     "Top": {
       "catalog": 16,
-      "sku_specs": 1,
-      "range_only": 6,
+      "sku_specs": 2,
+      "range_only": 5,
       "unresearched": 9
     },
     "NANOX": {
       "catalog": 24,
-      "sku_specs": 1,
-      "range_only": 21,
+      "sku_specs": 7,
+      "range_only": 15,
       "unresearched": 2
     },
     "Acron": {
       "catalog": 12,
-      "sku_specs": 0,
-      "range_only": 7,
+      "sku_specs": 1,
+      "range_only": 6,
       "unresearched": 5
     },
     "Bright": {
@@ -162,8 +162,8 @@
     },
     "Soflan Premium": {
       "catalog": 2,
-      "sku_specs": 1,
-      "range_only": 1,
+      "sku_specs": 2,
+      "range_only": 0,
       "unresearched": 0
     },
     "Soflan Aroma": {
@@ -174,14 +174,14 @@
     },
     "Style Guard": {
       "catalog": 3,
-      "sku_specs": 0,
-      "range_only": 2,
-      "unresearched": 1
+      "sku_specs": 3,
+      "range_only": 0,
+      "unresearched": 0
     },
     "Elegard": {
       "catalog": 2,
-      "sku_specs": 0,
-      "range_only": 1,
+      "sku_specs": 1,
+      "range_only": 0,
       "unresearched": 1
     },
     "Rain Guard": {
@@ -210,14 +210,14 @@
     },
     "Look": {
       "catalog": 11,
-      "sku_specs": 0,
-      "range_only": 11,
+      "sku_specs": 8,
+      "range_only": 3,
       "unresearched": 0
     },
     "Bathtub Cleanser": {
       "catalog": 20,
-      "sku_specs": 0,
-      "range_only": 12,
+      "sku_specs": 1,
+      "range_only": 11,
       "unresearched": 8
     },
     "Toilet Cleanser": {
@@ -228,33 +228,33 @@
     },
     "Mamepika": {
       "catalog": 4,
-      "sku_specs": 1,
-      "range_only": 3,
+      "sku_specs": 4,
+      "range_only": 0,
       "unresearched": 0
     },
     "Kose Ouvi Blue": {
       "catalog": 31,
-      "sku_specs": 6,
+      "sku_specs": 20,
       "range_only": 0,
-      "unresearched": 25
+      "unresearched": 11
     },
     "Kose Make Keep": {
       "catalog": 9,
-      "sku_specs": 2,
+      "sku_specs": 6,
       "range_only": 0,
-      "unresearched": 7
+      "unresearched": 3
     },
     "Kose Sekkisei": {
       "catalog": 14,
-      "sku_specs": 2,
+      "sku_specs": 12,
       "range_only": 0,
-      "unresearched": 12
+      "unresearched": 2
     },
     "Kose Infinity": {
       "catalog": 63,
-      "sku_specs": 15,
+      "sku_specs": 55,
       "range_only": 0,
-      "unresearched": 48
+      "unresearched": 8
     },
     "Kose Grace One": {
       "catalog": 32,
@@ -264,15 +264,15 @@
     },
     "Visee": {
       "catalog": 182,
-      "sku_specs": 30,
+      "sku_specs": 110,
       "range_only": 0,
-      "unresearched": 152
+      "unresearched": 72
     },
     "Fasio": {
       "catalog": 127,
-      "sku_specs": 19,
+      "sku_specs": 68,
       "range_only": 0,
-      "unresearched": 108
+      "unresearched": 59
     },
     "and honey": {
       "catalog": 29,
@@ -282,15 +282,15 @@
     },
     "BOTANIST": {
       "catalog": 22,
-      "sku_specs": 0,
+      "sku_specs": 3,
       "range_only": 0,
-      "unresearched": 22
+      "unresearched": 19
     },
     "DEVECICA": {
       "catalog": 21,
-      "sku_specs": 0,
+      "sku_specs": 2,
       "range_only": 0,
-      "unresearched": 21
+      "unresearched": 19
     },
     "Chacott": {
       "catalog": 3,
@@ -312,15 +312,15 @@
     },
     "Salon Link": {
       "catalog": 6,
-      "sku_specs": 0,
+      "sku_specs": 2,
       "range_only": 0,
-      "unresearched": 6
+      "unresearched": 4
     },
     "Kumano Beauty": {
       "catalog": 5,
-      "sku_specs": 0,
+      "sku_specs": 3,
       "range_only": 0,
-      "unresearched": 5
+      "unresearched": 2
     },
     "Kumano Vuea": {
       "catalog": 1,
@@ -330,15 +330,15 @@
     },
     "Seihaku": {
       "catalog": 23,
-      "sku_specs": 0,
+      "sku_specs": 7,
       "range_only": 0,
-      "unresearched": 23
+      "unresearched": 16
     },
     "cyclea": {
       "catalog": 16,
-      "sku_specs": 3,
+      "sku_specs": 9,
       "range_only": 0,
-      "unresearched": 13
+      "unresearched": 7
     },
     "The": {
       "catalog": 3,
@@ -348,9 +348,9 @@
     },
     "Ariel": {
       "catalog": 51,
-      "sku_specs": 7,
+      "sku_specs": 21,
       "range_only": 0,
-      "unresearched": 44
+      "unresearched": 30
     },
     "Bold": {
       "catalog": 59,
@@ -360,51 +360,51 @@
     },
     "Sarasa": {
       "catalog": 10,
-      "sku_specs": 0,
+      "sku_specs": 2,
       "range_only": 0,
-      "unresearched": 10
+      "unresearched": 8
     },
     "Lenor": {
       "catalog": 160,
-      "sku_specs": 21,
+      "sku_specs": 23,
       "range_only": 0,
-      "unresearched": 139
+      "unresearched": 137
     },
     "Joy": {
       "catalog": 78,
-      "sku_specs": 7,
+      "sku_specs": 24,
       "range_only": 0,
-      "unresearched": 71
+      "unresearched": 54
     },
     "Febreze": {
       "catalog": 224,
-      "sku_specs": 34,
+      "sku_specs": 53,
       "range_only": 0,
-      "unresearched": 190
+      "unresearched": 171
     },
     "Pantene": {
       "catalog": 133,
-      "sku_specs": 14,
+      "sku_specs": 48,
       "range_only": 0,
-      "unresearched": 119
+      "unresearched": 85
     },
     "H&E": {
       "catalog": 2,
-      "sku_specs": 0,
+      "sku_specs": 2,
       "range_only": 0,
-      "unresearched": 2
+      "unresearched": 0
     },
     "Head & Shoulders": {
       "catalog": 45,
-      "sku_specs": 7,
+      "sku_specs": 10,
       "range_only": 0,
-      "unresearched": 38
+      "unresearched": 35
     },
     "Head & Shoulders for Men": {
       "catalog": 34,
-      "sku_specs": 4,
+      "sku_specs": 6,
       "range_only": 0,
-      "unresearched": 30
+      "unresearched": 28
     },
     "Hair Recipe": {
       "catalog": 9,
@@ -432,15 +432,15 @@
     },
     "YOLU": {
       "catalog": 1,
-      "sku_specs": 0,
+      "sku_specs": 1,
       "range_only": 0,
-      "unresearched": 1
+      "unresearched": 0
     },
     "DHC": {
       "catalog": 168,
-      "sku_specs": 4,
+      "sku_specs": 44,
       "range_only": 0,
-      "unresearched": 164
+      "unresearched": 124
     },
     "cocochi": {
       "catalog": 22,

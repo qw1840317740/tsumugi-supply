@@ -1,0 +1,34 @@
+{
+  "checked_on": "2026-10-09",
+  "collections": [
+    {
+      "collection": "dhc_03",
+      "checked": 135
+    },
+    {
+      "collection": "brand-kose",
+      "checked": 338
+    },
+    {
+      "collection": "kose_counseling",
+      "checked": 410
+    },
+    {
+      "collection": "cosmetics",
+      "checked": 6902
+    },
+    {
+      "collection": "daily",
+      "checked": 7200
+    },
+    {
+      "collection": "healthy-supplement",
+      "checked": 396
+    },
+    {
+      "collection": "baby",
+      "checked": 676
+    }
+  ],
+  "new_matches": 482
+}

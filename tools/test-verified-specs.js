@@ -16,7 +16,8 @@ for(const [jan,record] of Object.entries(records)){
  if(record.source_type?.startsWith('retailer')) assert.equal(p.spec_source,`https://sundrug-online.com/products/${jan}`);
  if(record.source_type==='manufacturer-range') assert(record.match_note.includes('not a confirmed specification'));
  if(record.source_type==='manufacturer-range') assert(record.specs.every(s=>s.name.startsWith('Manufacturer range')));
- if(record.source_type==='retailer-title') assert(record.specs[0].name.includes('not manufacturer-confirmed'));
+ if(record.source_type==='retailer-title') assert(record.specs.some(s=>s.name.includes('not manufacturer-confirmed')||s.name==='Labelled supply period (retailer title; not dosage advice)'));
+ if(p.sub==='diaper'&&record.source_type==='retailer-title') assert(!/kg/i.test(record.unit||''),'Diaper body weight must not be used as pack size');
  const html=fs.readFileSync(require('path').join(__dirname,'..','products',jan+'.html'),'utf8');
  const ld=JSON.parse(html.match(/<script type="application\/ld\+json">(.*?)<\/script>/s)[1]);
  for(const spec of record.specs) assert(ld.additionalProperty.some(x=>x.name===spec.name&&x.value===spec.value),`Static schema dropped ${jan}: ${spec.name}`);
