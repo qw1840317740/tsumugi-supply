@@ -1,7 +1,18 @@
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 
 const root = path.resolve(__dirname, '..');
+const assetVersion = name => crypto.createHash('sha256').update(fs.readFileSync(path.join(root, 'assets/js', name))).digest('hex').slice(0, 12);
+const dataVersion = assetVersion('data.js');
+const appVersion = assetVersion('app.js');
+for (const name of fs.readdirSync(root).filter(name => name.endsWith('.html'))) {
+  const file = path.join(root, name);
+  const original = fs.readFileSync(file, 'utf8');
+  const updated = original.replace(/assets\/js\/data\.js\?v=[^"\s]+/g, `assets/js/data.js?v=${dataVersion}`)
+    .replace(/assets\/js\/app\.js\?v=[^"\s]+/g, `assets/js/app.js?v=${appVersion}`);
+  if(updated !== original) fs.writeFileSync(file, updated, 'utf8');
+}
 global.window = {};
 require(path.join(root, 'assets/js/data.js'));
 
@@ -241,9 +252,9 @@ ${ld.map(item => `  <script type="application/ld+json">${jsonForHtml(item)}</scr
 }
 
 function scripts() {
-  return `  <script defer src="assets/js/data.js?v=43"></script>
+  return `  <script defer src="assets/js/data.js?v=${dataVersion}"></script>
   <script defer src="assets/js/i18n.js?v=45"></script>
-  <script defer src="assets/js/app.js?v=63"></script>
+  <script defer src="assets/js/app.js?v=${appVersion}"></script>
   <script defer src="assets/js/auth.js"></script>
   <script defer src="assets/js/chatbot.js?v=4"></script>`;
 }

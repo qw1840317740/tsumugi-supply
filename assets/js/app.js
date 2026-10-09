@@ -902,6 +902,8 @@ function initPDP(){
   const id = activeProductId();
   const p = CATALOG_PRODUCTS.find(x=>x.id===id);
   if(!p){
+    // Keep the generated product page usable if the browser has stale catalog data.
+    if(host.dataset.productId && host.querySelector('h1')) return;
     host.innerHTML = `<div class="container" style="padding:80px 24px;text-align:center">
       <h1 class="h" data-i18n="pdp.notfound"></h1>
       <p class="muted" style="margin:12px 0 24px" data-i18n="pdp.notfoundP"></p>
