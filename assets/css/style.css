@@ -1443,16 +1443,19 @@ html { overflow-x:clip; }
   #homeCategories .cat-card:hover { background:var(--paper-3); border-color:var(--line); transform:none; box-shadow:none; }
 }
 @media (min-width:48rem) {
-  #homeCategories .cat-grid { grid-template-columns:repeat(3,minmax(0,1fr)); gap:var(--pdp-space-md); }
+  #homeCategories .cat-grid { gap:var(--pdp-space-md); }
   #homeCategories .cat-card { grid-template-columns:44px minmax(0,1fr) 20px; align-items:center; padding:var(--pdp-space-lg); min-height:144px; }
   #homeCategories .cat-card .ic { width:44px; height:44px; font-size:1.625rem; }
   #homeCategories .cat-card-body { grid-column:2; grid-row:1; }
   #homeCategories .cat-card h3 { font-size:1.125rem; min-height:0; }
   #homeCategories .cat-card .arr { grid-column:3; }
 }
+@media (min-width:60rem) {
+  #homeCategories .cat-grid { grid-template-columns:repeat(3,minmax(0,1fr)); }
+}
 @media (prefers-reduced-motion:reduce) {
   #homeCategories .cat-card { transition:none; }
 }
-@media (max-width:39.999rem) {
+@media (max-width:59.999rem) {
   body.viewing-categories .fab, body.viewing-categories .cb-fab { display:none; }
 }

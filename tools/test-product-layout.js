@@ -55,7 +55,7 @@ const server = http.createServer((req,res)=>{
       await page.goto(`http://127.0.0.1:${server.address().port}/index.html`,{waitUntil:'networkidle'});
       await page.locator('#catGrid .cat-card').first().waitFor();
       assert.equal(await page.locator('#catGrid .cat-card').count(),6);
-      assert.equal(await page.locator('#catGrid').evaluate(e=>getComputedStyle(e).gridTemplateColumns.split(' ').length),width>=768?3:2);
+      assert.equal(await page.locator('#catGrid').evaluate(e=>getComputedStyle(e).gridTemplateColumns.split(' ').length),width>=960?3:2);
       assert(!(await page.locator('#homeCategories').innerText()).includes('Four essential'));
       assert(!(await page.locator('#homeCategories').innerText()).includes('subcategories'));
       assert(await page.locator('#catGrid .arr').first().evaluate(e=>getComputedStyle(e).opacity==='1'));
