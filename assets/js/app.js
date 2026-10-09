@@ -827,13 +827,13 @@ function initShop(){
         const subsHtml = (expanded && liveSubs.length)
           ? `<ul class="filter-subs">${
               liveSubs.map(s=>{
-                return `<li><a data-sub="${s.id}" class="${state.sub===s.id?'on':''}">${subName(s.id)} <span class="n">${s.n}</span></a></li>`;
+                return `<li><a data-sub="${s.id}" class="${state.sub===s.id?'on':''}"><span class="filter-label">${subName(s.id)}</span><span class="n">${s.n.toLocaleString()}</span></a></li>`;
               }).join('')
             }</ul>` : '';
         const caret = liveSubs.length ? `<span class="caret ${expanded?'open':''}">${ICON.chev}</span>` : '';
-        return `<li><a data-cat="${c.id}" class="${state.cat===c.id&&!state.sub?'on':''}">${catName(c.id)} <span class="n">${n}</span>${caret}</a>${subsHtml}</li>`;
+        return `<li><a data-cat="${c.id}" class="${state.cat===c.id&&!state.sub?'on':''}"><span class="filter-label">${catName(c.id)}</span><span class="n">${n.toLocaleString()}</span>${caret}</a>${subsHtml}</li>`;
       }).join('');
-      catList.innerHTML = `<li><a data-cat="" data-sub="" class="${!state.cat?'on':''}">${t('shop.allP')} <span class="n">${CATALOG_PRODUCTS.length}</span></a></li>` + topsHtml;
+      catList.innerHTML = `<li><a data-cat="" data-sub="" class="${!state.cat?'on':''}"><span class="filter-label">${t('shop.allP')}</span><span class="n">${CATALOG_PRODUCTS.length.toLocaleString()}</span></a></li>` + topsHtml;
     };
     buildCats();
     catList.addEventListener('click', e=>{

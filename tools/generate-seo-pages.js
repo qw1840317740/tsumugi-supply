@@ -6,11 +6,13 @@ const root = path.resolve(__dirname, '..');
 const assetVersion = name => crypto.createHash('sha256').update(fs.readFileSync(path.join(root, 'assets/js', name))).digest('hex').slice(0, 12);
 const dataVersion = assetVersion('data.js');
 const appVersion = assetVersion('app.js');
+const cssVersion = crypto.createHash('sha256').update(fs.readFileSync(path.join(root, 'assets/css/style.min.css'))).digest('hex').slice(0, 12);
 for (const name of fs.readdirSync(root).filter(name => name.endsWith('.html'))) {
   const file = path.join(root, name);
   const original = fs.readFileSync(file, 'utf8');
   const updated = original.replace(/assets\/js\/data\.js\?v=[^"\s]+/g, `assets/js/data.js?v=${dataVersion}`)
-    .replace(/assets\/js\/app\.js\?v=[^"\s]+/g, `assets/js/app.js?v=${appVersion}`);
+    .replace(/assets\/js\/app\.js\?v=[^"\s]+/g, `assets/js/app.js?v=${appVersion}`)
+    .replace(/assets\/css\/style\.min\.css\?v=[^"\s]+/g, `assets/css/style.min.css?v=${cssVersion}`);
   if(updated !== original) fs.writeFileSync(file, updated, 'utf8');
 }
 global.window = {};
@@ -243,7 +245,7 @@ function commonHead({ title, description, canonical, type = 'website', image = '
   <meta name="twitter:image" content="${image}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="assets/css/style.min.css?v=73">
+  <link rel="stylesheet" href="assets/css/style.min.css?v=${cssVersion}">
   <link rel="preload" as="style" href="assets/css/chatbot.css?v=2" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="assets/css/chatbot.css?v=2"></noscript>
   <link rel="icon" href="assets/brand/japanitem-mark-user.png?v=2" type="image/png">
