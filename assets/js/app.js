@@ -1249,18 +1249,25 @@ function initHomeGrids(){
   const cg = document.getElementById('catGrid');
   if(cg && !cg.dataset.filled){
     cg.dataset.filled = '1';
+    function renderCategories(){
     cg.innerHTML = CATEGORIES.map(c => {
       const n = CATALOG_PRODUCTS.filter(p => p.category === c.id).length;
       if(n === 0) return '';
-      const usedSubs = (c.subs || []).filter(s => (s.count || 0) > 0).length;
       return `
-        <a class="cat-card reveal" href="products.html?cat=${c.id}" style="--cat-hue:${c.hue}">
+        <a class="cat-card" href="products.html?cat=${c.id}" style="--cat-hue:${c.hue}">
           <div class="ic" aria-hidden="true">${c.glyph || ''}</div>
-          <h4>${catName(c.id)}</h4>
-          <div class="count">${n} ${t(n===1?'cat.skus':'cat.skusPl')} · ${usedSubs} ${t('cat.subs')}</div>
-          <span class="arr">${I.arrow || ''}</span>
+          <div class="cat-card-body"><h3>${catName(c.id)}</h3><div class="count"><strong>${n.toLocaleString(getLang()==='en'?'en-US':getLang()==='zh'?'zh-CN':'ja-JP')}</strong> ${t('cat.products')}</div></div>
+          <span class="arr" aria-hidden="true">${I.arrow || ''}</span>
         </a>`;
     }).join('');
+    }
+    renderCategories();
+    addRenderer(renderCategories);
+    // Keep floating support controls off mobile category cards while browsing.
+    if(cg.closest('#homeCategories') && 'IntersectionObserver' in window){
+      new IntersectionObserver(([entry])=>document.body.classList.toggle('viewing-categories',entry.isIntersecting))
+        .observe(cg.closest('#homeCategories'));
+    }
   }
   // 2. Featured products: pick across sub-categories from best+new pool
   // so the home page doesn't always show the same oral-care SKUs.

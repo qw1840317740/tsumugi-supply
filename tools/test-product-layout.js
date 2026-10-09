@@ -50,6 +50,35 @@ const server = http.createServer((req,res)=>{
     await staticPage.goto(url); assert.equal(await staticPage.locator('.pdp-specs > div').count(),4);
     assert(await staticPage.locator('.pdp-actions .btn-primary').isVisible());
     await staticPage.screenshot({path:path.join(output,'pdp-static.png'),fullPage:true});
+    for(const width of [320,375,414,768,1280]) {
+      await page.setViewportSize({width,height:900});
+      await page.goto(`http://127.0.0.1:${server.address().port}/index.html`,{waitUntil:'networkidle'});
+      await page.locator('#catGrid .cat-card').first().waitFor();
+      assert.equal(await page.locator('#catGrid .cat-card').count(),6);
+      assert.equal(await page.locator('#catGrid').evaluate(e=>getComputedStyle(e).gridTemplateColumns.split(' ').length),width>=768?3:2);
+      assert(!(await page.locator('#homeCategories').innerText()).includes('Four essential'));
+      assert(!(await page.locator('#homeCategories').innerText()).includes('subcategories'));
+      assert(await page.locator('#catGrid .arr').first().evaluate(e=>getComputedStyle(e).opacity==='1'));
+      const counts=await page.evaluate(()=>[...document.querySelectorAll('#catGrid .cat-card')].map(e=>{
+        const cat=new URL(e.href).searchParams.get('cat');
+        return {displayed:Number(e.querySelector('.count strong').textContent.replace(/,/g,'')),actual:CATALOG_PRODUCTS.filter(p=>p.category===cat).length};
+      }));
+      assert(counts.every(c=>c.displayed===c.actual));
+      await page.locator('#homeCategories').screenshot({path:path.join(output,`categories-${width}.png`)});
+      await page.locator('#catGrid .cat-card').first().focus();
+      assert.equal(await page.locator('#catGrid .cat-card').first().evaluate(e=>getComputedStyle(e).outlineWidth),'2px');
+      assert(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth));
+    }
+    for(const lang of ['zh','ja','en']) {
+      await page.evaluate(lang=>setLang(lang),lang);
+      assert(!(await page.locator('#homeCategories').innerText()).includes('cat.products'));
+      assert((await page.locator('#catGrid .cat-card').first().innerText()).includes(lang==='zh'?'款商品':lang==='ja'?'商品':'products'));
+    }
+    assert.deepEqual(errors,[]);
+    await page.locator('#catGrid .cat-card').first().focus();
+    await page.keyboard.press('Enter');
+    await page.waitForURL('**/products.html?cat=health');
+    console.log('PASS: category rows, real counts, visible arrows, keyboard navigation, live translation, 5 viewports.');
     console.log(`PASS: 5 viewports, keyboard disclosure, 3 languages, no JS errors, static fallback. Screenshots: ${output}`);
   } finally {await browser.close();server.close();}
 })().catch(e=>{console.error(e);server.close();process.exitCode=1;});
