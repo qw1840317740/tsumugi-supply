@@ -310,6 +310,7 @@ for (const p of products) {
       { '@type': 'PropertyValue', name: 'Catalog unit', value: p.unit || '1 unit' },
       { '@type': 'PropertyValue', name: 'Case pack / MOQ', value: String(p.moq || 'Confirm at quotation') },
       ...(p.shelf_life ? [{ '@type': 'PropertyValue', name: 'Catalog shelf life', value: p.shelf_life }] : []),
+      ...(p.verified_specs || []).map(spec => ({ '@type': 'PropertyValue', name: spec.name, value: spec.value })),
     ],
   };
   const breadcrumbLd = breadcrumb([
@@ -338,7 +339,8 @@ ${commonHead({ title, description, canonical, type: 'product', image, ld: [produ
             <div><span>Brand</span><b>${escapeHtml(p.brand)}</b></div><div><span>Category</span><b>${escapeHtml(category)}</b></div>
             <div><span>Unit</span><b>${escapeHtml(p.unit || '—')}</b></div><div><span>MOQ</span><b>${escapeHtml(p.moq || '—')}</b></div>
             <div><span>JAN / GTIN</span><b>${escapeHtml(jan)}</b></div><div><span>Origin</span><b>Japan</b></div>
-${p.shelf_life ? `            <div><span>Catalog shelf life</span><b>${escapeHtml(p.shelf_life)}</b></div>\n` : ''}          </div>
+${p.shelf_life ? `            <div><span>Catalog shelf life (quote sheet; not remaining shelf life)</span><b>${escapeHtml(p.shelf_life)}</b></div>\n` : ''}${(p.verified_specs || []).map(spec => `<div><span>${escapeHtml(spec.name)}</span><b>${escapeHtml(spec.value)}</b></div>`).join('\n')}          </div>
+          ${p.spec_source ? `<p class="product-compliance-note">Source: <a href="${escapeHtml(p.spec_source)}" target="_blank" rel="noopener noreferrer">Manufacturer product information</a> · Checked ${escapeHtml(p.spec_checked_on)}. ${escapeHtml(p.spec_match_note)}. The supplied package label takes precedence.</p>` : ''}
           <p><a class="btn btn-primary btn-lg" href="how-to-order.html?product=${encodeURIComponent(p.id)}&amp;name=${encodeURIComponent(p.name)}&amp;brand=${encodeURIComponent(p.brand)}#request">Request wholesale quote</a></p>
         </div>
       </div>

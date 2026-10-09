@@ -28,6 +28,7 @@ const SITE = {
   year: 2024,
 };
 const STORE_KEY = 'tsumugi_cart_v1';
+function escapeSpec(value){ return String(value ?? '').replace(/[&<>"']/g, char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char])); }
 // The source catalog can contain repeated imports of the same JAN. Keep one
 // canonical record per id so counts, filters, related items and SEO agree.
 const CATALOG_PRODUCTS = [...new Map(PRODUCTS.map(product => [product.id, product])).values()];
@@ -936,8 +937,10 @@ function initPDP(){
             <div><span>${t('pdp.moq')}</span><b>${p.moq}</b></div>
             <div><span>${t('pdp.jan')}</span><b>${p.jan||p.id}</b></div>
             <div><span>${t('pdp.origin')}</span><b>Japan</b></div>
-            ${p.shelf_life?`<div><span>Catalog shelf life</span><b>${p.shelf_life}</b></div>`:''}
+            ${p.shelf_life?`<div><span>Catalog shelf life (quote sheet; not remaining shelf life)</span><b>${p.shelf_life}</b></div>`:''}
+            ${(p.verified_specs||[]).map(spec=>`<div><span>${escapeSpec(spec.name)}</span><b>${escapeSpec(spec.value)}</b></div>`).join('')}
           </div>
+          ${p.spec_source?`<p class="product-compliance-note">Source: <a href="${escapeSpec(p.spec_source)}" target="_blank" rel="noopener noreferrer">Manufacturer product information</a> · Checked ${escapeSpec(p.spec_checked_on)}. ${escapeSpec(p.spec_match_note)}. The supplied package label takes precedence.</p>`:''}
           <div class="pdp-actions">
             <a class="btn btn-primary btn-lg" href="how-to-order.html?product=${encodeURIComponent(p.id)}&name=${encodeURIComponent(p.name)}&brand=${encodeURIComponent(p.brand)}#request">${t('pdp.inquire')}</a>
             <a class="btn btn-clay btn-lg" href="mailto:${SITE.email}?subject=${encodeURIComponent('Quote request: '+p.name+' ('+p.id+')')}&body=${encodeURIComponent(t('pdp.emailBody').replace('{NAME}',p.name).replace('{BRAND}',p.brand).replace('{ID}',p.id).replace('{URL}',location.href))}">${t('pdp.contact')}</a>
@@ -1062,7 +1065,13 @@ function injectSEO(){
     _ld('product', { '@context':'https://schema.org','@type':'Product',
       name:p.name, brand:{'@type':'Brand', name:brHuman}, category:catHuman,
       sku:p.id, mpn:p.id, ...gtinForSchema(p.jan||p.id), description:desc,
-      image: location.origin + '/' + photoRel, url:cleanUrl });
+      image: location.origin + '/' + photoRel, url:cleanUrl,
+      additionalProperty: [
+        {'@type':'PropertyValue',name:'Catalog unit',value:p.unit||'Confirm at quotation'},
+        {'@type':'PropertyValue',name:'Case pack / MOQ',value:String(p.moq||'Confirm at quotation')},
+        ...(p.shelf_life?[{'@type':'PropertyValue',name:'Catalog shelf life',value:p.shelf_life}]:[]),
+        ...(p.verified_specs||[]).map(spec=>({'@type':'PropertyValue',name:spec.name,value:spec.value}))
+      ] });
     _ld('breadcrumb', { '@context':'https://schema.org','@type':'BreadcrumbList',
       itemListElement:[
         {'@type':'ListItem', position:1, name:'Home', item:location.origin+'/'},
