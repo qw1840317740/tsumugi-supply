@@ -4,16 +4,26 @@ global.window = {};
 require('../assets/js/data.js');
 const evidence = require('../assets/data/verified-product-specs.json');
 const sweets = require('../assets/data/verified-sweets-specs.json');
-const records = {...evidence.products,...sweets};
+const majorFile = require('path').join(__dirname,'..','assets/data/verified-major-brand-specs.json');
+const major = fs.existsSync(majorFile)?JSON.parse(fs.readFileSync(majorFile,'utf8')):{};
+const records = require('./load-spec-evidence')();
 for(const [jan,record] of Object.entries(records)){
  const p=window.PRODUCTS.find(p=>p.jan===jan);
  assert(p,`Missing catalog JAN ${jan}`);
  assert.deepEqual(p.verified_specs,record.specs,jan);
- assert.match(p.spec_source,/^https:\/\/www\.(asahi-gf|tivoli-factory)\.co\.jp\//);
+ assert.match(p.spec_source,/^https:\/\/(www\.(asahi-gf|tivoli-factory)\.co\.jp\/|www\.lion\.co\.jp\/ja\/products\/|sundrug-online\.com\/products\/)/);
+ assert.equal(p.spec_source_name,record.source_name||'Manufacturer product information');
+ if(record.source_type?.startsWith('retailer')) assert.equal(p.spec_source,`https://sundrug-online.com/products/${jan}`);
+ if(record.source_type==='manufacturer-range') assert(record.match_note.includes('not a confirmed specification'));
+ if(record.source_type==='manufacturer-range') assert(record.specs.every(s=>s.name.startsWith('Manufacturer range')));
+ if(record.source_type==='retailer-title') assert(record.specs[0].name.includes('not manufacturer-confirmed'));
  const html=fs.readFileSync(require('path').join(__dirname,'..','products',jan+'.html'),'utf8');
  const ld=JSON.parse(html.match(/<script type="application\/ld\+json">(.*?)<\/script>/s)[1]);
  for(const spec of record.specs) assert(ld.additionalProperty.some(x=>x.name===spec.name&&x.value===spec.value),`Static schema dropped ${jan}: ${spec.name}`);
  assert(html.includes(p.spec_source),`Missing visible evidence for ${jan}`);
+ if(record.range_source) assert(html.includes(record.range_source),`Missing family reference for ${jan}`);
+ const origin=record.specs.find(s=>s.name==='Country of origin (retailer listing)');
+ if(origin) assert.equal(p.origin,origin.value);
 }
 assert.equal(window.PRODUCTS.find(p=>p.jan==='4987244196804').unit,'130g');
 assert(window.PRODUCTS.find(p=>p.jan==='4975186230175').verified_specs.some(x=>x.value.includes('not net food weight')));

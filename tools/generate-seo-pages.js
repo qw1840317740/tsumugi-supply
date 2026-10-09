@@ -218,7 +218,7 @@ function editorialFor(p) {
     orderFacts: [
       `Quote identifier: JAN / GTIN ${jan}`,
       `Catalog order unit: ${unit}; listed MOQ: ${moq}`,
-      `Catalog origin: Japan; export destination and delivery terms are confirmed with the quote`,
+      `Origin: ${p.origin || 'not independently verified'}; country of manufacture and export terms must be confirmed for the supplied lot`,
       status,
     ],
     handling: brand.handling,
@@ -334,13 +334,14 @@ ${commonHead({ title, description, canonical, type: 'product', image, ld: [produ
           <span class="cat">${escapeHtml(category)}</span>
           <h1>${escapeHtml(p.name)}</h1>
           <p class="brand"><a href="brands/${escapeHtml(brandSlugs.get(p.brand))}.html">${escapeHtml(p.brand)}</a></p>
-          <p class="pdp-blurb">${escapeHtml(editorial?.lead || brand.blurb || description)}</p>
+          <p class="pdp-blurb">${escapeHtml(p.seo_lead || editorial?.lead || brand.blurb || description)}</p>
           <div class="pdp-specs">
             <div><span>Brand</span><b>${escapeHtml(p.brand)}</b></div><div><span>Category</span><b>${escapeHtml(category)}</b></div>
             <div><span>Unit</span><b>${escapeHtml(p.unit || '—')}</b></div><div><span>MOQ</span><b>${escapeHtml(p.moq || '—')}</b></div>
-            <div><span>JAN / GTIN</span><b>${escapeHtml(jan)}</b></div><div><span>Origin</span><b>Japan</b></div>
+            <div><span>JAN / GTIN</span><b>${escapeHtml(jan)}</b></div><div><span>Origin</span><b>${escapeHtml(p.origin || 'Not independently verified')}</b></div>
 ${p.shelf_life ? `            <div><span>Catalog shelf life (quote sheet; not remaining shelf life)</span><b>${escapeHtml(p.shelf_life)}</b></div>\n` : ''}${(p.verified_specs || []).map(spec => `<div><span>${escapeHtml(spec.name)}</span><b>${escapeHtml(spec.value)}</b></div>`).join('\n')}          </div>
-          ${p.spec_source ? `<p class="product-compliance-note">Source: <a href="${escapeHtml(p.spec_source)}" target="_blank" rel="noopener noreferrer">Manufacturer product information</a> · Checked ${escapeHtml(p.spec_checked_on)}. ${escapeHtml(p.spec_match_note)}. The supplied package label takes precedence.</p>` : ''}
+          ${p.spec_source ? `<p class="product-compliance-note">Source: <a href="${escapeHtml(p.spec_source)}" target="_blank" rel="noopener noreferrer">${escapeHtml(p.spec_source_name || 'Manufacturer product information')}</a> · Checked ${escapeHtml(p.spec_checked_on)}. ${escapeHtml(p.spec_match_note)}. The supplied package label takes precedence.</p>` : ''}
+          ${p.spec_range_source ? `<p class="product-compliance-note">Additional manufacturer reference: <a href="${escapeHtml(p.spec_range_source)}" target="_blank" rel="noopener noreferrer">Lion product-family information</a>. ${escapeHtml(p.spec_range_note)}</p>` : ''}
           <p><a class="btn btn-primary btn-lg" href="how-to-order.html?product=${encodeURIComponent(p.id)}&amp;name=${encodeURIComponent(p.name)}&amp;brand=${encodeURIComponent(p.brand)}#request">Request wholesale quote</a></p>
         </div>
       </div>

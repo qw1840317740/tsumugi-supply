@@ -936,11 +936,12 @@ function initPDP(){
             <div><span>${t('pdp.unit')}</span><b>${p.unit||'—'}</b></div>
             <div><span>${t('pdp.moq')}</span><b>${p.moq}</b></div>
             <div><span>${t('pdp.jan')}</span><b>${p.jan||p.id}</b></div>
-            <div><span>${t('pdp.origin')}</span><b>Japan</b></div>
+            <div><span>${t('pdp.origin')}</span><b>${escapeSpec(p.origin||'Not independently verified')}</b></div>
             ${p.shelf_life?`<div><span>Catalog shelf life (quote sheet; not remaining shelf life)</span><b>${p.shelf_life}</b></div>`:''}
             ${(p.verified_specs||[]).map(spec=>`<div><span>${escapeSpec(spec.name)}</span><b>${escapeSpec(spec.value)}</b></div>`).join('')}
           </div>
-          ${p.spec_source?`<p class="product-compliance-note">Source: <a href="${escapeSpec(p.spec_source)}" target="_blank" rel="noopener noreferrer">Manufacturer product information</a> · Checked ${escapeSpec(p.spec_checked_on)}. ${escapeSpec(p.spec_match_note)}. The supplied package label takes precedence.</p>`:''}
+          ${p.spec_source?`<p class="product-compliance-note">Source: <a href="${escapeSpec(p.spec_source)}" target="_blank" rel="noopener noreferrer">${escapeSpec(p.spec_source_name||'Manufacturer product information')}</a> · Checked ${escapeSpec(p.spec_checked_on)}. ${escapeSpec(p.spec_match_note)}. The supplied package label takes precedence.</p>`:''}
+          ${p.spec_range_source?`<p class="product-compliance-note">Additional manufacturer reference: <a href="${escapeSpec(p.spec_range_source)}" target="_blank" rel="noopener noreferrer">Lion product-family information</a>. ${escapeSpec(p.spec_range_note)}</p>`:''}
           <div class="pdp-actions">
             <a class="btn btn-primary btn-lg" href="how-to-order.html?product=${encodeURIComponent(p.id)}&name=${encodeURIComponent(p.name)}&brand=${encodeURIComponent(p.brand)}#request">${t('pdp.inquire')}</a>
             <a class="btn btn-clay btn-lg" href="mailto:${SITE.email}?subject=${encodeURIComponent('Quote request: '+p.name+' ('+p.id+')')}&body=${encodeURIComponent(t('pdp.emailBody').replace('{NAME}',p.name).replace('{BRAND}',p.brand).replace('{ID}',p.id).replace('{URL}',location.href))}">${t('pdp.contact')}</a>

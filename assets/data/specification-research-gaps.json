@@ -1,0 +1,2750 @@
+{
+  "checked_on": "2026-10-09",
+  "unresolved": [
+    {
+      "jan": "49033011147831",
+      "brand": "Clinica",
+      "name": "クリニカＡＤ　クール　３０ｇ",
+      "reason": "Not a 13-digit retail JAN; requires manual identification"
+    },
+    {
+      "jan": "4903301326557",
+      "brand": "Clinica",
+      "name": "クリニカＡＤホワイトニング　クリアミント",
+      "reason": "No usable size or origin field"
+    },
+    {
+      "jan": "4903301326564",
+      "brand": "Clinica",
+      "name": "クリニカＡＤホワイトニング　シトラスミント",
+      "reason": "No usable size or origin field"
+    },
+    {
+      "jan": "4903301339106",
+      "brand": "Clinica",
+      "name": "クリニカＰＲＯホワイトニングハミガキ　リフレッシュミント　９５ｇ",
+      "reason": "No exact JAN listing"
+    },
+    {
+      "jan": "4903301372585",
+      "brand": "Clinica",
+      "name": "クリニカＰＲＯ ｐｌｕｓ 歯周バリア ハミガキ 　95g",
+      "reason": "Listing barcode does not match"
+    },
+    {
+      "jan": "4903301205753",
+      "brand": "Clinica",
+      "name": "クリニカエナメルパール　ホワイトフローラルミント　１３０ｇ",
+      "reason": "No exact JAN listing"
+    },
+    {
+      "jan": "4903301205760",
+      "brand": "Clinica",
+      "name": "クリニカエナメルパール　フレッシュシトラスミント　１３０ｇ",
+      "reason": "No exact JAN listing"
+    },
+    {
+      "jan": "49795240",
+      "brand": "Clinica",
+      "name": "クリニカＫｉｄ’ｓジエルハミガキ　いちご",
+      "reason": "Not a 13-digit retail JAN; requires manual identification"
+    },
+    {
+      "jan": "49795936",
+      "brand": "Clinica",
+      "name": "クリニカＫｉｄ’ｓジエルハミガキ　グレープ",
+      "reason": "Not a 13-digit retail JAN; requires manual identification"
+    },
+    {
+      "jan": "4903301319115",
+      "brand": "Clinica",
+      "name": "クリニカＡＤ　ジェルハミガキ　９０ｇ",
+      "reason": "No usable size or origin field"
+    },
+    {
+      "jan": "4903301332268",
+      "brand": "Systema",
+      "name": "システマハグキプラス　プレミアムハミガキ　よくばりな美白（シルキーフローラルミント）　９５ｇ",
+      "reason": "No usable size or origin field"
+    },
+    {
+      "jan": "4903301332343",
+      "brand": "Systema",
+      "name": "システマハグキプラス　プレミアムハミガキ　よくばりな美白（ブライトニングフローラルミント）　９５ｇ",
+      "reason": "No usable size or origin field"
+    },
+    {
+      "jan": "4903301318941",
+      "brand": "Systema",
+      "name": "システマハグキプラス　ジェルハミガキ　９０ｇ",
+      "reason": "No exact JAN listing"
+    },
+    {
+      "jan": "49795462",
+      "brand": "NONIO",
+      "name": "ＮＯＮＩＯ舌専用クリーニングジェル　４５ｇ",
+      "reason": "Not a 13-digit retail JAN; requires manual identification"
+    },
+    {
+      "jan": "4903301339700",
+      "brand": "Lightee",
+      "name": "Lighteeハミガキ　PREMIUM　１００ｇ",
+      "reason": "No exact JAN listing"
+    },
+    {
+      "jan": "4903301142706",
+      "brand": "Between",
+      "name": "ビトイーンレギュラー　やわらかめ",
+      "reason": "Listing barcode does not match"
+    },
+    {
+      "jan": "4903301142676",
+      "brand": "Between",
+      "name": "ビトイーンレギュラー　ふつう",
+      "reason": "Listing barcode does not match"
+    },
+    {
+      "jan": "4903301142737",
+      "brand": "Between",
+      "name": "ビトイーンコンパクト　やわらかめ",
+      "reason": "Listing barcode does not match"
+    },
+    {
+      "jan": "4903301142690",
+      "brand": "Between",
+      "name": "ビトイーンレギュラー　かため",
+      "reason": "Listing barcode does not match"
+    },
+    {
+      "jan": "4903301142713",
+      "brand": "Between",
+      "name": "ビトイーンコンパクト　ふつう",
+      "reason": "Listing barcode does not match"
+    },
+    {
+      "jan": "4903301142720",
+      "brand": "Between",
+      "name": "ビトイーンコンパクト　かため",
+      "reason": "Listing barcode does not match"
+    },
+    {
+      "jan": "4903301151784",
+      "brand": "Between",
+      "name": "ビトイーン超コンパクト　やわらかめ",
+      "reason": "Listing barcode does not match"
+    },
+    {
+      "jan": "4903301151791",
+      "brand": "Between",
+      "name": "ビトイーン超コンパクト　ふつう",
+      "reason": "Listing barcode does not match"
+    },
+    {
+      "jan": "4903301152682",
+      "brand": "Clinica",
+      "name": "クリニカハブラシ　フラットカット　３列ふつう",
+      "reason": "No exact JAN listing"
+    },
+    {
+      "jan": "4903301344568",
+      "brand": "Clinica",
+      "name": "クリニカＡＤ　レギュラー　やわらかめ",
+      "reason": "No exact JAN listing"
+    },
+    {
+      "jan": "4903301344551",
+      "brand": "Clinica",
+      "name": "クリニカＡＤ　レギュラー　ふつう",
+      "reason": "No exact JAN listing"
+    },
+    {
+      "jan": "4903301321576",
+      "brand": "Systema",
+      "name": "システマ　極上プレミアム　超コンパクト　やわらかめ",
+      "reason": "No exact JAN listing"
+    },
+    {
+      "jan": "4903301318934",
+      "brand": "Systema",
+      "name": "システマ　極上プレミアム　コンパクト　やわらかめ",
+      "reason": "No exact JAN listing"
+    },
+    {
+      "jan": "4903301321545",
+      "brand": "Systema",
+      "name": "システマ　極上プレミアム　超コンパクト　ふつう",
+      "reason": "No exact JAN listing"
+    },
+    {
+      "jan": "4903301318910",
+      "brand": "Systema",
+      "name": "システマ　極上プレミアム　レギュラー　やわらかめ",
+      "reason": "No exact JAN listing"
+    },
+    {
+      "jan": "4903301321262",
+      "brand": "Systema",
+      "name": "システマ　極上プレミアム　コンパクト　ふつう",
+      "reason": "No exact JAN listing"
+    },
+    {
+      "jan": "4903301318903",
+      "brand": "Systema",
+      "name": "システマ　極上プレミアム　レギュラー　ふつう",
+      "reason": "No exact JAN listing"
+    },
+    {
+      "jan": "4903301176602",
+      "brand": "Dent Health",
+      "name": "デントヘルスハブラシ　やさしくケアマッサージ　やわらかめ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301332589",
+      "brand": "NONIO",
+      "name": "ＬＩＯＮ電動アシストブラシ　付替ＮＯＮＩＯ＋ホワイトニング　ふつう",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301293187",
+      "brand": "NONIO",
+      "name": "ＮＯＮＩＯハブラシ　ＳＨＡＲＰ　やわらかめ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301176619",
+      "brand": "Dent Health",
+      "name": "デントヘルスハブラシ　やさしくケアマッサージ　ふつう",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301293170",
+      "brand": "NONIO",
+      "name": "ＮＯＮＩＯハブラシ　ＳＨＡＲＰ　ふつう",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301293200",
+      "brand": "NONIO",
+      "name": "ＮＯＮＩＯハブラシ　ＲＩＣＨ　やわらかめ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301293194",
+      "brand": "NONIO",
+      "name": "ＮＯＮＩＯハブラシ　ＲＩＣＨ　ふつう",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301318194",
+      "brand": "NONIO",
+      "name": "ＮＯＮＩＯハブラシ　ＳＭＯＯＴＨ　やわらかめ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301318187",
+      "brand": "NONIO",
+      "name": "ＮＯＮＩＯハブラシ　ＳＭＯＯＴＨ　ふつう",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301362951",
+      "brand": "OCH-TUNE",
+      "name": "OCH-TUNEハブラシ　FAST",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301362982",
+      "brand": "OCH-TUNE",
+      "name": "OCH-TUNEハブラシ　SLOW",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301182917",
+      "brand": "Clinica",
+      "name": "クリニカトラベルセット",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301300731",
+      "brand": "Clinica",
+      "name": "ＭＩＧＡＣＯＴ　クリニカＡＤハミガキ・ハブラシセット",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301300779",
+      "brand": "Migacot",
+      "name": "ＭＩＧＡＣＯＴ　ケース",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301091233",
+      "brand": "Systema",
+      "name": "システマハンディセット",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301273233",
+      "brand": "NONIO",
+      "name": "ＮＯＮＩＯ　Ｍｏｂｉｌｅ　ノニオモバイル",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301241546",
+      "brand": "Clinica",
+      "name": "クリニカＡＤデンタルリンス　低刺激タイプ　４５０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301241614",
+      "brand": "Clinica",
+      "name": "クリニカＡＤデンタルリンス　すっきりタイプ　４５０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301241553",
+      "brand": "Clinica",
+      "name": "クリニカＡＤデンタルリンス　低刺激タイプ　９００ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301254713",
+      "brand": "Clinica",
+      "name": "クリニカクイックウォッシュ　８０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301254706",
+      "brand": "Clinica",
+      "name": "クリニカクイックウォッシュ　４５０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301241621",
+      "brand": "Clinica",
+      "name": "クリニカＡＤデンタルリンス　すっきりタイプ　９００ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301231141",
+      "brand": "Clinica",
+      "name": "クリニカＫｉｄ’ｓ　デンタルリンス　いちご　２５０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301331698",
+      "brand": "Clinica",
+      "name": "クリニカＪｒ.デンタルリンス　やさしいミント　４５０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301099277",
+      "brand": "Clinica",
+      "name": "クリニカＫｉｄ’ｓ　デンタルリンス　グレープ　２５０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301261025",
+      "brand": "Clinica",
+      "name": "クリニカ　フッ素メディカルコート　２５０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301269021",
+      "brand": "Systema",
+      "name": "システマＥＸデンタルリンス　ノンアルコール　４５０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301268987",
+      "brand": "Systema",
+      "name": "システマＥＸデンタルリンス　アルコールタイプ　４５０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301269038",
+      "brand": "Systema",
+      "name": "システマＥＸデンタルリンス　ノンアルコール　９００ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301268994",
+      "brand": "Systema",
+      "name": "システマＥＸデンタルリンス　アルコールタイプ　９００ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301216117",
+      "brand": "Systema",
+      "name": "システマハグキプラス　デンタルリンス　ノンアルコール　４５０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301216124",
+      "brand": "Systema",
+      "name": "システマハグキプラス　デンタルリンス　ノンアルコール　９００ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301326625",
+      "brand": "Systema",
+      "name": "システマハグキプラスプレミアム　デンタルリンス　エレガントフルーティ　６００ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301326663",
+      "brand": "Systema",
+      "name": "システマハグキプラスプレミアム　デンタルリンス　フレッシュクリスタル　６００ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "49795660",
+      "brand": "NONIO",
+      "name": "ＮＯＮＩＯマウスウォッシュ　クリアハーブ　８０ｍｌ",
+      "reason": "Not a 13-digit retail JAN; requires manual identification"
+    },
+    {
+      "jan": "4903301326632",
+      "brand": "Systema",
+      "name": "システマハグキプラスプレミアム　デンタルリンス　エレガントフルーティ　９００ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301326694",
+      "brand": "Systema",
+      "name": "システマハグキプラスプレミアム　デンタルリンス　フレッシュクリスタル　９００ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "49795615",
+      "brand": "NONIO",
+      "name": "ＮＯＮＩＯマウスウォッシュ　ＮＡライトハーブ　８０ｍｌ",
+      "reason": "Not a 13-digit retail JAN; requires manual identification"
+    },
+    {
+      "jan": "4903301259350",
+      "brand": "NONIO",
+      "name": "ＮＯＮＩＯマウスウォッシュ　クリアハーブ　６００ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301259398",
+      "brand": "NONIO",
+      "name": "ＮＯＮＩＯマウスウォッシュ　ＮＡライトハーブ　６００ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301259367",
+      "brand": "NONIO",
+      "name": "ＮＯＮＩＯマウスウォッシュ　スプラッシュシトラス　６００ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301291923",
+      "brand": "NONIO",
+      "name": "ＮＯＮＩＯマウスウォッシュ　クリアハーブ　１０００ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301291947",
+      "brand": "NONIO",
+      "name": "ＮＯＮＩＯマウスウォッシュ　ＮＡライトハーブ　１０００ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301291930",
+      "brand": "NONIO",
+      "name": "ＮＯＮＩＯマウスウォッシュ　スプラッシュシトラス　１０００ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301332602",
+      "brand": "NONIO",
+      "name": "ＮＯＮＩＯマウスウォッシュ　クリアハーブ　詰替　９５０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301332626",
+      "brand": "NONIO",
+      "name": "ＮＯＮＩＯマウスウォッシュ　ライトハーブＮＡ　詰替　９５０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301332725",
+      "brand": "NONIO",
+      "name": "ＮＯＮＩＯマウスウォッシュ　スプラッシュシトラス　詰替　９５０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301309697",
+      "brand": "NONIO",
+      "name": "ＮＯＮＩＯプラスホワイトニングデンタルリンス ６００ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301326861",
+      "brand": "NONIO",
+      "name": "ＮＯＮＩＯプラスホワイトニングデンタルリンス １０００ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301332732",
+      "brand": "NONIO",
+      "name": "ＮＯＮＩＯプラスホワイトニングデンタルリンス　詰替　９５０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301363071",
+      "brand": "OCH-TUNE",
+      "name": "OCH-TUNEマウスウォッシュ　FAST　クールドライミント　６００ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301363088",
+      "brand": "OCH-TUNE",
+      "name": "OCH-TUNEマウスウォッシュ　SLOW　シルキ―マイルドミント　６００ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301311539",
+      "brand": "Dental Rinse",
+      "name": "デンタルリンス薬用デンタルリンス　４５０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301282020",
+      "brand": "NONIO",
+      "name": "ＮＯＮＩＯマウススプレー　クリアハーブミント　５ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301282037",
+      "brand": "NONIO",
+      "name": "ＮＯＮＩＯマウススプレー　スプラッシュシトラスミント　５ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301282044",
+      "brand": "NONIO",
+      "name": "ＮＯＮＩＯマウススプレー　ピュアフルーティミント　５ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301276357",
+      "brand": "Clinica",
+      "name": "クリニカＡＤ　なめらかスリムフロス　４０ｍ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301203896",
+      "brand": "Clinica",
+      "name": "クリニカＡＤ　デンタルフロスＹ字タイプ　１８本",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301207825",
+      "brand": "Clinica",
+      "name": "クリニカＡＤ　スポンジフロス　４０ｍ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301206101",
+      "brand": "Clinica",
+      "name": "クリニカＡＤ　ダブルフロス　２０本",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301283812",
+      "brand": "Clinica",
+      "name": "クリニカＡＤ　デンタルフロスＹ字タイプ　３０本",
+      "reason": "No exact JAN listing"
+    },
+    {
+      "jan": "4903301042860",
+      "brand": "Clinica",
+      "name": "クリニカＡＤ　フロス＆スティック　３０本",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301373056",
+      "brand": "Systema",
+      "name": "システマ歯間用ブラシ　ＳＳＳ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301373063",
+      "brand": "Systema",
+      "name": "システマ歯間用ブラシ　ＳＳ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301006428",
+      "brand": "Systema",
+      "name": "システマ歯間用ブラシ　Ｓ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301373070",
+      "brand": "Systema",
+      "name": "システマ歯間用ブラシ　Ｍ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301373087",
+      "brand": "Systema",
+      "name": "システマ薬用歯間用ジェル",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301282839",
+      "brand": "NONIO",
+      "name": "ＮＯＮＩＯ舌クリーナー",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301073628",
+      "brand": "Soft in One",
+      "name": "ソフトインワン　サラサラ　レギュラー　２００ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301169536",
+      "brand": "Soft in One",
+      "name": "ソフトインワン　サラサラ　ポンプ　５３０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301169642",
+      "brand": "Soft in One",
+      "name": "ソフトインワン　スッキリ　ポンプ　５２０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301169550",
+      "brand": "Soft in One",
+      "name": "ソフトインワン　サラサラ　詰替　３８０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301169659",
+      "brand": "Soft in One",
+      "name": "ソフトインワン　スッキリ　詰替　３７０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301437239",
+      "brand": "Oct",
+      "name": "オクト薬用シャンプー　３２０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301437246",
+      "brand": "Oct",
+      "name": "オクト薬用リンス　３２０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301109990",
+      "brand": "Oct",
+      "name": "オクトｓｅｒａｐｉｅ薬用スキンケアシャンプー　２３０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301110002",
+      "brand": "Oct",
+      "name": "オクトｓｅｒａｐｉｅ薬用スキンケアコンディショナー　２３０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301176817",
+      "brand": "Kirei Kirei",
+      "name": "キレイキレイ薬用液体ハンドソープ　２５０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301176824",
+      "brand": "Kirei Kirei",
+      "name": "キレイキレイ薬用液体ハンドソープ詰替　２００ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301176831",
+      "brand": "Kirei Kirei",
+      "name": "キレイキレイ薬用液体ハンドソープ詰替大型　４５０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301282228",
+      "brand": "Kirei Kirei",
+      "name": "キレイキレイ薬用液体ハンドソープ詰替特大(新容器)　８００ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301176848",
+      "brand": "Kirei Kirei",
+      "name": "キレイキレイ　泡ＨＳ　本体　シトラス　２５０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301176909",
+      "brand": "Kirei Kirei",
+      "name": "キレイキレイ　泡ＨＳ　本体　フローラルソープ　２５０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301240990",
+      "brand": "Kirei Kirei",
+      "name": "キレイキレイ　泡ＨＳ　本体　フルーツミックス　２５０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301269052",
+      "brand": "Kirei Kirei",
+      "name": "キレイキレイ　泡ＨＳ　本体大　シトラス　５００ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301269069",
+      "brand": "Kirei Kirei",
+      "name": "キレイキレイ　泡ＨＳ　本体大　フローラルソープ　５００ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301269076",
+      "brand": "Kirei Kirei",
+      "name": "キレイキレイ　泡ＨＳ　本体大　フルーツミックス　５００ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301176855",
+      "brand": "Kirei Kirei",
+      "name": "キレイキレイ　泡ＨＳ　詰替　シトラス　２００ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301176862",
+      "brand": "Kirei Kirei",
+      "name": "キレイキレイ　泡ＨＳ　詰替大型　シトラス　４５０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301176930",
+      "brand": "Kirei Kirei",
+      "name": "キレイキレイ　泡ＨＳ　詰替大型　フローラルソープ　４５０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301241010",
+      "brand": "Kirei Kirei",
+      "name": "キレイキレイ　泡ＨＳ　詰替大型　フルーツミックス　４５０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301282198",
+      "brand": "Kirei Kirei",
+      "name": "キレイキレイ　泡ＨＳ　詰替特大　シトラス　８００ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301282204",
+      "brand": "Kirei Kirei",
+      "name": "キレイキレイ　泡ＨＳ　詰替特大　フロ－ラルソープ　８００ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301282211",
+      "brand": "Kirei Kirei",
+      "name": "キレイキレイ　泡ＨＳ　詰替特大　フル－ツミックス　８００ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301321330",
+      "brand": "Kirei Kirei",
+      "name": "キレイキレイ　泡ＨＳ　携帯用　５０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301219620",
+      "brand": "Kirei Kirei",
+      "name": "キレイキレイ薬用キッチン泡ＨＳ　本体　２３０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301219637",
+      "brand": "Kirei Kirei",
+      "name": "キレイキレイ薬用キッチン泡ＨＳ　詰替　１８０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "49795479",
+      "brand": "Kirei Kirei",
+      "name": "キレイキレイ　薬用ハンドコンディショニングソープ　本体　４５０ｍｌ",
+      "reason": "Not a 13-digit retail JAN; requires manual identification"
+    },
+    {
+      "jan": "4903301300137",
+      "brand": "Kirei Kirei",
+      "name": "キレイキレイ　薬用ハンドコンディショニングソープ　詰替　４００ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "45185618",
+      "brand": "Kirei Kirei",
+      "name": "キレイキレイ　薬用ハンドコンディショニングソープ　木漏れ日の香り　本体　４５０ｍｌ",
+      "reason": "Not a 13-digit retail JAN; requires manual identification"
+    },
+    {
+      "jan": "4903301331988",
+      "brand": "Kirei Kirei",
+      "name": "キレイキレイ　薬用ハンドコンディショニングソープ　詰替大型　７００ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301367321",
+      "brand": "Kirei Kirei",
+      "name": "キレイキレイ　薬用ハンドコンディショニングソープ　木漏れ日の香り　詰替大型　７００ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301367307",
+      "brand": "Kirei Kirei",
+      "name": "キレイキレイ　薬用ハンドコンディショニングソープ　木漏れ日の香り　詰替　４００ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301321347",
+      "brand": "Kirei Kirei",
+      "name": "キレイキレイ　薬用泡ハンドソープ専用オートディスペンサー",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "45185601",
+      "brand": "Kirei Kirei",
+      "name": "キレイキレイ薬用手指の消毒ジェルプラス　本体　２３０ｍｌ",
+      "reason": "Not a 13-digit retail JAN; requires manual identification"
+    },
+    {
+      "jan": "4903301372561",
+      "brand": "Kirei Kirei",
+      "name": "キレイキレイ薬用手指の消毒ジェルプラス　つめかえ用　２００ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301372578",
+      "brand": "Kirei Kirei",
+      "name": "キレイキレイ薬用手指の消毒ジェルプラス　携帯用　４０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301378426",
+      "brand": "Hadakara",
+      "name": "hadakara　モイストボディケアソープ　泡　フローラル　本体　５４０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301378495",
+      "brand": "Hadakara",
+      "name": "hadakara　モイストボディケアソープ　泡　ソープ　５４０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301276241",
+      "brand": "Hadakara",
+      "name": "ハダカラ泡ＢＳ　詰替　フローラル　４４０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301276319",
+      "brand": "Hadakara",
+      "name": "ハダカラ泡ＢＳ　詰替　ソープ　４４０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301291954",
+      "brand": "Hadakara",
+      "name": "ハダカラ泡BS　詰替大型　フローラル　７５０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301312048",
+      "brand": "Hadakara",
+      "name": "ハダカラ泡BS　詰替大型　ソープ　７５０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301378525",
+      "brand": "Hadakara",
+      "name": "ハダカラ泡ＢＳデオドラント　本体　５４０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301378532",
+      "brand": "Hadakara",
+      "name": "ハダカラ泡ＢＳピュアマイルド　本体　５４０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301326441",
+      "brand": "Hadakara",
+      "name": "ハダカラ泡ＢＳデオドラント　詰替　４４０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301339687",
+      "brand": "Hadakara",
+      "name": "ハダカラ泡ＢＳピュアマイルド　詰替　４４０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301378457",
+      "brand": "Hadakara",
+      "name": "hadakara　モイストボディケアソープ　液体　フローラル　本体　４８０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301378501",
+      "brand": "Hadakara",
+      "name": "hadakara　モイストボディケアソープ　液体　ソープ　本体　４８０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301238997",
+      "brand": "Hadakara",
+      "name": "hadakara　モイストボディケアソープ　液体　フローラル　詰替　３６０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301378471",
+      "brand": "Hadakara",
+      "name": "hadakara　モイストボディケアソープ　液体　フローラル　詰替大型７５０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301239031",
+      "brand": "Hadakara",
+      "name": "hadakara　モイストボディケアソープ　液体　ソープ　詰替　３６０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301378242",
+      "brand": "Hadakara",
+      "name": "hadakara 美肌プレミアム モイストボディケアソープ 液　本体　５００ｍ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301378228",
+      "brand": "Hadakara",
+      "name": "hadakara 美肌プレミアム モイストボディケアソープ 　本体　５００ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301378518",
+      "brand": "Hadakara",
+      "name": "hadakara　モイストボディケアソープ　液体　ソープ　詰替大型７５０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301378259",
+      "brand": "Hadakara",
+      "name": "hadakara 美肌プレミアム モイストボディケアソープ 液　詰替　３６０ｍ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301378235",
+      "brand": "Hadakara",
+      "name": "hadakara 美肌プレミアム モイストボディケアソープ 泡　詰替　３６０ｍ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301052067",
+      "brand": "Kirei Kirei",
+      "name": "キレイキレイうがい薬　ピーチ　２００ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301129462",
+      "brand": "Kirei Kirei",
+      "name": "キレイキレイお手ふきウエットシート　ＮＡ１０枚",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301052654",
+      "brand": "Kirei Kirei",
+      "name": "キレイキレイうがい薬　アップル　２００ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301519393",
+      "brand": "Kirei Kirei",
+      "name": "キレイキレイお手ふきウエットシート　Ａ１０枚",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301129479",
+      "brand": "Kirei Kirei",
+      "name": "キレイキレイお手ふきウエットシート　ＮＡ３０枚",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301129516",
+      "brand": "Kirei Kirei",
+      "name": "キレイキレイお手ふきウエットシート　Ａ３０枚",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301291022",
+      "brand": "Kirei Kirei",
+      "name": "キレイキレイ99.99%除菌ウェットシート　ノンアルコールタイプ　３０枚",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301326311",
+      "brand": "Kirei Kirei",
+      "name": "キレイキレイ99.99%除菌ウェットシート　アルコールタイプ　３０枚",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301333173",
+      "brand": "Ban",
+      "name": "Ｂａｎさっぱり感PREMIUMシート　パウダーinタイプ　クリーンソープ３０枚",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301333180",
+      "brand": "Ban",
+      "name": "Ｂａｎさっぱり感PREMIUMシート　パウダーinタイプ　ウォーターリリ―３０枚",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301333401",
+      "brand": "Ban",
+      "name": "Ｂａｎさっぱり感PREMIUMシート　ノンパウダータイプ　フレッシュフローラル３０枚",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301333296",
+      "brand": "Ban",
+      "name": "Ｂａｎさっぱり感PREMIUMシート　クールタイプ　ひんやりシトラス３０枚",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301333210",
+      "brand": "Ban",
+      "name": "Ｂａｎさっぱり感PREMIUMシート　クールタイプ　ナチュラルソープ３０枚",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301333395",
+      "brand": "Ban",
+      "name": "Ｂａｎさっぱり感PREMIUMシート　クールタイプ　ひんやりフローラル３０枚",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301300304",
+      "brand": "Ban",
+      "name": "Ｂａｎ汗ブロック　プラチナロールオン　無香性 ４０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301300311",
+      "brand": "Ban",
+      "name": "Ｂａｎ汗ブロック　プラチナロールオン　せっけん ４０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301300328",
+      "brand": "Ban",
+      "name": "Ｂａｎ汗ブロック　ロールオンプレミアム　無香性　４０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301300335",
+      "brand": "Ban",
+      "name": "Ｂａｎ汗ブロック　ロールオンプレミアム　せっけん　４０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301331575",
+      "brand": "Ban",
+      "name": "Ｂａｎ汗ブロック　スティックプレミアム　無香性　２０ｇ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301188711",
+      "brand": "Ban",
+      "name": "バンロールオン赤箱　３０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301533696",
+      "brand": "Ban",
+      "name": "バン男性用ロールオン　３０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301340126",
+      "brand": "Top",
+      "name": "部屋干しトップ 除菌EX　本体　９００ｇ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301340133",
+      "brand": "Top",
+      "name": "部屋干しトップ 除菌EX　詰替　８１０ｇ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301292067",
+      "brand": "Top",
+      "name": "無リントップ　３．２ｋｇ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301363064",
+      "brand": "NANOX",
+      "name": "NANOX自動投入洗濯機専用　７２０ｇ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301351092",
+      "brand": "NANOX",
+      "name": "NANOX one　Proワンパック　６０ｇ　10g×6入",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301375364",
+      "brand": "NANOX",
+      "name": "NANOX one　洗浄プラス　本体大　６００ｇ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301375449",
+      "brand": "NANOX",
+      "name": "NANOX one　ニオイ専用　本体大　６００ｇ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301375470",
+      "brand": "NANOX",
+      "name": "NANOX one　PRO　本体大　６００ｇ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301375371",
+      "brand": "NANOX",
+      "name": "NANOX one　洗浄プラス　詰替特大　７６５ｇ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301375456",
+      "brand": "NANOX",
+      "name": "NANOX one　ニオイ専用　詰替特大　７６５ｇ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301375487",
+      "brand": "NANOX",
+      "name": "NANOX one　PRO　詰替特大　７４０ｇ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301375395",
+      "brand": "NANOX",
+      "name": "NANOX one　洗浄プラス　詰替　超特大　１，０８０ｇ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301375463",
+      "brand": "NANOX",
+      "name": "NANOX one　ニオイ専用　詰替　超特大　１，０８０ｇ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301375401",
+      "brand": "NANOX",
+      "name": "NANOX one　洗浄プラス　詰替　ウルトラジャンボ　１，５３０ｇ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301375494",
+      "brand": "NANOX",
+      "name": "NANOX one　PRO　詰替　超特大　１，０１０ｇ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301350712",
+      "brand": "NANOX",
+      "name": "NANOX one　ニオイ専用　詰替　ウルトラジャンボ 　１，５３０ｇ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301350811",
+      "brand": "NANOX",
+      "name": "NANOX one　PRO　詰替　ウルトラジャンボ 　１，４００ｇ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301282914",
+      "brand": "Top",
+      "name": "トップ　クリアリキッド　抗菌　本体　９００ｇ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301282860",
+      "brand": "Top",
+      "name": "トップ　クリアリキッド　本体　９００ｇ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301355687",
+      "brand": "Top",
+      "name": "トップ　クリアリキッド　抗菌　詰替　５００ｇ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301355618",
+      "brand": "Top",
+      "name": "トップ　クリアリキッド　詰替　５００ｇ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301365563",
+      "brand": "Top",
+      "name": "トップ クリアリキッド　詰替　超特大　９００ｇ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301307778",
+      "brand": "Top",
+      "name": "香りつづくトップ　抗菌　Shiny　Rose　本体　８５０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301355717",
+      "brand": "Top",
+      "name": "香りつづくトップ　 抗菌　詰替　５００ｇ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301307877",
+      "brand": "Top",
+      "name": "香りつづくトップ　Sweet　Harmony　本体　８５０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301355700",
+      "brand": "Top",
+      "name": "香りつづくトップ　スウィートハーモニー　詰替　５００ｇ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301378709",
+      "brand": "Top",
+      "name": "トップ　クリアリキッド　抗菌　本体　８４０ｇ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301378723",
+      "brand": "Top",
+      "name": "トップ　クリアリキッド　抗菌詰替ウルトラジャンボ　１４２０ｇ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301365570",
+      "brand": "Top",
+      "name": "トップ クリアリキッド　抗菌　詰替　超特大　９００ｇ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301378655",
+      "brand": "NANOX",
+      "name": "NANOX 深層浸透洗浄  本体　８４０ｇ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301378662",
+      "brand": "NANOX",
+      "name": "NANOX 深層浸透洗浄  つめかえ用　１１５０ｇ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301274650",
+      "brand": "Acron",
+      "name": "アクロン　フローラルブーケ　本体 　４５０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301274841",
+      "brand": "Acron",
+      "name": "アクロン　ナチュラルソープ　本体　４５０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301344575",
+      "brand": "Acron",
+      "name": "アクロン　フローラルブーケ　詰替　３８０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301344582",
+      "brand": "Acron",
+      "name": "アクロン　フローラルブーケ　詰替大　８５０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301344612",
+      "brand": "Acron",
+      "name": "アクロン　ナチュラルソープ　詰替大　８５０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301384502",
+      "brand": "Acron",
+      "name": "アクロンふんわりなめらかケア　本体４３０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301384526",
+      "brand": "Acron",
+      "name": "アクロンふんわりなめらかケア　つめかえ用３５０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301384533",
+      "brand": "Acron",
+      "name": "アクロンふんわりなめらかケア　つめかえ用大７６０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301384649",
+      "brand": "Acron",
+      "name": "アクロン汗・皮脂スッキリケア　本体４３０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301384656",
+      "brand": "Acron",
+      "name": "アクロン汗・皮脂スッキリケア　つめかえ用大７６０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301372387",
+      "brand": "Acron",
+      "name": "アクロンやさしさプレミアム　グリーンシトラス　本体　４２０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301372394",
+      "brand": "Acron",
+      "name": "アクロンやさしさプレミアム　グリーンシトラス　詰替　６５０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301745525",
+      "brand": "NANOX",
+      "name": "NANOX　エリそで用　本体　２５０ｇ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301745532",
+      "brand": "NANOX",
+      "name": "NANOX　エリそで用　詰替　２３０ｇ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301231363",
+      "brand": "NANOX",
+      "name": "NANOX　エリそで用　詰替大　６５０ｇ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301784319",
+      "brand": "NANOX",
+      "name": "NANOX　ドロ用　詰替　２００ｇ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301527039",
+      "brand": "NANOX",
+      "name": "NANOX　シミ用　１６０ｇ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301720355",
+      "brand": "NANOX",
+      "name": "NANOX　ドロ用　本体　２２０ｇ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301723868",
+      "brand": "Top",
+      "name": "トップシミとりレスキュー",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301361886",
+      "brand": "Bright",
+      "name": "ブライトSTORONG　漂白&抗菌ジェル　本体　５１０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301361893",
+      "brand": "Bright",
+      "name": "ブライトSTORONG　漂白&漂白ジェル　詰替　６５０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301361909",
+      "brand": "Bright",
+      "name": "ブライトSTORONG　漂白&抗菌ジェル　詰替　９００ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301379768",
+      "brand": "Soflan",
+      "name": "ソフラン プレミアム消臭 アロマソープ 本体 480ml",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301379751",
+      "brand": "Soflan",
+      "name": "ソフラン プレミアム消臭 フローラルアロマ 本体 480ml",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301379775",
+      "brand": "Soflan",
+      "name": "ソフラン プレミアム消臭 フレッシュグリーンアロマ 本体 480ml",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301380276",
+      "brand": "Soflan",
+      "name": "ソフラン プレミアム消臭 フローラルアロマ 詰替 750ml",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301380191",
+      "brand": "Soflan",
+      "name": "ソフラン プレミアム消臭 汗臭ブロック シトラスソープ 本体 480ml",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301379690",
+      "brand": "Soflan",
+      "name": "ソフラン プレミアム消臭 汗臭ブロック シトラスソープ 詰替 730ml",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301380177",
+      "brand": "Soflan",
+      "name": "ソフラン プレミアム消臭 アロマソープ 詰替 750ml",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301379607",
+      "brand": "Soflan",
+      "name": "ソフラン プレミアム消臭 フレッシュグリーンアロマ 詰替 750ml",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301380122",
+      "brand": "Soflan",
+      "name": "ソフラン プレミアム消臭 フローラルアロマ 詰替 1300ml",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301379379",
+      "brand": "Soflan",
+      "name": "ソフラン プレミアム消臭 アロマソープ 詰替 1300ml",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301381365",
+      "brand": "Soflan",
+      "name": "ソフラン プレミアム消臭 フレッシュグリーンアロマ 詰替 1300ml",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301379959",
+      "brand": "Soflan",
+      "name": "ソフラン プレミアム消臭 汗臭ブロック シトラスソープ 詰替 1250ml",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301320760",
+      "brand": "Soflan Premium",
+      "name": "ソフランプレミアム消臭　ウルトラゼロ　詰替特大　１２００ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301320722",
+      "brand": "Soflan Premium",
+      "name": "ソフランプレミアム消臭　ウルトラゼロ　本体　５３０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301353041",
+      "brand": "Soflan Aroma",
+      "name": "ソフランアロマリッチ　ジュリエット　本体　４８０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301353119",
+      "brand": "Soflan Aroma",
+      "name": "ソフランアロマリッチ　ダイアナ　本体　４８０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301374169",
+      "brand": "Soflan Aroma",
+      "name": "ソフランアロマリッチ　レイラ　本体　４８０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301366973",
+      "brand": "Soflan Aroma",
+      "name": "ソフランアロマリッチ　クレア　本体　４８０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301353140",
+      "brand": "Soflan Aroma",
+      "name": "ソフランアロマリッチ　エリー　本体　４８０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301353157",
+      "brand": "Soflan Aroma",
+      "name": "ソフランアロマリッチ　ジュリエット　詰替　３８０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301374138",
+      "brand": "Soflan Aroma",
+      "name": "ソフランアロマリッチ　ジュリエット　詰替特大　７５０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301374220",
+      "brand": "Soflan Aroma",
+      "name": "ソフランアロマリッチ　ダイアナ　詰替特大　７５０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301353171",
+      "brand": "Soflan Aroma",
+      "name": "ソフランアロマリッチ　ダイアナ　詰替　３８０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301374176",
+      "brand": "Soflan Aroma",
+      "name": "ソフランアロマリッチ　レイラ　詰替特大　７５０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301374282",
+      "brand": "Soflan Aroma",
+      "name": "ソフランアロマリッチ　エリー　詰替特大　７５０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301374251",
+      "brand": "Soflan Aroma",
+      "name": "ソフランアロマリッチ　クレア　詰替特大　７５０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301374152",
+      "brand": "Soflan",
+      "name": "ソフラン　アロマリッチ　ジュリエット　詰替ウルトラジャンボ　１３００ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301374244",
+      "brand": "Soflan Aroma",
+      "name": "ソフランアロマリッチ　ダイアナ　詰替ウルトラジャンボ　１３００ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301374190",
+      "brand": "Soflan Aroma",
+      "name": "ソフランアロマリッチ　レイラ　詰替ウルトラジャンボ 　１３００ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301374305",
+      "brand": "Soflan Aroma",
+      "name": "ソフランアロマリッチ　エリー　詰替ウルトラジャンボ　１３００ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301374275",
+      "brand": "Soflan Aroma",
+      "name": "ソフランアロマリッチ　クレア　詰替ウルトラジャンボ　１３００ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301383314",
+      "brand": "Soflan",
+      "name": "ソフラン　アロマリッチ　モーア　サボン・ブラン　本体",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301383383",
+      "brand": "Soflan",
+      "name": "ソフラン　アロマリッチ　モーア　ウッディ・フルール　本体",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301383352",
+      "brand": "Soflan",
+      "name": "ソフラン　アロマリッチ　モーア　オー・ローズ　本体",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301383321",
+      "brand": "Soflan",
+      "name": "ソフラン　アロマリッチ　モーア　サボン・ブラン　つめかえ用７００ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301383369",
+      "brand": "Soflan",
+      "name": "ソフラン　アロマリッチ　モーア　オー・ローズ　つめかえ用７００ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301383390",
+      "brand": "Soflan",
+      "name": "ソフラン　アロマリッチ　モーア　ウッディ・フルール　つめかえ用７００ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301383338",
+      "brand": "Soflan",
+      "name": "ソフラン　アロマリッチ　モーア　サボン・ブラン　つめかえ用１２００ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301383376",
+      "brand": "Soflan",
+      "name": "ソフラン　アロマリッチ　モーア　オー・ローズ　つめかえ用１２００ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301383406",
+      "brand": "Soflan",
+      "name": "ソフラン アロマリッチ モーア ウッディ・フルール つめかえ用１２００ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301378396",
+      "brand": "Soflan",
+      "name": "ふんわりソフラン　本体　５５０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301378402",
+      "brand": "Soflan",
+      "name": "ふんわりソフラン　つめかえ用　７５０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301168720",
+      "brand": "Style Guard",
+      "name": "お洋服のスタイルガード　しわもニオイもすっきりスプレー　本体　３００ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301168737",
+      "brand": "Style Guard",
+      "name": "お洋服のスタイルガード　しわもニオイもすっきりスプレー　詰替　２５０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301370260",
+      "brand": "Elegard",
+      "name": "エレガード小　７５ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301370277",
+      "brand": "Elegard",
+      "name": "エレガード大　１６０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301168744",
+      "brand": "Style Guard",
+      "name": "お洋服のスタイルガード　しわもニオイもすっきりスプレー　携帯用　７０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301292074",
+      "brand": "NANOX",
+      "name": "NANOX　除菌・消臭スプレー　本体　３５０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301370239",
+      "brand": "Rain Guard",
+      "name": "レインガード大１８０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301292081",
+      "brand": "NANOX",
+      "name": "NANOX　除菌・消臭スプレー　詰替　３２０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301073093",
+      "brand": "Mama Lemon",
+      "name": "ママレモン中　８００ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301073116",
+      "brand": "Mama Lemon",
+      "name": "ママレモン特大　２１５０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301378464",
+      "brand": "Magica",
+      "name": "CHARMY Magica 酵素＋ オレンジ 本体 220ml",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301378563",
+      "brand": "Magica",
+      "name": "CHARMY Magica 酵素＋ フレッシュピーチ 本体 220ml",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301378433",
+      "brand": "Magica",
+      "name": "CHARMY Magica 速乾＋ カラッと除菌 フレッシュレモン本体 220ml",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301378365",
+      "brand": "Magica",
+      "name": "CHARMY Magica 速乾＋ カラッと除菌 シトラスグリーン 本体 220ml",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301378273",
+      "brand": "Magica",
+      "name": "CHARMY Magica 手肌＋除菌 グレープフルーツ＆ガーデン 本体 220ml",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301378334",
+      "brand": "Magica",
+      "name": "CHARMY Magica 手肌＋除菌 シトラス＆アールグレイ 本体 220ml",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301378488",
+      "brand": "Magica",
+      "name": "CHARMY Magica 酵素＋ オレンジ 詰替 680ml",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301378594",
+      "brand": "Magica",
+      "name": "CHARMY Magica 酵素＋ フレッシュピーチ 詰替 680ml",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301378372",
+      "brand": "Magica",
+      "name": "CHARMY Magica 速乾＋ カラッと除菌シトラスグリーン 詰替 680ml",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301378440",
+      "brand": "Magica",
+      "name": "CHARMY Magica 速乾＋ カラッと除菌フレッシュレモン 詰替 680ml",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301378341",
+      "brand": "Magica",
+      "name": "CHARMY Magica 手肌＋除菌 シトラス＆アールグレイ 詰替 650ml",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301378556",
+      "brand": "Magica",
+      "name": "CHARMY Magica 酵素＋ オレンジ 詰替 1000ml",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301378280",
+      "brand": "Magica",
+      "name": "CHARMY Magica 手肌＋除菌 グレープフルーツ＆ガーデン 詰替 650ml",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301378303",
+      "brand": "Magica",
+      "name": "CHARMY Magica 手肌＋除菌 グレープフルーツ＆ガーデン 詰替 950ml",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301326489",
+      "brand": "Magica",
+      "name": "Magica　一発洗浄スプレー　オレンジ　本体　３００ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301378389",
+      "brand": "Magica",
+      "name": "CHARMY Magica 速乾＋ カラッと除菌シトラスグリーン 詰替 1000ml",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301326496",
+      "brand": "Magica",
+      "name": "Magica　一発洗浄スプレー　オレンジ　詰替　２５０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301380795",
+      "brand": "LION",
+      "name": "CHARMY クリスタ クリアEXジェル 本体",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301380825",
+      "brand": "LION",
+      "name": "CHARMY クリスタ 消臭EXジェル 本体",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301380801",
+      "brand": "LION",
+      "name": "CHARMY クリスタ クリアEXジェル 詰替 660g",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301380900",
+      "brand": "LION",
+      "name": "CHARMY クリスタ 消臭EXジェル 詰替 660g",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301380832",
+      "brand": "LION",
+      "name": "CHARMY クリスタ クリアEXジェル 詰替 1155g",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301380924",
+      "brand": "LION",
+      "name": "CHARMY クリスタ 消臭EXジェル 詰替 1155g",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301384779",
+      "brand": "LION",
+      "name": "ＣＨＡＲＭＹ　クリスタ　予洗い専用泡スプレー　本体",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301384793",
+      "brand": "LION",
+      "name": "ＣＨＡＲＭＹ　クリスタ　予洗い専用泡スプレー　つめかえ用",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301015352",
+      "brand": "Look",
+      "name": "おふろのルック　本体　４００ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301015369",
+      "brand": "Look",
+      "name": "おふろのルック　詰替　３５０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301302421",
+      "brand": "Bathtub Cleanser",
+      "name": "バスタブクレンジング　銀イオン　グリーン　本体　５００ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301333456",
+      "brand": "Bathtub Cleanser",
+      "name": "バスタブクレンジング　銀イオン　香りが残らないタイプ　本体　５００ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301367444",
+      "brand": "Bathtub Cleanser",
+      "name": "バスタブクレンジング　銀イオン　スカッシュシトラス　本体　５００ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301375227",
+      "brand": "Bathtub Cleanser",
+      "name": "バスタブクレンジング　HARD洗浄　本体　５００ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301333470",
+      "brand": "Bathtub Cleanser",
+      "name": "バスタブクレンジング　銀イオン　香りが残らないタイプ　詰替大型　８００ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301367482",
+      "brand": "Bathtub Cleanser",
+      "name": "バスタブクレンジング　銀イオン　スカッシュシトラス　詰替大型　８００ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301302674",
+      "brand": "Bathtub Cleanser",
+      "name": "バスタブクレンジング　銀イオン　グリーン　詰替大型　８００ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301384922",
+      "brand": "Bathtub Cleanser",
+      "name": "バスタブクレンジング銀イオン 香りが残らないタイプ 詰替大",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301375234",
+      "brand": "Bathtub Cleanser",
+      "name": "バスタブクレンジング　HARD洗浄　詰替大型　８００ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301384809",
+      "brand": "Bathtub Cleanser",
+      "name": "バスタブクレンジング銀イオン ハーバルグリーン 詰替大",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301354284",
+      "brand": "Bathtub Cleanser",
+      "name": "バスタブクレンジング　銀イオン　グリーン　詰替特大１１５０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301385011",
+      "brand": "Bathtub Cleanser",
+      "name": "バスタブクレンジング銀イオン スカッシュシトラス 詰替大",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301385127",
+      "brand": "Bathtub Cleanser",
+      "name": "バスタブクレンジングHARD洗浄　詰替用大",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301354307",
+      "brand": "Bathtub Cleanser",
+      "name": "バスタブクレンジング　銀イオン　香りが残らないタイプ　詰替特大　１１５０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301367529",
+      "brand": "Bathtub Cleanser",
+      "name": "バスタブクレンジング　銀イオン　スカッシュシトラス　詰替特大　１１５０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301375241",
+      "brand": "Bathtub Cleanser",
+      "name": "バスタブクレンジング　HARD洗浄　詰替特大　１１５０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301384816",
+      "brand": "Bathtub Cleanser",
+      "name": "バスタブクレンジング銀イオン ハーバルグリーン 詰替特大",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301384939",
+      "brand": "Bathtub Cleanser",
+      "name": "バスタブクレンジング銀イオン 香りが残らないタイプ 詰替特大",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301385059",
+      "brand": "Bathtub Cleanser",
+      "name": "バスタブクレンジング銀イオン スカッシュシトラス 詰替特大",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301375272",
+      "brand": "Toilet Cleanser",
+      "name": "トイレクレンジング　クールシトラス　本体　３００ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301385134",
+      "brand": "Bathtub Cleanser",
+      "name": "バスタブクレンジングHARD洗浄　詰替用特大",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301375296",
+      "brand": "Toilet Cleanser",
+      "name": "トイレクレンジング　ミンティフレッシュ　本体　３００ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "49355215",
+      "brand": "Mamepika",
+      "name": "まめピカ　本体 　２１０ｍｌ",
+      "reason": "Not a 13-digit retail JAN; requires manual identification"
+    },
+    {
+      "jan": "4903301375319",
+      "brand": "Toilet Cleanser",
+      "name": "トイレクレンジング　ミンティフレッシュ　詰替　６４０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301375289",
+      "brand": "Toilet Cleanser",
+      "name": "トイレクレンジング　クールシトラスの香り　詰替　６４０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301194194",
+      "brand": "Mamepika",
+      "name": "まめピカ抗菌　本体　２１０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301118336",
+      "brand": "Mamepika",
+      "name": "まめピカ　詰替 　１９０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301194200",
+      "brand": "Mamepika",
+      "name": "まめピカ抗菌　詰替　１９０ｍｌ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301169994",
+      "brand": "Look",
+      "name": "ルックプラス　防カビくん煙剤　１Ｐ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301269458",
+      "brand": "Look",
+      "name": "ルックプラス　清潔リセット　キッチン用排水口まるごとクリーナー　40g×2包",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301219583",
+      "brand": "Look",
+      "name": "ルックプラス　防カビくん煙剤　１Ｐ　せっけん",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301234982",
+      "brand": "Look",
+      "name": "ルックプラス　防カビくん煙剤 　１Ｐ　ミント",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301187240",
+      "brand": "Look",
+      "name": "ルックプラス　防カビくん煙剤　３Ｐ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301221043",
+      "brand": "Look",
+      "name": "ルックプラス　防カビくん煙剤　３Ｐ　せっけん",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301234999",
+      "brand": "Look",
+      "name": "ルックプラス　防カビくん煙剤 　３Ｐ　ミント",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301372547",
+      "brand": "Look",
+      "name": "ルックプラス　トイレのまるごと除菌消臭くん煙剤　１Ｐ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4903301372554",
+      "brand": "Look",
+      "name": "ルックプラス　トイレのまるごと除菌消臭くん煙剤　３Ｐ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710643978",
+      "brand": "Kose Ouvi Blue",
+      "name": "OBKザリンクレスローション 180ml",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710643985",
+      "brand": "Kose Ouvi Blue",
+      "name": "OBKザリンクレスローションR 160ml",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710643992",
+      "brand": "Kose Ouvi Blue",
+      "name": "OBKザリンクレスローションM 30ml",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710644005",
+      "brand": "Kose Ouvi Blue",
+      "name": "OBKザリンクレスEM 135ml",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710644029",
+      "brand": "Kose Ouvi Blue",
+      "name": "OBKザリンクレスEMM",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710644012",
+      "brand": "Kose Ouvi Blue",
+      "name": "OBKザリンクレスEMR 115ml",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710622164",
+      "brand": "Kose Ouvi Blue",
+      "name": "メラノショット P <40mL>",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710622201",
+      "brand": "Kose Ouvi Blue",
+      "name": "メラノショット P <65mL 付けかえ用>",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710622188",
+      "brand": "Kose Ouvi Blue",
+      "name": "メラノショット P <40mL 付けかえ用>",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710599923",
+      "brand": "Kose Ouvi Blue",
+      "name": "OBK セラムヴェール ローション 180ml",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710599954",
+      "brand": "Kose Ouvi Blue",
+      "name": "OBK セラムヴェール ローション 160mL",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710599978",
+      "brand": "Kose Ouvi Blue",
+      "name": "OBK セラムヴェール エマルジョン",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710599985",
+      "brand": "Kose Ouvi Blue",
+      "name": "OBK セラムヴェール エマルジョン 詰替え 115mL グリーンフローラル",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710278521",
+      "brand": "Kose Ouvi Blue",
+      "name": "OBKバランシングチューナー",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710613278",
+      "brand": "Kose Ouvi Blue",
+      "name": "ザ リンクレス W <18g>",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710613285",
+      "brand": "Kose Ouvi Blue",
+      "name": "ザ リンクレス W ラージサイズ <27g>",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710595789",
+      "brand": "Kose Ouvi Blue",
+      "name": "OBK Wブラックウォッシャー",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710541212",
+      "brand": "Kose Ouvi Blue",
+      "name": "OBK Dハイドレーター",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710546071",
+      "brand": "Kose Ouvi Blue",
+      "name": "OBK DハイドレーターR",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710568103",
+      "brand": "Kose Ouvi Blue",
+      "name": "OBKメラノショットWマスク",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710561395",
+      "brand": "Kose Ouvi Blue",
+      "name": "OBK ポアクリアオイル",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710568899",
+      "brand": "Kose Ouvi Blue",
+      "name": "OBKリンクルダブルリペア",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710576634",
+      "brand": "Kose Ouvi Blue",
+      "name": "OBKクリアピールセラム",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710576641",
+      "brand": "Kose Ouvi Blue",
+      "name": "OBKクリアピールセラムR",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710574852",
+      "brand": "Kose Ouvi Blue",
+      "name": "OBK ポアクリアオイルR",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710591613",
+      "brand": "Kose Ouvi Blue",
+      "name": "OBKメラノWマスク1マイ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710614718",
+      "brand": "Kose Ouvi Blue",
+      "name": "セラム シールド / 7g",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710565065",
+      "brand": "Kose Ouvi Blue",
+      "name": "OBKセラムシールド 40g",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710577341",
+      "brand": "Kose Ouvi Blue",
+      "name": "OBKセラムヴェール ディープリペア / 60mL",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710580372",
+      "brand": "Kose Ouvi Blue",
+      "name": "OBKセラムヴェール ディープリペア / 60mL(付けかえ用)",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710580396",
+      "brand": "Kose Ouvi Blue",
+      "name": "OBKセラムヴェール ディープリペア / 120mL(付けかえ用)",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710598711",
+      "brand": "Kose Make Keep",
+      "name": "メイクキープパウダーEX",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710625592",
+      "brand": "Kose Make Keep",
+      "name": "メイク キープ プライマー UV / SPF35 / PA+++ / 01 毛穴レスベージュ",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710563238",
+      "brand": "Kose Make Keep",
+      "name": "メイクキーププライマー",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710576306",
+      "brand": "Kose Make Keep",
+      "name": "メイクキープミストEX+",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710588163",
+      "brand": "Kose Make Keep",
+      "name": "メイクキープUV",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710576573",
+      "brand": "Kose Make Keep",
+      "name": "メイクキープミストEX+ TR",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710597707",
+      "brand": "Kose Make Keep",
+      "name": "メイクキープカミパウダー",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710573855",
+      "brand": "Kose Sekkisei",
+      "name": "セッキセイ ケショウスイN 200ML",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710573992",
+      "brand": "Kose Sekkisei",
+      "name": "セッキセイ ケショウスイBIG 350ML",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710571905",
+      "brand": "Kose Sekkisei",
+      "name": "セッキセイ ケショウスイN TR 30ML",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710571868",
+      "brand": "Kose Sekkisei",
+      "name": "セッキセイ ニュウエキN 140ML",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710580600",
+      "brand": "Kose Sekkisei",
+      "name": "セッキセイ ケショウスイN R 310ML",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710581928",
+      "brand": "Kose Sekkisei",
+      "name": "セッキセイ ニュウエキN R 120ML",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710570250",
+      "brand": "Kose Sekkisei",
+      "name": "セッキセイ クリーム N 40G",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710597172",
+      "brand": "Kose Sekkisei",
+      "name": "セッキセイ ジェル N",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710585278",
+      "brand": "Kose Sekkisei",
+      "name": "セッキセイ クリームウォッシュN 130G",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710582338",
+      "brand": "Kose Sekkisei",
+      "name": "セッキセイ クリームN R 40G",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710585292",
+      "brand": "Kose Sekkisei",
+      "name": "セッキセイ CウォッシュN20 20G",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710585261",
+      "brand": "Kose Sekkisei",
+      "name": "セッキセイ クレンズオイルNR 135ML",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710585254",
+      "brand": "Kose Sekkisei",
+      "name": "セッキセイ クレンズオイルN 150ML",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710585285",
+      "brand": "Kose Sekkisei",
+      "name": "セッキセイクレンズオイルN30 30ML",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710635386",
+      "brand": "Kose Infinity",
+      "name": "インフィニティ ナイトリニューCジェル 120g",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710643565",
+      "brand": "Kose Infinity",
+      "name": "IFT ザMコンセントレート 50ml",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710635379",
+      "brand": "Kose Infinity",
+      "name": "IFTモーニングリニューEX 100g",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710229004",
+      "brand": "Kose Infinity",
+      "name": "インフィニティ バイタルコンフォート マスク 20mL×6枚入",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710229011",
+      "brand": "Kose Infinity",
+      "name": "インフィニティ バイタルコンフォート マスク 20mL×1枚入",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710643572",
+      "brand": "Kose Infinity",
+      "name": "IFT ザMコンセントレートR 50ml",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710229639",
+      "brand": "Kose Infinity",
+      "name": "インフィニティ アストリンゼント N 160ml",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710249651",
+      "brand": "Kose Infinity",
+      "name": "インフィニティ ビューティリップセラム 10g",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710235432",
+      "brand": "Kose Infinity",
+      "name": "インフィニティ アストリンゼント N 付けかえ用 160mL",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710270389",
+      "brand": "Kose Infinity",
+      "name": "インフィニティ パウダーファンデーション ケース",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710277494",
+      "brand": "Kose Infinity",
+      "name": "インフィニティ アドバンスト ホワイト クリーム XX 40g",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710270747",
+      "brand": "Kose Infinity",
+      "name": "インフィニティ メイクアップスポンジ P",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710277562",
+      "brand": "Kose Infinity",
+      "name": "インフィニティ アドバンスト ホワイト クリーム XX 付けかえ用 40g",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710282153",
+      "brand": "Kose Infinity",
+      "name": "インフィニティ トリートメント クレンジング クリーム 120g",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710282283",
+      "brand": "Kose Infinity",
+      "name": "インフィニティ トリートメント ウォッシュ 120g",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710288247",
+      "brand": "Kose Infinity",
+      "name": "インフィニティ プレステジアス クレンジング バーム 120g",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710285208",
+      "brand": "Kose Infinity",
+      "name": "インフィニティ アドバンスト ホワイト スティック XX 4g",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710288254",
+      "brand": "Kose Infinity",
+      "name": "インフィニティ プレステジアス ローション 160ml",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710288261",
+      "brand": "Kose Infinity",
+      "name": "インフィニティ プレステジアス ローション 付けかえ用 160ml",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710288278",
+      "brand": "Kose Infinity",
+      "name": "インフィニティ プレステジアス エマルジョン 120ml",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710288285",
+      "brand": "Kose Infinity",
+      "name": "インフィニティ プレステジアス エマルジョン 付けかえ用 120ml",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710276954",
+      "brand": "Kose Infinity",
+      "name": "インフィニティ プレステジアス セラム インダルジェンス 40ml",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710288292",
+      "brand": "Kose Infinity",
+      "name": "インフィニティ プレステジアス ウォッシング ミルク 150ml",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710294750",
+      "brand": "Kose Infinity",
+      "name": "インフィニティ スキン インテグレーション オイル 40ml",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710294736",
+      "brand": "Kose Infinity",
+      "name": "インフィニティ モーニング リニュー 100g",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710294767",
+      "brand": "Kose Infinity",
+      "name": "インフィニティ スキン インテグレーション オイル マスク 1回分",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710294774",
+      "brand": "Kose Infinity",
+      "name": "インフィニティ スキン インテグレーション オイル マスク 5回分",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710293548",
+      "brand": "Kose Infinity",
+      "name": "インフィニティ プレステジアス アイゾーン セラム 25g",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710293531",
+      "brand": "Kose Infinity",
+      "name": "インフィニティ プレステジアス デュアル クリーム 20g、40g",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710294224",
+      "brand": "Kose Infinity",
+      "name": "インフィニティ プレステジアス デュアル クリーム 付けかえ用 20g、40g",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710291957",
+      "brand": "Kose Infinity",
+      "name": "インフィニティ プレステジアス セラム インダルジェンス 付けかえ用 40ml",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710298697",
+      "brand": "Kose Infinity",
+      "name": "インフィニティ アンリミテッド キー 50ml",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710298680",
+      "brand": "Kose Infinity",
+      "name": "インフィニティ アンリミテッド キー 付けかえ用 50ml",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710551754",
+      "brand": "Kose Infinity",
+      "name": "インフィニティ エステ クレンジング EX 600ml",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710551761",
+      "brand": "Kose Infinity",
+      "name": "インフィニティ エステ クレンジング EX 付けかえ用 600ml",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710551778",
+      "brand": "Kose Infinity",
+      "name": "インフィニティ エステ クレンジング EX 180ml",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710556698",
+      "brand": "Kose Infinity",
+      "name": "インフィニティ リフト&トーンアップ ベース 30g",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710573145",
+      "brand": "Kose Infinity",
+      "name": "インフィニティ エステ クレンジング EX 15mL×2個",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710570137",
+      "brand": "Kose Infinity",
+      "name": "インフィニティ イノベイティブ ブライト ローション XX 160ml",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710570144",
+      "brand": "Kose Infinity",
+      "name": "インフィニティ イノベイティブ ブライト ローション XX 付けかえ用 150ml",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710570151",
+      "brand": "Kose Infinity",
+      "name": "インフィニティ イノベイティブ ブライト エマルジョン XX 120ml",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710570168",
+      "brand": "Kose Infinity",
+      "name": "インフィニティ イノベイティブ ブライト エマルジョン XX 付けかえ用 110ml",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710570175",
+      "brand": "Kose Infinity",
+      "name": "インフィニティ イノベイティブ ブライト セラム XX 40ml",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710570182",
+      "brand": "Kose Infinity",
+      "name": "インフィニティ イノベイティブ ブライト セラム XX 付けかえ用 40ml",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710572803",
+      "brand": "Kose Infinity",
+      "name": "インフィニティ マルチプロテクション デイセラム UV 01 ナチュラル 30g",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710572810",
+      "brand": "Kose Infinity",
+      "name": "インフィニティ マルチプロテクション デイセラム UV 02 トーンアップ 30g",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710584097",
+      "brand": "Kose Infinity",
+      "name": "インフィニティ ビューティハンドセラム リンクル&ブライト 55g",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710593532",
+      "brand": "Kose Infinity",
+      "name": "インフィニティ スキンルミナンス ファンデーション BO-305 ベージュオークル 9g",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710593549",
+      "brand": "Kose Infinity",
+      "name": "インフィニティ スキンルミナンス ファンデーション BO-310 ベージュオークル 9g",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710593570",
+      "brand": "Kose Infinity",
+      "name": "インフィニティ スキンルミナンス ファンデーション OC-415 オークル 9g",
+      "reason": "HTTP 429"
+    },
+    {
+      "jan": "4971710522945",
+      "brand": "Kose Grace One",
+      "name": "グレイス ワン リンクルケア コンセントレートスポッツマスク",
+      "reason": "No exact JAN listing"
+    },
+    {
+      "jan": "4971710587340",
+      "brand": "Kose Grace One",
+      "name": "グレイス ワン 薬用リンクル リフト液",
+      "reason": "No exact JAN listing"
+    },
+    {
+      "jan": "4971710582871",
+      "brand": "Kose Grace One",
+      "name": "グレイス ワン 薬用リンクル リペアジェル",
+      "reason": "No exact JAN listing"
+    },
+    {
+      "jan": "4971710582888",
+      "brand": "Kose Grace One",
+      "name": "グレイス ワン 薬用リンクル リペアジェル つめかえ",
+      "reason": "No exact JAN listing"
+    },
+    {
+      "jan": "4971710393187",
+      "brand": "Kose Grace One",
+      "name": "グレイス ワン 薬用 ホワイトニングエッセンス",
+      "reason": "No exact JAN listing"
+    },
+    {
+      "jan": "4971710384710",
+      "brand": "Kose Grace One",
+      "name": "グレイス ワン ディープホワイト ミルク",
+      "reason": "No exact JAN listing"
+    }
+  ],
+  "total_candidates": 2181,
+  "checkpoint_processed_count": 600,
+  "rate_limited": true
+}

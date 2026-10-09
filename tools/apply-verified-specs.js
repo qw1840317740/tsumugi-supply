@@ -3,21 +3,23 @@ const fs = require('fs');
 const path = require('path');
 const root = path.resolve(__dirname,'..');
 const dataFile = path.join(root,'assets/js/data.js');
-const evidence = JSON.parse(fs.readFileSync(path.join(root,'assets/data/verified-product-specs.json'),'utf8'));
-const extraFile = path.join(root,'assets/data/verified-sweets-specs.json');
-if(fs.existsSync(extraFile)) Object.assign(evidence.products,JSON.parse(fs.readFileSync(extraFile,'utf8')));
+const records = require('./load-spec-evidence')();
 const updates={};
 global.window={};
 require(dataFile);
 for(const p of window.PRODUCTS){
- const record=evidence.products[p.jan];
+ const record=records[p.jan];
  if(!record) continue;
  const unit=record.unit || record.specs.find(s=>s.name==='Net content')?.value || p.unit;
- const facts=record.specs.map(s=>`${s.name}: ${s.value}`).join('; ');
- updates[p.jan]={unit, verified_specs:record.specs, spec_source:record.source_url, spec_checked_on:record.checked_on,
+ const facts=record.specs.filter(s=>s.name!=='Exact-JAN source listing name').map(s=>`${s.name}: ${s.value}`).join('; ');
+ const sourceName=record.source_name || 'Manufacturer product information';
+ const origin=record.specs.find(s=>s.name==='Country of origin (retailer listing)')?.value || 'Not verified; confirm supplied package';
+ const primary=record.specs.find(s=>/^(Net content|Pack size stated|Pack contents)/.test(s.name));
+ const concise=primary?`Pack size: ${primary.value}. `:'';
+ updates[p.jan]={unit, origin, verified_specs:record.specs, spec_source:record.source_url, spec_source_name:sourceName, spec_source_type:record.source_type||'manufacturer', spec_checked_on:record.checked_on, spec_range_source:record.range_source||null, spec_range_note:record.range_note||null,
   spec_match_note:record.match_note || 'Exact JAN manufacturer product page',
-  seo_lead:`${p.name} — ${facts}. JAN / GTIN ${p.jan}. Manufacturer specifications were checked on ${record.checked_on}. Packaging and labeling must be confirmed for the supplied lot.`,
-  seo_description:`${p.name}, JAN ${p.jan}. ${facts}. Wholesale quotation from JAPANITEM.`};
+  seo_lead:`${p.name} — ${facts}. JAN / GTIN ${p.jan}. Source: ${sourceName}, checked ${record.checked_on}. Packaging and labeling must be confirmed for the supplied lot.`,
+  seo_description:`JAN ${p.jan}. ${concise}${p.name} by ${p.brand}. Wholesale quotation from JAPANITEM. ${record.source_type==='retailer-title'?'Pack size is retailer title-derived.':''}`};
 }
 const start='/* === verified specification enrichment: start === */';
 const end='/* === verified specification enrichment: end === */';
