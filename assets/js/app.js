@@ -432,6 +432,8 @@ function buildFooter(){
           </a>
           <p data-i18n="foot.about"></p>
           <p class="wechat-contact">WeChat / 微信：<strong>ks75995</strong></p>
+          <p class="wechat-contact">WhatsApp：<a href="https://wa.me/819071203239" target="_blank" rel="noopener"><strong>+81 90-7120-3239</strong></a></p>
+          <p class="wechat-contact">LINE：<strong>090-7120-3239</strong></p>
           <div class="social">
             <a href="${SITE.url}" target="_blank" rel="noopener" aria-label="Website">${ICON.spark}</a>
             <a href="mailto:${SITE.email}" aria-label="Email">${ICON.globe}</a>

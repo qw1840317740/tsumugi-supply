@@ -364,7 +364,7 @@
         '<div class="cb-head-top">' +
           '<div class="cb-avatar">K</div>' +
           '<div class="cb-titles">' +
-            '<div class="cb-name" id="cb-name">Kaisei Assistant</div>' +
+            '<div class="cb-name" id="cb-name">JAPANITEM Assistant</div>' +
             '<div class="cb-sub" id="cb-sub">Replies instantly</div>' +
           '</div>' +
           '<div class="cb-lang" role="tablist" aria-label="Language">' +
