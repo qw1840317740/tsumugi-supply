@@ -46,6 +46,14 @@ const truncate = (value, max) => {
   const text = String(value ?? '').replace(/\s+/g, ' ').trim();
   return text.length <= max ? text : `${text.slice(0, Math.max(1, max - 1)).trim()}…`;
 };
+// Cut at a word boundary and drop a dangling comma so titles read cleanly.
+const truncateWords = (value, max) => {
+  const text = String(value ?? '').replace(/\s+/g, ' ').trim();
+  if (text.length <= max) return text;
+  const cut = text.slice(0, max - 1);
+  const atSpace = cut.lastIndexOf(' ');
+  return `${(atSpace > max * 0.6 ? cut.slice(0, atSpace) : cut).replace(/[\s,;:&+-]+$/, '')}…`;
+};
 const slugify = value => String(value).toLowerCase()
   .replace(/&/g, '-and-').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'brand';
 
@@ -75,17 +83,17 @@ const gtinProperty = jan => {
 };
 const shortProductTitle = p => {
   const base = p.name_en || (p.name.toLowerCase().includes(String(p.brand).toLowerCase()) ? p.name : `${p.brand} ${p.name}`);
-  return `${truncate(base, 60 - ' | JAPANITEM'.length)} | JAPANITEM`;
+  return base.length + ' | JAPANITEM'.length <= 70 ? `${base} | JAPANITEM` : truncateWords(base, 100);
 };
 const shortTitleCounts = new Map();
 for (const p of products) shortTitleCounts.set(shortProductTitle(p), (shortTitleCounts.get(shortProductTitle(p)) || 0) + 1);
-// Short "Name | JAPANITEM" titles; add the JAN only where two catalog names would collide.
+// "Full English name | JAPANITEM" titles (Google indexes the full title even when it truncates the display); add the JAN only where two catalog names are identical.
 const productTitle = p => {
   const short = shortProductTitle(p);
   if (shortTitleCounts.get(short) === 1) return short;
   const suffix = ` | JAN ${p.jan || p.id} | JAPANITEM`;
   const base = p.name_en || (p.name.toLowerCase().includes(String(p.brand).toLowerCase()) ? p.name : `${p.brand} ${p.name}`);
-  return `${truncate(base, 65 - suffix.length)}${suffix}`;
+  return `${truncateWords(base, 100)}${suffix}`;
 };
 const nameWithJa = p => p.name_ja ? `${p.name} (${p.name_ja})` : p.name;
 const productDescription = p => truncate(

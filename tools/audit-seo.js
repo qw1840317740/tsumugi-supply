@@ -33,7 +33,9 @@ for (const name of productFiles) {
   const description = decodeHtml(match(html, /<meta name="description" content="([^"]*)"/i));
   const canonical = match(html, /<link rel="canonical" href="([^"]*)"/i);
   warn(Boolean(title), `${name}: missing title`);
-  warn(title.length <= 65, `${name}: title is ${title.length} characters`);
+  // Full English product names (brand, line, scent, pack size) keep variant titles unique;
+  // Google truncates the display, not the indexed title, so allow up to 100 characters.
+  warn(title.length <= 100, `${name}: title is ${title.length} characters`);
   warn(Boolean(description), `${name}: missing description`);
   warn(description.length <= 155, `${name}: description is ${description.length} characters`);
   warn(Boolean(canonical), `${name}: missing canonical`);
