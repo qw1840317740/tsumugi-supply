@@ -265,8 +265,9 @@ function scripts() {
 
 function productCard(p) {
   const jan = String(p.jan || p.id);
+  const photo=productImage(p);
   return `<article class="product">
-    <a class="media" href="products/${encodeURIComponent(p.id)}.html"><span class="prod-art-wrap"><img class="prod-photo loaded" src="assets/products/${encodeURIComponent(jan)}.jpg" alt="${escapeHtml(p.name)} — JAN ${escapeHtml(jan)}" width="360" height="360" loading="lazy" decoding="async"></span></a>
+    <a class="media" href="products/${encodeURIComponent(p.id)}.html"><span class="prod-art-wrap">${photo?`<img class="prod-photo loaded" src="assets/products/${encodeURIComponent(jan)}.jpg" alt="${escapeHtml(p.name)} — JAN ${escapeHtml(jan)}" width="360" height="360" loading="lazy" decoding="async">`:`<span class="product-photo-placeholder"><strong>${escapeHtml(p.brand)}</strong><span>Product photo pending</span><small>JAN ${escapeHtml(jan)}</small></span>`}</span></a>
     <div class="body"><span class="cat">${escapeHtml(categories[p.category] || p.category)}</span><h2><a href="products/${encodeURIComponent(p.id)}.html">${escapeHtml(p.name)}</a></h2><span class="brand">${escapeHtml(p.brand)} · JAN ${escapeHtml(jan)}</span></div>
   </article>`;
 }
@@ -331,7 +332,7 @@ ${commonHead({ title, description, canonical, type: 'product', image, ld: [produ
     <div class="container pdp-wrap">
       <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span class="sep">/</span><a href="categories/${escapeHtml(p.category)}.html">${escapeHtml(category)}</a><span class="sep">/</span><span class="cur">${escapeHtml(p.name)}</span></nav>
       <div class="pdp-grid">
-        <div class="pdp-media"><img class="prod-photo loaded" src="${productPhoto ? `assets/products/${encodeURIComponent(jan)}.jpg` : 'assets/og.png'}" alt="${escapeHtml(p.name)} — JAN ${escapeHtml(jan)}" width="600" height="600" loading="eager" decoding="async"></div>
+        <div class="pdp-media">${productPhoto?`<img class="prod-photo loaded" src="assets/products/${encodeURIComponent(jan)}.jpg" alt="${escapeHtml(p.name)} — JAN ${escapeHtml(jan)}" width="600" height="600" loading="eager" decoding="async">`:`<span class="product-photo-placeholder"><strong>${escapeHtml(p.brand)}</strong><span>Product photo pending</span><small>JAN ${escapeHtml(jan)}</small></span>`}</div>
         <div class="pdp-info">
           <span class="cat">${escapeHtml(category)}</span>
           <h1>${escapeHtml(p.name)}</h1>

@@ -1,0 +1,20 @@
+# Deploy the prebuilt website and API, not local source data or debug artifacts.
+.git
+.env*
+.gitignore.local
+node_modules
+__pycache__
+**/__pycache__
+tools
+docs
+*.xlsx
+*.xls
+*.csv
+*.tsv
+*.bak
+*.tmp
+*.py
+*.md
+_*.js
+_*.json
+_*.html

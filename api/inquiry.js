@@ -1,5 +1,6 @@
 const authToken = require('./_auth');
 const { pool } = require('./_db');
+const { randomUUID } = require('crypto');
 
 const escapeHtml = (value) => String(value || '')
   .replace(/&/g, '&amp;')
@@ -15,6 +16,7 @@ async function sendInquiryEmail(inquiry) {
   const recipient = process.env.INQUIRY_NOTIFY_TO || 'fanshijun@kaiseisg.com';
   const sender = process.env.INQUIRY_FROM_EMAIL || 'JAPANITEM <info@japanitem.com>';
   const rows = [
+    ['Request reference', inquiry.request_id],
     ['Name', inquiry.name],
     ['Company', inquiry.company],
     ['Email', inquiry.email],
@@ -40,7 +42,7 @@ async function sendInquiryEmail(inquiry) {
       from: sender,
       to: [recipient],
       reply_to: inquiry.email,
-      subject: `New wholesale inquiry — ${inquiry.company || inquiry.name}`,
+      subject: `Wholesale inquiry ${inquiry.request_id} — ${inquiry.company || inquiry.name}`,
       text,
       html: `<h2>New JAPANITEM wholesale inquiry</h2><table style="border-collapse:collapse">${html}</table>`,
     }),
@@ -57,6 +59,8 @@ module.exports = async (req, res) => {
 
   const { name, company, email, country, product, brand, quantity, notes } = req.body || {};
   if (!name || !email) return res.status(400).json({ error: 'MISSING_FIELDS' });
+  if(typeof name!=='string' || typeof email!=='string' || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) return res.status(400).json({ error:'INVALID_EMAIL' });
+  const request_id = `JI-${randomUUID()}`;
 
   let userId = null;
   const auth = req.headers.authorization;
@@ -74,16 +78,16 @@ module.exports = async (req, res) => {
     await client.query('BEGIN');
     await client.query(
       'INSERT INTO inquiries (user_id, name, company, email, country, product, brand, quantity, notes) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)',
-      [userId, name, company||null, email.toLowerCase(), country||null, product||null, brand||null, quantity||null, notes||null]
+      [userId, name, company||null, email.trim().toLowerCase(), country||null, product||null, brand||null, quantity||null, `Request reference: ${request_id}\n${notes || ''}`]
     );
-    await sendInquiryEmail({ name, company, email: email.toLowerCase(), country, product, brand, quantity, notes });
+    await sendInquiryEmail({ request_id, name, company, email: email.trim().toLowerCase(), country, product, brand, quantity, notes });
     await client.query('COMMIT');
-    return res.status(201).json({ ok: true });
+    return res.status(201).json({ ok: true, request_id });
   } catch (error) {
     if (client) {
       try { await client.query('ROLLBACK'); } catch {}
     }
-    console.error('Inquiry submission failed:', error);
+    console.error('Inquiry submission failed:', request_id, error);
     return res.status(500).json({ error: 'SERVER_ERROR' });
   } finally {
     if (client) client.release();

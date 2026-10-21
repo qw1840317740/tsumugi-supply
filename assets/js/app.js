@@ -25,7 +25,7 @@ const SITE = {
   // 法人名 (ワジュンゴウドウガイシャ)
   // 法人番号 2011503004303
   // 代表者 陳雲華 (チン・ウンカ)
-  year: 2024,
+  year: new Date().getFullYear(),
 };
 const STORE_KEY = 'tsumugi_cart_v1';
 function escapeSpec(value){ return String(value ?? '').replace(/[&<>"']/g, char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char])); }
@@ -292,26 +292,9 @@ function observeProductImages(root=document){
 }
 
 function productArt(p, eager=false){
-  const h = p.hue || '#21463D';
-  const kana = brandKana(p.brand);
-  const id = 'art'+(_artId++);
-  const shape = SHAPES[pickShape(p)] || SHAPES.dropper;
-  const svgArt = `<svg class="prod-art" viewBox="0 0 240 240" preserveAspectRatio="xMidYMid meet" role="img" aria-label="${p.name}">
-    <defs>
-      <linearGradient id="${id}" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0" stop-color="${shade(h,34)}"/><stop offset="1" stop-color="${shade(h,-4)}"/>
-      </linearGradient>
-    </defs>
-    <rect width="240" height="240" fill="url(#${id})"/>
-    <circle cx="205" cy="38" r="110" fill="#ffffff" opacity="0.07"/>
-    <circle cx="35" cy="210" r="80" fill="#000000" opacity="0.05"/>
-    ${shape(h, kana, p.unit||'')}
-  </svg>`;
-  // Real photo on top (temporary stand-ins from Unsplash); SVG remains as a
-  // graceful fallback if the photo fails to load.
-  const photo = productPhoto(p);
+  const photo = `assets/products/${encodeURIComponent(p.jan || p.id)}.jpg`;
   const source = eager ? `src="${photo}" loading="eager" fetchpriority="high"` : `data-src="${photo}" loading="lazy" fetchpriority="low"`;
-  return `<span class="prod-art-wrap">${svgArt}<img class="prod-photo" ${source} alt="${p.name}" width="600" height="600" decoding="async" onerror="this.classList.add('failed')" onload="this.classList.add('loaded')"></span>`;
+  return `<span class="prod-art-wrap"><span class="product-photo-placeholder"><span>${ICON.box}</span><strong>${escapeSpec(p.brand)}</strong><span>${t('pc.photoPending')}</span><small>JAN ${escapeSpec(p.jan || p.id)}</small></span><img class="prod-photo" ${source} alt="${escapeSpec(p.name)}" width="600" height="600" decoding="async" onerror="this.classList.add('failed')" onload="this.classList.add('loaded')"></span>`;
 }
 
 /* Real product photography (temporary category stand-ins, Unsplash).
@@ -448,6 +431,7 @@ function buildFooter(){
             <span class="footer-logo-name">JAPANITEM</span>
           </a>
           <p data-i18n="foot.about"></p>
+          <p class="wechat-contact">WeChat / 微信：<strong>ks75995</strong></p>
           <div class="social">
             <a href="${SITE.url}" target="_blank" rel="noopener" aria-label="Website">${ICON.spark}</a>
             <a href="mailto:${SITE.email}" aria-label="Email">${ICON.globe}</a>
@@ -457,7 +441,7 @@ function buildFooter(){
         <div class="footer-col">
           <h5 data-i18n="foot.shop"></h5>
           <a href="products.html" data-i18n="foot.all"></a>${
-            CATEGORIES.map(c=>`<a href="products.html?cat=${c.id}" data-i18n="c.${c.id}"></a>`).join('')
+            CATEGORIES.filter(c=>CATALOG_PRODUCTS.some(p=>p.category===c.id)).map(c=>`<a href="products.html?cat=${c.id}" data-i18n="c.${c.id}"></a>`).join('')
           }
         </div>
         <div class="footer-col">
@@ -501,6 +485,7 @@ function cartQty(){ return Object.values(loadCart()).reduce((s,l)=>s+l,0); }
 function cartTotal(){ return Object.entries(loadCart()).reduce((s,[id,q])=>{ const p=CATALOG_PRODUCTS.find(x=>x.id===id); return s + (p?p.price*q:0); },0); }
 
 function addToCart(id, qty=1){
+  if(!CATALOG_PRODUCTS.some(p=>p.id===id) || !Number.isSafeInteger(qty) || qty<1) return;
   const c = loadCart(); c[id] = (c[id]||0) + qty; saveCart(c);
   const p = CATALOG_PRODUCTS.find(x=>x.id===id);
   toast(t2('t.added', {ITEM:p?p.name:'', QTY:qty}));
@@ -536,7 +521,7 @@ function renderCartItems(){
   const total = cartTotal();
   const moq = $('#cartMoq');
   if(moq){
-    if(total>=SITE.minOrder){
+    if(ids.length){
       moq.className = 'cart-moq ok'; moq.innerHTML = `${ICON.check} ${t('t.moqOk')}`;
     } else {
       moq.className = 'cart-moq'; moq.innerHTML = `${ICON.info} ${t('t.moqAdd')}`;
@@ -614,35 +599,8 @@ function buildCartDrawer(){
   </aside>`;
 }
 async function requestQuote(){
-  if(cartTotal() < SITE.minOrder){ toast(t('t.moq')); return; }
-  // Check login
-  const token = localStorage.getItem('kaisei_token');
-  if(!token){
-    closeCart();
-    if(typeof openAuthModal === 'function') openAuthModal('login');
-    toast(typeof t === 'function' ? t('t.loginFirst') : 'Please sign in to request a quote.');
-    return;
-  }
-  // Build order items from cart
-  const cart = loadCart();
-  const items = Object.entries(cart).map(([id, qty])=>{
-    const p = CATALOG_PRODUCTS.find(x=>x.id===id);
-    return p ? { id:p.id, name:p.name, brand:p.brand, price:p.price, qty } : null;
-  }).filter(Boolean);
-  // Save to DB
-  try{
-    const r = await fetch('/api/orders', {
-      method:'POST',
-      headers:{ 'Content-Type':'application/json', Authorization:'Bearer '+token },
-      body: JSON.stringify({ items, total_jpy: cartTotal(), currency: cur || 'JPY' }),
-    });
-    if(!r.ok) throw new Error();
-    toast(typeof t === 'function' ? t('t.request') : 'Quote submitted!');
-    setTimeout(()=>{ localStorage.removeItem(STORE_KEY); refreshCartUI(); renderCartItems(); closeCart(); }, 1600);
-  }catch{
-    toast(typeof t === 'function' ? t('t.request') : 'Quote submitted!');
-    setTimeout(()=>{ localStorage.removeItem(STORE_KEY); refreshCartUI(); renderCartItems(); closeCart(); }, 1600);
-  }
+  if(!Object.keys(loadCart()).some(id=>CATALOG_PRODUCTS.some(p=>p.id===id))){ toast(t('cart.empty')); return; }
+  location.href = 'how-to-order.html?quote=cart#request';
 }
 
 /* =========================================================
@@ -688,9 +646,11 @@ function productCard(p){
     <div class="body">
       <span class="cat">${subOf(p)}</span>
       <h2><a href="${productUrl(p)}">${p.name}</a></h2>
+      <span class="product-context">${escapeSpec(p.brand)} · ${escapeSpec(subOf(p))}</span>
       <span class="brand">${p.brand} <span class="d"></span> ${p.unit}</span>
+      <span class="product-jan">JAN ${escapeSpec(p.jan || p.id)}</span>
       <div class="foot">
-        <a class="btn btn-primary" href="${productUrl(p)}">${t('pc.view')}</a>
+        <button class="btn btn-primary" type="button" onclick="addToCart('${p.id}')">${t('pc.quoteAdd')}</button>
         <button class="icon-btn save" aria-label="Save" onclick="handleSave(this,'${p.id}')">${ICON.heart}</button>
       </div>
     </div>
@@ -725,7 +685,7 @@ function initShop(){
     if(state.cat)   list = list.filter(p=>p.category===state.cat);
     if(state.sub)   list = list.filter(p=>p.sub===state.sub);
     if(state.brand) list = list.filter(p=>p.brand===state.brand);
-    if(state.inStock) list = list.filter(p=>p.tag!=='low');
+    if(state.inStock) list = list.filter(p=>p.stock_verified===true && Number(p.stock_quantity)>0);
     if(state.q){ const q=state.q.toLowerCase().trim();
       // Numeric-only queries (>=3 digits) are treated as a JAN / id lookup so
       // wholesalers can paste a code from a catalogue and jump straight to it.
@@ -855,10 +815,12 @@ function initShop(){
     addRenderer(buildCats);
   }
   const brandList = $('#filterBrands');
+  const brandSearch = $('#brandFilterSearch');
   let buildBrands = ()=>{};
   if(brandList){
     buildBrands = ()=>{
-      brandList.innerHTML = CATALOG_BRANDS.map(b=>{ const n=CATALOG_PRODUCTS.filter(p=>p.brand===b.name).length; if(n===0) return ''; return `<li><a data-brand="${b.name}" class="${state.brand===b.name?'on':''}">${brandName(b)} <span class="n">${n}</span></a></li>`; }).join('');
+      const query=(brandSearch?.value || '').trim().toLowerCase();
+      brandList.innerHTML = CATALOG_BRANDS.filter(b=>!query || [b.name,b.name_zh,b.name_ja].some(name=>String(name || '').toLowerCase().includes(query))).map(b=>{ const n=CATALOG_PRODUCTS.filter(p=>p.brand===b.name).length; if(n===0) return ''; return `<li><a data-brand="${escapeSpec(b.name)}" class="${state.brand===b.name?'on':''}">${escapeSpec(brandName(b))} <span class="n">${n}</span></a></li>`; }).join('');
     };
     buildBrands();
     brandList.addEventListener('click', e=>{
@@ -871,6 +833,7 @@ function initShop(){
     });
     addRenderer(buildBrands);
   }
+  brandSearch?.addEventListener('input',buildBrands);
   $('#shopSearch')?.addEventListener('input', e=>{ state.q=e.target.value.trim(); apply(); });
   $('#shopSort')?.addEventListener('change', e=>{ state.sort=e.target.value; apply(); });
   $('#inStock')?.addEventListener('change', e=>{ state.inStock=e.target.checked; apply(); });
@@ -937,7 +900,8 @@ function initPDP(){
             <div><span>${t('pdp.origin')}</span><b>${escapeSpec(!p.origin || /not verified|not independently verified/i.test(p.origin) ? t('pdp.confirmOrigin') : p.origin)}</b></div>
           </div>
           <div class="pdp-actions">
-            <a class="btn btn-primary btn-lg" href="how-to-order.html?product=${encodeURIComponent(p.id)}&name=${encodeURIComponent(p.name)}&brand=${encodeURIComponent(p.brand)}#request">${t('pdp.inquire')}</a>
+            <button class="btn btn-primary btn-lg" type="button" onclick="addToCart('${p.id}')">${t('pc.quoteAdd')}</button>
+            <a class="btn btn-outline btn-lg" href="how-to-order.html?product=${encodeURIComponent(p.id)}&name=${encodeURIComponent(p.name)}&brand=${encodeURIComponent(p.brand)}#request">${t('pdp.inquire')}</a>
             <a class="btn btn-outline btn-lg" href="mailto:${SITE.email}?subject=${encodeURIComponent('Quote request: '+p.name+' ('+p.id+')')}&body=${encodeURIComponent(t('pdp.emailBody').replace('{NAME}',p.name).replace('{BRAND}',p.brand).replace('{ID}',p.id).replace('{URL}',location.href))}">${t('pdp.contact')}</a>
             <button class="icon-btn save" aria-label="Save" onclick="handleSave(this,'${p.id}')">${ICON.heart}</button>
           </div>
@@ -1242,6 +1206,8 @@ function injectHomeIcons(){
    live in index.html. They were never filled — make them real.
    ========================================================= */
 function initHomeGrids(){
+  const counts = { categories:new Set(CATALOG_PRODUCTS.map(p=>p.category)).size, products:CATALOG_PRODUCTS.length, brands:new Set(CATALOG_PRODUCTS.map(p=>p.brand)).size };
+  $$('[data-catalog-count]').forEach(el=>el.textContent=counts[el.dataset.catalogCount]?.toLocaleString('en-US') || '—');
   const I = window.ICON || {};
   const ICONS = { health:I.check, beauty:I.spark, daily:I.box, food:I.leaf,
     sweets:I.spark, babykids:I.leaf, hobby:I.tag, seasonaltop:I.box };
@@ -1308,7 +1274,9 @@ function initHomeGrids(){
     const top = [...counts.entries()].sort((a,b) => b[1]-a[1]).slice(0, 12);
     bs.innerHTML = top.map(([name, n]) => {
       const brand = BRANDS.find(b => b.name === name) || { name, hue: '#21463D' };
-      const blurb = brand.blurb || '';
+      const blurb = getLang()==='en' && /[\u3040-\u30ff\u3400-\u9fff]/.test(brand.blurb || '')
+        ? [...new Set(CATALOG_PRODUCTS.filter(p=>p.brand===name).map(p=>catName(p.category)))].join(' · ')
+        : brand.blurb || '';
       return `<a class="brand-card" href="brands.html#${encodeURIComponent(name)}">
         <div class="bj">${brandLogo(brand, 44)}<h4>${brandName(brand)}</h4></div>
         <p>${blurb}</p>
@@ -1342,21 +1310,33 @@ async function handleSubscribe(form){
   const email = form.querySelector('input[type=email]')?.value.trim();
   if(!email) return;
   try{
-    await fetch('/api/subscribe', {
+    const response = await fetch('/api/subscribe', {
       method:'POST',
       headers:{ 'Content-Type':'application/json' },
       body: JSON.stringify({ email }),
     });
-  }catch{}
+    if(!response.ok) throw new Error('Subscription failed');
+  }catch{ toast(t('req.error')); return; }
   form.reset();
   toast(typeof t === 'function' ? t('t.subscribed') : 'Subscribed!');
 }
 
 /* ---------- Product request form (DB-backed) ---------- */
 async function handleInquiry(form){
+  if(form.dataset.submitting==='true') return;
   const data = Object.fromEntries(new FormData(form).entries());
   const status = form.querySelector('.form-status');
   const button = form.querySelector('button[type="submit"]');
+  const quoteCart = form.dataset.quoteCart ? JSON.parse(form.dataset.quoteCart) : null;
+  if(quoteCart){
+    const list = Object.entries(quoteCart).map(([id,qty])=>{
+      const p=CATALOG_PRODUCTS.find(p=>p.id===id);
+      return p ? `JAN ${p.jan || id} | ${p.name} | ${p.brand} | Qty: ${qty}` : null;
+    }).filter(Boolean);
+    data.product = `${t('cart.title')}: ${list.length} ${t('cat.products')}`;
+    data.notes = `${data.notes || ''}\n\n${list.join('\n')}`.trim();
+    data.quantity = String(Object.values(quoteCart).reduce((sum,qty)=>sum+Number(qty),0));
+  }
   if(!data.email || !data.name){
     if(status){ status.className='form-status error'; status.textContent=t('req.errorRequired'); }
     return;
@@ -1365,6 +1345,7 @@ async function handleInquiry(form){
   const headers = { 'Content-Type':'application/json' };
   if(token) headers.Authorization = 'Bearer '+token;
   if(button){ button.disabled=true; button.setAttribute('aria-busy','true'); }
+  form.dataset.submitting='true';
   if(status){ status.className='form-status'; status.textContent=t('req.sending'); }
   try{
     const response = await fetch('/api/inquiry', {
@@ -1372,13 +1353,28 @@ async function handleInquiry(form){
       body: JSON.stringify(data),
     });
     if(!response.ok) throw new Error(`Inquiry failed: ${response.status}`);
+    const result = await response.json();
+    if(result.ok!==true || !result.request_id) throw new Error('Missing submission confirmation');
+    if(quoteCart){
+      const current=loadCart();
+      for(const [id,qty] of Object.entries(quoteCart)){
+        if(current[id]===qty) delete current[id];
+        else if(current[id]>qty) current[id]-=qty;
+      }
+      saveCart(current);
+    }
     form.reset();
-    if(status){ status.className='form-status success'; status.textContent=t('req.sent'); }
-    toast(typeof t === 'function' ? t('t.requestSent') : 'Request sent!');
+    if(quoteCart){
+      delete form.dataset.quoteCart; form.querySelector('.quote-review')?.remove();
+      form.querySelector('#reqProduct').readOnly=false;
+      form.querySelectorAll('[data-quote-only]').forEach(field=>{field.disabled=false;field.closest('.field').hidden=false;delete field.dataset.quoteOnly;});
+    }
+    if(status){ status.className='form-status success'; status.textContent=`${t('req.sent')} ${t('req.reference')}: ${result.request_id}`; }
   }catch(error){
     console.error(error);
     if(status){ status.className='form-status error'; status.textContent=t('req.error'); }
   }finally{
+    delete form.dataset.submitting;
     if(button){ button.disabled=false; button.removeAttribute('aria-busy'); }
   }
 }

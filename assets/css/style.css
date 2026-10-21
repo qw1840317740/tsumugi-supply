@@ -1,3 +1,4 @@
+/* Hallmark · pre-emit critique: P4 H4 E4 S4 R5 V3 · existing-brand readability repairs */
 /* Hallmark · macrostructure: split editorial hero · tone: premium Japanese wholesale · anchor hue: forest green */
 @import '../../tokens.css';
 /* =========================================================
@@ -1357,6 +1358,8 @@ table.t td b{ color:var(--clay); font-family:var(--f-serif); font-size:1.1rem; }
    Hallmark · pre-emit critique: P4 H4 E4 S4 R5 V3.
    Nav/footer and catalog facts intentionally preserved; no additional animation. */
 html { overflow-x:clip; }
+.hero-chips { position:static; width:auto; flex-wrap:wrap; margin-top:24px; }
+.prod-art-wrap:has(.prod-photo.loaded) .product-photo-placeholder { visibility:hidden; }
 .cart-drawer:not(.open) { visibility:hidden; }
 .mobile-menu:not(.open) { visibility:hidden; }
 .footer-news input { min-width:0; }
@@ -1458,4 +1461,48 @@ html { overflow-x:clip; }
 }
 @media (max-width:59.999rem) {
   body.viewing-categories .fab, body.viewing-categories .cb-fab { display:none; }
+}
+
+/* Procurement readability: preserve the established brand and page structure. */
+html { overflow-x:clip; }
+.hero-card { container-type:inline-size; padding:clamp(16px,2vw,28px); }
+.hero-card .bm-name { font-family:var(--f-sans); font-size:clamp(20px,14cqi,42px); }
+.hero-search { margin-top:24px; max-width:480px; }
+.hero-search label { display:block; font-size:14px; font-weight:600; margin-bottom:8px; color:var(--ink-2); }
+.hero-search > div { display:flex; gap:8px; }
+.hero-search input { min-width:0; flex:1; width:100%; border:1px solid var(--line); border-radius:var(--radius-sm); background:var(--paper-2); padding:12px; color:var(--ink); }
+.hero-search button { white-space:nowrap; flex:none; }
+.hero-search input, .hero-search button { min-height:48px; }
+.hero-search input:hover, .brand-filter-search:hover { background:var(--paper-3); }
+.hero-search button:active, .product .foot .btn:active { transform:translateY(1px); }
+.btn:disabled { opacity:.55; cursor:not-allowed; }
+.product-photo-placeholder { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; width:100%; height:100%; padding:16px; text-align:center; background:var(--paper-2); color:var(--ink-2); }
+.product-photo-placeholder svg { width:32px; height:32px; color:var(--sumi); }
+.product-photo-placeholder strong { font-size:18px; }
+.product-photo-placeholder span, .product-photo-placeholder small { font-size:14px; }
+.product-context, .product-jan { display:block; font-size:14px; line-height:1.5; color:var(--ink-2); }
+.product .cat { font-family:var(--f-sans); font-size:14px; letter-spacing:0; text-transform:none; }
+.product .brand { font-size:14px; }
+.product .foot .btn { white-space:nowrap; padding:10px 8px; font-size:14px; }
+.product .foot .icon-btn { padding:8px; }
+.stock-note { font-size:14px; line-height:1.6; color:var(--ink-2); }
+.brand-filter-search { width:100%; margin-bottom:12px; padding:10px; border:1px solid var(--line); border-radius:var(--radius-sm); background:var(--paper-2); color:var(--ink); font-size:14px; }
+#filterBrands { max-height:420px; overflow-y:auto; }
+.quote-review { padding:16px; margin-bottom:24px; background:var(--paper-2); border:1px solid var(--line); border-radius:var(--radius-sm); }
+.form-card .field[hidden] { display:none; }
+.quote-review h3 { font-size:20px; margin-bottom:12px; }
+.quote-review p { font-size:14px; line-height:1.7; padding:8px 0; overflow-wrap:anywhere; }
+.quote-review p + p { border-top:1px solid var(--line-soft); }
+.pdp-actions { flex-wrap:wrap; }
+.pdp-actions .btn { white-space:nowrap; }
+.form-status { overflow-wrap:anywhere; }
+@media (max-width:600px) {
+  .hero-search { margin-top:20px; }
+  .hero-search > div { gap:6px; }
+  .hero-search .btn { padding-inline:12px; }
+  .product .foot .btn { font-size:13px; }
+  .product .foot .icon-btn { display:none; }
+  .hero-cta .btn { white-space:nowrap; }
+  .fab { padding:10px; }
+  .fab span { display:none; }
 }

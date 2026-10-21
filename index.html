@@ -11,10 +11,10 @@
   <link rel="preload" as="image" href="assets/hero/japanitem-hero-products-v2.webp" type="image/webp" fetchpriority="high">
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700&family=Roboto+Mono:wght@400;500;600&display=optional" onload="this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700&family=Roboto+Mono:wght@400;500;600&display=optional"></noscript>
-  <link rel="preload" as="style" href="assets/css/style.min.css?v=5ec5d3dced9c">
+  <link rel="preload" as="style" href="assets/css/style.min.css?v=f1faa29dbda9">
   <style>body{background:#F8F5EE;color:#20211C;margin:0;font-family:Inter,system-ui,sans-serif}#site-header{min-height:88px}.topbar{display:none !important}</style>
-  <link rel="stylesheet" href="assets/css/style.min.css?v=5ec5d3dced9c" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="assets/css/style.min.css?v=5ec5d3dced9c"></noscript>
+  <link rel="stylesheet" href="assets/css/style.min.css?v=f1faa29dbda9" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="assets/css/style.min.css?v=f1faa29dbda9"></noscript>
   <link rel="preload" as="style" href="assets/css/chatbot.css?v=2" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="assets/css/chatbot.css?v=2"></noscript>
   <link rel="icon" href="assets/brand/japanitem-mark-user.png?v=2" type="image/png">
@@ -56,6 +56,10 @@
           <span data-i18n="hero.h1.4">your shelves.</span>
         </h1>
         <p class="lead" data-i18n="hero.lead">From cult skincare to onsen bath salts, stationery and home care — we curate authentic Japanese brands and ship them wholesale to retailers across Japan and overseas. No payment to request a quote.</p>
+        <form class="hero-search" action="products.html" method="get" role="search">
+          <label for="homeProductSearch" data-i18n="hero.searchLabel">Find a Japanese product</label>
+          <div><input id="homeProductSearch" name="q" type="search" data-i18n-ph="shop.search" placeholder="Search name, brand or JAN…"><button class="btn btn-primary" type="submit" data-i18n="cur.search">Search</button></div>
+        </form>
         <div class="hero-cta">
           <a class="btn btn-primary btn-lg" href="products.html"><span data-i18n="hero.browse">Browse the catalog</span><span class="btn-arr">→</span></a>
           <a class="btn btn-ghost btn-lg" href="how-to-order.html"><span data-i18n="hero.howto">How to order</span><span class="btn-arr">→</span></a>
@@ -63,7 +67,7 @@
         <div class="hero-chips" aria-label="Browse categories">
           <a class="hero-chip" href="products.html?cat=beauty"><span class="hc-ic" id="icSkincare"></span><span>Skincare</span></a>
           <a class="hero-chip" href="products.html?cat=daily"><span class="hc-ic" id="icBath"></span><span>Bath &amp; Body</span><span class="hc-arr">›</span></a>
-          <a class="hero-chip" href="products.html?cat=hobby"><span class="hc-ic" id="icStat"></span><span>Stationery</span></a>
+          <a class="hero-chip" href="products.html?cat=babykids"><span class="hc-ic" id="icStat"></span><span data-i18n="c.babykids">Baby &amp; Kids</span></a>
           <a class="hero-chip" href="products.html?cat=daily"><span class="hc-ic" id="icHome"></span><span>Home Care</span></a>
           <a class="hero-chip" href="products.html?cat=food"><span class="hc-ic" id="icFood"></span><span>Food &amp; Snacks</span><span class="hc-arr">›</span></a>
           <a class="hero-chip hero-chip-all" href="products.html"><span>View all</span><span class="hc-arr">›</span></a>
@@ -281,9 +285,9 @@
     <div class="container">
       <div class="stats-band">
         <div class="stats-grid">
-          <div class="stat"><b>8</b><span data-i18n="stats.catL"></span></div>
-          <div class="stat"><b>2,181</b><span data-i18n="stats.skuL"></span></div>
-          <div class="stat"><b>73</b><span data-i18n="stats.brandsL"></span></div>
+          <div class="stat"><b data-catalog-count="categories">6</b><span data-i18n="stats.catL"></span></div>
+          <div class="stat"><b data-catalog-count="products">2,348</b><span data-i18n="stats.skuL"></span></div>
+          <div class="stat"><b data-catalog-count="brands">77</b><span data-i18n="stats.brandsL"></span></div>
           <div class="stat"><b>3</b><span data-i18n="stats.regionL"></span></div>
         </div>
       </div>
@@ -350,8 +354,8 @@
   <div id="site-footer"></div>
 
   <script defer src="assets/js/data.js?v=e6c1e7a36c9d"></script>
-  <script defer src="assets/js/i18n.js?v=4f6e926bce5c"></script>
-  <script defer src="assets/js/app.js?v=147da515094f"></script>
+  <script defer src="assets/js/i18n.js?v=4966c4b6364d"></script>
+  <script defer src="assets/js/app.js?v=b366e08690a2"></script>
   <script defer src="assets/js/auth.js"></script>
   <script defer src="assets/js/chatbot.js?v=4"></script>
 </body>
