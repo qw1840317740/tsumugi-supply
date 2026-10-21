@@ -692,7 +692,7 @@ function initShop(){
       const isJan = /^\d{3,}$/.test(q);
       list = list.filter(p => {
         if(isJan) return (p.id||'').includes(q) || (p.jan||'').includes(q);
-        return (p.name+p.brand+catName(p.category)+(p.sub?subName(p.sub):'')).toLowerCase().includes(q);
+        return [p.name,p.name_en,p.name_ja,p.brand,catName(p.category),p.sub?subName(p.sub):''].join(' ').toLowerCase().includes(q);
       });
     }
     if(state.sort==='brand') list.sort((a,b)=>a.brand.localeCompare(b.brand));
@@ -875,7 +875,7 @@ function initPDP(){
     </div>`;
     applyStatic(); return;
   }
-  document.title = `${p.name} · ${SITE.name}`;
+  if(!/^\/products\/[^/]+\.html$/.test(location.pathname)) document.title = `${p.name} · ${SITE.name}`;
   const brand = BRANDS.find(b => (b.name||'').toLowerCase() === (p.brand||'').toLowerCase()) || {blurb:''};
   const related = (CATALOG_PRODUCTS.filter(x=>x.sub===p.sub && x.id!==p.id).length>=4
     ? CATALOG_PRODUCTS.filter(x=>x.sub===p.sub && x.id!==p.id)
@@ -891,6 +891,7 @@ function initPDP(){
         <div class="pdp-info">
           <span class="cat">${subOf(p)}</span>
           <h1>${p.name}</h1>
+          ${p.name_en ? `<p class="pdp-name-ja" lang="${p.name===p.name_ja?'en':'ja'}">${escapeSpec(p.name===p.name_ja ? p.name_en : p.name_ja)}</p>` : ''}
           <a class="brandlink" href="${brandSeoUrl(p.brand)}"><span>${brandName(brand)}</span> ${ICON.arrow}</a>
           <p class="pdp-blurb">${t('pdp.procurement')}</p>
           <div class="pdp-specs">
@@ -993,6 +994,8 @@ function injectSEO(){
   const brand = isProd ? (BRANDS.find(b => b.name === (CATALOG_PRODUCTS.find(x => x.id === activeId) || {}).brand) || {}) : null;
 
   // ----- PDP branch -----
+  // Static /products/<JAN>.html pages ship generated title, meta and JSON-LD; keep them.
+  if(isProd && /^\/products\/[^/]+\.html$/.test(location.pathname)) return;
   if(isProd){
     const id = activeId;
     const p  = CATALOG_PRODUCTS.find(x => x.id === id);
@@ -1331,7 +1334,7 @@ async function handleInquiry(form){
   if(quoteCart){
     const list = Object.entries(quoteCart).map(([id,qty])=>{
       const p=CATALOG_PRODUCTS.find(p=>p.id===id);
-      return p ? `JAN ${p.jan || id} | ${p.name} | ${p.brand} | Qty: ${qty}` : null;
+      return p ? `JAN ${p.jan || id} | ${p.name}${p.name_ja && p.name_ja!==p.name ? ` (${p.name_ja})` : ''} | ${p.brand} | Qty: ${qty}` : null;
     }).filter(Boolean);
     data.product = `${t('cart.title')}: ${list.length} ${t('cat.products')}`;
     data.notes = `${data.notes || ''}\n\n${list.join('\n')}`.trim();

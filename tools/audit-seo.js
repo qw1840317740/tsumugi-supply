@@ -80,7 +80,7 @@ for (const location of locations) {
 }
 
 const catalog = read(path.join(root, 'products.html'));
-warn((catalog.match(/href="categories\//g) || []).length === categoryFiles.length, 'Catalog category index is incomplete');
+warn(((catalog.split('<!-- SEO-DIRECTORY:START -->')[1] || '').split('<!-- SEO-DIRECTORY:END -->')[0].match(/href="categories\//g) || []).length === categoryFiles.length, 'Catalog category index is incomplete');
 warn((catalog.match(/href="brands\//g) || []).length === brandFiles.length, 'Catalog brand index is incomplete');
 const heroWebp = path.join(root, 'assets/hero/japanitem-hero-products-v2.webp');
 warn(fs.existsSync(heroWebp), 'Optimized hero WebP is missing');

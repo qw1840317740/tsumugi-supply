@@ -864,7 +864,15 @@ const _renderers = [];
 function addRenderer(fn){ _renderers.push(fn); }
 function runRenderers(){ _renderers.forEach(f=>{ try{ f(); }catch(e){ console.error('renderer error', e); } }); }
 
+// Product names: English by default, original Japanese catalog name in JA mode.
+function localizeProductNames(){
+  if(!Array.isArray(window.PRODUCTS)) return;
+  for(const p of window.PRODUCTS){
+    if(p.name_en) p.name = (_lang === 'ja' && p.name_ja) ? p.name_ja : p.name_en;
+  }
+}
 function applyI18n(){
+  localizeProductNames();
   const meta = LANG_META[_lang];
   document.documentElement.setAttribute('lang', meta.html);
 

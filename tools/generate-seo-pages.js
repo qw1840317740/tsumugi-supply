@@ -73,13 +73,23 @@ const gtinProperty = jan => {
   const length = /^\d+$/.test(jan) ? jan.length : 0;
   return [8, 12, 13, 14].includes(length) ? { [`gtin${length}`]: jan } : {};
 };
-const productTitle = p => {
-  const jan = String(p.jan || p.id);
-  const suffix = ` | JAN ${jan} | JAPANITEM`;
-  return `${truncate(`${p.name} — ${p.brand}`, 65 - suffix.length)}${suffix}`;
+const shortProductTitle = p => {
+  const base = p.name_en || (p.name.toLowerCase().includes(String(p.brand).toLowerCase()) ? p.name : `${p.brand} ${p.name}`);
+  return `${truncate(base, 60 - ' | JAPANITEM'.length)} | JAPANITEM`;
 };
+const shortTitleCounts = new Map();
+for (const p of products) shortTitleCounts.set(shortProductTitle(p), (shortTitleCounts.get(shortProductTitle(p)) || 0) + 1);
+// Short "Name | JAPANITEM" titles; add the JAN only where two catalog names would collide.
+const productTitle = p => {
+  const short = shortProductTitle(p);
+  if (shortTitleCounts.get(short) === 1) return short;
+  const suffix = ` | JAN ${p.jan || p.id} | JAPANITEM`;
+  const base = p.name_en || (p.name.toLowerCase().includes(String(p.brand).toLowerCase()) ? p.name : `${p.brand} ${p.name}`);
+  return `${truncate(base, 65 - suffix.length)}${suffix}`;
+};
+const nameWithJa = p => p.name_ja ? `${p.name} (${p.name_ja})` : p.name;
 const productDescription = p => truncate(
-  p.seo_description || `${p.name}（${p.brand}）の業務用卸売。JAN/GTIN ${p.jan || p.id}。日本正規流通品を海外発送。法人向け見積もりをJAPANITEMへご依頼ください。`,
+  p.seo_description || `${nameWithJa(p)} by ${p.brand}, JAN ${p.jan || p.id}. Wholesale export from Japan — request a B2B quotation from JAPANITEM.`,
   155,
 );
 
@@ -212,7 +222,7 @@ function editorialFor(p) {
     ? 'This may be a legacy or discontinued catalog record; current availability and any successor JAN must be confirmed.'
     : 'Current packaging, lead time and lot availability are confirmed when we prepare your quotation.';
   return {
-    summary: truncate(p.seo_description || `${p.name} by ${p.brand}, JAN ${jan}. Japanese wholesale sourcing information, MOQ ${moq}, product identification and quotation guidance from JAPANITEM.`, 155),
+    summary: truncate(p.seo_description || `${nameWithJa(p)} by ${p.brand}, JAN ${jan}. Japanese wholesale sourcing information, MOQ ${moq}, product identification and quotation guidance from JAPANITEM.`, 155),
     lead: p.seo_lead || `${p.name} is listed in JAPANITEM's ${p.brand} wholesale catalog under ${category}. The exact catalog identifier is JAN / GTIN ${jan}, helping buyers distinguish this item from similar sizes, colors, scents or package revisions.`,
     overview: brand.overview,
     buyerFit: brand.buyerFit,
@@ -253,6 +263,15 @@ function commonHead({ title, description, canonical, type = 'website', image = '
   <link rel="icon" href="assets/brand/japanitem-mark-user.png?v=2" type="image/png">
   <meta name="theme-color" content="#174C43">
 ${ld.map(item => `  <script type="application/ld+json">${jsonForHtml(item)}</script>`).join('\n')}`;
+}
+
+function staticFooterNav() {
+  const links = [
+    ['/', 'Home'], ['products.html', 'All products'], ['brands.html', 'Brands A–Z'],
+    ...activeCategories.map(([id, name]) => [`categories/${id}.html`, name]),
+    ['how-to-order.html', 'How to order'], ['faq.html', 'FAQ'],
+  ];
+  return `<nav class="static-footer-nav" aria-label="Site"><ul>${links.map(([href, label]) => `<li><a href="${href}">${escapeHtml(label)}</a></li>`).join('')}</ul></nav>`;
 }
 
 function scripts() {
@@ -306,7 +325,7 @@ for (const p of products) {
     ...products.filter(x => x.id !== p.id && x.brand !== p.brand && x.category === p.category),
   ].slice(0, 4);
   const productLd = {
-    '@context': 'https://schema.org', '@type': 'Product', name: p.name,
+    '@context': 'https://schema.org', '@type': 'Product', name: p.name, ...(p.name_ja ? { alternateName: p.name_ja } : {}),
     brand: { '@type': 'Brand', name: p.brand }, category, sku: String(p.id),
     ...gtinProperty(jan), description, ...(productPhoto ? { image: [productPhoto] } : {}), url: canonical,
     additionalProperty: [
@@ -322,7 +341,7 @@ for (const p of products) {
     { name: p.name, url: canonical },
   ]);
   const html = `<!doctype html>
-<html lang="ja">
+<html lang="en">
 <head>
 ${commonHead({ title, description, canonical, type: 'product', image, ld: [productLd, breadcrumbLd] })}
 </head>
@@ -336,7 +355,8 @@ ${commonHead({ title, description, canonical, type: 'product', image, ld: [produ
         <div class="pdp-info">
           <span class="cat">${escapeHtml(category)}</span>
           <h1>${escapeHtml(p.name)}</h1>
-          <p class="brand"><a href="brands/${escapeHtml(brandSlugs.get(p.brand))}.html">${escapeHtml(p.brand)}</a></p>
+${p.name_ja ? `          <p class="pdp-name-ja" lang="ja">${escapeHtml(p.name_ja)}</p>
+` : ''}          <p class="brand"><a href="brands/${escapeHtml(brandSlugs.get(p.brand))}.html">${escapeHtml(p.brand)}</a></p>
           <p class="pdp-blurb">Request availability and wholesale pricing for this exact item using the JAN / GTIN below.</p>
           <div class="pdp-specs">
             <div><span>Unit</span><b>${escapeHtml(p.unit || '—')}</b></div><div><span>MOQ</span><b>${escapeHtml(p.moq || '—')}</b></div>
@@ -360,7 +380,7 @@ ${commonHead({ title, description, canonical, type: 'product', image, ld: [produ
       <section class="related seo-related" aria-labelledby="related-products"><div class="section-head"><div><span class="eyebrow">MORE FROM JAPAN</span><h2 class="h" id="related-products">Related wholesale products</h2></div><a href="brands/${escapeHtml(brandSlugs.get(p.brand))}.html">View ${escapeHtml(p.brand)} products →</a></div><div class="product-grid cols-4">${related.map(productCard).join('')}</div></section>
     </div>
   </main>
-  <div id="site-footer"></div>
+  <div id="site-footer">${staticFooterNav()}</div>
 ${scripts()}
 </body>
 </html>
@@ -387,7 +407,7 @@ ${commonHead({ title, description, canonical, ld: [collectionLd, breadcrumb([{ n
     <section class="section-sm"><div class="container"><div class="section-head"><div><span class="eyebrow">FEATURED SELECTION</span><h2 class="h">Products from Japan</h2></div><a href="how-to-order.html#request">Request a quote →</a></div><div class="product-grid cols-4">${list.slice(0, 12).map(productCard).join('')}</div></div></section>
     <section class="section-sm seo-directory"><div class="container"><div class="section-head"><div><span class="eyebrow">COMPLETE INDEX</span><h2 class="h">Browse every product</h2></div><a href="products.html">Search and filter →</a></div>${compactProductLinks(list)}</div></section>
   </main>
-  <div id="site-footer"></div>
+  <div id="site-footer">${staticFooterNav()}</div>
 ${scripts()}
 </body>
 </html>`;
@@ -436,6 +456,14 @@ if (productsHtml.includes(startMarker) && productsHtml.includes(endMarker)) {
   nextProductsHtml = productsHtml.replace('  <div id="site-footer"></div>', `${directory}\n\n  <div id="site-footer"></div>`);
 }
 fs.writeFileSync(productsPath, nextProductsHtml, 'utf8');
+
+// Hand-written core pages get the same crawlable footer links as generated pages.
+for (const name of ['index.html', 'products.html', 'brands.html', 'how-to-order.html', 'faq.html']) {
+  const file = path.join(root, name);
+  const html = fs.readFileSync(file, 'utf8');
+  const next = html.replace(/<div id="site-footer">(?:<nav class="static-footer-nav"[\s\S]*?<\/nav>)?<\/div>/, `<div id="site-footer">${staticFooterNav()}</div>`);
+  if (next !== html) fs.writeFileSync(file, next, 'utf8');
+}
 
 const sourceDate = fs.statSync(path.join(root, 'assets/js/data.js')).mtime.toISOString().slice(0, 10);
 const coreUrls = ['/', '/products.html', '/brands.html', '/how-to-order.html', '/faq.html'];

@@ -1506,3 +1506,5 @@ html { overflow-x:clip; }
   .fab { padding:10px; }
   .fab span { display:none; }
 }
+
+.pdp-name-ja{margin:-4px 0 10px;font-size:14px;color:var(--ink-3,#6A6957);line-height:1.5}.static-footer-nav ul{display:flex;flex-wrap:wrap;gap:8px 18px;list-style:none;margin:0;padding:24px 20px;font-size:13px}

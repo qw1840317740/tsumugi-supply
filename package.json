@@ -2,7 +2,7 @@
   "name": "kaisei-wholesale",
   "private": true,
   "scripts": {
-    "build:seo": "node tools/apply-verified-specs.js && node tools/generate-seo-pages.js",
+    "build:seo": "node tools/apply-english-names.js && node tools/apply-verified-specs.js && node tools/generate-seo-pages.js",
     "audit:seo": "node tools/audit-seo.js",
     "test:specs": "node tools/test-verified-specs.js",
     "test:inquiry": "node --test tools/test-inquiry-api.js"
