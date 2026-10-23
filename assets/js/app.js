@@ -174,7 +174,7 @@ const BRAND_MARKS = {
   'Rain Guard':'RG','Mama Lemon':'ML','Magica':'M','LION':'L','Look':'L',
   'Bathtub Cleanser':'BC','Toilet Cleanser':'TC','Mamepika':'M'
 };
-// Map brand name -> downloaded Amazon product image filename (assets/brands/*.jpg).
+// Map brand name -> downloaded Amazon product image filename (/assets/brands/*.jpg).
 // Falls back to a hue-tinted SVG monogram if no image is available.
 const BRAND_IMAGES = {
   'White&White':'white_white.jpg','Clinica':'clinica.jpg','Denter':'denter.jpg',
@@ -215,7 +215,7 @@ function brandLogo(b, size=44){
   const imgName = BRAND_IMAGES[b.name];
   // Prefer the real Amazon product image when available
   if(imgName){
-    return `<img class="brand-logo" src="assets/brands/${imgName}" alt="${b.name}" width="${size}" height="${size}" loading="lazy" decoding="async" onerror="window.__brandMonogramFallback(this)" data-brand="${b.name}" data-fb-size="${size}">`;
+    return `<img class="brand-logo" src="/assets/brands/${imgName}" alt="${b.name}" width="${size}" height="${size}" loading="lazy" decoding="async" onerror="window.__brandMonogramFallback(this)" data-brand="${b.name}" data-fb-size="${size}">`;
   }
   return brandMonogram(b, size);
 }
@@ -292,7 +292,7 @@ function observeProductImages(root=document){
 }
 
 function productArt(p, eager=false){
-  const photo = `assets/products/${encodeURIComponent(p.jan || p.id)}.jpg`;
+  const photo = `/assets/products/${encodeURIComponent(p.jan || p.id)}.jpg`;
   const source = eager ? `src="${photo}" loading="eager" fetchpriority="high"` : `data-src="${photo}" loading="lazy" fetchpriority="low"`;
   return `<span class="prod-art-wrap"><span class="product-photo-placeholder"><span>${ICON.box}</span><strong>${escapeSpec(p.brand)}</strong><span>${t('pc.photoPending')}</span><small>JAN ${escapeSpec(p.jan || p.id)}</small></span><img class="prod-photo" ${source} alt="${escapeSpec(p.name)}" width="600" height="600" decoding="async" onerror="this.classList.add('failed')" onload="this.classList.add('loaded')"></span>`;
 }
@@ -320,7 +320,7 @@ function productPhoto(p){
   // Real LION catalog photos, filed by JAN under assets/products/.
   // If a SKU has no photo (or it 404s), <img onerror> hides it and the SVG
   // art underneath shows as a graceful fallback.
-  if (p.jan) return `assets/products/${p.jan}.jpg`;
+  if (p.jan) return `/assets/products/${p.jan}.jpg`;
   const pool = CAT_IMG[p.category] || BEAUTY_IMG;
   const id = pool[Math.abs(CATALOG_PRODUCTS.indexOf(p)) % pool.length];
   return `https://images.unsplash.com/${id}?w=600&h=600&q=80&auto=format&fit=crop`;
@@ -453,6 +453,7 @@ function buildFooter(){
           <a href="how-to-order.html#shipping" data-i18n="foot.shipping"></a>
           <a href="how-to-order.html#discount" data-i18n="foot.discount"></a>
           <a href="faq.html" data-i18n="foot.faq"></a>
+          <a href="guides/index.html" data-i18n="foot.guides"></a>
         </div>
         <div class="footer-col">
           <h5 data-i18n="foot.support"></h5>
@@ -694,7 +695,7 @@ function initShop(){
       const isJan = /^\d{3,}$/.test(q);
       list = list.filter(p => {
         if(isJan) return (p.id||'').includes(q) || (p.jan||'').includes(q);
-        return [p.name,p.name_en,p.name_ja,p.brand,catName(p.category),p.sub?subName(p.sub):''].join(' ').toLowerCase().includes(q);
+        return [p.name,p.name_en,p.name_ja,p.name_zh,p.brand,catName(p.category),p.sub?subName(p.sub):''].join(' ').toLowerCase().includes(q);
       });
     }
     if(state.sort==='brand') list.sort((a,b)=>a.brand.localeCompare(b.brand));
@@ -877,7 +878,7 @@ function initPDP(){
     </div>`;
     applyStatic(); return;
   }
-  if(!/^\/products\/[^/]+\.html$/.test(location.pathname)) document.title = `${p.name} · ${SITE.name}`;
+  if(!/^\/(?:(?:zh|ja)\/)?products\/[^/]+\.html$/.test(location.pathname)) document.title = `${p.name} · ${SITE.name}`;
   const brand = BRANDS.find(b => (b.name||'').toLowerCase() === (p.brand||'').toLowerCase()) || {blurb:''};
   const related = (CATALOG_PRODUCTS.filter(x=>x.sub===p.sub && x.id!==p.id).length>=4
     ? CATALOG_PRODUCTS.filter(x=>x.sub===p.sub && x.id!==p.id)
@@ -988,7 +989,9 @@ function injectSEO(){
   // Static SEO tags in <head> act as the no-JS fallback. Here we rewrite
   // <title>, description, og:*, twitter:* and canonical for the active
   // language and (where applicable) the active product.
-  const path = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
+  // Core pages live at the site root (or /zh/, /ja/); deeper pages ship their own metadata.
+  const relPath = location.pathname.replace(/^\/(?:(?:zh|ja)\/)?/, '');
+  const path = relPath.includes('/') ? '#nested' : (relPath || 'index.html').toLowerCase();
   const params = new URLSearchParams(location.search);
   const activeId = activeProductId();
   const isProd = Boolean(activeId) && Boolean(document.getElementById('pdp'));
@@ -997,7 +1000,7 @@ function injectSEO(){
 
   // ----- PDP branch -----
   // Static /products/<JAN>.html pages ship generated title, meta and JSON-LD; keep them.
-  if(isProd && /^\/products\/[^/]+\.html$/.test(location.pathname)) return;
+  if(isProd && /^\/(?:(?:zh|ja)\/)?products\/[^/]+\.html$/.test(location.pathname)) return;
   if(isProd){
     const id = activeId;
     const p  = CATALOG_PRODUCTS.find(x => x.id === id);

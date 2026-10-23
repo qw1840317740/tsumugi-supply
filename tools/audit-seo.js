@@ -21,6 +21,7 @@ const productFiles = fs.readdirSync(productDir).filter(name => name.endsWith('.h
 const categoryFiles = fs.readdirSync(categoryDir).filter(name => name.endsWith('.html'));
 const brandFiles = fs.readdirSync(brandDir).filter(name => name.endsWith('.html'));
 const collectionDir = path.join(root, 'collections');
+const guideFiles = fs.existsSync(path.join(root, "guides")) ? fs.readdirSync(path.join(root, "guides")).filter(name => name.endsWith(".html")) : [];
 const collectionFiles = fs.existsSync(collectionDir) ? fs.readdirSync(collectionDir).filter(name => name.endsWith('.html')) : [];
 warn(productFiles.length === productCount, `Expected ${productCount} product pages, found ${productFiles.length}`);
 warn(categoryFiles.length === activeCategoryCount, `Expected ${activeCategoryCount} category pages, found ${categoryFiles.length}`);
@@ -76,7 +77,29 @@ for (const [directory, names] of [[categoryDir, categoryFiles], [brandDir, brand
 const sitemap = read(path.join(root, 'sitemap.xml'));
 const locations = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(item => item[1]);
 warn(new Set(locations).size === locations.length, 'Sitemap contains duplicate URLs');
-warn(locations.length === 5 + productFiles.length + categoryFiles.length + collectionFiles.length + brandFiles.length, `Unexpected sitemap URL count: ${locations.length}`);
+warn(locations.length === 3 * (5 + productFiles.length + categoryFiles.length + collectionFiles.length + brandFiles.length + guideFiles.length), `Unexpected sitemap URL count: ${locations.length}`);
+
+// Chinese / Japanese mirrors: same pages, correct lang, self canonical, full hreflang set.
+for (const [lang, htmlLang] of [['zh', 'zh-CN'], ['ja', 'ja']]) {
+  for (const dir of ['products', 'categories', 'brands', 'collections', 'guides']) {
+    const enFiles = fs.readdirSync(path.join(root, dir)).filter(name => name.endsWith('.html'));
+    const langDir = path.join(root, lang, dir);
+    const files = fs.existsSync(langDir) ? fs.readdirSync(langDir).filter(name => name.endsWith('.html')) : [];
+    warn(files.length === enFiles.length, `${lang}/${dir}: expected ${enFiles.length} pages, found ${files.length}`);
+  }
+  const samples = [
+    ...['index.html', 'products.html', 'faq.html'].map(name => [name, name === 'index.html' ? '' : name]),
+    ...fs.readdirSync(path.join(root, lang, 'products')).filter((_, i) => i % 400 === 0).map(name => [`products/${name}`, `products/${name}`]),
+    ...fs.readdirSync(path.join(root, lang, 'collections')).slice(0, 3).map(name => [`collections/${name}`, `collections/${name}`]),
+  ];
+  for (const [file, rel] of samples) {
+    const html = read(path.join(root, lang, file));
+    warn(html.includes(`<html lang="${htmlLang}"`), `${lang}/${file}: wrong html lang`);
+    warn(match(html, /<link rel="canonical" href="([^"]+)"/) === `https://www.japanitem.com/${lang}/${rel}`, `${lang}/${file}: canonical is not self-referencing`);
+    for (const hl of ['en', 'zh-Hans', 'ja', 'x-default']) warn(html.includes(`hreflang="${hl}"`), `${lang}/${file}: missing hreflang ${hl}`);
+    warn(!/href="(?:products|categories|brands|collections)\/[^"]+"/.test(html), `${lang}/${file}: has un-prefixed internal links`);
+  }
+}
 for (const location of locations) {
   const pathname = new URL(location).pathname;
   if (pathname === '/') continue;

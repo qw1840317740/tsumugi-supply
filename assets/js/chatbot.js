@@ -7,7 +7,7 @@
   if (window.__cbMounted) return;
   window.__cbMounted = true;
 
-  const KB_URL = 'assets/data/chatbot.json';
+  const KB_URL = '/assets/data/chatbot.json';
   const LS_KEY = 'cb_kb_cache_v1';
   const LANG_KEY = 'cb_lang';
   const SITE_LANG_KEY = 'tsumugi_lang';

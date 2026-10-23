@@ -225,7 +225,7 @@ const L = {
     'foot.shop':'Shop','foot.company':'Company','foot.support':'Support','foot.news':'Stay in the loop',
     'foot.newsP':'Monthly stock drops, new houses and exclusive distributor offers.','foot.ph':'you@shop.com','foot.join':'Join',
     'foot.all':'All products','foot.brands':'Our brands','foot.howto':'How to order','foot.shipping':'Shipping & fees',
-    'foot.discount':'Volume discount','foot.faq':'FAQ','foot.request':'Product request','foot.stock':"Today's stock",
+    'foot.discount':'Volume discount','foot.faq':'FAQ','foot.guides':'Buying guides','foot.request':'Product request','foot.stock':"Today's stock",
     'foot.help':'Help centre','foot.copy':'All rights reserved.','foot.pay':'Bank wire · T/T (SWIFT) only',
     // pdp
     'pdp.crumb':'Products','pdp.moq':'Case pack','pdp.unit':'Unit','pdp.sku':'SKU','pdp.jan':'JAN','pdp.brand':'Brand','pdp.cat':'Category',
@@ -434,7 +434,7 @@ const L = {
     'foot.shop':'商品','foot.company':'公司','foot.support':'支持','foot.news':'保持联系',
     'foot.newsP':'每月上新、新品牌与独家代理优惠。','foot.ph':'you@shop.com','foot.join':'订阅',
     'foot.all':'全部商品','foot.brands':'我们的品牌','foot.howto':'下单流程','foot.shipping':'运输与费用',
-    'foot.discount':'量贩折扣','foot.faq':'常见问题','foot.request':'寻货需求','foot.stock':'今日库存',
+    'foot.discount':'量贩折扣','foot.faq':'常见问题','foot.guides':'采购指南','foot.request':'寻货需求','foot.stock':'今日库存',
     'foot.help':'帮助中心','foot.copy':'保留所有权利。','foot.pay':'仅支持银行电汇（T/T · SWIFT）',
     'pdp.crumb':'商品','pdp.moq':'箱入数 (一箱)','pdp.unit':'规格','pdp.sku':'货号','pdp.jan':'JAN 编码','pdp.brand':'品牌','pdp.cat':'品类',
     'pdp.addCart':'加入购物车 QTY+ 件','pdp.buyNow':'申请发票','pdp.save':'收藏',
@@ -640,7 +640,7 @@ const L = {
     'foot.shop':'商品','foot.company':'会社','foot.support':'サポート','foot.news':'最新情報を受け取る',
     'foot.newsP':'毎月の新着在庫、新ブランド、独占販売店向けオファー。','foot.ph':'you@shop.com','foot.join':'登録',
     'foot.all':'すべての商品','foot.brands':'取扱ブランド','foot.howto':'ご注文方法','foot.shipping':'配送と費用',
-    'foot.discount':'数量割引','foot.faq':'よくある質問','foot.request':'商品リクエスト','foot.stock':'本日の在庫',
+    'foot.discount':'数量割引','foot.faq':'よくある質問','foot.guides':'仕入れガイド','foot.request':'商品リクエスト','foot.stock':'本日の在庫',
     'foot.help':'ヘルプセンター','foot.copy':'All rights reserved.','foot.pay':'銀行振込のみ · T/T (SWIFT)',
     'pdp.crumb':'商品','pdp.moq':'ケース入数','pdp.unit':'規格','pdp.sku':'SKU','pdp.jan':'JAN コード','pdp.brand':'ブランド','pdp.cat':'カテゴリー',
     'pdp.addCart':'カートに追加 QTY+ 個','pdp.buyNow':'インボイス依頼','pdp.save':'保存',
@@ -830,14 +830,46 @@ for(const lang of LANG_ORDER){
 }
 
 /* ---------- engine ---------- */
-let _lang = (localStorage.getItem(LANG_KEY) || 'en');
+// Language comes from the URL: /zh/… and /ja/… mirror the English pages at /….
+const LANG_PATH = /^\/(zh|ja)\//;
+// Pages that exist in all three languages (path without the language prefix).
+const LOCALIZED_PAGE = /^(|index\.html|products\.html|brands\.html|how-to-order\.html|faq\.html|(?:products|categories|brands|collections|guides)\/[^?#]+)$/;
+const pathLang = () => (LANG_PATH.exec(location.pathname) || [])[1] || null;
+const barePath = () => location.pathname.replace(/^\//, '').replace(/^(zh|ja)\//, '');
+let _lang = pathLang() || (LOCALIZED_PAGE.test(barePath()) ? 'en' : (localStorage.getItem(LANG_KEY) || 'en'));
 if(!L[_lang]) _lang = 'en';
 
 function getLang(){ return _lang; }
 function setLang(l){
   if(!L[l]) return;
-  _lang = l; localStorage.setItem(LANG_KEY, l);
+  localStorage.setItem(LANG_KEY, l);
+  const bare = barePath();
+  if(l !== _lang && LOCALIZED_PAGE.test(bare)){
+    location.href = '/' + (l === 'en' ? '' : l + '/') + bare + location.search + location.hash;
+    return;
+  }
+  _lang = l;
   applyI18n();
+}
+// Keep links rendered by JavaScript inside the current language.
+function localizeDomLinks(root){
+  if(_lang === 'en') return;
+  (root || document).querySelectorAll('a[href]').forEach(a => {
+    const raw = a.getAttribute('href');
+    if(!raw || /^(?:[a-z]+:|#|\/\/)/i.test(raw)) return;
+    const bare = raw.replace(/^\//, '');
+    if(/^(zh|ja)\//.test(bare)) return;
+    const pathPart = bare.split(/[?#]/)[0];
+    if(!LOCALIZED_PAGE.test(pathPart)) return;
+    a.setAttribute('href', '/' + _lang + '/' + bare);
+  });
+}
+if(pathLang() && typeof MutationObserver !== 'undefined'){
+  let queued = false;
+  new MutationObserver(() => {
+    if(queued) return; queued = true;
+    requestAnimationFrame(() => { queued = false; localizeDomLinks(); });
+  }).observe(document.documentElement, { childList: true, subtree: true });
 }
 function cycleLang(){
   const i = LANG_ORDER.indexOf(_lang);
@@ -868,7 +900,7 @@ function runRenderers(){ _renderers.forEach(f=>{ try{ f(); }catch(e){ console.er
 function localizeProductNames(){
   if(!Array.isArray(window.PRODUCTS)) return;
   for(const p of window.PRODUCTS){
-    if(p.name_en) p.name = (_lang === 'ja' && p.name_ja) ? p.name_ja : p.name_en;
+    if(p.name_en) p.name = (_lang === 'ja' && p.name_ja) ? p.name_ja : (_lang === 'zh' && p.name_zh) ? p.name_zh : p.name_en;
   }
 }
 function applyI18n(){
@@ -902,6 +934,7 @@ function applyI18n(){
   if(typeof syncDD==='function') syncDD('langDD', _lang, LANG_META[_lang] && LANG_META[_lang].label);
 
   runRenderers();
+  localizeDomLinks();
 }
 
 window.LANG_META = LANG_META; window.LANG_ORDER = LANG_ORDER;
