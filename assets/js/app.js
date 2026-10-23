@@ -374,6 +374,7 @@ function buildHeader(){
           </li>
           <li><a class="nav-link ${active('how-to-order.html')}" href="how-to-order.html" data-i18n="nav.howto"></a></li>
           <li><a class="nav-link ${active('faq.html')}" href="faq.html" data-i18n="nav.faq"></a></li>
+          <li><a class="nav-link ${location.pathname.includes('/guides/') ? 'active' : ''}" href="guides/index.html" data-i18n="nav.guides"></a></li>
           <li><a class="nav-link" href="index.html#about-us">About Us</a></li>
         </ul>
         <div class="nav-actions">
@@ -411,6 +412,7 @@ function buildMobileMenu(){
       <div class="mm-sub" id="mmBrands">${brands}<a href="brands.html" class="more" data-i18n="mm.allBrands"></a></div>
       <a href="how-to-order.html" data-i18n="nav.howto" aria-label="How to order"> ${ICON.arrow}</a>
       <a href="faq.html" data-i18n="nav.faq" aria-label="FAQ"></a>
+      <a href="guides/index.html" data-i18n="nav.guides"></a>
     </div>
     <div class="mm-foot">
       <a class="btn btn-primary btn-block" href="how-to-order.html#request" data-i18n="mm.quote"></a>
@@ -1115,6 +1117,11 @@ function mount(){
     const h=$('#site-header'); if(h) h.outerHTML = buildHeader();
     const f=$('#site-footer'); if(f) f.outerHTML = buildFooter();
     const m=$('#mobileMenu'); if(m) m.outerHTML = buildMobileMenu();
+    // The rebuilt nodes miss the earlier data-i18n pass: fill their labels now.
+    ['#site-header', '.site-header', '.site-footer', '#mobileMenu'].forEach(sel => $(sel)?.querySelectorAll('[data-i18n]').forEach(el => {
+      const v = t(el.getAttribute('data-i18n')); if(typeof v === 'string') el.textContent = v;
+    }));
+    $$('#mobileMenu .mm-toggle').forEach(tg => tg.addEventListener('click', () => { $('#'+tg.dataset.toggle)?.classList.toggle('open'); tg.classList.toggle('open'); }));
     // re-bind the buttons we just rebuilt
     $('#cartBtn')?.addEventListener('click', openCart);
     $('#cartClose')?.addEventListener('click', closeCart);
