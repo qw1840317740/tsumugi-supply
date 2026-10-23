@@ -831,11 +831,11 @@ for(const lang of LANG_ORDER){
 
 /* ---------- engine ---------- */
 // Language comes from the URL: /zh/… and /ja/… mirror the English pages at /….
-const LANG_PATH = /^\/(zh|ja)\//;
+const LANG_PATH = /^\/(zh|ja)(?:\/|$)/;
 // Pages that exist in all three languages (path without the language prefix).
 const LOCALIZED_PAGE = /^(|index\.html|products\.html|brands\.html|how-to-order\.html|faq\.html|(?:products|categories|brands|collections|guides)\/[^?#]+)$/;
 const pathLang = () => (LANG_PATH.exec(location.pathname) || [])[1] || null;
-const barePath = () => location.pathname.replace(/^\//, '').replace(/^(zh|ja)\//, '');
+const barePath = () => location.pathname.replace(/^\//, '').replace(/^(zh|ja)(?:\/|$)/, '');
 let _lang = pathLang() || (LOCALIZED_PAGE.test(barePath()) ? 'en' : (localStorage.getItem(LANG_KEY) || 'en'));
 if(!L[_lang]) _lang = 'en';
 
@@ -845,7 +845,8 @@ function setLang(l){
   localStorage.setItem(LANG_KEY, l);
   const bare = barePath();
   if(l !== _lang && LOCALIZED_PAGE.test(bare)){
-    location.href = '/' + (l === 'en' ? '' : l + '/') + bare + location.search + location.hash;
+    const target = l === 'en' ? '/' + bare : '/' + l + (bare ? '/' + bare : '');
+    location.href = target + location.search + location.hash;
     return;
   }
   _lang = l;
@@ -861,7 +862,7 @@ function localizeDomLinks(root){
     if(/^(zh|ja)\//.test(bare)) return;
     const pathPart = bare.split(/[?#]/)[0];
     if(!LOCALIZED_PAGE.test(pathPart)) return;
-    a.setAttribute('href', '/' + _lang + '/' + bare);
+    a.setAttribute('href', '/' + _lang + (bare ? '/' + bare : ''));
   });
 }
 if(pathLang() && typeof MutationObserver !== 'undefined'){

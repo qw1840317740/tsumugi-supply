@@ -95,7 +95,8 @@ for (const [lang, htmlLang] of [['zh', 'zh-CN'], ['ja', 'ja']]) {
   for (const [file, rel] of samples) {
     const html = read(path.join(root, lang, file));
     warn(html.includes(`<html lang="${htmlLang}"`), `${lang}/${file}: wrong html lang`);
-    warn(match(html, /<link rel="canonical" href="([^"]+)"/) === `https://www.japanitem.com/${lang}/${rel}`, `${lang}/${file}: canonical is not self-referencing`);
+    // Home pages are /zh and /ja (vercel.json trailingSlash:false redirects /zh/ to /zh).
+    warn(match(html, /<link rel="canonical" href="([^"]+)"/) === (rel ? `https://www.japanitem.com/${lang}/${rel}` : `https://www.japanitem.com/${lang}`),`${lang}/${file}: canonical is not self-referencing`);
     for (const hl of ['en', 'zh-Hans', 'ja', 'x-default']) warn(html.includes(`hreflang="${hl}"`), `${lang}/${file}: missing hreflang ${hl}`);
     warn(!/href="(?:products|categories|brands|collections)\/[^"]+"/.test(html), `${lang}/${file}: has un-prefixed internal links`);
   }

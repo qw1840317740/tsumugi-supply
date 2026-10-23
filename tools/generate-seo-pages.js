@@ -245,7 +245,8 @@ const HREFLANG = { en: 'en', zh: 'zh-Hans', ja: 'ja' };
 const HTML_LANG = { en: 'en', zh: 'zh-CN', ja: 'ja' };
 const OG_LOCALE = { en: 'en_US', zh: 'zh_CN', ja: 'ja_JP' };
 const SITE = 'https://www.japanitem.com/';
-const abs = (lang, rel) => `${SITE}${PRE[lang]}${rel}`;
+// vercel.json has trailingSlash:false, so the zh/ja home pages live at /zh and /ja (no slash).
+const abs = (lang, rel) => (lang !== "en" && rel === "") ? `${SITE}${lang}` : `${SITE}${PRE[lang]}${rel}`;
 
 const nameIn = (p, lang) => lang === 'zh' ? (p.name_zh || p.name_en || p.name)
   : lang === 'ja' ? String(p.name_ja || p.name).normalize('NFKC').replace(/\s+/g, ' ').trim()
@@ -319,7 +320,7 @@ const guideLinks = (list, lang) => `<ul class="guide-links">${list.map(g => `<li
 // Relative page links get the language prefix (base href stays "/" so assets resolve at the root).
 const PAGE_LINK = /(?<!<base )(href=")(\/|(?:index|products|brands|how-to-order|faq)\.html(?:[?#][^"]*)?|(?:products|categories|brands|collections|guides)\/[^"]*)"/g;
 const localizeLinks = (html, lang) => lang === 'en' ? html
-  : html.replace(PAGE_LINK, (m, a, link) => `${a}/${PRE[lang]}${link === '/' ? '' : link}"`);
+  : html.replace(PAGE_LINK, (m, a, link) => link === '/' ? `${a}/${lang}"` : `${a}/${PRE[lang]}${link}"`);
 
 const alternates = rel => [
   ...LANGS.map(l => `  <link rel="alternate" hreflang="${HREFLANG[l]}" href="${abs(l, rel)}">`),
