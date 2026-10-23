@@ -67,6 +67,18 @@ for (const brand of activeBrands) {
   brandSlugs.set(brand, slug);
 }
 
+// Search-intent collections (tools/collections.js); thin ones are skipped.
+const collections = require('./collections')
+  .map(def => ({ ...def, list: products.filter(p => p.name_en && def.match(p)).sort((a, b) => a.brand.localeCompare(b.brand) || a.name.localeCompare(b.name)) }))
+  .filter(c => c.list.length >= 8);
+const collectionsByProduct = new Map();
+for (const c of collections) for (const p of c.list) {
+  if (!collectionsByProduct.has(p.id)) collectionsByProduct.set(p.id, []);
+  collectionsByProduct.get(p.id).push(c);
+}
+const collectionUrl = c => `https://www.japanitem.com/collections/${c.slug}.html`;
+const collectionLinks = list => `<div class="seo-brand-links">${list.map(c => `<a href="collections/${c.slug}.html">${escapeHtml(c.name)}</a>`).join('')}</div>`;
+
 const productUrl = p => `https://www.japanitem.com/products/${encodeURIComponent(p.id)}.html`;
 const categoryUrl = id => `https://www.japanitem.com/categories/${encodeURIComponent(id)}.html`;
 const brandUrl = name => `https://www.japanitem.com/brands/${encodeURIComponent(brandSlugs.get(name))}.html`;
@@ -312,7 +324,8 @@ function breadcrumb(items) {
 const productDir = path.resolve(root, 'products');
 const categoryDir = path.resolve(root, 'categories');
 const brandDir = path.resolve(root, 'brands');
-for (const output of [productDir, categoryDir, brandDir]) {
+const collectionDir = path.resolve(root, 'collections');
+for (const output of [productDir, categoryDir, brandDir, collectionDir]) {
   if (!output.startsWith(root + path.sep)) throw new Error(`Unsafe output directory: ${output}`);
   fs.rmSync(output, { recursive: true, force: true });
   fs.mkdirSync(output, { recursive: true });
@@ -328,10 +341,17 @@ for (const p of products) {
   const title = productTitle(p);
   const editorial = editorialFor(p);
   const description = editorial?.summary || productDescription(p);
-  const related = [
+  const productCollections = collectionsByProduct.get(p.id) || [];
+  // Two same-type products from other brands (rotated by position so links spread
+  // across the collection), then same brand, then same category.
+  const typeList = productCollections[0]?.list || [];
+  const typeStart = Math.max(0, typeList.indexOf(p));
+  const sameTypeOtherBrand = [...typeList.slice(typeStart + 1), ...typeList.slice(0, typeStart)].filter(x => x.brand !== p.brand);
+  const related = [...new Set([
+    ...sameTypeOtherBrand.filter((_, i) => i % 7 === 0).slice(0, 2),
     ...products.filter(x => x.id !== p.id && x.brand === p.brand),
     ...products.filter(x => x.id !== p.id && x.brand !== p.brand && x.category === p.category),
-  ].slice(0, 4);
+  ])].slice(0, 4);
   const productLd = {
     '@context': 'https://schema.org', '@type': 'Product', name: p.name, ...(p.name_ja ? { alternateName: p.name_ja } : {}),
     brand: { '@type': 'Brand', name: p.brand }, category, sku: String(p.id),
@@ -388,7 +408,7 @@ ${p.name_ja ? `          <p class="pdp-name-ja" lang="ja">${escapeHtml(p.name_ja
       <section class="related seo-related" aria-labelledby="related-products"><div class="section-head"><div><span class="eyebrow">MORE FROM JAPAN</span><h2 class="h" id="related-products">Related wholesale products</h2></div><a href="brands/${escapeHtml(brandSlugs.get(p.brand))}.html">View ${escapeHtml(p.brand)} products →</a></div><div class="product-grid cols-4">${related.map(productCard).join('')}</div></section>
     </div>
   </main>
-  <div id="site-footer">${staticFooterNav()}</div>
+${productCollections.length ? `  <nav class="container section-sm shop-by-type" aria-labelledby="shop-by-type"><span class="eyebrow">SHOP BY TYPE</span><h2 class="h" id="shop-by-type">More wholesale ${escapeHtml(productCollections[0].name.replace(/^Japanese /, '').toLowerCase())} from Japan</h2>${collectionLinks(productCollections)}</nav>\n` : ''}  <div id="site-footer">${staticFooterNav()}</div>
 ${scripts()}
 </body>
 </html>
@@ -396,7 +416,7 @@ ${scripts()}
   fs.writeFileSync(path.join(productDir, `${p.id}.html`), html.replace(/[\t ]+$/gm, ''), 'utf8');
 }
 
-function writeCollectionPage({ output, canonical, title, description, eyebrow, heading, intro, list, parent, editorial = null }) {
+function writeCollectionPage({ output, canonical, title, description, eyebrow, heading, intro, list, parent, editorial = null, extra = '' }) {
   const collectionLd = {
     '@context': 'https://schema.org', '@type': 'CollectionPage', name: heading,
     description, url: canonical,
@@ -413,6 +433,7 @@ ${commonHead({ title, description, canonical, ld: [collectionLd, breadcrumb([{ n
     <section class="page-hero seo-collection-hero"><div class="container"><nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span class="sep">/</span><a href="products.html">Catalog</a><span class="sep">/</span><span class="cur">${escapeHtml(heading)}</span></nav><span class="eyebrow">${escapeHtml(eyebrow)}</span><h1 class="tight">${escapeHtml(heading)}</h1><p>${escapeHtml(intro)}</p><div class="seo-count">${list.length.toLocaleString('en-US')} wholesale products · Searchable by JAN / GTIN</div></div></section>
     ${editorial ? `<section class="section-sm brand-editorial"><div class="container"><div class="brand-editorial-grid"><div><span class="eyebrow">BRAND SOURCING GUIDE</span><h2 class="h">Source ${escapeHtml(heading.replace(/ Wholesale$/, ''))} from Japan</h2><p>${escapeHtml(editorial.overview)}</p><p>${escapeHtml(editorial.buyerFit)}</p></div><aside><strong>Ordering note</strong><p>${escapeHtml(editorial.handling)}</p><a href="how-to-order.html#request">Ask for availability and export pricing →</a></aside></div></div></section>` : ''}
     <section class="section-sm"><div class="container"><div class="section-head"><div><span class="eyebrow">FEATURED SELECTION</span><h2 class="h">Products from Japan</h2></div><a href="how-to-order.html#request">Request a quote →</a></div><div class="product-grid cols-4">${list.slice(0, 12).map(productCard).join('')}</div></div></section>
+    ${extra}
     <section class="section-sm seo-directory"><div class="container"><div class="section-head"><div><span class="eyebrow">COMPLETE INDEX</span><h2 class="h">Browse every product</h2></div><a href="products.html">Search and filter →</a></div>${compactProductLinks(list)}</div></section>
   </main>
   <div id="site-footer">${staticFooterNav()}</div>
@@ -450,12 +471,28 @@ for (const name of activeBrands) {
   });
 }
 
+for (const c of collections) {
+  const brandCounts = new Map();
+  for (const p of c.list) brandCounts.set(p.brand, (brandCounts.get(p.brand) || 0) + 1);
+  const topBrands = [...brandCounts].sort((a, b) => b[1] - a[1]).map(([name]) => name);
+  const sameGroup = collections.filter(x => x !== c && x.group === c.group);
+  const others = collections.filter(x => x !== c && x.group !== c.group);
+  const extra = `<section class="section-sm"><div class="container"><span class="eyebrow">BRANDS IN THIS COLLECTION</span><h2 class="h">${escapeHtml(c.name)} brands</h2><div class="seo-brand-links">${topBrands.map(name => `<a href="brands/${escapeHtml(brandSlugs.get(name))}.html">${escapeHtml(name)} <small>(${brandCounts.get(name)})</small></a>`).join('')}</div><span class="eyebrow" style="display:block;margin-top:28px">RELATED COLLECTIONS</span>${collectionLinks([...sameGroup, ...others])}</div></section>`;
+  writeCollectionPage({
+    output: path.join(collectionDir, `${c.slug}.html`), canonical: collectionUrl(c),
+    title: `${c.name} Wholesale | ${c.list.length} Products | JAPANITEM`,
+    description: truncate(`Wholesale Japanese ${c.name.replace(/^Japanese /, '').toLowerCase()} from Japan: ${c.list.length} products from ${topBrands.slice(0, 4).join(', ')}. Search by JAN and request B2B export pricing.`, 155),
+    eyebrow: `${c.group.toUpperCase()} · WHOLESALE FROM JAPAN`, heading: `${c.name} Wholesale`,
+    intro: c.intro, list: c.list, parent: 'Collections', extra,
+  });
+}
+
 const productsPath = path.join(root, 'products.html');
 const productsHtml = fs.readFileSync(productsPath, 'utf8');
 const startMarker = '  <!-- SEO-DIRECTORY:START -->';
 const endMarker = '  <!-- SEO-DIRECTORY:END -->';
 const directory = `${startMarker}
-  <section class="section-sm seo-directory" aria-labelledby="catalog-directory-title"><div class="container"><div class="section-head"><div><span class="eyebrow">CRAWLABLE CATALOG</span><h2 class="h" id="catalog-directory-title">Shop by category or brand</h2></div></div><div class="seo-index-grid">${activeCategories.map(([id, name]) => `<a class="seo-index-card" href="categories/${id}.html"><strong>${escapeHtml(name)}</strong><span>${products.filter(p => p.category === id).length.toLocaleString('en-US')} products</span></a>`).join('')}</div><div class="seo-brand-links">${activeBrands.map(name => `<a href="brands/${escapeHtml(brandSlugs.get(name))}.html">${escapeHtml(name)}</a>`).join('')}</div></div></section>
+  <section class="section-sm seo-directory" aria-labelledby="catalog-directory-title"><div class="container"><div class="section-head"><div><span class="eyebrow">CRAWLABLE CATALOG</span><h2 class="h" id="catalog-directory-title">Shop by category or brand</h2></div></div><div class="seo-index-grid">${activeCategories.map(([id, name]) => `<a class="seo-index-card" href="categories/${id}.html"><strong>${escapeHtml(name)}</strong><span>${products.filter(p => p.category === id).length.toLocaleString('en-US')} products</span></a>`).join('')}</div><div class="seo-brand-links">${activeBrands.map(name => `<a href="brands/${escapeHtml(brandSlugs.get(name))}.html">${escapeHtml(name)}</a>`).join('')}</div><h3 class="h" style="margin-top:28px;font-size:20px">Shop by product type</h3>${collectionLinks(collections)}</div></section>
 ${endMarker}`;
 let nextProductsHtml;
 if (productsHtml.includes(startMarker) && productsHtml.includes(endMarker)) {
@@ -478,9 +515,10 @@ const coreUrls = ['/', '/products.html', '/brands.html', '/how-to-order.html', '
 const urls = [
   ...coreUrls.map((url, index) => `  <url><loc>https://www.japanitem.com${url}</loc><lastmod>${sourceDate}</lastmod><changefreq>${index < 2 ? 'weekly' : 'monthly'}</changefreq><priority>${index === 0 ? '1.0' : index === 1 ? '0.9' : '0.7'}</priority></url>`),
   ...activeCategories.map(([id]) => `  <url><loc>${categoryUrl(id)}</loc><lastmod>${sourceDate}</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>`),
+  ...collections.map(c => `  <url><loc>${collectionUrl(c)}</loc><lastmod>${sourceDate}</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>`),
   ...activeBrands.map(name => `  <url><loc>${brandUrl(name)}</loc><lastmod>${sourceDate}</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>`),
   ...products.map(p => `  <url><loc>${productUrl(p)}</loc><lastmod>${sourceDate}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>`),
 ];
 fs.writeFileSync(path.join(root, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join('\n')}\n</urlset>\n`, 'utf8');
 
-console.log(`Generated ${products.length} product pages, ${activeCategories.length} category pages, ${activeBrands.length} brand pages and ${urls.length} sitemap URLs.`);
+console.log(`Generated ${products.length} product pages, ${activeCategories.length} category pages, ${collections.length} collection pages, ${activeBrands.length} brand pages and ${urls.length} sitemap URLs.`);

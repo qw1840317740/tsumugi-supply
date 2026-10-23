@@ -20,6 +20,8 @@ const activeCategoryCount = new Set(window.PRODUCTS.map(p => p.category)).size;
 const productFiles = fs.readdirSync(productDir).filter(name => name.endsWith('.html'));
 const categoryFiles = fs.readdirSync(categoryDir).filter(name => name.endsWith('.html'));
 const brandFiles = fs.readdirSync(brandDir).filter(name => name.endsWith('.html'));
+const collectionDir = path.join(root, 'collections');
+const collectionFiles = fs.existsSync(collectionDir) ? fs.readdirSync(collectionDir).filter(name => name.endsWith('.html')) : [];
 warn(productFiles.length === productCount, `Expected ${productCount} product pages, found ${productFiles.length}`);
 warn(categoryFiles.length === activeCategoryCount, `Expected ${activeCategoryCount} category pages, found ${categoryFiles.length}`);
 warn(brandFiles.length === activeBrandCount, `Expected ${activeBrandCount} brand pages, found ${brandFiles.length}`);
@@ -60,7 +62,7 @@ warn(titles.size === productFiles.length, 'Product titles are not unique');
 warn(descriptions.size === productFiles.length, 'Product descriptions are not unique');
 warn(canonicals.size === productFiles.length, 'Product canonicals are not unique');
 
-for (const [directory, names] of [[categoryDir, categoryFiles], [brandDir, brandFiles]]) {
+for (const [directory, names] of [[categoryDir, categoryFiles], [brandDir, brandFiles], [collectionDir, collectionFiles]]) {
   for (const name of names) {
     const html = read(path.join(directory, name));
     warn((html.match(/<h1(?:\s|>)/gi) || []).length === 1, `${path.basename(directory)}/${name}: expected exactly one H1`);
@@ -74,7 +76,7 @@ for (const [directory, names] of [[categoryDir, categoryFiles], [brandDir, brand
 const sitemap = read(path.join(root, 'sitemap.xml'));
 const locations = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(item => item[1]);
 warn(new Set(locations).size === locations.length, 'Sitemap contains duplicate URLs');
-warn(locations.length === 5 + productFiles.length + categoryFiles.length + brandFiles.length, `Unexpected sitemap URL count: ${locations.length}`);
+warn(locations.length === 5 + productFiles.length + categoryFiles.length + collectionFiles.length + brandFiles.length, `Unexpected sitemap URL count: ${locations.length}`);
 for (const location of locations) {
   const pathname = new URL(location).pathname;
   if (pathname === '/') continue;

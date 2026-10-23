@@ -5,19 +5,39 @@
   "headers": [
     {
       "source": "/assets/(.*).css",
-      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
     },
     {
       "source": "/assets/(.*).js",
-      "headers": [{ "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }]
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
     },
     {
       "source": "/assets/(.*).(svg|png|jpg|jpeg|webp|avif)",
-      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
     },
     {
       "source": "/(.*)\\.html",
-      "headers": [{ "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }]
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
     }
   ],
   "redirects": [
@@ -28,8 +48,24 @@
     },
     {
       "source": "/product.html",
-      "has": [{ "type": "query", "key": "id", "value": "(?<id>[0-9]+)" }],
+      "has": [
+        {
+          "type": "query",
+          "key": "id",
+          "value": "(?<id>[0-9]+)"
+        }
+      ],
       "destination": "/products/:id.html",
+      "permanent": true
+    },
+    {
+      "source": "/brands/kose-ouvi-blue.html",
+      "destination": "/brands/one-by-kose.html",
+      "permanent": true
+    },
+    {
+      "source": "/brands/seihaku.html",
+      "destination": "/brands/reihaku.html",
       "permanent": true
     }
   ]
