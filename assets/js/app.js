@@ -375,7 +375,7 @@ function buildHeader(){
           <li><a class="nav-link ${active('how-to-order.html')}" href="how-to-order.html" data-i18n="nav.howto"></a></li>
           <li><a class="nav-link ${active('faq.html')}" href="faq.html" data-i18n="nav.faq"></a></li>
           <li><a class="nav-link ${location.pathname.includes('/guides/') ? 'active' : ''}" href="guides/index.html" data-i18n="nav.guides"></a></li>
-          <li><a class="nav-link" href="index.html#about-us">About Us</a></li>
+          <li><a class="nav-link" href="index.html#about-us" data-i18n="nav.about">About Us</a></li>
         </ul>
         <div class="nav-actions">
           <div class="dd" id="langDD">
