@@ -202,6 +202,10 @@ const BRAND_IMAGES = {
   'Kose Make Keep':'ccs.jpg',
   'Cocochi':'cocochi.jpg','ANETOS':'anetos.jpg',
 };
+// <generated:home-images> tools/make-home-images.py
+const BRAND_THUMBS = {"White&White":"white-white","Clinica":"clinica","Denter":"denter","Systema":"systema","Dent Health":"dent-health","NONIO":"nonio","Lightee":"lightee","Zact":"zact","Between":"between","LION Kids":"lion-kids","LION e-Toothbrush":"lion-e-toothbrush","OCH-TUNE":"och-tune","Migacot":"migacot","Dental Rinse":"dental-rinse","Soft in One":"soft-in-one","Oct":"oct","Kirei Kirei":"kirei-kirei","Hadakara":"hadakara","Ban":"ban","Top":"top","NANOX":"nanox","Acron":"acron","Bright":"bright","Soflan":"soflan","Soflan Premium":"soflan-premium","Soflan Aroma":"soflan-aroma","Style Guard":"style-guard","Elegard":"elegard","Rain Guard":"rain-guard","Mama Lemon":"mama-lemon","Magica":"magica","LION":"lion","Look":"look","Bathtub Cleanser":"bathtub-cleanser","Toilet Cleanser":"toilet-cleanser","Mamepika":"mamepika","ONE BY KOSE":"one-by-kose","Kose Make Keep":"kose-make-keep","Kose Sekkisei":"kose-sekkisei","Kose Infinity":"kose-infinity","Kose Grace One":"kose-grace-one","Visee":"visee","Fasio":"fasio","and honey":"and-honey","BOTANIST":"botanist","DEVECICA":"devecica","Chacott":"chacott","Fino":"fino","Pixy":"pixy","Salon Link":"salon-link","Kumano Beauty":"kumano-beauty","Kumano Vuea":"kumano-vuea","Reihaku":"reihaku","cyclea":"cyclea","The":"the","Ariel":"ariel","Bold":"bold","Sarasa":"sarasa","Lenor":"lenor","Joy":"joy","Febreze":"febreze","Pantene":"pantene","H&E":"h-e","Head & Shoulders":"head-shoulders","Head & Shoulders for Men":"head-shoulders-for-men","Hair Recipe":"hair-recipe","Pampers":"pampers","Whisper":"whisper","Oral-B":"oral-b","YOLU":"yolu","DHC":"dhc","cocochi":"cocochi","ANETOS":"anetos","Akai Bohshi":"akai-bohshi","Moegino":"moegino"};
+const NO_PHOTO = new Set(["4571670980108","4971710235432","4971710288285","4971710593563","4987176388872","4987176388889","4987244134158","4987244141750","4987244158345","4987244177834","4987244177841","4987244177858","4987244177865","4987244177872","4987244177902","4987244177919","4987244177926","4987244179012","4987244179036","4987244179043","4987244179067","4987244179074","4987244179081","4987244179104","4987244179111","4987244179128","4987244179135","4987244179142","4987244179159","4987244179166","4987244179197","4987244179227","4987244179234","4987244179241","4987244179258","4987244183477","4987244183484","4987244183491","4987244183507","4987244183514","4987244183552","4987244183569","4987244183576","4987244183590","4987244183606","4987244183613","4987244183637","4987244183651","4987244183668","4987244183682","4987244183699","4987244183705","4987244183712","4987244183729","4987244183736","4987244183743","4987244183750","4987244183767","4987244183781","4987244183804","4987244183828","4987244183903","4987244183927","4987244185266","4987244185273","4987244185280","4987244185297","4987244185303","4987244185310","4987244185334","4987244185341","4987244185365","4987244194169","4987244194176","4987244194190","4987244194206","4987244194855","4987244194862","4987244194886","4987244195104","4987244195111","4987244195401","4987244195418","4987244195425","4987244195432","4987244195449","4987244195456","4987244195463","4987244195609","4987244195630","4987244195784","4987244196354","4987244196361","4987244196378","4987244196385","4987244196392","4987244196408","4987244196415","4987244196453","4987244196460","4987244196491","4987244196521","4987244196538","4987244196705","4987244196712","4987244196767","4987244196774","4987244196781","4987244196798","4987244196804","4987244196811","4987244196828","4987244196835","4987244196842","4987244196859","4987244196866","4987244196873","4987244196880","4987244196897","4987244196903","4987244196910","4987244196927","4987244196934","4987244196941","4987244196958","4987244196965","4987244196972","4987244204004","4987244600660","4987244600677","4987244600684","4987244600691","4987244600714","4987244600783","4987244600790","4987244600813","4987244600820","4987244600844","4987244600851","4987244600875","4987244600905","4987244600936","4987244601162","4987244601629","4987244601636","4987244601643"]);
+// </generated:home-images>
 // Trilingual brand name in current UI language. Falls back to canonical name if data is missing.
 function brandName(b){
   if(!b) return '';
@@ -212,6 +216,10 @@ function brandName(b){
   return b.name;
 }
 function brandLogo(b, size=44){
+  const thumb = BRAND_THUMBS[b.name];
+  if(thumb){
+    return `<img class="brand-logo brand-thumb" src="/assets/brand-thumbs/${thumb}.webp" alt="${b.name}" width="${size}" height="${size}" loading="lazy" decoding="async" onerror="window.__brandMonogramFallback(this)" data-brand="${b.name}" data-fb-size="${size}">`;
+  }
   const imgName = BRAND_IMAGES[b.name];
   // Prefer the real Amazon product image when available
   if(imgName){
@@ -478,7 +486,7 @@ function buildFooter(){
       </div>
     </div>
   </footer>
-  <a class="fab" href="tel:${SITE.phone.replace(/\s/g,'')}" rel="noopener">${ICON.phone} <span data-i18n="cta.chat"></span></a>`;
+  <a class="fab" href="tel:${SITE.phone.replace(/\s/g,'')}" rel="noopener" onclick="const cb=document.getElementById('cb-fab'); if(cb){ event.preventDefault(); cb.click(); }">${ICON.chat} <span data-i18n="cta.chat"></span></a>`;
 }
 
 /* =========================================================
@@ -642,18 +650,18 @@ function activeProductId(){
   return match ? decodeURIComponent(match[1]) : null;
 }
 function productCard(p){
-  const tag = p.tag==='best' ? `<span class="tag tag-best">${t('pc.best')}</span>`
-            : p.tag==='new'  ? `<span class="tag tag-new">${t('pc.new')}</span>`
-            : p.tag==='low'  ? `<span class="tag tag-low">${t('pc.low')}</span>` : '';
+  // "Featured"/"New" sat on most of the catalogue and told buyers nothing; only flag stock.
+  const tag = p.tag==='low' ? `<span class="tag tag-low">${t('pc.low')}</span>` : '';
+  // Show the pack size only when it is a plain measure (450ml, 60g); counts like "1ｺ" are already in the name.
+  const unit = String(p.unit || '').normalize('NFKC').trim();
+  const size = /^[\d.,]+\s*(ml|g|kg|l|cm|mm)$/i.test(unit) ? unit : '';
   return `
   <article class="product">
     <a class="media" href="${productUrl(p)}">${productArt(p)}${tag}</a>
     <div class="body">
-      <span class="cat">${subOf(p)}</span>
+      <span class="cat">${escapeSpec(p.brand)}</span>
       <h2><a href="${productUrl(p)}">${p.name}</a></h2>
-      <span class="product-context">${escapeSpec(p.brand)} · ${escapeSpec(subOf(p))}</span>
-      <span class="brand">${p.brand} <span class="d"></span> ${p.unit}</span>
-      <span class="product-jan">JAN ${escapeSpec(p.jan || p.id)}</span>
+      ${size ? `<span class="brand">${escapeSpec(size)}</span>` : ''}
       <div class="foot">
         <button class="btn btn-primary" type="button" onclick="addToCart('${p.id}')">${t('pc.quoteAdd')}</button>
         <button class="icon-btn save" aria-label="Save" onclick="handleSave(this,'${p.id}')">${ICON.heart}</button>
@@ -707,9 +715,10 @@ function initShop(){
       // SKUs that are inserted first in data.js. The shuffle uses a daily
       // seed so it stays stable for the rest of the day (good for SEO/cache
       // and reduces user confusion from layout shifts).
-      const rank = t => (t==='best'?0 : t==='new'?1 : 2);
+      // Products still waiting for a photo go last so the first screen is all real packshots.
+      const rank = p => (NO_PHOTO.has(String(p.jan || p.id)) ? 3 : p.tag==='best'?0 : p.tag==='new'?1 : 2);
       list.sort((a,b)=>{
-        const ra = rank(a.tag), rb = rank(b.tag);
+        const ra = rank(a), rb = rank(b);
         if(ra !== rb) return ra - rb;
         return dailyShuffle(a.id, b.id);
       });
@@ -1186,6 +1195,7 @@ function injectHomeIcons(){
   set('tIcShield', I.shield);
   set('tIcTruck',  I.truck);
   set('tIcHand',   I.handshake);
+  set('tIcLayers', I.layers);
   // Hero category chips
   set('icSkincare', I.spark);
   set('icBath',     I.box);
@@ -1230,15 +1240,19 @@ function initHomeGrids(){
   const cg = document.getElementById('catGrid');
   if(cg && !cg.dataset.filled){
     cg.dataset.filled = '1';
+    // Photo per category (tools/make-home-images.py). Categories without one are too thin to lead with.
+    const CAT_PHOTOS = new Set(['health','beauty','daily','sweets','babykids']);
+    cg.classList.add('cat-shelf');
     function renderCategories(){
-    cg.innerHTML = CATEGORIES.map(c => {
-      const n = CATALOG_PRODUCTS.filter(p => p.category === c.id).length;
-      if(n === 0) return '';
+    cg.innerHTML = CATEGORIES.filter(c => CAT_PHOTOS.has(c.id)).map(c => {
+      const counts = new Map();
+      for(const p of CATALOG_PRODUCTS) if(p.category === c.id) counts.set(p.brand, (counts.get(p.brand)||0) + 1);
+      if(!counts.size) return '';
+      const brands = [...counts.entries()].sort((a,b) => b[1]-a[1]).slice(0, 3).map(([b]) => escapeSpec(b)).join(' · ');
       return `
-        <a class="cat-card" href="products.html?cat=${c.id}" style="--cat-hue:${c.hue}">
-          <div class="ic" aria-hidden="true">${c.glyph || ''}</div>
-          <div class="cat-card-body"><h3>${catName(c.id)}</h3><div class="count"><strong>${n.toLocaleString(getLang()==='en'?'en-US':getLang()==='zh'?'zh-CN':'ja-JP')}</strong> ${t('cat.products')}</div></div>
-          <span class="arr" aria-hidden="true">${I.arrow || ''}</span>
+        <a class="cat-photo-card" href="products.html?cat=${c.id}">
+          <span class="cpc-img"><img src="/assets/home/cat-${c.id}.webp" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
+          <span class="cpc-body"><h3>${catName(c.id)}</h3><span class="cpc-brands">${brands}</span></span>
         </a>`;
     }).join('');
     }
@@ -1255,7 +1269,7 @@ function initHomeGrids(){
   const fg = document.getElementById('featuredGrid');
   if(fg && !fg.dataset.filled){
     fg.dataset.filled = '1';
-    const pool = CATALOG_PRODUCTS.filter(p => p.tag === 'best' || p.tag === 'new');
+    const pool = CATALOG_PRODUCTS.filter(p => (p.tag === 'best' || p.tag === 'new') && !NO_PHOTO.has(String(p.jan || p.id)));
     // Group by sub-category, then pick one from each, then fill remainder.
     const bySub = new Map();
     for (const p of pool){ const arr = bySub.get(p.sub) || []; arr.push(p); bySub.set(p.sub, arr); }
@@ -1286,14 +1300,15 @@ function initHomeGrids(){
     bs.dataset.filled = '1';
     const counts = new Map();
     for(const p of CATALOG_PRODUCTS) counts.set(p.brand, (counts.get(p.brand)||0) + 1);
-    const top = [...counts.entries()].sort((a,b) => b[1]-a[1]).slice(0, 12);
+    // Lead with brands we can show a real product photo for (Wakodo has none yet).
+    const top = [...counts.entries()].filter(([name]) => BRAND_THUMBS[name]).sort((a,b) => b[1]-a[1]).slice(0, 12);
     bs.innerHTML = top.map(([name, n]) => {
       const brand = BRANDS.find(b => b.name === name) || { name, hue: '#21463D' };
       const blurb = getLang()==='en' && /[\u3040-\u30ff\u3400-\u9fff]/.test(brand.blurb || '')
         ? [...new Set(CATALOG_PRODUCTS.filter(p=>p.brand===name).map(p=>catName(p.category)))].join(' · ')
         : brand.blurb || '';
       return `<a class="brand-card" href="brands.html#${encodeURIComponent(name)}">
-        <div class="bj">${brandLogo(brand, 44)}<h4>${brandName(brand)}</h4></div>
+        <div class="bj">${brandLogo(brand, 56)}<h4>${brandName(brand)}</h4></div>
         <p>${blurb}</p>
         <span class="mk">${n} ${t('cat.skusPl')}</span>
       </a>`;
