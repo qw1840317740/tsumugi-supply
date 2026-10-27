@@ -6,6 +6,8 @@ module.exports = [
     slug: 'how-to-source-japanese-products-wholesale',
     date: '2026-10-23',
     collections: ['japanese-toothpaste', 'japanese-shampoo', 'japanese-laundry-detergent', 'japanese-supplements'],
+    // Shorter <title> for search results; the H1 keeps the full title.
+    seoTitle: { en: 'How to Source Japanese Products Wholesale', ja: '日本の日用品を卸で仕入れる方法：輸入ガイド' },
     title: {
       en: 'How to Source Japanese Daily Goods Wholesale: A Step-by-Step Guide for Importers',
       zh: '如何批发采购日本日用品：进口商分步指南',
@@ -43,6 +45,8 @@ module.exports = [
     slug: 'shipping-from-japan-ems-air-sea-freight',
     date: '2026-10-23',
     collections: ['japanese-laundry-detergent', 'japanese-diapers', 'japanese-air-freshener', 'japanese-hand-soap'],
+    // Shorter <title> for search results; the H1 keeps the full title.
+    seoTitle: { en: 'Shipping from Japan: EMS vs Air vs Sea Freight' },
     title: {
       en: 'Shipping Wholesale Orders from Japan: EMS vs Air Freight vs Sea Freight',
       zh: '从日本发货批发订单：EMS、空运与海运对比',
@@ -76,6 +80,8 @@ module.exports = [
     slug: 'what-is-a-jan-code',
     date: '2026-10-23',
     collections: ['japanese-fabric-softener', 'japanese-shampoo', 'japanese-mascara', 'japanese-baby-food'],
+    // Shorter <title> for search results; the H1 keeps the full title.
+    seoTitle: { en: 'What Is a JAN Code? A Guide for Wholesale Buyers' },
     title: {
       en: 'What Is a JAN Code? Why Wholesale Buyers Should Order Japanese Products by JAN',
       zh: '什么是 JAN 码？为什么批发采购日本商品要按 JAN 下单',
@@ -109,6 +115,8 @@ module.exports = [
     slug: 'japanese-quasi-drugs-cosmetics-labels',
     date: '2026-10-23',
     collections: ['japanese-toothpaste', 'japanese-sunscreen', 'japanese-toner-lotion', 'japanese-hand-soap'],
+    // Shorter <title> for search results; the H1 keeps the full title.
+    seoTitle: { en: 'Japanese Quasi-Drugs vs Cosmetics: Label Guide' },
     title: {
       en: 'Quasi-Drugs and Cosmetics: What Japanese Product Labels Mean for Importers',
       zh: '医药部外品与化妆品：日本商品标签对进口商意味着什么',
@@ -138,6 +146,8 @@ module.exports = [
     slug: 'japanese-refill-pack-sizes-explained',
     date: '2026-10-23',
     collections: ['japanese-laundry-detergent', 'japanese-fabric-softener', 'japanese-dish-soap', 'japanese-shampoo'],
+    // Shorter <title> for search results; the H1 keeps the full title.
+    seoTitle: { en: 'Japanese Refill & Pack Sizes Explained', ja: '詰替・特大・ジャンボとは？日本の容量表記を解説' },
     title: {
       en: 'Japanese Refill and Pack Sizes Explained: Tsumekae, Tokudai, Jumbo and More',
       zh: '日本补充装与包装规格详解：詰替、特大、ジャンボ等',

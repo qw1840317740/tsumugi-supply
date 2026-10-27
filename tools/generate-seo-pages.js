@@ -636,7 +636,7 @@ for (const lang of LANGS) {
     const html = `<!doctype html>
 <html lang="${HTML_LANG[lang]}">
 <head>
-${commonHead({ lang, title: `${g.title[lang]} | JAPANITEM`, description: g.description[lang], rel, type: 'article', ld: [articleLd, breadcrumb([{ name: t.home, url: abs(lang, '') }, { name: t.guides, url: abs(lang, 'guides/index.html') }, { name: g.title[lang], url: abs(lang, rel) }])] })}
+${commonHead({ lang, title: `${g.seoTitle?.[lang] || g.title[lang]} | JAPANITEM`, description: g.description[lang], rel, type: 'article', ld: [articleLd, breadcrumb([{ name: t.home, url: abs(lang, '') }, { name: t.guides, url: abs(lang, 'guides/index.html') }, { name: g.title[lang], url: abs(lang, rel) }])] })}
 </head>
 <body>
   <div id="site-header"></div>
