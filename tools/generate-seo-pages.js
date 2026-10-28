@@ -7,13 +7,17 @@ const assetVersion = name => crypto.createHash('sha256').update(fs.readFileSync(
 const dataVersion = assetVersion('data.js');
 const appVersion = assetVersion('app.js');
 const i18nVersion = assetVersion('i18n.js');
+const chatbotVersion = assetVersion('chatbot.js');
 const cssVersion = crypto.createHash('sha256').update(fs.readFileSync(path.join(root, 'assets/css/style.min.css'))).digest('hex').slice(0, 12);
+const chatbotCssVersion = crypto.createHash('sha256').update(fs.readFileSync(path.join(root, 'assets/css/chatbot.css'))).digest('hex').slice(0, 12);
 for (const name of fs.readdirSync(root).filter(name => name.endsWith('.html'))) {
   const file = path.join(root, name);
   const original = fs.readFileSync(file, 'utf8');
   const updated = original.replace(/assets\/js\/data\.js\?v=[^"\s]+/g, `assets/js/data.js?v=${dataVersion}`)
     .replace(/assets\/js\/app\.js\?v=[^"\s]+/g, `assets/js/app.js?v=${appVersion}`)
     .replace(/assets\/js\/i18n\.js\?v=[^"\s]+/g, `assets/js/i18n.js?v=${i18nVersion}`)
+    .replace(/assets\/js\/chatbot\.js\?v=[^"\s]+/g, `assets/js/chatbot.js?v=${chatbotVersion}`)
+    .replace(/assets\/css\/chatbot\.css\?v=[^"\s]+/g, `assets/css/chatbot.css?v=${chatbotCssVersion}`)
     .replace(/assets\/css\/style\.min\.css\?v=[^"\s]+/g, `assets/css/style.min.css?v=${cssVersion}`);
   if(updated !== original) fs.writeFileSync(file, updated, 'utf8');
 }
@@ -351,8 +355,8 @@ ${alternates(rel)}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="assets/css/style.min.css?v=${cssVersion}">
-  <link rel="preload" as="style" href="assets/css/chatbot.css?v=2" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="assets/css/chatbot.css?v=2"></noscript>
+  <link rel="preload" as="style" href="assets/css/chatbot.css?v=${chatbotCssVersion}" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="assets/css/chatbot.css?v=${chatbotCssVersion}"></noscript>
   <link rel="icon" href="assets/brand/japanitem-mark-user.png?v=2" type="image/png">
   <meta name="theme-color" content="#174C43">
 ${ld.map(item => `  <script type="application/ld+json">${jsonForHtml(item)}</script>`).join('\n')}`;
@@ -373,7 +377,7 @@ function scripts() {
   <script defer src="assets/js/i18n.js?v=${i18nVersion}"></script>
   <script defer src="assets/js/app.js?v=${appVersion}"></script>
   <script defer src="assets/js/auth.js"></script>
-  <script defer src="assets/js/chatbot.js?v=4"></script>`;
+  <script defer src="assets/js/chatbot.js?v=${chatbotVersion}"></script>`;
 }
 
 function productCard(p, lang) {
