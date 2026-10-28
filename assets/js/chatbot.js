@@ -377,9 +377,9 @@
       '</header>' +
       // Direct lines sit above the FAQ bot; the site's single "Contact us" button opens this panel.
       '<nav class="cb-contact" aria-label="Contact">' +
-        '<a href="https://wa.me/819071203239" target="_blank" rel="noopener">WhatsApp</a>' +
-        '<span>LINE 090-7120-3239</span>' +
-        '<a href="tel:+819071203239">+81 90-7120-3239</a>' +
+        '<a href="https://wa.me/817092869587" target="_blank" rel="noopener">WhatsApp</a>' +
+        '<span>LINE 070-9286-9587</span>' +
+        '<a href="tel:+817092869587">+81 70-9286-9587</a>' +
       '</nav>' +
       '<div class="cb-body" id="cb-body" aria-live="polite"></div>' +
       '<footer class="cb-foot">' +

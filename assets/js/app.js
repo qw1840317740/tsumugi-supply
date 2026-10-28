@@ -16,8 +16,8 @@ const SITE = {
   url: 'https://japanitem.com',
   minOrder: 25000,
   currency: 'JPY',
-  phone: '+81 90-7120-3239',
-  fax: '+81 90-7120-3239',
+  phone: '+81 70-9286-9587',
+  fax: '+81 70-9286-9587',
   email: 'info@japanitem.com',
   // 特定商取引法に基づく表示 — 法人登記住所 (北区豊島1-8-5-203号)
   postalCode: '〒114-0001',
@@ -425,7 +425,7 @@ function buildMobileMenu(){
     </div>
     <div class="mm-foot">
       <a class="btn btn-primary btn-block" href="how-to-order.html#request" data-i18n="mm.quote"></a>
-      <a class="btn btn-ghost btn-block" href="tel:${SITE.phone}">${ICON.phone} ${SITE.phone}</a>
+      <a class="btn btn-ghost btn-block" href="tel:${SITE.phone.replace(/[\s-]/g,'')}">${ICON.phone} ${SITE.phone}</a>
     </div>
   </div>
   <div class="scrim" id="scrim"></div>`;
@@ -443,8 +443,8 @@ function buildFooter(){
           </a>
           <p data-i18n="foot.about"></p>
           <p class="wechat-contact">WeChat / 微信：<strong>ks75995</strong></p>
-          <p class="wechat-contact">WhatsApp：<a href="https://wa.me/819071203239" target="_blank" rel="noopener"><strong>+81 90-7120-3239</strong></a></p>
-          <p class="wechat-contact">LINE：<strong>090-7120-3239</strong></p>
+          <p class="wechat-contact">WhatsApp：<a href="https://wa.me/817092869587" target="_blank" rel="noopener"><strong>+81 70-9286-9587</strong></a></p>
+          <p class="wechat-contact">LINE：<strong>070-9286-9587</strong></p>
           <div class="social">
             <a href="${SITE.url}" target="_blank" rel="noopener" aria-label="Website">${ICON.spark}</a>
             <a href="mailto:${SITE.email}" aria-label="Email">${ICON.globe}</a>
@@ -487,7 +487,7 @@ function buildFooter(){
       </div>
     </div>
   </footer>
-  <a class="fab" href="tel:${SITE.phone.replace(/\s/g,'')}" rel="noopener" onclick="const cb=document.getElementById('cb-fab'); if(cb){ event.preventDefault(); cb.click(); }">${ICON.chat} <span data-i18n="cta.chat"></span></a>`;
+  <a class="fab" href="tel:${SITE.phone.replace(/[\s-]/g,'')}" rel="noopener" onclick="const cb=document.getElementById('cb-fab'); if(cb){ event.preventDefault(); cb.click(); }">${ICON.chat} <span data-i18n="cta.chat"></span></a>`;
 }
 
 /* =========================================================
