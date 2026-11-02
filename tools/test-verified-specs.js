@@ -11,7 +11,8 @@ for(const [jan,record] of Object.entries(records)){
  const p=window.PRODUCTS.find(p=>p.jan===jan);
  assert(p,`Missing catalog JAN ${jan}`);
  assert.deepEqual(p.verified_specs,record.specs,jan);
- assert.match(p.spec_source,/^https:\/\/(www\.(asahi-gf|tivoli-factory)\.co\.jp\/|www\.lion\.co\.jp\/ja\/products\/|sundrug-online\.com\/products\/)/);
+ // item.rakuten.co.jp/oskstyle is OSK's own official store (the manufacturer), not a third-party retailer.
+ assert.match(p.spec_source,/^https:\/\/(www\.(asahi-gf|tivoli-factory)\.co\.jp\/|www\.lion\.co\.jp\/ja\/products\/|sundrug-online\.com\/products\/|item\.rakuten\.co\.jp\/oskstyle\/)/);
  assert.equal(p.spec_source_name,record.source_name||'Manufacturer product information');
  if(record.source_type?.startsWith('retailer')) assert.equal(p.spec_source,`https://sundrug-online.com/products/${jan}`);
  if(record.source_type==='manufacturer-range') assert(record.match_note.includes('not a confirmed specification'));

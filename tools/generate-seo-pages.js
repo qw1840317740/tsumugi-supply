@@ -463,7 +463,8 @@ for (const p of products) {
   const line = lines.get(lineKey(p)) || [];
   const lineStart = Math.max(0, line.indexOf(p));
   let variants = [...line.slice(lineStart + 1), ...line.slice(0, lineStart)].slice(0, 12);
-  if (!variants.length) variants = typeList.filter(x => x.id !== p.id && x.brand === p.brand).slice(0, 6);
+  // OSK lines are keyed by product code; same-collection OSK items are other products, not variants.
+  if (!variants.length && p.brand !== 'OSK') variants = typeList.filter(x => x.id !== p.id && x.brand === p.brand).slice(0, 6);
 
   for (const lang of LANGS) {
     const t = T[lang];

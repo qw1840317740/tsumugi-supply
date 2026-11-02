@@ -16,10 +16,16 @@ const GROUPS = {
   'Health': { zh: '健康', ja: 'ヘルスケア' },
   'Baby & Kids': { zh: '婴幼儿', ja: 'ベビー・キッズ' },
   'Food & Sweets': { zh: '食品与零食', ja: '食品・お菓子' },
+  'Lunch & Tableware': { zh: '便当与餐具', ja: 'ランチ・食器' },
 };
 
 // What a wholesale buyer should confirm for this type of product.
 const GROUP_NOTES = {
+  'Lunch & Tableware': {
+    en: 'Lunch boxes, bottles and tableware are food-contact products. Many import markets require material declarations or food-contact testing (for example FDA, EU 10/2011 or LFGB). Character designs are licensed and may be limited to certain markets; we confirm availability for your country with the quotation.',
+    zh: '便当盒、水壶和餐具属于食品接触材料，许多进口国要求提供材质声明或食品接触检测（如 FDA、EU 10/2011、LFGB）。角色设计为授权商品，可能限定销售地区，我们会在报价时确认能否供应到贵国。',
+    ja: '弁当箱・水筒・食器は食品接触製品です。輸入国によっては材質の表示や食品接触試験（FDA、EU 10/2011、LFGB など）が必要です。キャラクター商品はライセンス商品のため販売地域が限られる場合があり、お見積り時に貴国向けの供給可否を確認します。',
+  },
   'Oral Care': {
     en: 'Many Japanese toothpastes and mouthwashes are sold as quasi-drugs (医薬部外品) in Japan. Rules on active ingredients such as fluoride and on labeling differ by destination market, so check your import requirements before ordering.',
     zh: '许多日本牙膏和漱口水在日本属于“医药部外品”。氟化物等有效成分及标签要求因进口国而异，下单前请先确认当地进口规定。',
@@ -105,6 +111,12 @@ function attributes(nameEn) {
 
 // Line key: the part of the English name before variant details (scent, size, format).
 function lineKey(p) {
+  // OSK names end with the model number; its product code (HS-11, SBR-600D) is shared by
+  // every character / design of the same item, which is what buyers compare.
+  if (p.brand === 'OSK') {
+    const code = String(p.name_en || '').match(/\b([A-Z]{1,4}-\d+[A-Z]*)(?:, [A-Za-z]+)?$/);
+    if (code) return `OSK|${code[1]}`;
+  }
   return `${p.brand}|${String(p.name_en || p.name).split(',')[0].replace(SIZE_RE, '').replace(/\s+/g, ' ').trim().toLowerCase()}`;
 }
 
