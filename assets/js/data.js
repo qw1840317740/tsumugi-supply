@@ -426,11 +426,11 @@ const BRANDS = [
   /* === KOSE 2026-07-08: 7 sub-brands === */
   {"name": "ONE BY KOSE", "kana": "ワンバイコーセー", "letter": "O", "hue": "#3E5A45", "blurb": "KOSE · ONE BY KOSE skincare (The Wrinkless, Melano Shot, Serum Veil)", "items": 31, "kind": "beauty", "name_ja": "ONE BY KOSE", "name_zh": "ONE BY KOSE"},
   {"name": "Kose Make Keep", "kana": "CCS", "letter": "C", "hue": "#BE5A38", "blurb": "KOSE · メイクキープ", "items": 10, "kind": "beauty", "name_ja": "CCS", "name_zh": "Kose Make Keep 持妆"},
-  {"name": "Kose Sekkisei", "kana": "雪肌精", "letter": "S", "hue": "#2F5A4F", "blurb": "KOSE · 雪肌精", "items": 14, "kind": "beauty", "name_ja": "雪肌精", "name_zh": "Kose Sekkisei 雪肌精"},
-  {"name": "Kose Infinity", "kana": "茵菲妮", "letter": "I", "hue": "#9C3B2E", "blurb": "KOSE · INFINITY 茵菲妮", "items": 63, "kind": "beauty", "name_ja": "茵菲妮", "name_zh": "Kose Infinity 茵菲妮"},
-  {"name": "Kose Grace One", "kana": "GraceOne", "letter": "G", "hue": "#B8923D", "blurb": "KOSE · 卓萃 Grace One", "items": 32, "kind": "beauty", "name_ja": "GraceOne", "name_zh": "Kose Grace One 卓萃"},
-  {"name": "Visee", "kana": "VISEE", "letter": "V", "hue": "#BE5A38", "blurb": "KOSE · VISEE 彩妆", "items": 182, "kind": "beauty", "name_ja": "VISEE", "name_zh": "Visee 维丝"},
-  {"name": "Fasio", "kana": "FASIO", "letter": "F", "hue": "#C2603F", "blurb": "KOSE · FASIO 底妆 / 眼妆", "items": 127, "kind": "beauty", "name_ja": "FASIO", "name_zh": "Fasio 菲希欧"},
+  {"name": "Kose Sekkisei", "kana": "雪肌精", "letter": "S", "hue": "#2F5A4F", "blurb": "KOSE · Sekkisei skincare", "items": 14, "kind": "beauty", "name_ja": "雪肌精", "name_zh": "Kose Sekkisei 雪肌精"},
+  {"name": "Kose Infinity", "kana": "茵菲妮", "letter": "I", "hue": "#9C3B2E", "blurb": "KOSE · Infinity prestige skincare", "items": 63, "kind": "beauty", "name_ja": "茵菲妮", "name_zh": "Kose Infinity 茵菲妮"},
+  {"name": "Kose Grace One", "kana": "GraceOne", "letter": "G", "hue": "#B8923D", "blurb": "KOSE · Grace One mature skincare", "items": 32, "kind": "beauty", "name_ja": "GraceOne", "name_zh": "Kose Grace One 卓萃"},
+  {"name": "Visee", "kana": "VISEE", "letter": "V", "hue": "#BE5A38", "blurb": "KOSE · Visee makeup", "items": 182, "kind": "beauty", "name_ja": "VISEE", "name_zh": "Visee 维丝"},
+  {"name": "Fasio", "kana": "FASIO", "letter": "F", "hue": "#C2603F", "blurb": "KOSE · Fasio base and eye makeup", "items": 127, "kind": "beauty", "name_ja": "FASIO", "name_zh": "Fasio 菲希欧"},
   /* === 日常用品 2026-07-08: 12 brands === */
   {"name": "Kumano Beauty", "kana": "熊野油脂", "letter": "K", "hue": "#3A4A66", "blurb": "Kumano Beauty · Japanese daily goods", "items": 5, "kind": "beauty", "site": "https://www.kumanobeauty.com/", "name_ja": "熊野油脂", "name_zh": "Kumano Beauty 熊野"},
   {"name": "Kumano Vuea", "kana": "ビューア", "letter": "K", "hue": "#5B8C7F", "blurb": "Kumano Vuea · Japanese daily goods", "items": 1, "kind": "beauty", "site": "https://www.kumanobeauty.com/", "name_ja": "ビューア", "name_zh": "Kumano Vuea 熊野 Vuea"},
@@ -463,8 +463,8 @@ const BRANDS = [
   /* === 2026-07-17 DHC: supplements + skincare === */
   {"name":"DHC","kana":"ディーエイチシー","letter":"D","hue":"#7A4A8E","blurb":"DHC · supplements & skincare","items":168,"kind":"beauty","site":"https://www.dhc.co.jp/","name_ja":"DHC","name_zh":"DHC 蝶翠诗"},
   /* === 2026-08-14 Cocochi: AG抗糖 + ANETOS === */
-  {"name":"Cocochi","kana":"ココチ","letter":"C","hue":"#C9A06B","blurb":"Cocochi · AG抗糖面膜","items":22,"kind":"beauty","site":"https://cocochi.co.jp/","name_ja":"ココチ","name_zh":"Cocochi 蔻蔻琪"},
-  {"name":"ANETOS","kana":"アネトス","letter":"A","hue":"#8E7B6B","blurb":"ANETOS · 敏感干燥肌护肤","items":9,"kind":"beauty","site":"https://www.anetos.jp/","name_ja":"アネトス","name_zh":"ANETOS 安耐投"},
+  {"name":"Cocochi","kana":"ココチ","letter":"C","hue":"#C9A06B","blurb":"Cocochi · AG anti-glycation face masks","items":22,"kind":"beauty","site":"https://cocochi.co.jp/","name_ja":"ココチ","name_zh":"Cocochi 蔻蔻琪"},
+  {"name":"ANETOS","kana":"アネトス","letter":"A","hue":"#8E7B6B","blurb":"ANETOS · skincare for sensitive dry skin","items":9,"kind":"beauty","site":"https://www.anetos.jp/","name_ja":"アネトス","name_zh":"ANETOS 安耐投"},
   {"name": "Wakodo", "kana": "和光堂", "letter": "W", "hue": "#D59A62", "blurb": "Asahi Group Foods · baby food and family care", "items": 140, "kind": "babykids", "site": "https://www.wakodo.co.jp/", "name_ja": "和光堂", "name_zh": "Wakodo 和光堂"},
   {"name": "Akai Bohshi", "kana": "赤い帽子", "letter": "A", "hue": "#A94335", "blurb": "Tivoli · Japanese cookies and gift assortments", "items": 21, "kind": "sweets", "site": "https://www.akaibohshi.com/jp/", "name_ja": "赤い帽子", "name_zh": "Akai Bohshi 红帽子"},
   {"name": "Moegino", "kana": "もえぎ野", "letter": "M", "hue": "#7B9360", "blurb": "Tivoli · Japanese baked confectionery assortments", "items": 5, "kind": "sweets", "site": "https://www.akaibohshi.com/jp/", "name_ja": "もえぎ野", "name_zh": "Moegino 萌木野"},

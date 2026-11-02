@@ -42,6 +42,21 @@
   ],
   "redirects": [
     {
+      "source": "/ja/index.html",
+      "destination": "/ja",
+      "statusCode": 301
+    },
+    {
+      "source": "/zh/index.html",
+      "destination": "/zh",
+      "statusCode": 301
+    },
+    {
+      "source": "/index.html",
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
       "source": "/catalog.html",
       "destination": "/products.html",
       "permanent": true

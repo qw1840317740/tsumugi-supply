@@ -207,6 +207,14 @@ const BRAND_IMAGES = {
 const BRAND_THUMBS = {"White&White":"white-white","Clinica":"clinica","Denter":"denter","Systema":"systema","Dent Health":"dent-health","NONIO":"nonio","Lightee":"lightee","Zact":"zact","Between":"between","LION Kids":"lion-kids","LION e-Toothbrush":"lion-e-toothbrush","OCH-TUNE":"och-tune","Migacot":"migacot","Dental Rinse":"dental-rinse","Soft in One":"soft-in-one","Oct":"oct","Kirei Kirei":"kirei-kirei","Hadakara":"hadakara","Ban":"ban","Top":"top","NANOX":"nanox","Acron":"acron","Bright":"bright","Soflan":"soflan","Soflan Premium":"soflan-premium","Soflan Aroma":"soflan-aroma","Style Guard":"style-guard","Elegard":"elegard","Rain Guard":"rain-guard","Mama Lemon":"mama-lemon","Magica":"magica","LION":"lion","Look":"look","Bathtub Cleanser":"bathtub-cleanser","Toilet Cleanser":"toilet-cleanser","Mamepika":"mamepika","ONE BY KOSE":"one-by-kose","Kose Make Keep":"kose-make-keep","Kose Sekkisei":"kose-sekkisei","Kose Infinity":"kose-infinity","Kose Grace One":"kose-grace-one","Visee":"visee","Fasio":"fasio","and honey":"and-honey","BOTANIST":"botanist","DEVECICA":"devecica","Chacott":"chacott","Fino":"fino","Pixy":"pixy","Salon Link":"salon-link","Kumano Beauty":"kumano-beauty","Kumano Vuea":"kumano-vuea","Reihaku":"reihaku","cyclea":"cyclea","The":"the","Ariel":"ariel","Bold":"bold","Sarasa":"sarasa","Lenor":"lenor","Joy":"joy","Febreze":"febreze","Pantene":"pantene","H&E":"h-e","Head & Shoulders":"head-shoulders","Head & Shoulders for Men":"head-shoulders-for-men","Hair Recipe":"hair-recipe","Pampers":"pampers","Whisper":"whisper","Oral-B":"oral-b","YOLU":"yolu","DHC":"dhc","cocochi":"cocochi","ANETOS":"anetos","Akai Bohshi":"akai-bohshi","Moegino":"moegino","OSK":"osk","Goshiki Somen":"goshiki-somen"};
 const NO_PHOTO = new Set(["4549660425434","4571670980108","4901361068349","4901650103492","4902179022455","4902555216607","4970180100745","4970180200223","4971710235432","4971710288285","4971710593563","4975186161325","4975186161332","4975186161349","4975186161356","4975186161363","4975186161370","4987176388872","4987176388889","4987244134158","4987244141750","4987244158345","4987244177834","4987244177841","4987244177858","4987244177865","4987244177872","4987244177902","4987244177919","4987244177926","4987244179012","4987244179036","4987244179043","4987244179067","4987244179074","4987244179081","4987244179104","4987244179111","4987244179128","4987244179135","4987244179142","4987244179159","4987244179166","4987244179197","4987244179227","4987244179234","4987244179241","4987244179258","4987244183477","4987244183484","4987244183491","4987244183507","4987244183514","4987244183552","4987244183569","4987244183576","4987244183590","4987244183606","4987244183613","4987244183637","4987244183651","4987244183668","4987244183682","4987244183699","4987244183705","4987244183712","4987244183729","4987244183736","4987244183743","4987244183750","4987244183767","4987244183781","4987244183804","4987244183828","4987244183903","4987244183927","4987244185266","4987244185273","4987244185280","4987244185297","4987244185303","4987244185310","4987244185334","4987244185341","4987244185365","4987244194169","4987244194176","4987244194190","4987244194206","4987244194855","4987244194862","4987244194886","4987244195104","4987244195111","4987244195401","4987244195418","4987244195425","4987244195432","4987244195449","4987244195456","4987244195463","4987244195609","4987244195630","4987244195784","4987244196354","4987244196361","4987244196378","4987244196385","4987244196392","4987244196408","4987244196415","4987244196453","4987244196460","4987244196491","4987244196521","4987244196538","4987244196705","4987244196712","4987244196767","4987244196774","4987244196781","4987244196798","4987244196804","4987244196811","4987244196828","4987244196835","4987244196842","4987244196859","4987244196866","4987244196873","4987244196880","4987244196897","4987244196903","4987244196910","4987244196927","4987244196934","4987244196941","4987244196958","4987244196965","4987244196972","4987244204004","4987244600660","4987244600677","4987244600684","4987244600691","4987244600714","4987244600783","4987244600790","4987244600813","4987244600820","4987244600844","4987244600851","4987244600875","4987244600905","4987244600936","4987244601162","4987244601629","4987244601636","4987244601643"]);
 // </generated:home-images>
+// Short brand description: the English blurb on English pages; on zh/ja pages the brand's
+// categories in that language, so cards never mix languages.
+// skipKind: the card already shows the brand's main category, so leave it out here.
+function brandBlurb(b, skipKind=false){
+  if(getLang()==='en' && b.blurb) return b.blurb;
+  const cats = [...new Set(CATALOG_PRODUCTS.filter(p=>p.brand===b.name).map(p=>catName(p.category)))];
+  return cats.filter(c => !(skipKind && b.kind && c === catName(b.kind))).join(' · ');
+}
 // Trilingual brand name in current UI language. Falls back to canonical name if data is missing.
 function brandName(b){
   if(!b) return '';
@@ -356,7 +364,7 @@ function buildHeader(){
     </div></div>
     <div class="container">
       <nav class="nav">
-        <a class="brand site-brand" href="index.html" aria-label="${SITE.full}">
+        <a class="brand site-brand" href="/" aria-label="${SITE.full}">
           <img class="brand-lockup" src="/assets/brand/japanitem-logo-user.webp" alt="JAPANITEM" width="241" height="54" decoding="async">
         </a>
         <ul class="nav-primary">
@@ -384,7 +392,7 @@ function buildHeader(){
           <li><a class="nav-link ${active('how-to-order.html')}" href="how-to-order.html" data-i18n="nav.howto"></a></li>
           <li><a class="nav-link ${active('faq.html')}" href="faq.html" data-i18n="nav.faq"></a></li>
           <li><a class="nav-link ${location.pathname.includes('/guides/') ? 'active' : ''}" href="guides/index.html" data-i18n="nav.guides"></a></li>
-          <li><a class="nav-link" href="index.html#about-us" data-i18n="nav.about">About Us</a></li>
+          <li><a class="nav-link" href="/#about-us" data-i18n="nav.about">About Us</a></li>
         </ul>
         <div class="nav-actions">
           <div class="dd" id="langDD">
@@ -437,7 +445,7 @@ function buildFooter(){
     <div class="container">
       <div class="footer-top">
         <div class="footer-brand">
-          <a class="brand site-brand footer-logo" href="index.html" aria-label="${SITE.full}">
+          <a class="brand site-brand footer-logo" href="/" aria-label="${SITE.full}">
             <img class="footer-logo-mark" src="/assets/brand/japanitem-mark-user.webp" alt="" width="48" height="54" loading="lazy" decoding="async">
             <span class="footer-logo-name">JAPANITEM</span>
           </a>
@@ -858,10 +866,10 @@ function initShop(){
     const h=$('#activeCatTitleH'); if(h) h.textContent=v;
     const bc=$('#shopBreadcrumb'); if(bc){
       bc.innerHTML = state.sub
-        ? `<a href="index.html">${t('nav.home')}</a><span class="sep">/</span><a href="products.html">${t('nav.products')}</a><span class="sep">/</span><a href="products.html?cat=${state.cat}">${catName(state.cat)}</a><span class="sep">/</span><span class="cur">${v}</span>`
+        ? `<a href="/">${t('nav.home')}</a><span class="sep">/</span><a href="products.html">${t('nav.products')}</a><span class="sep">/</span><a href="products.html?cat=${state.cat}">${catName(state.cat)}</a><span class="sep">/</span><span class="cur">${v}</span>`
         : state.cat
-          ? `<a href="index.html">${t('nav.home')}</a><span class="sep">/</span><a href="products.html">${t('nav.products')}</a><span class="sep">/</span><span class="cur">${v}</span>`
-          : `<a href="index.html">${t('nav.home')}</a><span class="sep">/</span><span class="cur">${t('nav.products')}</span>`;
+          ? `<a href="/">${t('nav.home')}</a><span class="sep">/</span><a href="products.html">${t('nav.products')}</a><span class="sep">/</span><span class="cur">${v}</span>`
+          : `<a href="/">${t('nav.home')}</a><span class="sep">/</span><span class="cur">${t('nav.products')}</span>`;
     }
   }
   setTitle();
@@ -900,7 +908,7 @@ function initPDP(){
   function build(){
     host.innerHTML = `
     <div class="container pdp-wrap">
-      <div class="breadcrumb"><a href="index.html">${t('nav.home')}</a><span class="sep">/</span><a href="products.html">${t('nav.products')}</a><span class="sep">/</span><a href="${categorySeoUrl(p.category)}">${catName(p.category)}</a>${p.sub?`<span class="sep">/</span><a href="products.html?cat=${p.category}&sub=${p.sub}">${subName(p.sub)}</a>`:''}<span class="sep">/</span><span class="cur">${p.name}</span></div>
+      <div class="breadcrumb"><a href="/">${t('nav.home')}</a><span class="sep">/</span><a href="products.html">${t('nav.products')}</a><span class="sep">/</span><a href="${categorySeoUrl(p.category)}">${catName(p.category)}</a>${p.sub?`<span class="sep">/</span><a href="products.html?cat=${p.category}&sub=${p.sub}">${subName(p.sub)}</a>`:''}<span class="sep">/</span><span class="cur">${p.name}</span></div>
       <div class="pdp-grid">
         <div class="pdp-media">${productArt(p, true)}${tag?`<span class="tag ${p.tag==='best'?'tag-best':p.tag==='new'?'tag-new':'tag-low'}" style="top:16px;left:16px">${tag}</span>`:''}</div>
         <div class="pdp-info">
@@ -1305,9 +1313,7 @@ function initHomeGrids(){
     const top = [...counts.entries()].filter(([name]) => BRAND_THUMBS[name]).sort((a,b) => b[1]-a[1]).slice(0, 12);
     bs.innerHTML = top.map(([name, n]) => {
       const brand = BRANDS.find(b => b.name === name) || { name, hue: '#21463D' };
-      const blurb = getLang()==='en' && /[\u3040-\u30ff\u3400-\u9fff]/.test(brand.blurb || '')
-        ? [...new Set(CATALOG_PRODUCTS.filter(p=>p.brand===name).map(p=>catName(p.category)))].join(' · ')
-        : brand.blurb || '';
+      const blurb = brandBlurb(brand);
       return `<a class="brand-card" href="brands.html#${encodeURIComponent(name)}">
         <div class="bj">${brandLogo(brand, 56)}<h4>${brandName(brand)}</h4></div>
         <p>${blurb}</p>

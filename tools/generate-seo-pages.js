@@ -709,6 +709,38 @@ const setHreflang = (html, rel) => {
 const escAttr = v => escapeHtml(v);
 const setMeta = (html, re, value) => html.replace(re, (m, a, b) => `${a}${escAttr(value)}${b}`);
 
+// Pre-render static text (data-i18n) so crawlers see headings and copy before JS runs.
+const prerenderI18n = (html, dict) => html
+  .replace(/(<([a-z0-9]+)\b[^>]*\sdata-i18n="([^"]+)"[^>]*>)([^<]*)(<\/\2>)/g, (m, open, tag, key, inner, close) =>
+    typeof dict[key] === 'string' ? `${open}${escapeHtml(dict[key])}${close}` : m)
+  .replace(/(<([a-z0-9]+)\b[^>]*\sdata-i18n-html="([^"]+)"[^>]*>)([^<]*)(<\/\2>)/g, (m, open, tag, key, inner, close) =>
+    typeof dict[key] === 'string' ? `${open}${dict[key]}${close}` : m)
+  .replace(/(<[^>]*\sdata-i18n-ph="([^"]+)"[^>]*\splaceholder=")[^"]*(")/g, (m, a, key, b) =>
+    typeof dict[key] === 'string' ? `${a}${escapeHtml(dict[key])}${b}` : m);
+
+// Static A-Z brand list inside #brandDirectory (app.js replaces it with the interactive directory).
+const BRAND_DIR_START = '<!-- BRAND-DIRECTORY:START -->';
+const BRAND_DIR_END = '<!-- BRAND-DIRECTORY:END -->';
+const brandLabel = (name, lang) => {
+  const b = brandData.get(name) || {};
+  return lang === 'zh' ? (b.name_zh || name) : lang === 'ja' ? (b.name_ja || name) : name;
+};
+const brandDirectoryFor = lang => {
+  const groups = new Map();
+  for (const name of activeBrands) {
+    const letter = /^[a-z]/i.test(name) ? name[0].toUpperCase() : '#';
+    if (!groups.has(letter)) groups.set(letter, []);
+    groups.get(letter).push(name);
+  }
+  const sections = [...groups.entries()].sort(([a], [b]) => a.localeCompare(b)).map(([letter, names]) =>
+    `<section class="brand-static-group"><h2 class="h">${letter}</h2><ul>${names.map(name =>
+      `<li><a href="brands/${escapeHtml(brandSlugs.get(name))}.html">${escapeHtml(brandLabel(name, lang))}</a> <span>${T[lang].productsN(products.filter(p => p.brand === name).length)}</span></li>`).join('')}</ul></section>`).join('');
+  return `${BRAND_DIR_START}${sections}${BRAND_DIR_END}`;
+};
+const setBrandDirectory = (html, lang) => html.includes(BRAND_DIR_START)
+  ? html.replace(new RegExp(`${BRAND_DIR_START}[\\s\\S]*?${BRAND_DIR_END}`), brandDirectoryFor(lang))
+  : html.replace('<div class="container" id="brandDirectory"></div>', `<div class="container" id="brandDirectory">${brandDirectoryFor(lang)}</div>`);
+
 for (const page of CORE) {
   const file = path.join(root, page.file);
   let html = fs.readFileSync(file, 'utf8');
@@ -719,6 +751,8 @@ for (const page of CORE) {
   }
   html = html.replace(/<div id="site-footer">(?:<nav class="static-footer-nav"[\s\S]*?<\/nav>)?<\/div>/, `<div id="site-footer">${staticFooterNav('en')}</div>`);
   html = setHreflang(html, page.rel);
+  html = prerenderI18n(html, L.en);
+  if (page.file === 'brands.html') html = setBrandDirectory(html, 'en');
   fs.writeFileSync(file, html, 'utf8');
 
   for (const lang of LANGS.filter(l => l !== 'en')) {
@@ -741,12 +775,8 @@ for (const page of CORE) {
       .replace(/(<meta property="og:locale" content=")[^"]*(")/, `$1${OG_LOCALE[lang]}$2`)
       .replace(/\s*<meta property="og:locale:alternate"[^>]*>/g, '');
     // Pre-render translated static text so crawlers see it before JS runs.
-    out = out.replace(/(<([a-z0-9]+)\b[^>]*\sdata-i18n="([^"]+)"[^>]*>)([^<]*)(<\/\2>)/g, (m, open, tag, key, inner, close) =>
-      typeof dict[key] === 'string' ? `${open}${escapeHtml(dict[key])}${close}` : m);
-    out = out.replace(/(<([a-z0-9]+)\b[^>]*\sdata-i18n-html="([^"]+)"[^>]*>)([^<]*)(<\/\2>)/g, (m, open, tag, key, inner, close) =>
-      typeof dict[key] === 'string' ? `${open}${dict[key]}${close}` : m);
-    out = out.replace(/(<[^>]*\sdata-i18n-ph="([^"]+)"[^>]*\splaceholder=")[^"]*(")/g, (m, a, key, b) =>
-      typeof dict[key] === 'string' ? `${a}${escapeHtml(dict[key])}${b}` : m);
+    out = prerenderI18n(out, dict);
+    if (page.file === 'brands.html') out = setBrandDirectory(out, lang);
     if (page.file === 'products.html') out = out.replace(new RegExp(`${startMarker}[\\s\\S]*?${endMarker}`), directoryFor(lang));
     out = out.replace(/<div id="site-footer">(?:<nav class="static-footer-nav"[\s\S]*?<\/nav>)?<\/div>/, `<div id="site-footer">${staticFooterNav(lang)}</div>`);
     // Core pages have no <base>; make asset paths root-absolute so they resolve under /zh/ and /ja/.
