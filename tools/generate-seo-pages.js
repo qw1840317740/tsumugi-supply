@@ -97,19 +97,11 @@ const gtinProperty = jan => {
   const length = /^\d+$/.test(jan) ? jan.length : 0;
   return [8, 12, 13, 14].includes(length) ? { [`gtin${length}`]: jan } : {};
 };
-const shortProductTitle = p => {
-  const base = p.name_en || (p.name.toLowerCase().includes(String(p.brand).toLowerCase()) ? p.name : `${p.brand} ${p.name}`);
-  return base.length + ' | JAPANITEM'.length <= 70 ? `${base} | JAPANITEM` : truncateWords(base, 100);
-};
-const shortTitleCounts = new Map();
-for (const p of products) shortTitleCounts.set(shortProductTitle(p), (shortTitleCounts.get(shortProductTitle(p)) || 0) + 1);
-// "Full English name | JAPANITEM" titles (Google indexes the full title even when it truncates the display); add the JAN only where two catalog names are identical.
+// Buyers mostly search by JAN, so every product title carries it: "Name (≤48 chars) | JAN 4987… | JAPANITEM".
+// The name is shortened so the JAN stays inside Google's visible title; the full name stays in the H1 and description.
 const productTitle = p => {
-  const short = shortProductTitle(p);
-  if (shortTitleCounts.get(short) === 1) return short;
-  const suffix = ` | JAN ${p.jan || p.id} | JAPANITEM`;
   const base = p.name_en || (p.name.toLowerCase().includes(String(p.brand).toLowerCase()) ? p.name : `${p.brand} ${p.name}`);
-  return `${truncateWords(base, 100)}${suffix}`;
+  return `${truncateWords(base, 48)} | JAN ${p.jan || p.id} | JAPANITEM`;
 };
 const nameWithJa = p => p.name_ja ? `${p.name} (${p.name_ja})` : p.name;
 const productDescription = p => truncate(
@@ -418,22 +410,11 @@ for (const p of products) {
   lines.get(k).push(p);
 }
 
-// Localised product titles; JAN is added only where two names in that language collide.
-const titleBase = {
-  en: p => shortProductTitle(p),
-  zh: p => `${nameIn(p, 'zh')} | 日本批发 JAPANITEM`,
-  ja: p => `${nameIn(p, 'ja')}｜卸売・輸出 JAPANITEM`,
-};
-const titleCounts = Object.fromEntries(LANGS.map(lang => {
-  const m = new Map();
-  for (const p of products) m.set(titleBase[lang](p), (m.get(titleBase[lang](p)) || 0) + 1);
-  return [lang, m];
-}));
+// Localised product titles, always with the JAN (CJK names cut at 28 characters so the JAN stays visible).
 const titleIn = (p, lang) => {
   if (lang === 'en') return productTitle(p);
-  const base = titleBase[lang](p);
-  if (titleCounts[lang].get(base) === 1) return base;
-  return lang === 'zh' ? `${nameIn(p, 'zh')} JAN ${p.jan || p.id} | 日本批发 JAPANITEM` : `${nameIn(p, 'ja')} JAN ${p.jan || p.id}｜卸売・輸出 JAPANITEM`;
+  const jan = p.jan || p.id;
+  return lang === 'zh' ? `${truncate(nameIn(p, 'zh'), 28)} JAN ${jan} | 日本批发 JAPANITEM` : `${truncate(nameIn(p, 'ja'), 28)} JAN ${jan}｜卸売・輸出 JAPANITEM`;
 };
 const descriptionIn = (p, lang) => {
   const jan = p.jan || p.id;
