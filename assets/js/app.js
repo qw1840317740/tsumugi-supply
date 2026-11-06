@@ -57,7 +57,8 @@ function shade(hex, pct){
   return '#'+[r,g,b].map(x=>x.toString(16).padStart(2,'0')).join('');
 }
 const ICON = {
-  cart:  svg('<circle cx="9" cy="20" r="1.3"/><circle cx="18" cy="20" r="1.3"/><path d="M2.5 3.5h2l2.2 12.2a1.5 1.5 0 0 0 1.5 1.3h8.4a1.5 1.5 0 0 0 1.5-1.2L21 7.5H6"/>'),
+  whatsapp: svg('<path d="M4 20l1.3-4.2A8 8 0 1 1 8.2 18.8z"/><path d="M9.2 8.6c.2 2.6 2.3 4.9 5 5.4l1-1.2-1.6-.9-.7.6c-.9-.4-1.7-1.2-2.1-2.1l.6-.7-.9-1.6z"/>'),
+  cart: svg('<circle cx="9" cy="20" r="1.3"/><circle cx="18" cy="20" r="1.3"/><path d="M2.5 3.5h2l2.2 12.2a1.5 1.5 0 0 0 1.5 1.3h8.4a1.5 1.5 0 0 0 1.5-1.2L21 7.5H6"/>'),
   search:svg('<circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/>'),
   user:  svg('<circle cx="12" cy="8.5" r="3.6"/><path d="M4.5 20a7.5 7.5 0 0 1 15 0"/>'),
   globe: svg('<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>'),
@@ -881,6 +882,22 @@ function initShop(){
 /* =========================================================
    PDP (product.html)
    ========================================================= */
+// One-tap contact on product pages: WhatsApp opens with the JAN and product already written,
+// WeChat ID is shown and copied on tap (Chinese pages put WeChat first).
+const WECHAT_ID = 'ks75995';
+const WHATSAPP_NO = '817092869587';
+function quickContact(p){
+  const jan = p.jan || p.id;
+  const msg = t('pdp.waText').replace('{JAN}', jan).replace('{NAME}', p.name).replace('{URL}', location.origin + location.pathname);
+  const wa = `<a class="qc qc-wa" href="https://wa.me/${WHATSAPP_NO}?text=${encodeURIComponent(msg)}" target="_blank" rel="noopener">${ICON.whatsapp || ''}<span>WhatsApp</span></a>`;
+  const wc = `<button class="qc qc-wc" type="button" onclick="copyWeChat()"><span>${t('pdp.wechat')} <b>${WECHAT_ID}</b></span><small>${t('pdp.copy')}</small></button>`;
+  return `<div class="pdp-quick"><p class="pdp-quick-label">${t('pdp.quick')}</p><div class="pdp-quick-row">${getLang() === 'zh' ? wc + wa : wa + wc}</div></div>`;
+}
+function copyWeChat(){
+  const done = () => toast(t('pdp.wcCopied').replace('{ID}', WECHAT_ID));
+  if (navigator.clipboard?.writeText) navigator.clipboard.writeText(WECHAT_ID).then(done, done); else done();
+}
+window.copyWeChat = copyWeChat;
 function initPDP(){
   const host = $('#pdp'); if(!host) return;
   // Generated SEO pages include a server-rendered editorial section. Preserve
@@ -929,6 +946,7 @@ function initPDP(){
             <a class="btn btn-outline btn-lg" href="mailto:${SITE.email}?subject=${encodeURIComponent('Quote request: '+p.name+' ('+p.id+')')}&body=${encodeURIComponent(t('pdp.emailBody').replace('{NAME}',p.name).replace('{BRAND}',p.brand).replace('{ID}',p.id).replace('{URL}',location.href))}">${t('pdp.contact')}</a>
             <button class="icon-btn save" aria-label="Save" onclick="handleSave(this,'${p.id}')">${ICON.heart}</button>
           </div>
+          ${quickContact(p)}
           <div class="pdp-trust">
             <span>${ICON.shield} ${t('t.auth')}</span>
             <span>${ICON.truck} ${t('t.logistics')}</span>
